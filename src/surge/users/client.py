@@ -54,9 +54,9 @@ class UsersClient:
 
         Examples
         --------
-        from surge import Splitit
+        from surge import Surge
 
-        client = Splitit(
+        client = Surge(
             surge_account="YOUR_SURGE_ACCOUNT",
             token="YOUR_TOKEN",
         )
@@ -115,9 +115,9 @@ class UsersClient:
 
         Examples
         --------
-        from surge import Splitit
+        from surge import Surge
 
-        client = Splitit(
+        client = Surge(
             surge_account="YOUR_SURGE_ACCOUNT",
             token="YOUR_TOKEN",
         )
@@ -187,9 +187,9 @@ class AsyncUsersClient:
         --------
         import asyncio
 
-        from surge import AsyncSplitit
+        from surge import AsyncSurge
 
-        client = AsyncSplitit(
+        client = AsyncSurge(
             surge_account="YOUR_SURGE_ACCOUNT",
             token="YOUR_TOKEN",
         )
@@ -256,9 +256,9 @@ class AsyncUsersClient:
         --------
         import asyncio
 
-        from surge import AsyncSplitit
+        from surge import AsyncSurge
 
-        client = AsyncSplitit(
+        client = AsyncSurge(
             surge_account="YOUR_SURGE_ACCOUNT",
             token="YOUR_TOKEN",
         )

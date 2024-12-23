@@ -16,12 +16,12 @@ from .types import (
     VerificationStatus,
 )
 from . import contacts, messages, users, verifications
-from .client import AsyncSplitit, Splitit
-from .environment import SplititEnvironment
+from .client import AsyncSurge, Surge
+from .environment import SurgeEnvironment
 from .version import __version__
 
 __all__ = [
-    "AsyncSplitit",
+    "AsyncSurge",
     "AttachmentParams",
     "AttachmentResponse",
     "Contact",
@@ -30,8 +30,8 @@ __all__ = [
     "MessageConversationContactParams",
     "MessageConversationParams",
     "MessageResponse",
-    "Splitit",
-    "SplititEnvironment",
+    "Surge",
+    "SurgeEnvironment",
     "UserResponse",
     "Verification",
     "VerificationCheckResponse",

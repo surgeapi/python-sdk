@@ -27,9 +27,9 @@ Creates a new Contact object.
 <dd>
 
 ```python
-from surge import Splitit
+from surge import Surge
 
-client = Splitit(
+client = Surge(
     surge_account="YOUR_SURGE_ACCOUNT",
     token="YOUR_TOKEN",
 )
@@ -116,9 +116,9 @@ Retrieves a Contact object.
 <dd>
 
 ```python
-from surge import Splitit
+from surge import Surge
 
-client = Splitit(
+client = Surge(
     surge_account="YOUR_SURGE_ACCOUNT",
     token="YOUR_TOKEN",
 )
@@ -187,9 +187,9 @@ Updates the specified contact by setting the values of the parameters passed. An
 <dd>
 
 ```python
-from surge import Splitit
+from surge import Surge
 
-client = Splitit(
+client = Surge(
     surge_account="YOUR_SURGE_ACCOUNT",
     token="YOUR_TOKEN",
 )
@@ -263,10 +263,10 @@ from surge import (
     AttachmentParams,
     MessageConversationContactParams,
     MessageConversationParams,
-    Splitit,
+    Surge,
 )
 
-client = Splitit(
+client = Surge(
     surge_account="YOUR_SURGE_ACCOUNT",
     token="YOUR_TOKEN",
 )
@@ -366,9 +366,9 @@ Creates a new User object.
 <dd>
 
 ```python
-from surge import Splitit
+from surge import Surge
 
-client = Splitit(
+client = Surge(
     surge_account="YOUR_SURGE_ACCOUNT",
     token="YOUR_TOKEN",
 )
@@ -464,9 +464,9 @@ Retrieves a User object.
 <dd>
 
 ```python
-from surge import Splitit
+from surge import Surge
 
-client = Splitit(
+client = Surge(
     surge_account="YOUR_SURGE_ACCOUNT",
     token="YOUR_TOKEN",
 )
@@ -536,9 +536,9 @@ Creates a new Verification and sends the code to the given phone number.
 <dd>
 
 ```python
-from surge import Splitit
+from surge import Surge
 
-client = Splitit(
+client = Surge(
     surge_account="YOUR_SURGE_ACCOUNT",
     token="YOUR_TOKEN",
 )
@@ -607,9 +607,9 @@ Checks the code against a verification.
 <dd>
 
 ```python
-from surge import Splitit
+from surge import Surge
 
-client = Splitit(
+client = Surge(
     surge_account="YOUR_SURGE_ACCOUNT",
     token="YOUR_TOKEN",
 )

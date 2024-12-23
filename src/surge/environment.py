@@ -3,5 +3,5 @@
 import enum
 
 
-class SplititEnvironment(enum.Enum):
+class SurgeEnvironment(enum.Enum):
     DEFAULT = "https://api.surgemsg.com"

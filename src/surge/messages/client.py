@@ -54,10 +54,10 @@ class MessagesClient:
             AttachmentParams,
             MessageConversationContactParams,
             MessageConversationParams,
-            Splitit,
+            Surge,
         )
 
-        client = Splitit(
+        client = Surge(
             surge_account="YOUR_SURGE_ACCOUNT",
             token="YOUR_TOKEN",
         )
@@ -149,13 +149,13 @@ class AsyncMessagesClient:
         import asyncio
 
         from surge import (
-            AsyncSplitit,
+            AsyncSurge,
             AttachmentParams,
             MessageConversationContactParams,
             MessageConversationParams,
         )
 
-        client = AsyncSplitit(
+        client = AsyncSurge(
             surge_account="YOUR_SURGE_ACCOUNT",
             token="YOUR_TOKEN",
         )

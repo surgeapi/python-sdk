@@ -20,9 +20,9 @@ A full reference for this library is available [here](./reference.md).
 Instantiate and use the client with the following:
 
 ```python
-from surge import Splitit
+from surge import Surge
 
-client = Splitit(
+client = Surge(
     surge_account="YOUR_SURGE_ACCOUNT",
     token="YOUR_TOKEN",
 )
@@ -40,9 +40,9 @@ The SDK also exports an `async` client so that you can make non-blocking calls t
 ```python
 import asyncio
 
-from surge import AsyncSplitit
+from surge import AsyncSurge
 
-client = AsyncSplitit(
+client = AsyncSurge(
     surge_account="YOUR_SURGE_ACCOUNT",
     token="YOUR_TOKEN",
 )
@@ -102,9 +102,9 @@ The SDK defaults to a 60 second timeout. You can configure this with a timeout o
 
 ```python
 
-from surge import Splitit
+from surge import Surge
 
-client = Splitit(
+client = Surge(
     ...,
     timeout=20.0,
 )
@@ -122,9 +122,9 @@ You can override the `httpx` client to customize it for your use-case. Some comm
 and transports.
 ```python
 import httpx
-from surge import Splitit
+from surge import Surge
 
-client = Splitit(
+client = Surge(
     ...,
     httpx_client=httpx.Client(
         proxies="http://my.test.proxy.example.com",
