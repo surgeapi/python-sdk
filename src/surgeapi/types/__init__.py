@@ -4,7 +4,12 @@ from __future__ import annotations
 
 from .user import User as User
 from .blast import Blast as Blast
-from .shared import Contact as Contact, ContactParams as ContactParams, AttachmentParams as AttachmentParams
+from .shared import (
+    Error as Error,
+    Contact as Contact,
+    ContactParams as ContactParams,
+    AttachmentParams as AttachmentParams,
+)
 from .account import Account as Account
 from .message import Message as Message
 from .campaign import Campaign as Campaign

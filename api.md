@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from surgeapi.types import AttachmentParams, Contact, ContactParams
+from surgeapi.types import AttachmentParams, Contact, ContactParams, Error
 ```
 
 # Accounts
