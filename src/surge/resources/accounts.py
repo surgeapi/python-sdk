@@ -402,7 +402,7 @@ class AccountsResource(SyncAPIResource):
         email: str | NotGiven = NOT_GIVEN,
         first_name: str | NotGiven = NOT_GIVEN,
         last_name: str | NotGiven = NOT_GIVEN,
-        metadata: object | NotGiven = NOT_GIVEN,
+        metadata: Dict[str, str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -421,6 +421,8 @@ class AccountsResource(SyncAPIResource):
           first_name: The contact's first name.
 
           last_name: The contact's last name.
+
+          metadata: Set of key-value pairs that will be stored with the object.
 
           extra_headers: Send extra headers
 
@@ -728,7 +730,7 @@ class AccountsResource(SyncAPIResource):
 
           last_name: The user's last name.
 
-          metadata: Set of key-value pairs that will be stored with the user.
+          metadata: Set of key-value pairs that will be stored with the object.
 
           photo_url: URL of a photo to be used as the user's avatar.
 
@@ -1119,7 +1121,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         email: str | NotGiven = NOT_GIVEN,
         first_name: str | NotGiven = NOT_GIVEN,
         last_name: str | NotGiven = NOT_GIVEN,
-        metadata: object | NotGiven = NOT_GIVEN,
+        metadata: Dict[str, str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1138,6 +1140,8 @@ class AsyncAccountsResource(AsyncAPIResource):
           first_name: The contact's first name.
 
           last_name: The contact's last name.
+
+          metadata: Set of key-value pairs that will be stored with the object.
 
           extra_headers: Send extra headers
 
@@ -1445,7 +1449,7 @@ class AsyncAccountsResource(AsyncAPIResource):
 
           last_name: The user's last name.
 
-          metadata: Set of key-value pairs that will be stored with the user.
+          metadata: Set of key-value pairs that will be stored with the object.
 
           photo_url: URL of a photo to be used as the user's avatar.
 

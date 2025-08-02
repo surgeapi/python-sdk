@@ -100,7 +100,7 @@ class UsersResource(SyncAPIResource):
 
           last_name: The user's last name.
 
-          metadata: Set of key-value pairs that will be stored with the user.
+          metadata: Set of key-value pairs that will be stored with the object.
 
           photo_url: URL of a photo to be used as the user's avatar.
 
@@ -248,7 +248,7 @@ class AsyncUsersResource(AsyncAPIResource):
 
           last_name: The user's last name.
 
-          metadata: Set of key-value pairs that will be stored with the user.
+          metadata: Set of key-value pairs that will be stored with the object.
 
           photo_url: URL of a photo to be used as the user's avatar.
 

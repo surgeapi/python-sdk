@@ -16,7 +16,7 @@ class AccountUsersParams(TypedDict, total=False):
     """The user's last name."""
 
     metadata: Dict[str, str]
-    """Set of key-value pairs that will be stored with the user."""
+    """Set of key-value pairs that will be stored with the object."""
 
     photo_url: str
     """URL of a photo to be used as the user's avatar."""

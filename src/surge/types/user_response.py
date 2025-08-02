@@ -18,7 +18,7 @@ class UserResponse(BaseModel):
     """The user's last name."""
 
     metadata: Optional[Dict[str, str]] = None
-    """Set of key-value pairs that will be stored with the user."""
+    """Set of key-value pairs that will be stored with the object."""
 
     photo_url: Optional[str] = None
     """URL of a photo to be used as the user's avatar."""
