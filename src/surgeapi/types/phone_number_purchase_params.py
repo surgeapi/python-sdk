@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["PhoneNumberCreateParams"]
+__all__ = ["PhoneNumberPurchaseParams"]
 
 
-class PhoneNumberCreateParams(TypedDict, total=False):
+class PhoneNumberPurchaseParams(TypedDict, total=False):
     type: Required[Literal["local", "toll_free"]]
     """Whether the phone number is local or toll-free"""
 

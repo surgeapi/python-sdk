@@ -6,7 +6,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import phone_number_create_params
+from ..types import phone_number_purchase_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -43,7 +43,7 @@ class PhoneNumbersResource(SyncAPIResource):
         """
         return PhoneNumbersResourceWithStreamingResponse(self)
 
-    def create(
+    def purchase(
         self,
         account_id: str,
         *,
@@ -81,7 +81,7 @@ class PhoneNumbersResource(SyncAPIResource):
                     "type": type,
                     "area_code": area_code,
                 },
-                phone_number_create_params.PhoneNumberCreateParams,
+                phone_number_purchase_params.PhoneNumberPurchaseParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -110,7 +110,7 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
         """
         return AsyncPhoneNumbersResourceWithStreamingResponse(self)
 
-    async def create(
+    async def purchase(
         self,
         account_id: str,
         *,
@@ -148,7 +148,7 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
                     "type": type,
                     "area_code": area_code,
                 },
-                phone_number_create_params.PhoneNumberCreateParams,
+                phone_number_purchase_params.PhoneNumberPurchaseParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -161,8 +161,8 @@ class PhoneNumbersResourceWithRawResponse:
     def __init__(self, phone_numbers: PhoneNumbersResource) -> None:
         self._phone_numbers = phone_numbers
 
-        self.create = to_raw_response_wrapper(
-            phone_numbers.create,
+        self.purchase = to_raw_response_wrapper(
+            phone_numbers.purchase,
         )
 
 
@@ -170,8 +170,8 @@ class AsyncPhoneNumbersResourceWithRawResponse:
     def __init__(self, phone_numbers: AsyncPhoneNumbersResource) -> None:
         self._phone_numbers = phone_numbers
 
-        self.create = async_to_raw_response_wrapper(
-            phone_numbers.create,
+        self.purchase = async_to_raw_response_wrapper(
+            phone_numbers.purchase,
         )
 
 
@@ -179,8 +179,8 @@ class PhoneNumbersResourceWithStreamingResponse:
     def __init__(self, phone_numbers: PhoneNumbersResource) -> None:
         self._phone_numbers = phone_numbers
 
-        self.create = to_streamed_response_wrapper(
-            phone_numbers.create,
+        self.purchase = to_streamed_response_wrapper(
+            phone_numbers.purchase,
         )
 
 
@@ -188,6 +188,6 @@ class AsyncPhoneNumbersResourceWithStreamingResponse:
     def __init__(self, phone_numbers: AsyncPhoneNumbersResource) -> None:
         self._phone_numbers = phone_numbers
 
-        self.create = async_to_streamed_response_wrapper(
-            phone_numbers.create,
+        self.purchase = async_to_streamed_response_wrapper(
+            phone_numbers.purchase,
         )

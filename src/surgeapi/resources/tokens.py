@@ -16,7 +16,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.token_create_token_response import TokenCreateTokenResponse
+from ..types.token_response import TokenResponse
 
 __all__ = ["TokensResource", "AsyncTokensResource"]
 
@@ -52,7 +52,7 @@ class TokensResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> TokenCreateTokenResponse:
+    ) -> TokenResponse:
         """
         Provides a mechanism for having Surge create a signed token for embeds instead
         of signing with your own signing key.
@@ -78,7 +78,7 @@ class TokensResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=TokenCreateTokenResponse,
+            cast_to=TokenResponse,
         )
 
 
@@ -113,7 +113,7 @@ class AsyncTokensResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> TokenCreateTokenResponse:
+    ) -> TokenResponse:
         """
         Provides a mechanism for having Surge create a signed token for embeds instead
         of signing with your own signing key.
@@ -139,7 +139,7 @@ class AsyncTokensResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=TokenCreateTokenResponse,
+            cast_to=TokenResponse,
         )
 
 

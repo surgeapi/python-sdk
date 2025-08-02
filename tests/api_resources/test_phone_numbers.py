@@ -21,8 +21,8 @@ class TestPhoneNumbers:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_method_create(self, client: Surge) -> None:
-        phone_number = client.phone_numbers.create(
+    def test_method_purchase(self, client: Surge) -> None:
+        phone_number = client.phone_numbers.purchase(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             type="local",
         )
@@ -32,8 +32,8 @@ class TestPhoneNumbers:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_method_create_with_all_params(self, client: Surge) -> None:
-        phone_number = client.phone_numbers.create(
+    def test_method_purchase_with_all_params(self, client: Surge) -> None:
+        phone_number = client.phone_numbers.purchase(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             type="local",
             area_code="801",
@@ -44,8 +44,8 @@ class TestPhoneNumbers:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_raw_response_create(self, client: Surge) -> None:
-        response = client.phone_numbers.with_raw_response.create(
+    def test_raw_response_purchase(self, client: Surge) -> None:
+        response = client.phone_numbers.with_raw_response.purchase(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             type="local",
         )
@@ -59,8 +59,8 @@ class TestPhoneNumbers:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_streaming_response_create(self, client: Surge) -> None:
-        with client.phone_numbers.with_streaming_response.create(
+    def test_streaming_response_purchase(self, client: Surge) -> None:
+        with client.phone_numbers.with_streaming_response.purchase(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             type="local",
         ) as response:
@@ -76,9 +76,9 @@ class TestPhoneNumbers:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_path_params_create(self, client: Surge) -> None:
+    def test_path_params_purchase(self, client: Surge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-            client.phone_numbers.with_raw_response.create(
+            client.phone_numbers.with_raw_response.purchase(
                 account_id="",
                 type="local",
             )
@@ -93,8 +93,8 @@ class TestAsyncPhoneNumbers:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_method_create(self, async_client: AsyncSurge) -> None:
-        phone_number = await async_client.phone_numbers.create(
+    async def test_method_purchase(self, async_client: AsyncSurge) -> None:
+        phone_number = await async_client.phone_numbers.purchase(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             type="local",
         )
@@ -104,8 +104,8 @@ class TestAsyncPhoneNumbers:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncSurge) -> None:
-        phone_number = await async_client.phone_numbers.create(
+    async def test_method_purchase_with_all_params(self, async_client: AsyncSurge) -> None:
+        phone_number = await async_client.phone_numbers.purchase(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             type="local",
             area_code="801",
@@ -116,8 +116,8 @@ class TestAsyncPhoneNumbers:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_raw_response_create(self, async_client: AsyncSurge) -> None:
-        response = await async_client.phone_numbers.with_raw_response.create(
+    async def test_raw_response_purchase(self, async_client: AsyncSurge) -> None:
+        response = await async_client.phone_numbers.with_raw_response.purchase(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             type="local",
         )
@@ -131,8 +131,8 @@ class TestAsyncPhoneNumbers:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncSurge) -> None:
-        async with async_client.phone_numbers.with_streaming_response.create(
+    async def test_streaming_response_purchase(self, async_client: AsyncSurge) -> None:
+        async with async_client.phone_numbers.with_streaming_response.purchase(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             type="local",
         ) as response:
@@ -148,9 +148,9 @@ class TestAsyncPhoneNumbers:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_path_params_create(self, async_client: AsyncSurge) -> None:
+    async def test_path_params_purchase(self, async_client: AsyncSurge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-            await async_client.phone_numbers.with_raw_response.create(
+            await async_client.phone_numbers.with_raw_response.purchase(
                 account_id="",
                 type="local",
             )

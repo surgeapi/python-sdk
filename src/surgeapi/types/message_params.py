@@ -10,35 +10,16 @@ from .._utils import PropertyInfo
 from .contact_params import ContactParams
 
 __all__ = [
-    "MessageSendParams",
-    "Variant0",
-    "Variant0Conversation",
-    "Variant0Attachment",
-    "Variant1",
-    "Variant1Attachment",
+    "MessageParams",
+    "UnionMember0",
+    "UnionMember0Conversation",
+    "UnionMember0Attachment",
+    "UnionMember1",
+    "UnionMember1Attachment",
 ]
 
 
-class Variant0(TypedDict, total=False):
-    conversation: Required[Variant0Conversation]
-    """Params for selecting or creating a new conversation.
-
-    Either the id or the Contact must be given.
-    """
-
-    attachments: Iterable[Variant0Attachment]
-
-    body: str
-    """The message body."""
-
-    send_at: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
-    """
-    An optional datetime for scheduling message up to a couple of months in the
-    future.
-    """
-
-
-class Variant0Conversation(TypedDict, total=False):
+class UnionMember0Conversation(TypedDict, total=False):
     contact: Required[ContactParams]
     """Parameters for creating a contact"""
 
@@ -49,29 +30,22 @@ class Variant0Conversation(TypedDict, total=False):
     """
 
 
-class Variant0Attachment(TypedDict, total=False):
+class UnionMember0Attachment(TypedDict, total=False):
     url: Required[str]
     """The URL of the attachment."""
 
 
-class Variant1(TypedDict, total=False):
-    to: Required[str]
-    """The recipient's phone number in E.164 format.
+class UnionMember0(TypedDict, total=False):
+    conversation: Required[UnionMember0Conversation]
+    """Params for selecting or creating a new conversation.
 
-    Cannot be used together with 'conversation'.
+    Either the id or the Contact must be given.
     """
 
-    attachments: Iterable[Variant1Attachment]
+    attachments: Iterable[UnionMember0Attachment]
 
     body: str
     """The message body."""
-
-    from_: Annotated[str, PropertyInfo(alias="from")]
-    """The sender's phone number in E.164 format or phone number ID.
-
-    If omitted, uses the account's default phone number. Cannot be used together
-    with 'conversation'.
-    """
 
     send_at: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """
@@ -80,9 +54,37 @@ class Variant1(TypedDict, total=False):
     """
 
 
-class Variant1Attachment(TypedDict, total=False):
+class UnionMember1Attachment(TypedDict, total=False):
     url: Required[str]
     """The URL of the attachment."""
 
 
-MessageSendParams: TypeAlias = Union[Variant0, Variant1]
+_UnionMember1ReservedKeywords = TypedDict(
+    "_UnionMember1ReservedKeywords",
+    {
+        "from": str,
+    },
+    total=False,
+)
+
+
+class UnionMember1(_UnionMember1ReservedKeywords, total=False):
+    to: Required[str]
+    """The recipient's phone number in E.164 format.
+
+    Cannot be used together with 'conversation'.
+    """
+
+    attachments: Iterable[UnionMember1Attachment]
+
+    body: str
+    """The message body."""
+
+    send_at: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
+    """
+    An optional datetime for scheduling message up to a couple of months in the
+    future.
+    """
+
+
+MessageParams: TypeAlias = Union[UnionMember0, UnionMember1]

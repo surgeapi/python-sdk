@@ -3,7 +3,7 @@
 Types:
 
 ```python
-from surgeapi.types import Account, AccountStatus
+from surgeapi.types import Account, AccountParams, AccountStatus, AccountUpdateParams
 ```
 
 Methods:
@@ -17,7 +17,7 @@ Methods:
 Types:
 
 ```python
-from surgeapi.types import Blast
+from surgeapi.types import Blast, BlastParams
 ```
 
 Methods:
@@ -29,7 +29,7 @@ Methods:
 Types:
 
 ```python
-from surgeapi.types import Campaign
+from surgeapi.types import Campaign, CampaignParams
 ```
 
 Methods:
@@ -41,7 +41,7 @@ Methods:
 Types:
 
 ```python
-from surgeapi.types import Contact
+from surgeapi.types import Contact, ContactParams
 ```
 
 Methods:
@@ -55,7 +55,7 @@ Methods:
 Types:
 
 ```python
-from surgeapi.types import Message
+from surgeapi.types import Message, MessageParams
 ```
 
 Methods:
@@ -72,26 +72,26 @@ from surgeapi.types import PhoneNumber
 
 Methods:
 
-- <code title="post /accounts/{account_id}/phone_numbers">client.phone_numbers.<a href="./src/surgeapi/resources/phone_numbers.py">create</a>(account_id, \*\*<a href="src/surgeapi/types/phone_number_create_params.py">params</a>) -> <a href="./src/surgeapi/types/phone_number.py">PhoneNumber</a></code>
+- <code title="post /accounts/{account_id}/phone_numbers">client.phone_numbers.<a href="./src/surgeapi/resources/phone_numbers.py">purchase</a>(account_id, \*\*<a href="src/surgeapi/types/phone_number_purchase_params.py">params</a>) -> <a href="./src/surgeapi/types/phone_number.py">PhoneNumber</a></code>
 
 # Tokens
 
 Types:
 
 ```python
-from surgeapi.types import TokenCreateTokenResponse
+from surgeapi.types import TokenParams, TokenResponse
 ```
 
 Methods:
 
-- <code title="post /users/{user_id}/tokens">client.tokens.<a href="./src/surgeapi/resources/tokens.py">create_token</a>(user_id, \*\*<a href="src/surgeapi/types/token_create_token_params.py">params</a>) -> <a href="./src/surgeapi/types/token_create_token_response.py">TokenCreateTokenResponse</a></code>
+- <code title="post /users/{user_id}/tokens">client.tokens.<a href="./src/surgeapi/resources/tokens.py">create_token</a>(user_id, \*\*<a href="src/surgeapi/types/token_create_token_params.py">params</a>) -> <a href="./src/surgeapi/types/token_response.py">TokenResponse</a></code>
 
 # Users
 
 Types:
 
 ```python
-from surgeapi.types import User
+from surgeapi.types import User, UserParams
 ```
 
 Methods:
@@ -105,7 +105,7 @@ Methods:
 Types:
 
 ```python
-from surgeapi.types import Verification, VerificationCheckResponse
+from surgeapi.types import Verification, VerificationParams, VerificationCheckResponse
 ```
 
 Methods:
