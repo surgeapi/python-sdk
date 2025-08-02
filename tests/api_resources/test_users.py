@@ -89,7 +89,7 @@ class TestUsers:
             last_name="O'Conner",
             metadata={
                 "email": "boconner@toretti.family",
-                "user_id": 1234,
+                "user_id": "string",
             },
             photo_url="https://toretti.family/people/brian.jpg",
         )
@@ -277,7 +277,7 @@ class TestAsyncUsers:
             last_name="O'Conner",
             metadata={
                 "email": "boconner@toretti.family",
-                "user_id": 1234,
+                "user_id": "string",
             },
             photo_url="https://toretti.family/people/brian.jpg",
         )

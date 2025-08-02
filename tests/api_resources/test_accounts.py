@@ -406,7 +406,7 @@ class TestAccounts:
             email="dom@toretto.family",
             first_name="Dominic",
             last_name="Toretto",
-            metadata={"car": "bar"},
+            metadata={"car": "1970 Dodge Charger R/T"},
         )
         assert_matches_type(ContactResponse, account, path=["response"])
 
@@ -746,7 +746,7 @@ class TestAccounts:
             last_name="O'Conner",
             metadata={
                 "email": "boconner@toretti.family",
-                "user_id": 1234,
+                "user_id": "string",
             },
             photo_url="https://toretti.family/people/brian.jpg",
         )
@@ -1180,7 +1180,7 @@ class TestAsyncAccounts:
             email="dom@toretto.family",
             first_name="Dominic",
             last_name="Toretto",
-            metadata={"car": "bar"},
+            metadata={"car": "1970 Dodge Charger R/T"},
         )
         assert_matches_type(ContactResponse, account, path=["response"])
 
@@ -1520,7 +1520,7 @@ class TestAsyncAccounts:
             last_name="O'Conner",
             metadata={
                 "email": "boconner@toretti.family",
-                "user_id": 1234,
+                "user_id": "string",
             },
             photo_url="https://toretti.family/people/brian.jpg",
         )

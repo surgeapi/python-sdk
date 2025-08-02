@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, Optional
+from typing import Optional
 
 from .._models import BaseModel
 
@@ -20,8 +20,7 @@ class ContactResponse(BaseModel):
     last_name: Optional[str] = None
     """The contact's last name."""
 
-    metadata: Optional[Dict[str, object]] = None
-    """Additional metadata about the contact."""
+    metadata: Optional[object] = None
 
     phone_number: Optional[str] = None
     """The contact's phone number in E.164 format."""

@@ -89,7 +89,7 @@ class TestContacts:
             email="dom@toretto.family",
             first_name="Dominic",
             last_name="Toretto",
-            metadata={"car": "bar"},
+            metadata={"car": "1970 Dodge Charger R/T"},
         )
         assert_matches_type(ContactResponse, contact, path=["response"])
 
@@ -214,7 +214,7 @@ class TestAsyncContacts:
             email="dom@toretto.family",
             first_name="Dominic",
             last_name="Toretto",
-            metadata={"car": "bar"},
+            metadata={"car": "1970 Dodge Charger R/T"},
         )
         assert_matches_type(ContactResponse, contact, path=["response"])
 

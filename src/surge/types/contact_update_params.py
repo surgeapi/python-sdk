@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Dict
 from typing_extensions import Required, TypedDict
 
 __all__ = ["ContactUpdateParams"]
@@ -21,5 +20,4 @@ class ContactUpdateParams(TypedDict, total=False):
     last_name: str
     """The contact's last name."""
 
-    metadata: Dict[str, object]
-    """Additional metadata about the contact."""
+    metadata: object

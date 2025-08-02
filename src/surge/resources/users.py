@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Dict
+
 import httpx
 
 from ..types import user_update_params, user_create_token_params
@@ -81,7 +83,7 @@ class UsersResource(SyncAPIResource):
         *,
         first_name: str,
         last_name: str | NotGiven = NOT_GIVEN,
-        metadata: object | NotGiven = NOT_GIVEN,
+        metadata: Dict[str, str] | NotGiven = NOT_GIVEN,
         photo_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -229,7 +231,7 @@ class AsyncUsersResource(AsyncAPIResource):
         *,
         first_name: str,
         last_name: str | NotGiven = NOT_GIVEN,
-        metadata: object | NotGiven = NOT_GIVEN,
+        metadata: Dict[str, str] | NotGiven = NOT_GIVEN,
         photo_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

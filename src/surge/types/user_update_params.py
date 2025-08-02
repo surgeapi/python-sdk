@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Dict
 from typing_extensions import Required, TypedDict
 
 __all__ = ["UserUpdateParams"]
@@ -14,7 +15,7 @@ class UserUpdateParams(TypedDict, total=False):
     last_name: str
     """The user's last name."""
 
-    metadata: object
+    metadata: Dict[str, str]
     """Set of key-value pairs that will be stored with the user."""
 
     photo_url: str

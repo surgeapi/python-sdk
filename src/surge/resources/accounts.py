@@ -402,7 +402,7 @@ class AccountsResource(SyncAPIResource):
         email: str | NotGiven = NOT_GIVEN,
         first_name: str | NotGiven = NOT_GIVEN,
         last_name: str | NotGiven = NOT_GIVEN,
-        metadata: Dict[str, object] | NotGiven = NOT_GIVEN,
+        metadata: object | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -421,8 +421,6 @@ class AccountsResource(SyncAPIResource):
           first_name: The contact's first name.
 
           last_name: The contact's last name.
-
-          metadata: Additional metadata about the contact.
 
           extra_headers: Send extra headers
 
@@ -713,7 +711,7 @@ class AccountsResource(SyncAPIResource):
         *,
         first_name: str,
         last_name: str | NotGiven = NOT_GIVEN,
-        metadata: object | NotGiven = NOT_GIVEN,
+        metadata: Dict[str, str] | NotGiven = NOT_GIVEN,
         photo_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1121,7 +1119,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         email: str | NotGiven = NOT_GIVEN,
         first_name: str | NotGiven = NOT_GIVEN,
         last_name: str | NotGiven = NOT_GIVEN,
-        metadata: Dict[str, object] | NotGiven = NOT_GIVEN,
+        metadata: object | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1140,8 +1138,6 @@ class AsyncAccountsResource(AsyncAPIResource):
           first_name: The contact's first name.
 
           last_name: The contact's last name.
-
-          metadata: Additional metadata about the contact.
 
           extra_headers: Send extra headers
 
@@ -1432,7 +1428,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         *,
         first_name: str,
         last_name: str | NotGiven = NOT_GIVEN,
-        metadata: object | NotGiven = NOT_GIVEN,
+        metadata: Dict[str, str] | NotGiven = NOT_GIVEN,
         photo_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

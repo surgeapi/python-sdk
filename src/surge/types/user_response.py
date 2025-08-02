@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import Dict, Optional
 
 from .._models import BaseModel
 
@@ -17,7 +17,7 @@ class UserResponse(BaseModel):
     last_name: Optional[str] = None
     """The user's last name."""
 
-    metadata: Optional[object] = None
+    metadata: Optional[Dict[str, str]] = None
     """Set of key-value pairs that will be stored with the user."""
 
     photo_url: Optional[str] = None
