@@ -4,8 +4,8 @@ from typing import Sequence
 
 import pytest
 
-from surge._types import FileTypes
-from surge._utils import extract_files
+from surgeapi._types import FileTypes
+from surgeapi._utils import extract_files
 
 
 def test_removes_files_from_input() -> None:

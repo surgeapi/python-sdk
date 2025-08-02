@@ -1,7 +1,7 @@
 # Surge Python API library
 
 <!-- prettier-ignore -->
-[![PyPI version](https://img.shields.io/pypi/v/surge.svg?label=pypi%20(stable))](https://pypi.org/project/surge/)
+[![PyPI version](https://img.shields.io/pypi/v/surgeapi.svg?label=pypi%20(stable))](https://pypi.org/project/surgeapi/)
 
 The Surge Python library provides convenient access to the Surge REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -11,7 +11,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
-The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.surge.app](https://docs.surge.app). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
@@ -21,7 +21,7 @@ pip install git+ssh://git@github.com/stainless-sdks/surge-python.git
 ```
 
 > [!NOTE]
-> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install --pre surge`
+> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install --pre surgeapi`
 
 ## Usage
 
@@ -29,21 +29,30 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from surge import Surge
+from surgeapi import Surge
 
 client = Surge(
-    bearer_token=os.environ.get("SURGE_BEARER_TOKEN"),  # This is the default and can be omitted
+    bearer_token=os.environ.get("SURGE_API_KEY"),  # This is the default and can be omitted
 )
 
-account = client.accounts.create(
-    name="Account #2840 - DT Precision Auto",
+response = client.messages.send(
+    account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+    conversation={
+        "contact": {
+            "first_name": "Dominic",
+            "last_name": "Toretto",
+            "phone_number": "+18015551234",
+        }
+    },
+    attachments=[{"url": "https://toretto.family/coronas.gif"}],
+    body="Thought you could leave without saying goodbye?",
 )
-print(account.id)
+print(response.id)
 ```
 
 While you can provide a `bearer_token` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `SURGE_BEARER_TOKEN="My Bearer Token"` to your `.env` file
+to add `SURGE_API_KEY="My Bearer Token"` to your `.env` file
 so that your Bearer Token is not stored in source control.
 
 ## Async usage
@@ -53,18 +62,27 @@ Simply import `AsyncSurge` instead of `Surge` and use `await` with each API call
 ```python
 import os
 import asyncio
-from surge import AsyncSurge
+from surgeapi import AsyncSurge
 
 client = AsyncSurge(
-    bearer_token=os.environ.get("SURGE_BEARER_TOKEN"),  # This is the default and can be omitted
+    bearer_token=os.environ.get("SURGE_API_KEY"),  # This is the default and can be omitted
 )
 
 
 async def main() -> None:
-    account = await client.accounts.create(
-        name="Account #2840 - DT Precision Auto",
+    response = await client.messages.send(
+        account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+        conversation={
+            "contact": {
+                "first_name": "Dominic",
+                "last_name": "Toretto",
+                "phone_number": "+18015551234",
+            }
+        },
+        attachments=[{"url": "https://toretto.family/coronas.gif"}],
+        body="Thought you could leave without saying goodbye?",
     )
-    print(account.id)
+    print(response.id)
 
 
 asyncio.run(main())
@@ -80,15 +98,15 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from this staging repo
-pip install 'surge[aiohttp] @ git+ssh://git@github.com/stainless-sdks/surge-python.git'
+pip install 'surgeapi[aiohttp] @ git+ssh://git@github.com/stainless-sdks/surge-python.git'
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
 import asyncio
-from surge import DefaultAioHttpClient
-from surge import AsyncSurge
+from surgeapi import DefaultAioHttpClient
+from surgeapi import AsyncSurge
 
 
 async def main() -> None:
@@ -96,10 +114,19 @@ async def main() -> None:
         bearer_token="My Bearer Token",
         http_client=DefaultAioHttpClient(),
     ) as client:
-        account = await client.accounts.create(
-            name="Account #2840 - DT Precision Auto",
+        response = await client.messages.send(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            conversation={
+                "contact": {
+                    "first_name": "Dominic",
+                    "last_name": "Toretto",
+                    "phone_number": "+18015551234",
+                }
+            },
+            attachments=[{"url": "https://toretto.family/coronas.gif"}],
+            body="Thought you could leave without saying goodbye?",
         )
-        print(account.id)
+        print(response.id)
 
 
 asyncio.run(main())
@@ -119,72 +146,50 @@ Typed requests and responses provide autocomplete and documentation within your 
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
 
 ```python
-from surge import Surge
+from surgeapi import Surge
 
 client = Surge()
 
-account = client.accounts.create(
-    name="Account #2840 - DT Precision Auto",
-    organization={
-        "address": {
-            "country": "US",
-            "line1": "2640 Huron St",
-            "line2": None,
-            "locality": "Los Angeles",
-            "name": "DT Precision Auto",
-            "postal_code": "90065",
-            "region": "CA",
-        },
+response = client.messages.send(
+    account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+    conversation={
         "contact": {
-            "email": "dom@dtprecisionauto.com",
             "first_name": "Dominic",
             "last_name": "Toretto",
-            "phone_number": "+13235556439",
-            "title": "other",
-            "title_other": "Owner",
+            "phone_number": "+18015551234",
         },
-        "country": "US",
-        "email": "dom@dtprecisionauto.com",
-        "identifier": "123456789",
-        "identifier_type": "ein",
-        "industry": "automotive",
-        "mobile_number": "+13235556439",
-        "regions_of_operation": ["usa_and_canada"],
-        "registered_name": "DT Precision Auto LLC",
-        "stock_exchange": None,
-        "stock_symbol": None,
-        "type": "llc",
-        "website": "https://dtprecisionauto.com",
+        "phone_number": "+18015556789",
     },
 )
-print(account.organization)
+print(response.conversation)
 ```
 
 ## Handling errors
 
-When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `surge.APIConnectionError` is raised.
+When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `surgeapi.APIConnectionError` is raised.
 
 When the API returns a non-success status code (that is, 4xx or 5xx
-response), a subclass of `surge.APIStatusError` is raised, containing `status_code` and `response` properties.
+response), a subclass of `surgeapi.APIStatusError` is raised, containing `status_code` and `response` properties.
 
-All errors inherit from `surge.APIError`.
+All errors inherit from `surgeapi.APIError`.
 
 ```python
-import surge
-from surge import Surge
+import surgeapi
+from surgeapi import Surge
 
 client = Surge()
 
 try:
-    client.accounts.create(
-        name="Account #2840 - DT Precision Auto",
+    client.messages.send(
+        account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+        conversation={"contact": {}},
     )
-except surge.APIConnectionError as e:
+except surgeapi.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
-except surge.RateLimitError as e:
+except surgeapi.RateLimitError as e:
     print("A 429 status code was received; we should back off a bit.")
-except surge.APIStatusError as e:
+except surgeapi.APIStatusError as e:
     print("Another non-200-range status code was received")
     print(e.status_code)
     print(e.response)
@@ -212,7 +217,7 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from surge import Surge
+from surgeapi import Surge
 
 # Configure the default for all requests:
 client = Surge(
@@ -221,8 +226,9 @@ client = Surge(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).accounts.create(
-    name="Account #2840 - DT Precision Auto",
+client.with_options(max_retries=5).messages.send(
+    account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+    conversation={"contact": {}},
 )
 ```
 
@@ -232,7 +238,7 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
-from surge import Surge
+from surgeapi import Surge
 
 # Configure the default for all requests:
 client = Surge(
@@ -246,8 +252,9 @@ client = Surge(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).accounts.create(
-    name="Account #2840 - DT Precision Auto",
+client.with_options(timeout=5.0).messages.send(
+    account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+    conversation={"contact": {}},
 )
 ```
 
@@ -286,21 +293,24 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from surge import Surge
+from surgeapi import Surge
 
 client = Surge()
-response = client.accounts.with_raw_response.create(
-    name="Account #2840 - DT Precision Auto",
+response = client.messages.with_raw_response.send(
+    account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+    conversation={
+        "contact": {}
+    },
 )
 print(response.headers.get('X-My-Header'))
 
-account = response.parse()  # get the object that `accounts.create()` would have returned
-print(account.id)
+message = response.parse()  # get the object that `messages.send()` would have returned
+print(message.id)
 ```
 
-These methods return an [`APIResponse`](https://github.com/stainless-sdks/surge-python/tree/main/src/surge/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/stainless-sdks/surge-python/tree/main/src/surgeapi/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/surge-python/tree/main/src/surge/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/surge-python/tree/main/src/surgeapi/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -309,8 +319,9 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.accounts.with_streaming_response.create(
-    name="Account #2840 - DT Precision Auto",
+with client.messages.with_streaming_response.send(
+    account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+    conversation={"contact": {}},
 ) as response:
     print(response.headers.get("X-My-Header"))
 
@@ -364,7 +375,7 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 
 ```python
 import httpx
-from surge import Surge, DefaultHttpxClient
+from surgeapi import Surge, DefaultHttpxClient
 
 client = Surge(
     # Or use the `SURGE_BASE_URL` env var
@@ -387,7 +398,7 @@ client.with_options(http_client=DefaultHttpxClient(...))
 By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
 
 ```py
-from surge import Surge
+from surgeapi import Surge
 
 with Surge() as client:
   # make requests here
@@ -415,8 +426,8 @@ If you've upgraded to the latest version but aren't seeing any new features you 
 You can determine the version that is being used at runtime with:
 
 ```py
-import surge
-print(surge.__version__)
+import surgeapi
+print(surgeapi.__version__)
 ```
 
 ## Requirements

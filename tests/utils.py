@@ -8,8 +8,8 @@ from typing import Any, TypeVar, Iterator, cast
 from datetime import date, datetime
 from typing_extensions import Literal, get_args, get_origin, assert_type
 
-from surge._types import Omit, NoneType
-from surge._utils import (
+from surgeapi._types import Omit, NoneType
+from surgeapi._utils import (
     is_dict,
     is_list,
     is_list_type,
@@ -18,8 +18,8 @@ from surge._utils import (
     is_annotated_type,
     is_type_alias_type,
 )
-from surge._compat import PYDANTIC_V2, field_outer_type, get_model_fields
-from surge._models import BaseModel
+from surgeapi._compat import PYDANTIC_V2, field_outer_type, get_model_fields
+from surgeapi._models import BaseModel
 
 BaseModelT = TypeVar("BaseModelT", bound=BaseModel)
 

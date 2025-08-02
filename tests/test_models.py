@@ -7,9 +7,9 @@ import pytest
 import pydantic
 from pydantic import Field
 
-from surge._utils import PropertyInfo
-from surge._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
-from surge._models import BaseModel, construct_type
+from surgeapi._utils import PropertyInfo
+from surgeapi._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
+from surgeapi._models import BaseModel, construct_type
 
 
 class BasicModel(BaseModel):

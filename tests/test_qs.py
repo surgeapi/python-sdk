@@ -4,7 +4,7 @@ from urllib.parse import unquote
 
 import pytest
 
-from surge._qs import Querystring, stringify
+from surgeapi._qs import Querystring, stringify
 
 
 def test_empty() -> None:

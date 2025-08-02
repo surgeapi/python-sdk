@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from surge._utils import required_args
+from surgeapi._utils import required_args
 
 
 def test_too_many_positional_params() -> None:

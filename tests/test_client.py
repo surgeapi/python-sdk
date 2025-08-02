@@ -21,11 +21,11 @@ import pytest
 from respx import MockRouter
 from pydantic import ValidationError
 
-from surge import Surge, AsyncSurge, APIResponseValidationError
-from surge._types import Omit
-from surge._models import BaseModel, FinalRequestOptions
-from surge._exceptions import SurgeError, APIStatusError, APITimeoutError, APIResponseValidationError
-from surge._base_client import (
+from surgeapi import Surge, AsyncSurge, APIResponseValidationError
+from surgeapi._types import Omit
+from surgeapi._models import BaseModel, FinalRequestOptions
+from surgeapi._exceptions import SurgeError, APIStatusError, APITimeoutError, APIResponseValidationError
+from surgeapi._base_client import (
     DEFAULT_TIMEOUT,
     HTTPX_DEFAULT_TIMEOUT,
     BaseClient,
@@ -235,10 +235,10 @@ class TestSurge:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "surge/_legacy_response.py",
-                        "surge/_response.py",
+                        "surgeapi/_legacy_response.py",
+                        "surgeapi/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "surge/_compat.py",
+                        "surgeapi/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -348,7 +348,7 @@ class TestSurge:
         assert request.headers.get("Authorization") == f"Bearer {bearer_token}"
 
         with pytest.raises(SurgeError):
-            with update_env(**{"SURGE_BEARER_TOKEN": Omit()}):
+            with update_env(**{"SURGE_API_KEY": Omit()}):
                 client2 = Surge(base_url=base_url, bearer_token=None, _strict_response_validation=True)
             _ = client2
 
@@ -739,27 +739,33 @@ class TestSurge:
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("surge._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("surgeapi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: Surge) -> None:
-        respx_mock.post("/accounts").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/accounts/acct_01j9a43avnfqzbjfch6pygv1td/messages").mock(
+            side_effect=httpx.TimeoutException("Test timeout error")
+        )
 
         with pytest.raises(APITimeoutError):
-            client.accounts.with_streaming_response.create(name="Account #2840 - DT Precision Auto").__enter__()
+            client.messages.with_streaming_response.send(
+                account_id="acct_01j9a43avnfqzbjfch6pygv1td", conversation={"contact": {}}
+            ).__enter__()
 
         assert _get_open_connections(self.client) == 0
 
-    @mock.patch("surge._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("surgeapi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: Surge) -> None:
-        respx_mock.post("/accounts").mock(return_value=httpx.Response(500))
+        respx_mock.post("/accounts/acct_01j9a43avnfqzbjfch6pygv1td/messages").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            client.accounts.with_streaming_response.create(name="Account #2840 - DT Precision Auto").__enter__()
+            client.messages.with_streaming_response.send(
+                account_id="acct_01j9a43avnfqzbjfch6pygv1td", conversation={"contact": {}}
+            ).__enter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("surge._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("surgeapi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     def test_retries_taken(
@@ -782,15 +788,17 @@ class TestSurge:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/accounts").mock(side_effect=retry_handler)
+        respx_mock.post("/accounts/acct_01j9a43avnfqzbjfch6pygv1td/messages").mock(side_effect=retry_handler)
 
-        response = client.accounts.with_raw_response.create(name="Account #2840 - DT Precision Auto")
+        response = client.messages.with_raw_response.send(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td", conversation={"contact": {}}
+        )
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("surge._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("surgeapi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_omit_retry_count_header(self, client: Surge, failures_before_success: int, respx_mock: MockRouter) -> None:
         client = client.with_options(max_retries=4)
@@ -804,16 +812,18 @@ class TestSurge:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/accounts").mock(side_effect=retry_handler)
+        respx_mock.post("/accounts/acct_01j9a43avnfqzbjfch6pygv1td/messages").mock(side_effect=retry_handler)
 
-        response = client.accounts.with_raw_response.create(
-            name="Account #2840 - DT Precision Auto", extra_headers={"x-stainless-retry-count": Omit()}
+        response = client.messages.with_raw_response.send(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            conversation={"contact": {}},
+            extra_headers={"x-stainless-retry-count": Omit()},
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("surge._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("surgeapi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_overwrite_retry_count_header(
         self, client: Surge, failures_before_success: int, respx_mock: MockRouter
@@ -829,10 +839,12 @@ class TestSurge:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/accounts").mock(side_effect=retry_handler)
+        respx_mock.post("/accounts/acct_01j9a43avnfqzbjfch6pygv1td/messages").mock(side_effect=retry_handler)
 
-        response = client.accounts.with_raw_response.create(
-            name="Account #2840 - DT Precision Auto", extra_headers={"x-stainless-retry-count": "42"}
+        response = client.messages.with_raw_response.send(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            conversation={"contact": {}},
+            extra_headers={"x-stainless-retry-count": "42"},
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
@@ -1066,10 +1078,10 @@ class TestAsyncSurge:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "surge/_legacy_response.py",
-                        "surge/_response.py",
+                        "surgeapi/_legacy_response.py",
+                        "surgeapi/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "surge/_compat.py",
+                        "surgeapi/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -1179,7 +1191,7 @@ class TestAsyncSurge:
         assert request.headers.get("Authorization") == f"Bearer {bearer_token}"
 
         with pytest.raises(SurgeError):
-            with update_env(**{"SURGE_BEARER_TOKEN": Omit()}):
+            with update_env(**{"SURGE_API_KEY": Omit()}):
                 client2 = AsyncSurge(base_url=base_url, bearer_token=None, _strict_response_validation=True)
             _ = client2
 
@@ -1574,31 +1586,33 @@ class TestAsyncSurge:
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("surge._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("surgeapi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, async_client: AsyncSurge) -> None:
-        respx_mock.post("/accounts").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/accounts/acct_01j9a43avnfqzbjfch6pygv1td/messages").mock(
+            side_effect=httpx.TimeoutException("Test timeout error")
+        )
 
         with pytest.raises(APITimeoutError):
-            await async_client.accounts.with_streaming_response.create(
-                name="Account #2840 - DT Precision Auto"
+            await async_client.messages.with_streaming_response.send(
+                account_id="acct_01j9a43avnfqzbjfch6pygv1td", conversation={"contact": {}}
             ).__aenter__()
 
         assert _get_open_connections(self.client) == 0
 
-    @mock.patch("surge._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("surgeapi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, async_client: AsyncSurge) -> None:
-        respx_mock.post("/accounts").mock(return_value=httpx.Response(500))
+        respx_mock.post("/accounts/acct_01j9a43avnfqzbjfch6pygv1td/messages").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await async_client.accounts.with_streaming_response.create(
-                name="Account #2840 - DT Precision Auto"
+            await async_client.messages.with_streaming_response.send(
+                account_id="acct_01j9a43avnfqzbjfch6pygv1td", conversation={"contact": {}}
             ).__aenter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("surge._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("surgeapi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
@@ -1622,15 +1636,17 @@ class TestAsyncSurge:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/accounts").mock(side_effect=retry_handler)
+        respx_mock.post("/accounts/acct_01j9a43avnfqzbjfch6pygv1td/messages").mock(side_effect=retry_handler)
 
-        response = await client.accounts.with_raw_response.create(name="Account #2840 - DT Precision Auto")
+        response = await client.messages.with_raw_response.send(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td", conversation={"contact": {}}
+        )
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("surge._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("surgeapi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     async def test_omit_retry_count_header(
@@ -1647,16 +1663,18 @@ class TestAsyncSurge:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/accounts").mock(side_effect=retry_handler)
+        respx_mock.post("/accounts/acct_01j9a43avnfqzbjfch6pygv1td/messages").mock(side_effect=retry_handler)
 
-        response = await client.accounts.with_raw_response.create(
-            name="Account #2840 - DT Precision Auto", extra_headers={"x-stainless-retry-count": Omit()}
+        response = await client.messages.with_raw_response.send(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            conversation={"contact": {}},
+            extra_headers={"x-stainless-retry-count": Omit()},
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("surge._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("surgeapi._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     async def test_overwrite_retry_count_header(
@@ -1673,10 +1691,12 @@ class TestAsyncSurge:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/accounts").mock(side_effect=retry_handler)
+        respx_mock.post("/accounts/acct_01j9a43avnfqzbjfch6pygv1td/messages").mock(side_effect=retry_handler)
 
-        response = await client.accounts.with_raw_response.create(
-            name="Account #2840 - DT Precision Auto", extra_headers={"x-stainless-retry-count": "42"}
+        response = await client.messages.with_raw_response.send(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            conversation={"contact": {}},
+            extra_headers={"x-stainless-retry-count": "42"},
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
@@ -1692,8 +1712,8 @@ class TestAsyncSurge:
         import nest_asyncio
         import threading
 
-        from surge._utils import asyncify
-        from surge._base_client import get_platform
+        from surgeapi._utils import asyncify
+        from surgeapi._base_client import get_platform
 
         async def test_main() -> None:
             result = await asyncify(get_platform)()
