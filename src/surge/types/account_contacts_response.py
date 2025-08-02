@@ -4,21 +4,24 @@ from typing import Dict, Optional
 
 from .._models import BaseModel
 
-__all__ = ["UserResponse"]
+__all__ = ["AccountContactsResponse"]
 
 
-class UserResponse(BaseModel):
-    id: Optional[str] = None
+class AccountContactsResponse(BaseModel):
+    id: str
     """Unique identifier for the object."""
 
+    phone_number: str
+    """The contact's phone number in E.164 format."""
+
+    email: Optional[str] = None
+    """The contact's email address."""
+
     first_name: Optional[str] = None
-    """The user's first name."""
+    """The contact's first name."""
 
     last_name: Optional[str] = None
-    """The user's last name."""
+    """The contact's last name."""
 
     metadata: Optional[Dict[str, str]] = None
     """Set of key-value pairs that will be stored with the object."""
-
-    photo_url: Optional[str] = None
-    """URL of a photo to be used as the user's avatar."""

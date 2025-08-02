@@ -18,7 +18,8 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.user_response import UserResponse
+from ..types.user_update_response import UserUpdateResponse
+from ..types.user_retrieve_response import UserRetrieveResponse
 from ..types.user_create_token_response import UserCreateTokenResponse
 
 __all__ = ["UsersResource", "AsyncUsersResource"]
@@ -54,7 +55,7 @@ class UsersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> UserResponse:
+    ) -> UserRetrieveResponse:
         """
         Retrieves a User object.
 
@@ -74,7 +75,7 @@ class UsersResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=UserResponse,
+            cast_to=UserRetrieveResponse,
         )
 
     def update(
@@ -91,7 +92,7 @@ class UsersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> UserResponse:
+    ) -> UserUpdateResponse:
         """
         Updates an existing User object.
 
@@ -128,7 +129,7 @@ class UsersResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=UserResponse,
+            cast_to=UserUpdateResponse,
         )
 
     def create_token(
@@ -202,7 +203,7 @@ class AsyncUsersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> UserResponse:
+    ) -> UserRetrieveResponse:
         """
         Retrieves a User object.
 
@@ -222,7 +223,7 @@ class AsyncUsersResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=UserResponse,
+            cast_to=UserRetrieveResponse,
         )
 
     async def update(
@@ -239,7 +240,7 @@ class AsyncUsersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> UserResponse:
+    ) -> UserUpdateResponse:
         """
         Updates an existing User object.
 
@@ -276,7 +277,7 @@ class AsyncUsersResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=UserResponse,
+            cast_to=UserUpdateResponse,
         )
 
     async def create_token(

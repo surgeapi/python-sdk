@@ -8,7 +8,7 @@ from typing import Any, cast
 import pytest
 
 from surge import Surge, AsyncSurge
-from surge.types import ContactResponse
+from surge.types import ContactUpdateResponse, ContactRetrieveResponse
 from tests.utils import assert_matches_type
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -25,7 +25,7 @@ class TestContacts:
         contact = client.contacts.retrieve(
             "id",
         )
-        assert_matches_type(ContactResponse, contact, path=["response"])
+        assert_matches_type(ContactRetrieveResponse, contact, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -39,7 +39,7 @@ class TestContacts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contact = response.parse()
-        assert_matches_type(ContactResponse, contact, path=["response"])
+        assert_matches_type(ContactRetrieveResponse, contact, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -53,7 +53,7 @@ class TestContacts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contact = response.parse()
-            assert_matches_type(ContactResponse, contact, path=["response"])
+            assert_matches_type(ContactRetrieveResponse, contact, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -76,7 +76,7 @@ class TestContacts:
             id="ctc_01j9dy8mdzfn3r0e8x1tbdrdrf",
             phone_number="+18015551234",
         )
-        assert_matches_type(ContactResponse, contact, path=["response"])
+        assert_matches_type(ContactUpdateResponse, contact, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -91,7 +91,7 @@ class TestContacts:
             last_name="Toretto",
             metadata={"car": "1970 Dodge Charger R/T"},
         )
-        assert_matches_type(ContactResponse, contact, path=["response"])
+        assert_matches_type(ContactUpdateResponse, contact, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -106,7 +106,7 @@ class TestContacts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contact = response.parse()
-        assert_matches_type(ContactResponse, contact, path=["response"])
+        assert_matches_type(ContactUpdateResponse, contact, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -121,7 +121,7 @@ class TestContacts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contact = response.parse()
-            assert_matches_type(ContactResponse, contact, path=["response"])
+            assert_matches_type(ContactUpdateResponse, contact, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -150,7 +150,7 @@ class TestAsyncContacts:
         contact = await async_client.contacts.retrieve(
             "id",
         )
-        assert_matches_type(ContactResponse, contact, path=["response"])
+        assert_matches_type(ContactRetrieveResponse, contact, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -164,7 +164,7 @@ class TestAsyncContacts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contact = await response.parse()
-        assert_matches_type(ContactResponse, contact, path=["response"])
+        assert_matches_type(ContactRetrieveResponse, contact, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -178,7 +178,7 @@ class TestAsyncContacts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contact = await response.parse()
-            assert_matches_type(ContactResponse, contact, path=["response"])
+            assert_matches_type(ContactRetrieveResponse, contact, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -201,7 +201,7 @@ class TestAsyncContacts:
             id="ctc_01j9dy8mdzfn3r0e8x1tbdrdrf",
             phone_number="+18015551234",
         )
-        assert_matches_type(ContactResponse, contact, path=["response"])
+        assert_matches_type(ContactUpdateResponse, contact, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -216,7 +216,7 @@ class TestAsyncContacts:
             last_name="Toretto",
             metadata={"car": "1970 Dodge Charger R/T"},
         )
-        assert_matches_type(ContactResponse, contact, path=["response"])
+        assert_matches_type(ContactUpdateResponse, contact, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -231,7 +231,7 @@ class TestAsyncContacts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         contact = await response.parse()
-        assert_matches_type(ContactResponse, contact, path=["response"])
+        assert_matches_type(ContactUpdateResponse, contact, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -246,7 +246,7 @@ class TestAsyncContacts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             contact = await response.parse()
-            assert_matches_type(ContactResponse, contact, path=["response"])
+            assert_matches_type(ContactUpdateResponse, contact, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
