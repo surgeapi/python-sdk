@@ -11,15 +11,15 @@ from .contact_params import ContactParams
 
 __all__ = [
     "MessageParams",
-    "UnionMember0",
-    "UnionMember0Conversation",
-    "UnionMember0Attachment",
-    "UnionMember1",
-    "UnionMember1Attachment",
+    "MessageParamsWithConversation",
+    "MessageParamsWithConversationConversation",
+    "MessageParamsWithConversationAttachment",
+    "SimpleMessageParams",
+    "SimpleMessageParamsAttachment",
 ]
 
 
-class UnionMember0Conversation(TypedDict, total=False):
+class MessageParamsWithConversationConversation(TypedDict, total=False):
     contact: Required[ContactParams]
     """Parameters for creating a contact"""
 
@@ -30,19 +30,19 @@ class UnionMember0Conversation(TypedDict, total=False):
     """
 
 
-class UnionMember0Attachment(TypedDict, total=False):
+class MessageParamsWithConversationAttachment(TypedDict, total=False):
     url: Required[str]
     """The URL of the attachment."""
 
 
-class UnionMember0(TypedDict, total=False):
-    conversation: Required[UnionMember0Conversation]
+class MessageParamsWithConversation(TypedDict, total=False):
+    conversation: Required[MessageParamsWithConversationConversation]
     """Params for selecting or creating a new conversation.
 
     Either the id or the Contact must be given.
     """
 
-    attachments: Iterable[UnionMember0Attachment]
+    attachments: Iterable[MessageParamsWithConversationAttachment]
 
     body: str
     """The message body."""
@@ -54,13 +54,13 @@ class UnionMember0(TypedDict, total=False):
     """
 
 
-class UnionMember1Attachment(TypedDict, total=False):
+class SimpleMessageParamsAttachment(TypedDict, total=False):
     url: Required[str]
     """The URL of the attachment."""
 
 
-_UnionMember1ReservedKeywords = TypedDict(
-    "_UnionMember1ReservedKeywords",
+_SimpleMessageParamsReservedKeywords = TypedDict(
+    "_SimpleMessageParamsReservedKeywords",
     {
         "from": str,
     },
@@ -68,14 +68,14 @@ _UnionMember1ReservedKeywords = TypedDict(
 )
 
 
-class UnionMember1(_UnionMember1ReservedKeywords, total=False):
+class SimpleMessageParams(_SimpleMessageParamsReservedKeywords, total=False):
     to: Required[str]
     """The recipient's phone number in E.164 format.
 
     Cannot be used together with 'conversation'.
     """
 
-    attachments: Iterable[UnionMember1Attachment]
+    attachments: Iterable[SimpleMessageParamsAttachment]
 
     body: str
     """The message body."""
@@ -87,4 +87,4 @@ class UnionMember1(_UnionMember1ReservedKeywords, total=False):
     """
 
 
-MessageParams: TypeAlias = Union[UnionMember0, UnionMember1]
+MessageParams: TypeAlias = Union[MessageParamsWithConversation, SimpleMessageParams]

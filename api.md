@@ -67,7 +67,7 @@ Methods:
 Types:
 
 ```python
-from surgeapi.types import PhoneNumber
+from surgeapi.types import PhoneNumber, PhoneNumberPurchaseParams
 ```
 
 Methods:

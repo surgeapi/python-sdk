@@ -11,22 +11,22 @@ from .contact_params import ContactParams
 
 __all__ = [
     "MessageSendParams",
-    "Variant0",
-    "Variant0Conversation",
-    "Variant0Attachment",
-    "Variant1",
-    "Variant1Attachment",
+    "MessageParamsWithConversation",
+    "MessageParamsWithConversationConversation",
+    "MessageParamsWithConversationAttachment",
+    "SimpleMessageParams",
+    "SimpleMessageParamsAttachment",
 ]
 
 
-class Variant0(TypedDict, total=False):
-    conversation: Required[Variant0Conversation]
+class MessageParamsWithConversation(TypedDict, total=False):
+    conversation: Required[MessageParamsWithConversationConversation]
     """Params for selecting or creating a new conversation.
 
     Either the id or the Contact must be given.
     """
 
-    attachments: Iterable[Variant0Attachment]
+    attachments: Iterable[MessageParamsWithConversationAttachment]
 
     body: str
     """The message body."""
@@ -38,7 +38,7 @@ class Variant0(TypedDict, total=False):
     """
 
 
-class Variant0Conversation(TypedDict, total=False):
+class MessageParamsWithConversationConversation(TypedDict, total=False):
     contact: Required[ContactParams]
     """Parameters for creating a contact"""
 
@@ -49,19 +49,19 @@ class Variant0Conversation(TypedDict, total=False):
     """
 
 
-class Variant0Attachment(TypedDict, total=False):
+class MessageParamsWithConversationAttachment(TypedDict, total=False):
     url: Required[str]
     """The URL of the attachment."""
 
 
-class Variant1(TypedDict, total=False):
+class SimpleMessageParams(TypedDict, total=False):
     to: Required[str]
     """The recipient's phone number in E.164 format.
 
     Cannot be used together with 'conversation'.
     """
 
-    attachments: Iterable[Variant1Attachment]
+    attachments: Iterable[SimpleMessageParamsAttachment]
 
     body: str
     """The message body."""
@@ -80,9 +80,9 @@ class Variant1(TypedDict, total=False):
     """
 
 
-class Variant1Attachment(TypedDict, total=False):
+class SimpleMessageParamsAttachment(TypedDict, total=False):
     url: Required[str]
     """The URL of the attachment."""
 
 
-MessageSendParams: TypeAlias = Union[Variant0, Variant1]
+MessageSendParams: TypeAlias = Union[MessageParamsWithConversation, SimpleMessageParams]
