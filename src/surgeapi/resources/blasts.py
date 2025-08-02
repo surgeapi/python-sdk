@@ -20,6 +20,7 @@ from .._response import (
 )
 from ..types.blast import Blast
 from .._base_client import make_request_options
+from ..types.shared_params.attachment_params import AttachmentParams
 
 __all__ = ["BlastsResource", "AsyncBlastsResource"]
 
@@ -48,7 +49,7 @@ class BlastsResource(SyncAPIResource):
         self,
         account_id: str,
         *,
-        attachments: Iterable[blast_blasts_params.Attachment] | NotGiven = NOT_GIVEN,
+        attachments: Iterable[AttachmentParams] | NotGiven = NOT_GIVEN,
         body: str | NotGiven = NOT_GIVEN,
         contacts: List[str] | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
@@ -135,7 +136,7 @@ class AsyncBlastsResource(AsyncAPIResource):
         self,
         account_id: str,
         *,
-        attachments: Iterable[blast_blasts_params.Attachment] | NotGiven = NOT_GIVEN,
+        attachments: Iterable[AttachmentParams] | NotGiven = NOT_GIVEN,
         body: str | NotGiven = NOT_GIVEN,
         contacts: List[str] | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,

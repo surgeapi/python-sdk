@@ -7,15 +7,14 @@ from datetime import datetime
 from typing_extensions import Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
-from .contact_params import ContactParams
+from .shared_params.contact_params import ContactParams
+from .shared_params.attachment_params import AttachmentParams
 
 __all__ = [
     "MessageParams",
     "MessageParamsWithConversation",
     "MessageParamsWithConversationConversation",
-    "MessageParamsWithConversationAttachment",
     "SimpleMessageParams",
-    "SimpleMessageParamsAttachment",
 ]
 
 
@@ -30,11 +29,6 @@ class MessageParamsWithConversationConversation(TypedDict, total=False):
     """
 
 
-class MessageParamsWithConversationAttachment(TypedDict, total=False):
-    url: Required[str]
-    """The URL of the attachment."""
-
-
 class MessageParamsWithConversation(TypedDict, total=False):
     conversation: Required[MessageParamsWithConversationConversation]
     """Params for selecting or creating a new conversation.
@@ -42,7 +36,7 @@ class MessageParamsWithConversation(TypedDict, total=False):
     Either the id or the Contact must be given.
     """
 
-    attachments: Iterable[MessageParamsWithConversationAttachment]
+    attachments: Iterable[AttachmentParams]
 
     body: str
     """The message body."""
@@ -52,11 +46,6 @@ class MessageParamsWithConversation(TypedDict, total=False):
     An optional datetime for scheduling message up to a couple of months in the
     future.
     """
-
-
-class SimpleMessageParamsAttachment(TypedDict, total=False):
-    url: Required[str]
-    """The URL of the attachment."""
 
 
 _SimpleMessageParamsReservedKeywords = TypedDict(
@@ -75,7 +64,7 @@ class SimpleMessageParams(_SimpleMessageParamsReservedKeywords, total=False):
     Cannot be used together with 'conversation'.
     """
 
-    attachments: Iterable[SimpleMessageParamsAttachment]
+    attachments: Iterable[AttachmentParams]
 
     body: str
     """The message body."""

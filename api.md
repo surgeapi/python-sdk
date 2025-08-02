@@ -1,9 +1,22 @@
+# Shared Types
+
+```python
+from surgeapi.types import AttachmentParams, Contact, ContactParams
+```
+
 # Accounts
 
 Types:
 
 ```python
-from surgeapi.types import Account, AccountParams, AccountStatus, AccountUpdateParams
+from surgeapi.types import (
+    Account,
+    AccountParams,
+    AccountStatus,
+    AccountUpdateParams,
+    Organization,
+    OrganizationParams,
+)
 ```
 
 Methods:
@@ -38,17 +51,11 @@ Methods:
 
 # Contacts
 
-Types:
-
-```python
-from surgeapi.types import Contact, ContactParams
-```
-
 Methods:
 
-- <code title="post /accounts/{account_id}/contacts">client.contacts.<a href="./src/surgeapi/resources/contacts.py">create</a>(account_id, \*\*<a href="src/surgeapi/types/contact_create_params.py">params</a>) -> <a href="./src/surgeapi/types/contact.py">Contact</a></code>
-- <code title="get /contacts/{id}">client.contacts.<a href="./src/surgeapi/resources/contacts.py">retrieve</a>(id) -> <a href="./src/surgeapi/types/contact.py">Contact</a></code>
-- <code title="patch /contacts/{id}">client.contacts.<a href="./src/surgeapi/resources/contacts.py">update</a>(id, \*\*<a href="src/surgeapi/types/contact_update_params.py">params</a>) -> <a href="./src/surgeapi/types/contact.py">Contact</a></code>
+- <code title="post /accounts/{account_id}/contacts">client.contacts.<a href="./src/surgeapi/resources/contacts.py">create</a>(account_id, \*\*<a href="src/surgeapi/types/contact_create_params.py">params</a>) -> <a href="./src/surgeapi/types/shared/contact.py">Contact</a></code>
+- <code title="get /contacts/{id}">client.contacts.<a href="./src/surgeapi/resources/contacts.py">retrieve</a>(id) -> <a href="./src/surgeapi/types/shared/contact.py">Contact</a></code>
+- <code title="patch /contacts/{id}">client.contacts.<a href="./src/surgeapi/resources/contacts.py">update</a>(id, \*\*<a href="src/surgeapi/types/contact_update_params.py">params</a>) -> <a href="./src/surgeapi/types/shared/contact.py">Contact</a></code>
 
 # Messages
 

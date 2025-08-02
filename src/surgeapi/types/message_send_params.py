@@ -7,15 +7,14 @@ from datetime import datetime
 from typing_extensions import Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
-from .contact_params import ContactParams
+from .shared_params.contact_params import ContactParams
+from .shared_params.attachment_params import AttachmentParams
 
 __all__ = [
     "MessageSendParams",
     "MessageParamsWithConversation",
     "MessageParamsWithConversationConversation",
-    "MessageParamsWithConversationAttachment",
     "SimpleMessageParams",
-    "SimpleMessageParamsAttachment",
 ]
 
 
@@ -26,7 +25,7 @@ class MessageParamsWithConversation(TypedDict, total=False):
     Either the id or the Contact must be given.
     """
 
-    attachments: Iterable[MessageParamsWithConversationAttachment]
+    attachments: Iterable[AttachmentParams]
 
     body: str
     """The message body."""
@@ -49,11 +48,6 @@ class MessageParamsWithConversationConversation(TypedDict, total=False):
     """
 
 
-class MessageParamsWithConversationAttachment(TypedDict, total=False):
-    url: Required[str]
-    """The URL of the attachment."""
-
-
 class SimpleMessageParams(TypedDict, total=False):
     to: Required[str]
     """The recipient's phone number in E.164 format.
@@ -61,7 +55,7 @@ class SimpleMessageParams(TypedDict, total=False):
     Cannot be used together with 'conversation'.
     """
 
-    attachments: Iterable[SimpleMessageParamsAttachment]
+    attachments: Iterable[AttachmentParams]
 
     body: str
     """The message body."""
@@ -78,11 +72,6 @@ class SimpleMessageParams(TypedDict, total=False):
     An optional datetime for scheduling message up to a couple of months in the
     future.
     """
-
-
-class SimpleMessageParamsAttachment(TypedDict, total=False):
-    url: Required[str]
-    """The URL of the attachment."""
 
 
 MessageSendParams: TypeAlias = Union[MessageParamsWithConversation, SimpleMessageParams]

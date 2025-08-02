@@ -39,9 +39,9 @@ message = client.messages.send(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
     conversation={
         "contact": {
-            "first_name": "Dominic",
+            "first_name": "Dom",
             "last_name": "Toretto",
-            "phone_number": "+18015551234",
+            "phone_number": "+13235556439",
         }
     },
     attachments=[{"url": "https://toretto.family/coronas.gif"}],
@@ -74,9 +74,9 @@ async def main() -> None:
         account_id="acct_01j9a43avnfqzbjfch6pygv1td",
         conversation={
             "contact": {
-                "first_name": "Dominic",
+                "first_name": "Dom",
                 "last_name": "Toretto",
-                "phone_number": "+18015551234",
+                "phone_number": "+13235556439",
             }
         },
         attachments=[{"url": "https://toretto.family/coronas.gif"}],
@@ -118,9 +118,9 @@ async def main() -> None:
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             conversation={
                 "contact": {
-                    "first_name": "Dominic",
+                    "first_name": "Dom",
                     "last_name": "Toretto",
-                    "phone_number": "+18015551234",
+                    "phone_number": "+13235556439",
                 }
             },
             attachments=[{"url": "https://toretto.family/coronas.gif"}],
@@ -184,9 +184,9 @@ try:
         account_id="acct_01j9a43avnfqzbjfch6pygv1td",
         conversation={
             "contact": {
-                "first_name": "Dominic",
+                "first_name": "Dom",
                 "last_name": "Toretto",
-                "phone_number": "+18015551234",
+                "phone_number": "+13235556439",
             }
         },
         attachments=[{"url": "https://toretto.family/coronas.gif"}],
@@ -238,9 +238,9 @@ client.with_options(max_retries=5).messages.send(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
     conversation={
         "contact": {
-            "first_name": "Dominic",
+            "first_name": "Dom",
             "last_name": "Toretto",
-            "phone_number": "+18015551234",
+            "phone_number": "+13235556439",
         }
     },
     attachments=[{"url": "https://toretto.family/coronas.gif"}],
@@ -272,9 +272,9 @@ client.with_options(timeout=5.0).messages.send(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
     conversation={
         "contact": {
-            "first_name": "Dominic",
+            "first_name": "Dom",
             "last_name": "Toretto",
-            "phone_number": "+18015551234",
+            "phone_number": "+13235556439",
         }
     },
     attachments=[{"url": "https://toretto.family/coronas.gif"}],
@@ -324,9 +324,9 @@ response = client.messages.with_raw_response.send(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
     conversation={
         "contact": {
-            "first_name": "Dominic",
+            "first_name": "Dom",
             "last_name": "Toretto",
-            "phone_number": "+18015551234",
+            "phone_number": "+13235556439",
         }
     },
     attachments=[{
@@ -355,9 +355,9 @@ with client.messages.with_streaming_response.send(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
     conversation={
         "contact": {
-            "first_name": "Dominic",
+            "first_name": "Dom",
             "last_name": "Toretto",
-            "phone_number": "+18015551234",
+            "phone_number": "+13235556439",
         }
     },
     attachments=[{"url": "https://toretto.family/coronas.gif"}],
