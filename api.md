@@ -4,8 +4,9 @@ Types:
 
 ```python
 from surge.types import (
-    AccountResponse,
     AttachmentParams,
+    AccountCreateResponse,
+    AccountUpdateResponse,
     AccountBlastsResponse,
     AccountCampaignsResponse,
     AccountContactsResponse,
@@ -18,8 +19,8 @@ from surge.types import (
 
 Methods:
 
-- <code title="post /accounts">client.accounts.<a href="./src/surge/resources/accounts.py">create</a>(\*\*<a href="src/surge/types/account_create_params.py">params</a>) -> <a href="./src/surge/types/account_response.py">AccountResponse</a></code>
-- <code title="patch /accounts/{id}">client.accounts.<a href="./src/surge/resources/accounts.py">update</a>(id, \*\*<a href="src/surge/types/account_update_params.py">params</a>) -> <a href="./src/surge/types/account_response.py">AccountResponse</a></code>
+- <code title="post /accounts">client.accounts.<a href="./src/surge/resources/accounts.py">create</a>(\*\*<a href="src/surge/types/account_create_params.py">params</a>) -> <a href="./src/surge/types/account_create_response.py">AccountCreateResponse</a></code>
+- <code title="patch /accounts/{id}">client.accounts.<a href="./src/surge/resources/accounts.py">update</a>(id, \*\*<a href="src/surge/types/account_update_params.py">params</a>) -> <a href="./src/surge/types/account_update_response.py">AccountUpdateResponse</a></code>
 - <code title="post /accounts/{account_id}/blasts">client.accounts.<a href="./src/surge/resources/accounts.py">blasts</a>(account_id, \*\*<a href="src/surge/types/account_blasts_params.py">params</a>) -> <a href="./src/surge/types/account_blasts_response.py">AccountBlastsResponse</a></code>
 - <code title="post /accounts/{account_id}/campaigns">client.accounts.<a href="./src/surge/resources/accounts.py">campaigns</a>(account_id, \*\*<a href="src/surge/types/account_campaigns_params.py">params</a>) -> <a href="./src/surge/types/account_campaigns_response.py">AccountCampaignsResponse</a></code>
 - <code title="post /accounts/{account_id}/contacts">client.accounts.<a href="./src/surge/resources/accounts.py">contacts</a>(account_id, \*\*<a href="src/surge/types/account_contacts_params.py">params</a>) -> <a href="./src/surge/types/account_contacts_response.py">AccountContactsResponse</a></code>

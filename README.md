@@ -35,10 +35,10 @@ client = Surge(
     bearer_token=os.environ.get("SURGE_BEARER_TOKEN"),  # This is the default and can be omitted
 )
 
-account_response = client.accounts.create(
+account = client.accounts.create(
     name="Account #2840 - DT Precision Auto",
 )
-print(account_response.id)
+print(account.id)
 ```
 
 While you can provide a `bearer_token` keyword argument,
@@ -61,10 +61,10 @@ client = AsyncSurge(
 
 
 async def main() -> None:
-    account_response = await client.accounts.create(
+    account = await client.accounts.create(
         name="Account #2840 - DT Precision Auto",
     )
-    print(account_response.id)
+    print(account.id)
 
 
 asyncio.run(main())
@@ -96,10 +96,10 @@ async def main() -> None:
         bearer_token="My Bearer Token",
         http_client=DefaultAioHttpClient(),
     ) as client:
-        account_response = await client.accounts.create(
+        account = await client.accounts.create(
             name="Account #2840 - DT Precision Auto",
         )
-        print(account_response.id)
+        print(account.id)
 
 
 asyncio.run(main())
@@ -123,7 +123,7 @@ from surge import Surge
 
 client = Surge()
 
-account_response = client.accounts.create(
+account = client.accounts.create(
     name="Account #2840 - DT Precision Auto",
     organization={
         "address": {
@@ -157,7 +157,7 @@ account_response = client.accounts.create(
         "website": "https://dtprecisionauto.com",
     },
 )
-print(account_response.organization)
+print(account.organization)
 ```
 
 ## Handling errors

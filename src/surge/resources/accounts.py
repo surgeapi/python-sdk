@@ -30,10 +30,11 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.account_response import AccountResponse
 from ..types.attachment_params import AttachmentParams
 from ..types.account_users_response import AccountUsersResponse
 from ..types.account_blasts_response import AccountBlastsResponse
+from ..types.account_create_response import AccountCreateResponse
+from ..types.account_update_response import AccountUpdateResponse
 from ..types.account_contacts_response import AccountContactsResponse
 from ..types.account_messages_response import AccountMessagesResponse
 from ..types.account_campaigns_response import AccountCampaignsResponse
@@ -76,7 +77,7 @@ class AccountsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountResponse:
+    ) -> AccountCreateResponse:
         """
         Creates a new Account within the calling Platform.
 
@@ -118,7 +119,7 @@ class AccountsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountResponse,
+            cast_to=AccountCreateResponse,
         )
 
     def update(
@@ -135,7 +136,7 @@ class AccountsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountResponse:
+    ) -> AccountUpdateResponse:
         """
         Updates an Account
 
@@ -178,7 +179,7 @@ class AccountsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountResponse,
+            cast_to=AccountUpdateResponse,
         )
 
     def blasts(
@@ -797,7 +798,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountResponse:
+    ) -> AccountCreateResponse:
         """
         Creates a new Account within the calling Platform.
 
@@ -839,7 +840,7 @@ class AsyncAccountsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountResponse,
+            cast_to=AccountCreateResponse,
         )
 
     async def update(
@@ -856,7 +857,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountResponse:
+    ) -> AccountUpdateResponse:
         """
         Updates an Account
 
@@ -899,7 +900,7 @@ class AsyncAccountsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountResponse,
+            cast_to=AccountUpdateResponse,
         )
 
     async def blasts(

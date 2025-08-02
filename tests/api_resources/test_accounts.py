@@ -9,9 +9,10 @@ import pytest
 
 from surge import Surge, AsyncSurge
 from surge.types import (
-    AccountResponse,
     AccountUsersResponse,
     AccountBlastsResponse,
+    AccountCreateResponse,
+    AccountUpdateResponse,
     AccountContactsResponse,
     AccountMessagesResponse,
     AccountCampaignsResponse,
@@ -35,7 +36,7 @@ class TestAccounts:
         account = client.accounts.create(
             name="Account #2840 - DT Precision Auto",
         )
-        assert_matches_type(AccountResponse, account, path=["response"])
+        assert_matches_type(AccountCreateResponse, account, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -78,7 +79,7 @@ class TestAccounts:
             },
             time_zone="America/Los_Angeles",
         )
-        assert_matches_type(AccountResponse, account, path=["response"])
+        assert_matches_type(AccountCreateResponse, account, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -92,7 +93,7 @@ class TestAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account = response.parse()
-        assert_matches_type(AccountResponse, account, path=["response"])
+        assert_matches_type(AccountCreateResponse, account, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -106,7 +107,7 @@ class TestAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account = response.parse()
-            assert_matches_type(AccountResponse, account, path=["response"])
+            assert_matches_type(AccountCreateResponse, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -118,7 +119,7 @@ class TestAccounts:
         account = client.accounts.update(
             id="acct_01jpqjvfg9enpt7pyxd60pcmxj",
         )
-        assert_matches_type(AccountResponse, account, path=["response"])
+        assert_matches_type(AccountUpdateResponse, account, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -162,7 +163,7 @@ class TestAccounts:
             },
             time_zone="America/Los_Angeles",
         )
-        assert_matches_type(AccountResponse, account, path=["response"])
+        assert_matches_type(AccountUpdateResponse, account, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -176,7 +177,7 @@ class TestAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account = response.parse()
-        assert_matches_type(AccountResponse, account, path=["response"])
+        assert_matches_type(AccountUpdateResponse, account, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -190,7 +191,7 @@ class TestAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account = response.parse()
-            assert_matches_type(AccountResponse, account, path=["response"])
+            assert_matches_type(AccountUpdateResponse, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -811,7 +812,7 @@ class TestAsyncAccounts:
         account = await async_client.accounts.create(
             name="Account #2840 - DT Precision Auto",
         )
-        assert_matches_type(AccountResponse, account, path=["response"])
+        assert_matches_type(AccountCreateResponse, account, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -854,7 +855,7 @@ class TestAsyncAccounts:
             },
             time_zone="America/Los_Angeles",
         )
-        assert_matches_type(AccountResponse, account, path=["response"])
+        assert_matches_type(AccountCreateResponse, account, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -868,7 +869,7 @@ class TestAsyncAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account = await response.parse()
-        assert_matches_type(AccountResponse, account, path=["response"])
+        assert_matches_type(AccountCreateResponse, account, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -882,7 +883,7 @@ class TestAsyncAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account = await response.parse()
-            assert_matches_type(AccountResponse, account, path=["response"])
+            assert_matches_type(AccountCreateResponse, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -894,7 +895,7 @@ class TestAsyncAccounts:
         account = await async_client.accounts.update(
             id="acct_01jpqjvfg9enpt7pyxd60pcmxj",
         )
-        assert_matches_type(AccountResponse, account, path=["response"])
+        assert_matches_type(AccountUpdateResponse, account, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -938,7 +939,7 @@ class TestAsyncAccounts:
             },
             time_zone="America/Los_Angeles",
         )
-        assert_matches_type(AccountResponse, account, path=["response"])
+        assert_matches_type(AccountUpdateResponse, account, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -952,7 +953,7 @@ class TestAsyncAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account = await response.parse()
-        assert_matches_type(AccountResponse, account, path=["response"])
+        assert_matches_type(AccountUpdateResponse, account, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -966,7 +967,7 @@ class TestAsyncAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account = await response.parse()
-            assert_matches_type(AccountResponse, account, path=["response"])
+            assert_matches_type(AccountUpdateResponse, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
