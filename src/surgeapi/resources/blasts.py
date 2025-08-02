@@ -18,8 +18,8 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from ..types.blast import Blast
 from .._base_client import make_request_options
-from ..types.blast_blasts_response import BlastBlastsResponse
 
 __all__ = ["BlastsResource", "AsyncBlastsResource"]
 
@@ -61,7 +61,7 @@ class BlastsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> BlastBlastsResponse:
+    ) -> Blast:
         """Sends a Blast.
 
         Args:
@@ -107,7 +107,7 @@ class BlastsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=BlastBlastsResponse,
+            cast_to=Blast,
         )
 
 
@@ -148,7 +148,7 @@ class AsyncBlastsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> BlastBlastsResponse:
+    ) -> Blast:
         """Sends a Blast.
 
         Args:
@@ -194,7 +194,7 @@ class AsyncBlastsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=BlastBlastsResponse,
+            cast_to=Blast,
         )
 
 

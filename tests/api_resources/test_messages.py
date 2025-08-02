@@ -9,7 +9,7 @@ import pytest
 
 from surgeapi import Surge, AsyncSurge
 from tests.utils import assert_matches_type
-from surgeapi.types import MessageSendResponse
+from surgeapi.types import Message
 from surgeapi._utils import parse_datetime
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -25,9 +25,9 @@ class TestMessages:
     def test_method_send_overload_1(self, client: Surge) -> None:
         message = client.messages.send(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-            conversation={"contact": {}},
+            conversation={"contact": {"phone_number": "+18015551234"}},
         )
-        assert_matches_type(MessageSendResponse, message, path=["response"])
+        assert_matches_type(Message, message, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -38,9 +38,11 @@ class TestMessages:
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             conversation={
                 "contact": {
+                    "phone_number": "+18015551234",
+                    "email": "dev@stainless.com",
                     "first_name": "Dominic",
                     "last_name": "Toretto",
-                    "phone_number": "+18015551234",
+                    "metadata": {"foo": "string"},
                 },
                 "phone_number": "+18015556789",
             },
@@ -48,7 +50,7 @@ class TestMessages:
             body="body",
             send_at=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
-        assert_matches_type(MessageSendResponse, message, path=["response"])
+        assert_matches_type(Message, message, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -57,13 +59,13 @@ class TestMessages:
     def test_raw_response_send_overload_1(self, client: Surge) -> None:
         response = client.messages.with_raw_response.send(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-            conversation={"contact": {}},
+            conversation={"contact": {"phone_number": "+18015551234"}},
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         message = response.parse()
-        assert_matches_type(MessageSendResponse, message, path=["response"])
+        assert_matches_type(Message, message, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -72,13 +74,13 @@ class TestMessages:
     def test_streaming_response_send_overload_1(self, client: Surge) -> None:
         with client.messages.with_streaming_response.send(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-            conversation={"contact": {}},
+            conversation={"contact": {"phone_number": "+18015551234"}},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             message = response.parse()
-            assert_matches_type(MessageSendResponse, message, path=["response"])
+            assert_matches_type(Message, message, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -90,7 +92,7 @@ class TestMessages:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             client.messages.with_raw_response.send(
                 account_id="",
-                conversation={"contact": {}},
+                conversation={"contact": {"phone_number": "+18015551234"}},
             )
 
     @pytest.mark.skip(
@@ -102,7 +104,7 @@ class TestMessages:
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             to="+18015551234",
         )
-        assert_matches_type(MessageSendResponse, message, path=["response"])
+        assert_matches_type(Message, message, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -117,7 +119,7 @@ class TestMessages:
             from_="+18015552345",
             send_at=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
-        assert_matches_type(MessageSendResponse, message, path=["response"])
+        assert_matches_type(Message, message, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -132,7 +134,7 @@ class TestMessages:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         message = response.parse()
-        assert_matches_type(MessageSendResponse, message, path=["response"])
+        assert_matches_type(Message, message, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -147,7 +149,7 @@ class TestMessages:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             message = response.parse()
-            assert_matches_type(MessageSendResponse, message, path=["response"])
+            assert_matches_type(Message, message, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -175,9 +177,9 @@ class TestAsyncMessages:
     async def test_method_send_overload_1(self, async_client: AsyncSurge) -> None:
         message = await async_client.messages.send(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-            conversation={"contact": {}},
+            conversation={"contact": {"phone_number": "+18015551234"}},
         )
-        assert_matches_type(MessageSendResponse, message, path=["response"])
+        assert_matches_type(Message, message, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -188,9 +190,11 @@ class TestAsyncMessages:
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             conversation={
                 "contact": {
+                    "phone_number": "+18015551234",
+                    "email": "dev@stainless.com",
                     "first_name": "Dominic",
                     "last_name": "Toretto",
-                    "phone_number": "+18015551234",
+                    "metadata": {"foo": "string"},
                 },
                 "phone_number": "+18015556789",
             },
@@ -198,7 +202,7 @@ class TestAsyncMessages:
             body="body",
             send_at=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
-        assert_matches_type(MessageSendResponse, message, path=["response"])
+        assert_matches_type(Message, message, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -207,13 +211,13 @@ class TestAsyncMessages:
     async def test_raw_response_send_overload_1(self, async_client: AsyncSurge) -> None:
         response = await async_client.messages.with_raw_response.send(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-            conversation={"contact": {}},
+            conversation={"contact": {"phone_number": "+18015551234"}},
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         message = await response.parse()
-        assert_matches_type(MessageSendResponse, message, path=["response"])
+        assert_matches_type(Message, message, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -222,13 +226,13 @@ class TestAsyncMessages:
     async def test_streaming_response_send_overload_1(self, async_client: AsyncSurge) -> None:
         async with async_client.messages.with_streaming_response.send(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-            conversation={"contact": {}},
+            conversation={"contact": {"phone_number": "+18015551234"}},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             message = await response.parse()
-            assert_matches_type(MessageSendResponse, message, path=["response"])
+            assert_matches_type(Message, message, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -240,7 +244,7 @@ class TestAsyncMessages:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             await async_client.messages.with_raw_response.send(
                 account_id="",
-                conversation={"contact": {}},
+                conversation={"contact": {"phone_number": "+18015551234"}},
             )
 
     @pytest.mark.skip(
@@ -252,7 +256,7 @@ class TestAsyncMessages:
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             to="+18015551234",
         )
-        assert_matches_type(MessageSendResponse, message, path=["response"])
+        assert_matches_type(Message, message, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -267,7 +271,7 @@ class TestAsyncMessages:
             from_="+18015552345",
             send_at=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
-        assert_matches_type(MessageSendResponse, message, path=["response"])
+        assert_matches_type(Message, message, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -282,7 +286,7 @@ class TestAsyncMessages:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         message = await response.parse()
-        assert_matches_type(MessageSendResponse, message, path=["response"])
+        assert_matches_type(Message, message, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -297,7 +301,7 @@ class TestAsyncMessages:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             message = await response.parse()
-            assert_matches_type(MessageSendResponse, message, path=["response"])
+            assert_matches_type(Message, message, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

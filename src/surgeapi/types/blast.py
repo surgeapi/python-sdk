@@ -5,7 +5,7 @@ from datetime import datetime
 
 from .._models import BaseModel
 
-__all__ = ["BlastBlastsResponse", "Attachment"]
+__all__ = ["Blast", "Attachment"]
 
 
 class Attachment(BaseModel):
@@ -13,7 +13,7 @@ class Attachment(BaseModel):
     """The URL of the attachment."""
 
 
-class BlastBlastsResponse(BaseModel):
+class Blast(BaseModel):
     id: Optional[str] = None
     """Unique identifier for the object."""
 

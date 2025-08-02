@@ -35,7 +35,7 @@ client = Surge(
     bearer_token=os.environ.get("SURGE_API_KEY"),  # This is the default and can be omitted
 )
 
-response = client.messages.send(
+message = client.messages.send(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
     conversation={
         "contact": {
@@ -47,7 +47,7 @@ response = client.messages.send(
     attachments=[{"url": "https://toretto.family/coronas.gif"}],
     body="Thought you could leave without saying goodbye?",
 )
-print(response.id)
+print(message.id)
 ```
 
 While you can provide a `bearer_token` keyword argument,
@@ -70,7 +70,7 @@ client = AsyncSurge(
 
 
 async def main() -> None:
-    response = await client.messages.send(
+    message = await client.messages.send(
         account_id="acct_01j9a43avnfqzbjfch6pygv1td",
         conversation={
             "contact": {
@@ -82,7 +82,7 @@ async def main() -> None:
         attachments=[{"url": "https://toretto.family/coronas.gif"}],
         body="Thought you could leave without saying goodbye?",
     )
-    print(response.id)
+    print(message.id)
 
 
 asyncio.run(main())
@@ -114,7 +114,7 @@ async def main() -> None:
         bearer_token="My Bearer Token",
         http_client=DefaultAioHttpClient(),
     ) as client:
-        response = await client.messages.send(
+        message = await client.messages.send(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             conversation={
                 "contact": {
@@ -126,7 +126,7 @@ async def main() -> None:
             attachments=[{"url": "https://toretto.family/coronas.gif"}],
             body="Thought you could leave without saying goodbye?",
         )
-        print(response.id)
+        print(message.id)
 
 
 asyncio.run(main())
@@ -150,18 +150,18 @@ from surgeapi import Surge
 
 client = Surge()
 
-response = client.messages.send(
+message = client.messages.send(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
     conversation={
         "contact": {
+            "phone_number": "+18015551234",
             "first_name": "Dominic",
             "last_name": "Toretto",
-            "phone_number": "+18015551234",
         },
         "phone_number": "+18015556789",
     },
 )
-print(response.conversation)
+print(message.conversation)
 ```
 
 ## Handling errors
@@ -182,7 +182,7 @@ client = Surge()
 try:
     client.messages.send(
         account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-        conversation={"contact": {}},
+        conversation={"contact": {"phone_number": "+18015551234"}},
     )
 except surgeapi.APIConnectionError as e:
     print("The server could not be reached")
@@ -228,7 +228,7 @@ client = Surge(
 # Or, configure per-request:
 client.with_options(max_retries=5).messages.send(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-    conversation={"contact": {}},
+    conversation={"contact": {"phone_number": "+18015551234"}},
 )
 ```
 
@@ -254,7 +254,7 @@ client = Surge(
 # Override per-request:
 client.with_options(timeout=5.0).messages.send(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-    conversation={"contact": {}},
+    conversation={"contact": {"phone_number": "+18015551234"}},
 )
 ```
 
@@ -299,7 +299,9 @@ client = Surge()
 response = client.messages.with_raw_response.send(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
     conversation={
-        "contact": {}
+        "contact": {
+            "phone_number": "+18015551234"
+        }
     },
 )
 print(response.headers.get('X-My-Header'))
@@ -321,7 +323,7 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 ```python
 with client.messages.with_streaming_response.send(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-    conversation={"contact": {}},
+    conversation={"contact": {"phone_number": "+18015551234"}},
 ) as response:
     print(response.headers.get("X-My-Header"))
 

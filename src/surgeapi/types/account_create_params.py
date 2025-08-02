@@ -25,7 +25,10 @@ class AccountCreateParams(TypedDict, total=False):
     """
 
     organization: Organization
-    """The legal entity on whose behalf the account will be operated."""
+    """
+    Parameters describing the legal entity on whose behalf the account will be
+    operated.
+    """
 
     time_zone: str
     """This is the time zone in which the account is headquartered.

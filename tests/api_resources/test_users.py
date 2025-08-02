@@ -9,11 +9,7 @@ import pytest
 
 from surgeapi import Surge, AsyncSurge
 from tests.utils import assert_matches_type
-from surgeapi.types import (
-    UserUsersResponse,
-    UserUpdateResponse,
-    UserRetrieveResponse,
-)
+from surgeapi.types import User
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -29,7 +25,7 @@ class TestUsers:
         user = client.users.retrieve(
             "id",
         )
-        assert_matches_type(UserRetrieveResponse, user, path=["response"])
+        assert_matches_type(User, user, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -43,7 +39,7 @@ class TestUsers:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         user = response.parse()
-        assert_matches_type(UserRetrieveResponse, user, path=["response"])
+        assert_matches_type(User, user, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -57,7 +53,7 @@ class TestUsers:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             user = response.parse()
-            assert_matches_type(UserRetrieveResponse, user, path=["response"])
+            assert_matches_type(User, user, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -80,7 +76,7 @@ class TestUsers:
             id="usr_01j9dwavghe1ttppewekjjkfrx",
             first_name="Brian",
         )
-        assert_matches_type(UserUpdateResponse, user, path=["response"])
+        assert_matches_type(User, user, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -97,7 +93,7 @@ class TestUsers:
             },
             photo_url="https://toretti.family/people/brian.jpg",
         )
-        assert_matches_type(UserUpdateResponse, user, path=["response"])
+        assert_matches_type(User, user, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -112,7 +108,7 @@ class TestUsers:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         user = response.parse()
-        assert_matches_type(UserUpdateResponse, user, path=["response"])
+        assert_matches_type(User, user, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -127,7 +123,7 @@ class TestUsers:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             user = response.parse()
-            assert_matches_type(UserUpdateResponse, user, path=["response"])
+            assert_matches_type(User, user, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -151,7 +147,7 @@ class TestUsers:
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             first_name="Brian",
         )
-        assert_matches_type(UserUsersResponse, user, path=["response"])
+        assert_matches_type(User, user, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -168,7 +164,7 @@ class TestUsers:
             },
             photo_url="https://toretti.family/people/brian.jpg",
         )
-        assert_matches_type(UserUsersResponse, user, path=["response"])
+        assert_matches_type(User, user, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -183,7 +179,7 @@ class TestUsers:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         user = response.parse()
-        assert_matches_type(UserUsersResponse, user, path=["response"])
+        assert_matches_type(User, user, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -198,7 +194,7 @@ class TestUsers:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             user = response.parse()
-            assert_matches_type(UserUsersResponse, user, path=["response"])
+            assert_matches_type(User, user, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -227,7 +223,7 @@ class TestAsyncUsers:
         user = await async_client.users.retrieve(
             "id",
         )
-        assert_matches_type(UserRetrieveResponse, user, path=["response"])
+        assert_matches_type(User, user, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -241,7 +237,7 @@ class TestAsyncUsers:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         user = await response.parse()
-        assert_matches_type(UserRetrieveResponse, user, path=["response"])
+        assert_matches_type(User, user, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -255,7 +251,7 @@ class TestAsyncUsers:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             user = await response.parse()
-            assert_matches_type(UserRetrieveResponse, user, path=["response"])
+            assert_matches_type(User, user, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -278,7 +274,7 @@ class TestAsyncUsers:
             id="usr_01j9dwavghe1ttppewekjjkfrx",
             first_name="Brian",
         )
-        assert_matches_type(UserUpdateResponse, user, path=["response"])
+        assert_matches_type(User, user, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -295,7 +291,7 @@ class TestAsyncUsers:
             },
             photo_url="https://toretti.family/people/brian.jpg",
         )
-        assert_matches_type(UserUpdateResponse, user, path=["response"])
+        assert_matches_type(User, user, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -310,7 +306,7 @@ class TestAsyncUsers:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         user = await response.parse()
-        assert_matches_type(UserUpdateResponse, user, path=["response"])
+        assert_matches_type(User, user, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -325,7 +321,7 @@ class TestAsyncUsers:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             user = await response.parse()
-            assert_matches_type(UserUpdateResponse, user, path=["response"])
+            assert_matches_type(User, user, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -349,7 +345,7 @@ class TestAsyncUsers:
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             first_name="Brian",
         )
-        assert_matches_type(UserUsersResponse, user, path=["response"])
+        assert_matches_type(User, user, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -366,7 +362,7 @@ class TestAsyncUsers:
             },
             photo_url="https://toretti.family/people/brian.jpg",
         )
-        assert_matches_type(UserUsersResponse, user, path=["response"])
+        assert_matches_type(User, user, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -381,7 +377,7 @@ class TestAsyncUsers:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         user = await response.parse()
-        assert_matches_type(UserUsersResponse, user, path=["response"])
+        assert_matches_type(User, user, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -396,7 +392,7 @@ class TestAsyncUsers:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             user = await response.parse()
-            assert_matches_type(UserUsersResponse, user, path=["response"])
+            assert_matches_type(User, user, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

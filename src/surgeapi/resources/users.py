@@ -17,10 +17,8 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from ..types.user import User
 from .._base_client import make_request_options
-from ..types.user_users_response import UserUsersResponse
-from ..types.user_update_response import UserUpdateResponse
-from ..types.user_retrieve_response import UserRetrieveResponse
 
 __all__ = ["UsersResource", "AsyncUsersResource"]
 
@@ -55,7 +53,7 @@ class UsersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> UserRetrieveResponse:
+    ) -> User:
         """
         Retrieves a User object.
 
@@ -75,7 +73,7 @@ class UsersResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=UserRetrieveResponse,
+            cast_to=User,
         )
 
     def update(
@@ -92,7 +90,7 @@ class UsersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> UserUpdateResponse:
+    ) -> User:
         """
         Updates an existing User object.
 
@@ -129,7 +127,7 @@ class UsersResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=UserUpdateResponse,
+            cast_to=User,
         )
 
     def users(
@@ -146,7 +144,7 @@ class UsersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> UserUsersResponse:
+    ) -> User:
         """
         Creates a new User object.
 
@@ -183,7 +181,7 @@ class UsersResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=UserUsersResponse,
+            cast_to=User,
         )
 
 
@@ -217,7 +215,7 @@ class AsyncUsersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> UserRetrieveResponse:
+    ) -> User:
         """
         Retrieves a User object.
 
@@ -237,7 +235,7 @@ class AsyncUsersResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=UserRetrieveResponse,
+            cast_to=User,
         )
 
     async def update(
@@ -254,7 +252,7 @@ class AsyncUsersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> UserUpdateResponse:
+    ) -> User:
         """
         Updates an existing User object.
 
@@ -291,7 +289,7 @@ class AsyncUsersResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=UserUpdateResponse,
+            cast_to=User,
         )
 
     async def users(
@@ -308,7 +306,7 @@ class AsyncUsersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> UserUsersResponse:
+    ) -> User:
         """
         Creates a new User object.
 
@@ -345,7 +343,7 @@ class AsyncUsersResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=UserUsersResponse,
+            cast_to=User,
         )
 
 

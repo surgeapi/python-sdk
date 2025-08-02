@@ -18,9 +18,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.contact_create_response import ContactCreateResponse
-from ..types.contact_update_response import ContactUpdateResponse
-from ..types.contact_retrieve_response import ContactRetrieveResponse
+from ..types.contact import Contact
 
 __all__ = ["ContactsResource", "AsyncContactsResource"]
 
@@ -60,7 +58,7 @@ class ContactsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ContactCreateResponse:
+    ) -> Contact:
         """
         Creates a new Contact object.
 
@@ -100,7 +98,7 @@ class ContactsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ContactCreateResponse,
+            cast_to=Contact,
         )
 
     def retrieve(
@@ -113,7 +111,7 @@ class ContactsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ContactRetrieveResponse:
+    ) -> Contact:
         """
         Retrieves a Contact object.
 
@@ -133,7 +131,7 @@ class ContactsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ContactRetrieveResponse,
+            cast_to=Contact,
         )
 
     def update(
@@ -151,7 +149,7 @@ class ContactsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ContactUpdateResponse:
+    ) -> Contact:
         """
         Updates the specified contact by setting the values of the parameters passed.
         Any parameters not provided will be left unchanged.
@@ -192,7 +190,7 @@ class ContactsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ContactUpdateResponse,
+            cast_to=Contact,
         )
 
 
@@ -231,7 +229,7 @@ class AsyncContactsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ContactCreateResponse:
+    ) -> Contact:
         """
         Creates a new Contact object.
 
@@ -271,7 +269,7 @@ class AsyncContactsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ContactCreateResponse,
+            cast_to=Contact,
         )
 
     async def retrieve(
@@ -284,7 +282,7 @@ class AsyncContactsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ContactRetrieveResponse:
+    ) -> Contact:
         """
         Retrieves a Contact object.
 
@@ -304,7 +302,7 @@ class AsyncContactsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ContactRetrieveResponse,
+            cast_to=Contact,
         )
 
     async def update(
@@ -322,7 +320,7 @@ class AsyncContactsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ContactUpdateResponse:
+    ) -> Contact:
         """
         Updates the specified contact by setting the values of the parameters passed.
         Any parameters not provided will be left unchanged.
@@ -363,7 +361,7 @@ class AsyncContactsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ContactUpdateResponse,
+            cast_to=Contact,
         )
 
 

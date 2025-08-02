@@ -25,7 +25,10 @@ class AccountUpdateParams(TypedDict, total=False):
     """
 
     organization: Organization
-    """The legal entity on whose behalf the account will be operated."""
+    """
+    Parameters describing the legal entity on whose behalf the account will be
+    operated.
+    """
 
     time_zone: Optional[str]
     """The time zone for the account"""

@@ -5,7 +5,7 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["AccountCreateResponse", "Organization", "OrganizationAddress", "OrganizationContact"]
+__all__ = ["Account", "Organization", "OrganizationAddress", "OrganizationContact"]
 
 
 class OrganizationAddress(BaseModel):
@@ -224,7 +224,7 @@ class Organization(BaseModel):
     """
 
 
-class AccountCreateResponse(BaseModel):
+class Account(BaseModel):
     id: str
     """The account ID"""
 

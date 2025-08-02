@@ -19,9 +19,8 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.account import Account
 from ..types.account_status import AccountStatus
-from ..types.account_create_response import AccountCreateResponse
-from ..types.account_update_response import AccountUpdateResponse
 
 __all__ = ["AccountsResource", "AsyncAccountsResource"]
 
@@ -59,7 +58,7 @@ class AccountsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountCreateResponse:
+    ) -> Account:
         """
         Creates a new Account within the calling Platform.
 
@@ -73,7 +72,8 @@ class AccountsResource(SyncAPIResource):
           brand_name: The name by which the people this account communicates with know it. If not
               provided, this will match the name field.
 
-          organization: The legal entity on whose behalf the account will be operated.
+          organization: Parameters describing the legal entity on whose behalf the account will be
+              operated.
 
           time_zone: This is the time zone in which the account is headquartered. This time zone may
               be used for compliance with TCPA restrictions on when messages may be sent.
@@ -100,7 +100,7 @@ class AccountsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountCreateResponse,
+            cast_to=Account,
         )
 
     def update(
@@ -117,7 +117,7 @@ class AccountsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountUpdateResponse:
+    ) -> Account:
         """
         Updates an Account
 
@@ -131,7 +131,8 @@ class AccountsResource(SyncAPIResource):
               anywhere outside of Surge HQ, and may include your ID for the account or
               anything else that may help you.
 
-          organization: The legal entity on whose behalf the account will be operated.
+          organization: Parameters describing the legal entity on whose behalf the account will be
+              operated.
 
           time_zone: The time zone for the account
 
@@ -159,7 +160,7 @@ class AccountsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountUpdateResponse,
+            cast_to=Account,
         )
 
     def check_status(
@@ -238,7 +239,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountCreateResponse:
+    ) -> Account:
         """
         Creates a new Account within the calling Platform.
 
@@ -252,7 +253,8 @@ class AsyncAccountsResource(AsyncAPIResource):
           brand_name: The name by which the people this account communicates with know it. If not
               provided, this will match the name field.
 
-          organization: The legal entity on whose behalf the account will be operated.
+          organization: Parameters describing the legal entity on whose behalf the account will be
+              operated.
 
           time_zone: This is the time zone in which the account is headquartered. This time zone may
               be used for compliance with TCPA restrictions on when messages may be sent.
@@ -279,7 +281,7 @@ class AsyncAccountsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountCreateResponse,
+            cast_to=Account,
         )
 
     async def update(
@@ -296,7 +298,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountUpdateResponse:
+    ) -> Account:
         """
         Updates an Account
 
@@ -310,7 +312,8 @@ class AsyncAccountsResource(AsyncAPIResource):
               anywhere outside of Surge HQ, and may include your ID for the account or
               anything else that may help you.
 
-          organization: The legal entity on whose behalf the account will be operated.
+          organization: Parameters describing the legal entity on whose behalf the account will be
+              operated.
 
           time_zone: The time zone for the account
 
@@ -338,7 +341,7 @@ class AsyncAccountsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountUpdateResponse,
+            cast_to=Account,
         )
 
     async def check_status(

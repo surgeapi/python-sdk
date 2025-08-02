@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
+from typing import Dict, Union, Iterable
 from datetime import datetime
 from typing_extensions import Required, Annotated, TypeAlias, TypedDict
 
@@ -39,22 +39,25 @@ class Variant0(TypedDict, total=False):
 
 
 class Variant0ConversationContact(TypedDict, total=False):
+    phone_number: Required[str]
+    """The contact's phone number in E.164 format."""
+
+    email: str
+    """The contact's email address."""
+
     first_name: str
-    """The contact's first name in case a new contact is created."""
+    """The contact's first name."""
 
     last_name: str
-    """The message's last name in case a new contact is created."""
+    """The contact's last name."""
 
-    phone_number: str
-    """The contact's phone number in E.164 format."""
+    metadata: Dict[str, str]
+    """Set of key-value pairs that will be stored with the object."""
 
 
 class Variant0Conversation(TypedDict, total=False):
     contact: Required[Variant0ConversationContact]
-    """Params for selecting or creating a new contact for sending a message.
-
-    Either the id or the phone number must be given.
-    """
+    """Parameters for creating a contact"""
 
     phone_number: str
     """The phone number from which to send the message.

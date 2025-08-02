@@ -4,15 +4,15 @@ from typing import Dict, Optional
 
 from .._models import BaseModel
 
-__all__ = ["UserUpdateResponse"]
+__all__ = ["User"]
 
 
-class UserUpdateResponse(BaseModel):
+class User(BaseModel):
+    first_name: str
+    """The user's first name."""
+
     id: Optional[str] = None
     """Unique identifier for the object."""
-
-    first_name: Optional[str] = None
-    """The user's first name."""
 
     last_name: Optional[str] = None
     """The user's last name."""

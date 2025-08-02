@@ -6,7 +6,7 @@ from typing_extensions import Literal
 from .contact import Contact
 from .._models import BaseModel
 
-__all__ = ["MessageSendResponse", "Attachment", "Conversation", "ConversationPhoneNumber"]
+__all__ = ["Message", "Attachment", "Conversation", "ConversationPhoneNumber"]
 
 
 class Attachment(BaseModel):
@@ -42,7 +42,7 @@ class Conversation(BaseModel):
     """This is the phone number tied to the Surge account."""
 
 
-class MessageSendResponse(BaseModel):
+class Message(BaseModel):
     id: Optional[str] = None
     """Unique identifier for the object."""
 
