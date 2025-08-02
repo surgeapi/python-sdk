@@ -23,7 +23,7 @@ Methods:
 
 - <code title="post /accounts">client.accounts.<a href="./src/surgeapi/resources/accounts.py">create</a>(\*\*<a href="src/surgeapi/types/account_create_params.py">params</a>) -> <a href="./src/surgeapi/types/account.py">Account</a></code>
 - <code title="patch /accounts/{id}">client.accounts.<a href="./src/surgeapi/resources/accounts.py">update</a>(id, \*\*<a href="src/surgeapi/types/account_update_params.py">params</a>) -> <a href="./src/surgeapi/types/account.py">Account</a></code>
-- <code title="get /accounts/{account_id}/status">client.accounts.<a href="./src/surgeapi/resources/accounts.py">check_status</a>(account_id, \*\*<a href="src/surgeapi/types/account_check_status_params.py">params</a>) -> <a href="./src/surgeapi/types/account_status.py">AccountStatus</a></code>
+- <code title="get /accounts/{account_id}/status">client.accounts.<a href="./src/surgeapi/resources/accounts.py">retrieve_status</a>(account_id, \*\*<a href="src/surgeapi/types/account_retrieve_status_params.py">params</a>) -> <a href="./src/surgeapi/types/account_status.py">AccountStatus</a></code>
 
 # Blasts
 

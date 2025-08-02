@@ -201,8 +201,8 @@ class TestAccounts:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_method_check_status(self, client: Surge) -> None:
-        account = client.accounts.check_status(
+    def test_method_retrieve_status(self, client: Surge) -> None:
+        account = client.accounts.retrieve_status(
             account_id="acct_01jpqjvfg9enpt7pyxd60pcmxj",
         )
         assert_matches_type(AccountStatus, account, path=["response"])
@@ -211,8 +211,8 @@ class TestAccounts:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_method_check_status_with_all_params(self, client: Surge) -> None:
-        account = client.accounts.check_status(
+    def test_method_retrieve_status_with_all_params(self, client: Surge) -> None:
+        account = client.accounts.retrieve_status(
             account_id="acct_01jpqjvfg9enpt7pyxd60pcmxj",
             capabilities=["local_messaging"],
         )
@@ -222,8 +222,8 @@ class TestAccounts:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_raw_response_check_status(self, client: Surge) -> None:
-        response = client.accounts.with_raw_response.check_status(
+    def test_raw_response_retrieve_status(self, client: Surge) -> None:
+        response = client.accounts.with_raw_response.retrieve_status(
             account_id="acct_01jpqjvfg9enpt7pyxd60pcmxj",
         )
 
@@ -236,8 +236,8 @@ class TestAccounts:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_streaming_response_check_status(self, client: Surge) -> None:
-        with client.accounts.with_streaming_response.check_status(
+    def test_streaming_response_retrieve_status(self, client: Surge) -> None:
+        with client.accounts.with_streaming_response.retrieve_status(
             account_id="acct_01jpqjvfg9enpt7pyxd60pcmxj",
         ) as response:
             assert not response.is_closed
@@ -252,9 +252,9 @@ class TestAccounts:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_path_params_check_status(self, client: Surge) -> None:
+    def test_path_params_retrieve_status(self, client: Surge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-            client.accounts.with_raw_response.check_status(
+            client.accounts.with_raw_response.retrieve_status(
                 account_id="",
             )
 
@@ -445,8 +445,8 @@ class TestAsyncAccounts:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_method_check_status(self, async_client: AsyncSurge) -> None:
-        account = await async_client.accounts.check_status(
+    async def test_method_retrieve_status(self, async_client: AsyncSurge) -> None:
+        account = await async_client.accounts.retrieve_status(
             account_id="acct_01jpqjvfg9enpt7pyxd60pcmxj",
         )
         assert_matches_type(AccountStatus, account, path=["response"])
@@ -455,8 +455,8 @@ class TestAsyncAccounts:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_method_check_status_with_all_params(self, async_client: AsyncSurge) -> None:
-        account = await async_client.accounts.check_status(
+    async def test_method_retrieve_status_with_all_params(self, async_client: AsyncSurge) -> None:
+        account = await async_client.accounts.retrieve_status(
             account_id="acct_01jpqjvfg9enpt7pyxd60pcmxj",
             capabilities=["local_messaging"],
         )
@@ -466,8 +466,8 @@ class TestAsyncAccounts:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_raw_response_check_status(self, async_client: AsyncSurge) -> None:
-        response = await async_client.accounts.with_raw_response.check_status(
+    async def test_raw_response_retrieve_status(self, async_client: AsyncSurge) -> None:
+        response = await async_client.accounts.with_raw_response.retrieve_status(
             account_id="acct_01jpqjvfg9enpt7pyxd60pcmxj",
         )
 
@@ -480,8 +480,8 @@ class TestAsyncAccounts:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_streaming_response_check_status(self, async_client: AsyncSurge) -> None:
-        async with async_client.accounts.with_streaming_response.check_status(
+    async def test_streaming_response_retrieve_status(self, async_client: AsyncSurge) -> None:
+        async with async_client.accounts.with_streaming_response.retrieve_status(
             account_id="acct_01jpqjvfg9enpt7pyxd60pcmxj",
         ) as response:
             assert not response.is_closed
@@ -496,8 +496,8 @@ class TestAsyncAccounts:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_path_params_check_status(self, async_client: AsyncSurge) -> None:
+    async def test_path_params_retrieve_status(self, async_client: AsyncSurge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-            await async_client.accounts.with_raw_response.check_status(
+            await async_client.accounts.with_raw_response.retrieve_status(
                 account_id="",
             )

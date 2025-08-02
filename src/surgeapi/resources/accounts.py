@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import OrganizationParams, account_create_params, account_update_params, account_check_status_params
+from ..types import OrganizationParams, account_create_params, account_update_params, account_retrieve_status_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -164,7 +164,7 @@ class AccountsResource(SyncAPIResource):
             cast_to=Account,
         )
 
-    def check_status(
+    def retrieve_status(
         self,
         account_id: str,
         *,
@@ -200,7 +200,7 @@ class AccountsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"capabilities": capabilities}, account_check_status_params.AccountCheckStatusParams
+                    {"capabilities": capabilities}, account_retrieve_status_params.AccountRetrieveStatusParams
                 ),
             ),
             cast_to=AccountStatus,
@@ -345,7 +345,7 @@ class AsyncAccountsResource(AsyncAPIResource):
             cast_to=Account,
         )
 
-    async def check_status(
+    async def retrieve_status(
         self,
         account_id: str,
         *,
@@ -381,7 +381,7 @@ class AsyncAccountsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"capabilities": capabilities}, account_check_status_params.AccountCheckStatusParams
+                    {"capabilities": capabilities}, account_retrieve_status_params.AccountRetrieveStatusParams
                 ),
             ),
             cast_to=AccountStatus,
@@ -398,8 +398,8 @@ class AccountsResourceWithRawResponse:
         self.update = to_raw_response_wrapper(
             accounts.update,
         )
-        self.check_status = to_raw_response_wrapper(
-            accounts.check_status,
+        self.retrieve_status = to_raw_response_wrapper(
+            accounts.retrieve_status,
         )
 
 
@@ -413,8 +413,8 @@ class AsyncAccountsResourceWithRawResponse:
         self.update = async_to_raw_response_wrapper(
             accounts.update,
         )
-        self.check_status = async_to_raw_response_wrapper(
-            accounts.check_status,
+        self.retrieve_status = async_to_raw_response_wrapper(
+            accounts.retrieve_status,
         )
 
 
@@ -428,8 +428,8 @@ class AccountsResourceWithStreamingResponse:
         self.update = to_streamed_response_wrapper(
             accounts.update,
         )
-        self.check_status = to_streamed_response_wrapper(
-            accounts.check_status,
+        self.retrieve_status = to_streamed_response_wrapper(
+            accounts.retrieve_status,
         )
 
 
@@ -443,6 +443,6 @@ class AsyncAccountsResourceWithStreamingResponse:
         self.update = async_to_streamed_response_wrapper(
             accounts.update,
         )
-        self.check_status = async_to_streamed_response_wrapper(
-            accounts.check_status,
+        self.retrieve_status = async_to_streamed_response_wrapper(
+            accounts.retrieve_status,
         )

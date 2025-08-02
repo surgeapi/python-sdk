@@ -5,9 +5,9 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import Literal, TypedDict
 
-__all__ = ["AccountCheckStatusParams"]
+__all__ = ["AccountRetrieveStatusParams"]
 
 
-class AccountCheckStatusParams(TypedDict, total=False):
+class AccountRetrieveStatusParams(TypedDict, total=False):
     capabilities: List[Literal["local_messaging"]]
     """capabilities about which to check the status"""
