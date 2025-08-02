@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable
-from typing_extensions import TypedDict
+from typing import List, Union, Iterable
+from datetime import datetime
+from typing_extensions import Annotated, TypedDict
 
+from .._utils import PropertyInfo
 from .attachment_params import AttachmentParams
 
 __all__ = ["AccountBlastsParams"]
@@ -25,7 +27,7 @@ class AccountBlastsParams(TypedDict, total=False):
     segments: List[str]
     """Deprecated. Use `to` instead."""
 
-    send_at: str
+    send_at: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """When to send the blast. If not provided, sends immediately."""
 
     to: List[str]

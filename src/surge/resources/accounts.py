@@ -188,7 +188,7 @@ class AccountsResource(SyncAPIResource):
         contacts: List[str] | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         segments: List[str] | NotGiven = NOT_GIVEN,
-        send_at: str | NotGiven = NOT_GIVEN,
+        send_at: Union[str, datetime] | NotGiven = NOT_GIVEN,
         to: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -907,7 +907,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         contacts: List[str] | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         segments: List[str] | NotGiven = NOT_GIVEN,
-        send_at: str | NotGiven = NOT_GIVEN,
+        send_at: Union[str, datetime] | NotGiven = NOT_GIVEN,
         to: List[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

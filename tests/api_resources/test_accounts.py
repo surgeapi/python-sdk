@@ -226,7 +226,7 @@ class TestAccounts:
             contacts=["ctc_01jxwtp1vse91twb5bj977gav9"],
             name="Grand Opening Announcement",
             segments=["seg_01jxwtwzqhfykb31dt6mvpsa9k"],
-            send_at="2024-02-01T15:00:00Z",
+            send_at=parse_datetime("2024-02-01T15:00:00Z"),
             to=["seg_01j9dy8mdzfn3r0e8x1tbdrdrf", "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf", "+18015551234", "+18015555678"],
         )
         assert_matches_type(AccountBlastsResponse, account, path=["response"])
@@ -1000,7 +1000,7 @@ class TestAsyncAccounts:
             contacts=["ctc_01jxwtp1vse91twb5bj977gav9"],
             name="Grand Opening Announcement",
             segments=["seg_01jxwtwzqhfykb31dt6mvpsa9k"],
-            send_at="2024-02-01T15:00:00Z",
+            send_at=parse_datetime("2024-02-01T15:00:00Z"),
             to=["seg_01j9dy8mdzfn3r0e8x1tbdrdrf", "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf", "+18015551234", "+18015555678"],
         )
         assert_matches_type(AccountBlastsResponse, account, path=["response"])

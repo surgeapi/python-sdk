@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
+from datetime import datetime
 
 from .._models import BaseModel
 
@@ -24,5 +25,5 @@ class AccountBlastsResponse(BaseModel):
     name: Optional[str] = None
     """Optional name for the blast."""
 
-    send_at: Optional[str] = None
+    send_at: Optional[datetime] = None
     """When the blast will be or was sent."""
