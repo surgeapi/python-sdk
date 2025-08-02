@@ -182,7 +182,15 @@ client = Surge()
 try:
     client.messages.send(
         account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-        conversation={"contact": {"phone_number": "+18015551234"}},
+        conversation={
+            "contact": {
+                "first_name": "Dominic",
+                "last_name": "Toretto",
+                "phone_number": "+18015551234",
+            }
+        },
+        attachments=[{"url": "https://toretto.family/coronas.gif"}],
+        body="Thought you could leave without saying goodbye?",
     )
 except surgeapi.APIConnectionError as e:
     print("The server could not be reached")
@@ -228,7 +236,15 @@ client = Surge(
 # Or, configure per-request:
 client.with_options(max_retries=5).messages.send(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-    conversation={"contact": {"phone_number": "+18015551234"}},
+    conversation={
+        "contact": {
+            "first_name": "Dominic",
+            "last_name": "Toretto",
+            "phone_number": "+18015551234",
+        }
+    },
+    attachments=[{"url": "https://toretto.family/coronas.gif"}],
+    body="Thought you could leave without saying goodbye?",
 )
 ```
 
@@ -254,7 +270,15 @@ client = Surge(
 # Override per-request:
 client.with_options(timeout=5.0).messages.send(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-    conversation={"contact": {"phone_number": "+18015551234"}},
+    conversation={
+        "contact": {
+            "first_name": "Dominic",
+            "last_name": "Toretto",
+            "phone_number": "+18015551234",
+        }
+    },
+    attachments=[{"url": "https://toretto.family/coronas.gif"}],
+    body="Thought you could leave without saying goodbye?",
 )
 ```
 
@@ -300,9 +324,15 @@ response = client.messages.with_raw_response.send(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
     conversation={
         "contact": {
-            "phone_number": "+18015551234"
+            "first_name": "Dominic",
+            "last_name": "Toretto",
+            "phone_number": "+18015551234",
         }
     },
+    attachments=[{
+        "url": "https://toretto.family/coronas.gif"
+    }],
+    body="Thought you could leave without saying goodbye?",
 )
 print(response.headers.get('X-My-Header'))
 
@@ -323,7 +353,15 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 ```python
 with client.messages.with_streaming_response.send(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-    conversation={"contact": {"phone_number": "+18015551234"}},
+    conversation={
+        "contact": {
+            "first_name": "Dominic",
+            "last_name": "Toretto",
+            "phone_number": "+18015551234",
+        }
+    },
+    attachments=[{"url": "https://toretto.family/coronas.gif"}],
+    body="Thought you could leave without saying goodbye?",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
