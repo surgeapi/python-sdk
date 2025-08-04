@@ -8,7 +8,7 @@ from typing_extensions import overload
 
 import httpx
 
-from ..types import message_send_params
+from ..types import message_create_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import required_args, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -47,11 +47,11 @@ class MessagesResource(SyncAPIResource):
         return MessagesResourceWithStreamingResponse(self)
 
     @overload
-    def send(
+    def create(
         self,
         account_id: str,
         *,
-        conversation: message_send_params.MessageParamsWithConversationConversation,
+        conversation: message_create_params.MessageParamsWithConversationConversation,
         attachments: Iterable[AttachmentParams] | NotGiven = NOT_GIVEN,
         body: str | NotGiven = NOT_GIVEN,
         send_at: Union[str, datetime] | NotGiven = NOT_GIVEN,
@@ -109,7 +109,7 @@ class MessagesResource(SyncAPIResource):
         ...
 
     @overload
-    def send(
+    def create(
         self,
         account_id: str,
         *,
@@ -175,11 +175,11 @@ class MessagesResource(SyncAPIResource):
         ...
 
     @required_args(["conversation"], ["to"])
-    def send(
+    def create(
         self,
         account_id: str,
         *,
-        conversation: message_send_params.MessageParamsWithConversationConversation | NotGiven = NOT_GIVEN,
+        conversation: message_create_params.MessageParamsWithConversationConversation | NotGiven = NOT_GIVEN,
         attachments: Iterable[AttachmentParams] | NotGiven = NOT_GIVEN,
         body: str | NotGiven = NOT_GIVEN,
         send_at: Union[str, datetime] | NotGiven = NOT_GIVEN,
@@ -205,7 +205,7 @@ class MessagesResource(SyncAPIResource):
                     "to": to,
                     "from_": from_,
                 },
-                message_send_params.MessageSendParams,
+                message_create_params.MessageCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -235,11 +235,11 @@ class AsyncMessagesResource(AsyncAPIResource):
         return AsyncMessagesResourceWithStreamingResponse(self)
 
     @overload
-    async def send(
+    async def create(
         self,
         account_id: str,
         *,
-        conversation: message_send_params.MessageParamsWithConversationConversation,
+        conversation: message_create_params.MessageParamsWithConversationConversation,
         attachments: Iterable[AttachmentParams] | NotGiven = NOT_GIVEN,
         body: str | NotGiven = NOT_GIVEN,
         send_at: Union[str, datetime] | NotGiven = NOT_GIVEN,
@@ -297,7 +297,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         ...
 
     @overload
-    async def send(
+    async def create(
         self,
         account_id: str,
         *,
@@ -363,11 +363,11 @@ class AsyncMessagesResource(AsyncAPIResource):
         ...
 
     @required_args(["conversation"], ["to"])
-    async def send(
+    async def create(
         self,
         account_id: str,
         *,
-        conversation: message_send_params.MessageParamsWithConversationConversation | NotGiven = NOT_GIVEN,
+        conversation: message_create_params.MessageParamsWithConversationConversation | NotGiven = NOT_GIVEN,
         attachments: Iterable[AttachmentParams] | NotGiven = NOT_GIVEN,
         body: str | NotGiven = NOT_GIVEN,
         send_at: Union[str, datetime] | NotGiven = NOT_GIVEN,
@@ -393,7 +393,7 @@ class AsyncMessagesResource(AsyncAPIResource):
                     "to": to,
                     "from_": from_,
                 },
-                message_send_params.MessageSendParams,
+                message_create_params.MessageCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -406,8 +406,8 @@ class MessagesResourceWithRawResponse:
     def __init__(self, messages: MessagesResource) -> None:
         self._messages = messages
 
-        self.send = to_raw_response_wrapper(
-            messages.send,
+        self.create = to_raw_response_wrapper(
+            messages.create,
         )
 
 
@@ -415,8 +415,8 @@ class AsyncMessagesResourceWithRawResponse:
     def __init__(self, messages: AsyncMessagesResource) -> None:
         self._messages = messages
 
-        self.send = async_to_raw_response_wrapper(
-            messages.send,
+        self.create = async_to_raw_response_wrapper(
+            messages.create,
         )
 
 
@@ -424,8 +424,8 @@ class MessagesResourceWithStreamingResponse:
     def __init__(self, messages: MessagesResource) -> None:
         self._messages = messages
 
-        self.send = to_streamed_response_wrapper(
-            messages.send,
+        self.create = to_streamed_response_wrapper(
+            messages.create,
         )
 
 
@@ -433,6 +433,6 @@ class AsyncMessagesResourceWithStreamingResponse:
     def __init__(self, messages: AsyncMessagesResource) -> None:
         self._messages = messages
 
-        self.send = async_to_streamed_response_wrapper(
-            messages.send,
+        self.create = async_to_streamed_response_wrapper(
+            messages.create,
         )

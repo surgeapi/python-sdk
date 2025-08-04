@@ -9,10 +9,10 @@ from typing_extensions import Annotated, TypedDict
 from .._utils import PropertyInfo
 from .shared_params.attachment_params import AttachmentParams
 
-__all__ = ["BlastBlastsParams"]
+__all__ = ["BlastCreateParams"]
 
 
-class BlastBlastsParams(TypedDict, total=False):
+class BlastCreateParams(TypedDict, total=False):
     attachments: Iterable[AttachmentParams]
 
     body: str

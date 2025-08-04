@@ -9,10 +9,7 @@ import pytest
 
 from surgeapi import Surge, AsyncSurge
 from tests.utils import assert_matches_type
-from surgeapi.types import (
-    Verification,
-    VerificationCheckResponse,
-)
+from surgeapi.types import Verification, VerificationCheck
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -69,7 +66,7 @@ class TestVerifications:
             id="vfn_01jayh15c2f2xamftg0xpyq1nj",
             code="123456",
         )
-        assert_matches_type(VerificationCheckResponse, verification, path=["response"])
+        assert_matches_type(VerificationCheck, verification, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -84,7 +81,7 @@ class TestVerifications:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         verification = response.parse()
-        assert_matches_type(VerificationCheckResponse, verification, path=["response"])
+        assert_matches_type(VerificationCheck, verification, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -99,7 +96,7 @@ class TestVerifications:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             verification = response.parse()
-            assert_matches_type(VerificationCheckResponse, verification, path=["response"])
+            assert_matches_type(VerificationCheck, verification, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -169,7 +166,7 @@ class TestAsyncVerifications:
             id="vfn_01jayh15c2f2xamftg0xpyq1nj",
             code="123456",
         )
-        assert_matches_type(VerificationCheckResponse, verification, path=["response"])
+        assert_matches_type(VerificationCheck, verification, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -184,7 +181,7 @@ class TestAsyncVerifications:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         verification = await response.parse()
-        assert_matches_type(VerificationCheckResponse, verification, path=["response"])
+        assert_matches_type(VerificationCheck, verification, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -199,7 +196,7 @@ class TestAsyncVerifications:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             verification = await response.parse()
-            assert_matches_type(VerificationCheckResponse, verification, path=["response"])
+            assert_matches_type(VerificationCheck, verification, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

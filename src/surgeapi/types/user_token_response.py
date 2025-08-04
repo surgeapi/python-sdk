@@ -4,9 +4,9 @@ from typing import Optional
 
 from .._models import BaseModel
 
-__all__ = ["TokenResponse"]
+__all__ = ["UserTokenResponse"]
 
 
-class TokenResponse(BaseModel):
+class UserTokenResponse(BaseModel):
     token: Optional[str] = None
     """The created token."""

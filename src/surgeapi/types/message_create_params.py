@@ -11,7 +11,7 @@ from .shared_params.contact_params import ContactParams
 from .shared_params.attachment_params import AttachmentParams
 
 __all__ = [
-    "MessageSendParams",
+    "MessageCreateParams",
     "MessageParamsWithConversation",
     "MessageParamsWithConversationConversation",
     "SimpleMessageParams",
@@ -74,4 +74,4 @@ class SimpleMessageParams(TypedDict, total=False):
     """
 
 
-MessageSendParams: TypeAlias = Union[MessageParamsWithConversation, SimpleMessageParams]
+MessageCreateParams: TypeAlias = Union[MessageParamsWithConversation, SimpleMessageParams]

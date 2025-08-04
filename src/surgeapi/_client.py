@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import users, blasts, tokens, accounts, contacts, messages, campaigns, phone_numbers, verifications
+from .resources import users, blasts, accounts, contacts, messages, campaigns, phone_numbers, verifications
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import SurgeError, APIStatusError
 from ._base_client import (
@@ -40,7 +40,6 @@ class Surge(SyncAPIClient):
     contacts: contacts.ContactsResource
     messages: messages.MessagesResource
     phone_numbers: phone_numbers.PhoneNumbersResource
-    tokens: tokens.TokensResource
     users: users.UsersResource
     verifications: verifications.VerificationsResource
     with_raw_response: SurgeWithRawResponse
@@ -106,7 +105,6 @@ class Surge(SyncAPIClient):
         self.contacts = contacts.ContactsResource(self)
         self.messages = messages.MessagesResource(self)
         self.phone_numbers = phone_numbers.PhoneNumbersResource(self)
-        self.tokens = tokens.TokensResource(self)
         self.users = users.UsersResource(self)
         self.verifications = verifications.VerificationsResource(self)
         self.with_raw_response = SurgeWithRawResponse(self)
@@ -224,7 +222,6 @@ class AsyncSurge(AsyncAPIClient):
     contacts: contacts.AsyncContactsResource
     messages: messages.AsyncMessagesResource
     phone_numbers: phone_numbers.AsyncPhoneNumbersResource
-    tokens: tokens.AsyncTokensResource
     users: users.AsyncUsersResource
     verifications: verifications.AsyncVerificationsResource
     with_raw_response: AsyncSurgeWithRawResponse
@@ -290,7 +287,6 @@ class AsyncSurge(AsyncAPIClient):
         self.contacts = contacts.AsyncContactsResource(self)
         self.messages = messages.AsyncMessagesResource(self)
         self.phone_numbers = phone_numbers.AsyncPhoneNumbersResource(self)
-        self.tokens = tokens.AsyncTokensResource(self)
         self.users = users.AsyncUsersResource(self)
         self.verifications = verifications.AsyncVerificationsResource(self)
         self.with_raw_response = AsyncSurgeWithRawResponse(self)
@@ -409,7 +405,6 @@ class SurgeWithRawResponse:
         self.contacts = contacts.ContactsResourceWithRawResponse(client.contacts)
         self.messages = messages.MessagesResourceWithRawResponse(client.messages)
         self.phone_numbers = phone_numbers.PhoneNumbersResourceWithRawResponse(client.phone_numbers)
-        self.tokens = tokens.TokensResourceWithRawResponse(client.tokens)
         self.users = users.UsersResourceWithRawResponse(client.users)
         self.verifications = verifications.VerificationsResourceWithRawResponse(client.verifications)
 
@@ -422,7 +417,6 @@ class AsyncSurgeWithRawResponse:
         self.contacts = contacts.AsyncContactsResourceWithRawResponse(client.contacts)
         self.messages = messages.AsyncMessagesResourceWithRawResponse(client.messages)
         self.phone_numbers = phone_numbers.AsyncPhoneNumbersResourceWithRawResponse(client.phone_numbers)
-        self.tokens = tokens.AsyncTokensResourceWithRawResponse(client.tokens)
         self.users = users.AsyncUsersResourceWithRawResponse(client.users)
         self.verifications = verifications.AsyncVerificationsResourceWithRawResponse(client.verifications)
 
@@ -435,7 +429,6 @@ class SurgeWithStreamedResponse:
         self.contacts = contacts.ContactsResourceWithStreamingResponse(client.contacts)
         self.messages = messages.MessagesResourceWithStreamingResponse(client.messages)
         self.phone_numbers = phone_numbers.PhoneNumbersResourceWithStreamingResponse(client.phone_numbers)
-        self.tokens = tokens.TokensResourceWithStreamingResponse(client.tokens)
         self.users = users.UsersResourceWithStreamingResponse(client.users)
         self.verifications = verifications.VerificationsResourceWithStreamingResponse(client.verifications)
 
@@ -448,7 +441,6 @@ class AsyncSurgeWithStreamedResponse:
         self.contacts = contacts.AsyncContactsResourceWithStreamingResponse(client.contacts)
         self.messages = messages.AsyncMessagesResourceWithStreamingResponse(client.messages)
         self.phone_numbers = phone_numbers.AsyncPhoneNumbersResourceWithStreamingResponse(client.phone_numbers)
-        self.tokens = tokens.AsyncTokensResourceWithStreamingResponse(client.tokens)
         self.users = users.AsyncUsersResourceWithStreamingResponse(client.users)
         self.verifications = verifications.AsyncVerificationsResourceWithStreamingResponse(client.verifications)
 

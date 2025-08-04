@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["CampaignCampaignsParams"]
+__all__ = ["CampaignCreateParams"]
 
 
-class CampaignCampaignsParams(TypedDict, total=False):
+class CampaignCreateParams(TypedDict, total=False):
     consent_flow: Required[str]
     """
     A string explaining the method through which end users will opt in to receive

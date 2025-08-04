@@ -35,7 +35,7 @@ from surgeapi.types import Blast, BlastParams
 
 Methods:
 
-- <code title="post /accounts/{account_id}/blasts">client.blasts.<a href="./src/surgeapi/resources/blasts.py">blasts</a>(account_id, \*\*<a href="src/surgeapi/types/blast_blasts_params.py">params</a>) -> <a href="./src/surgeapi/types/blast.py">Blast</a></code>
+- <code title="post /accounts/{account_id}/blasts">client.blasts.<a href="./src/surgeapi/resources/blasts.py">create</a>(account_id, \*\*<a href="src/surgeapi/types/blast_create_params.py">params</a>) -> <a href="./src/surgeapi/types/blast.py">Blast</a></code>
 
 # Campaigns
 
@@ -47,7 +47,7 @@ from surgeapi.types import Campaign, CampaignParams
 
 Methods:
 
-- <code title="post /accounts/{account_id}/campaigns">client.campaigns.<a href="./src/surgeapi/resources/campaigns.py">campaigns</a>(account_id, \*\*<a href="src/surgeapi/types/campaign_campaigns_params.py">params</a>) -> <a href="./src/surgeapi/types/campaign.py">Campaign</a></code>
+- <code title="post /accounts/{account_id}/campaigns">client.campaigns.<a href="./src/surgeapi/resources/campaigns.py">create</a>(account_id, \*\*<a href="src/surgeapi/types/campaign_create_params.py">params</a>) -> <a href="./src/surgeapi/types/campaign.py">Campaign</a></code>
 
 # Contacts
 
@@ -67,7 +67,7 @@ from surgeapi.types import Message, MessageParams
 
 Methods:
 
-- <code title="post /accounts/{account_id}/messages">client.messages.<a href="./src/surgeapi/resources/messages.py">send</a>(account_id, \*\*<a href="src/surgeapi/types/message_send_params.py">params</a>) -> <a href="./src/surgeapi/types/message.py">Message</a></code>
+- <code title="post /accounts/{account_id}/messages">client.messages.<a href="./src/surgeapi/resources/messages.py">create</a>(account_id, \*\*<a href="src/surgeapi/types/message_create_params.py">params</a>) -> <a href="./src/surgeapi/types/message.py">Message</a></code>
 
 # PhoneNumbers
 
@@ -81,41 +81,35 @@ Methods:
 
 - <code title="post /accounts/{account_id}/phone_numbers">client.phone_numbers.<a href="./src/surgeapi/resources/phone_numbers.py">purchase</a>(account_id, \*\*<a href="src/surgeapi/types/phone_number_purchase_params.py">params</a>) -> <a href="./src/surgeapi/types/phone_number.py">PhoneNumber</a></code>
 
-# Tokens
-
-Types:
-
-```python
-from surgeapi.types import TokenParams, TokenResponse
-```
-
-Methods:
-
-- <code title="post /users/{user_id}/tokens">client.tokens.<a href="./src/surgeapi/resources/tokens.py">create_token</a>(user_id, \*\*<a href="src/surgeapi/types/token_create_token_params.py">params</a>) -> <a href="./src/surgeapi/types/token_response.py">TokenResponse</a></code>
-
 # Users
 
 Types:
 
 ```python
-from surgeapi.types import User, UserParams
+from surgeapi.types import User, UserParams, UserTokenParams, UserTokenResponse
 ```
 
 Methods:
 
+- <code title="post /accounts/{account_id}/users">client.users.<a href="./src/surgeapi/resources/users.py">create</a>(account_id, \*\*<a href="src/surgeapi/types/user_create_params.py">params</a>) -> <a href="./src/surgeapi/types/user.py">User</a></code>
 - <code title="get /users/{id}">client.users.<a href="./src/surgeapi/resources/users.py">retrieve</a>(id) -> <a href="./src/surgeapi/types/user.py">User</a></code>
 - <code title="patch /users/{id}">client.users.<a href="./src/surgeapi/resources/users.py">update</a>(id, \*\*<a href="src/surgeapi/types/user_update_params.py">params</a>) -> <a href="./src/surgeapi/types/user.py">User</a></code>
-- <code title="post /accounts/{account_id}/users">client.users.<a href="./src/surgeapi/resources/users.py">users</a>(account_id, \*\*<a href="src/surgeapi/types/user_users_params.py">params</a>) -> <a href="./src/surgeapi/types/user.py">User</a></code>
+- <code title="post /users/{user_id}/tokens">client.users.<a href="./src/surgeapi/resources/users.py">create_token</a>(user_id, \*\*<a href="src/surgeapi/types/user_create_token_params.py">params</a>) -> <a href="./src/surgeapi/types/user_token_response.py">UserTokenResponse</a></code>
 
 # Verifications
 
 Types:
 
 ```python
-from surgeapi.types import Verification, VerificationParams, VerificationCheckResponse
+from surgeapi.types import (
+    Verification,
+    VerificationCheck,
+    VerificationCheckParams,
+    VerificationParams,
+)
 ```
 
 Methods:
 
 - <code title="post /verifications">client.verifications.<a href="./src/surgeapi/resources/verifications.py">create</a>(\*\*<a href="src/surgeapi/types/verification_create_params.py">params</a>) -> <a href="./src/surgeapi/types/verification.py">Verification</a></code>
-- <code title="post /verifications/{id}/checks">client.verifications.<a href="./src/surgeapi/resources/verifications.py">check</a>(id, \*\*<a href="src/surgeapi/types/verification_check_params.py">params</a>) -> <a href="./src/surgeapi/types/verification_check_response.py">VerificationCheckResponse</a></code>
+- <code title="post /verifications/{id}/checks">client.verifications.<a href="./src/surgeapi/resources/verifications.py">check</a>(id, \*\*<a href="src/surgeapi/types/verification_check_params.py">params</a>) -> <a href="./src/surgeapi/types/verification_check.py">VerificationCheck</a></code>

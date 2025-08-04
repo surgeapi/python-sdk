@@ -6,10 +6,10 @@ from typing_extensions import Literal
 from .._models import BaseModel
 from .verification import Verification
 
-__all__ = ["VerificationCheckResponse"]
+__all__ = ["VerificationCheck"]
 
 
-class VerificationCheckResponse(BaseModel):
+class VerificationCheck(BaseModel):
     result: Optional[Literal["ok", "incorrect", "exhausted", "expired", "already_verified"]] = None
     """The result of the code check."""
 

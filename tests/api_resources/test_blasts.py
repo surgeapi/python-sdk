@@ -22,8 +22,8 @@ class TestBlasts:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_method_blasts(self, client: Surge) -> None:
-        blast = client.blasts.blasts(
+    def test_method_create(self, client: Surge) -> None:
+        blast = client.blasts.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
         )
         assert_matches_type(Blast, blast, path=["response"])
@@ -32,8 +32,8 @@ class TestBlasts:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_method_blasts_with_all_params(self, client: Surge) -> None:
-        blast = client.blasts.blasts(
+    def test_method_create_with_all_params(self, client: Surge) -> None:
+        blast = client.blasts.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             attachments=[{"url": "https://example.com/image.jpg"}],
             body="Join us for our grand opening!",
@@ -49,8 +49,8 @@ class TestBlasts:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_raw_response_blasts(self, client: Surge) -> None:
-        response = client.blasts.with_raw_response.blasts(
+    def test_raw_response_create(self, client: Surge) -> None:
+        response = client.blasts.with_raw_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
         )
 
@@ -63,8 +63,8 @@ class TestBlasts:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_streaming_response_blasts(self, client: Surge) -> None:
-        with client.blasts.with_streaming_response.blasts(
+    def test_streaming_response_create(self, client: Surge) -> None:
+        with client.blasts.with_streaming_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
         ) as response:
             assert not response.is_closed
@@ -79,9 +79,9 @@ class TestBlasts:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_path_params_blasts(self, client: Surge) -> None:
+    def test_path_params_create(self, client: Surge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-            client.blasts.with_raw_response.blasts(
+            client.blasts.with_raw_response.create(
                 account_id="",
             )
 
@@ -95,8 +95,8 @@ class TestAsyncBlasts:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_method_blasts(self, async_client: AsyncSurge) -> None:
-        blast = await async_client.blasts.blasts(
+    async def test_method_create(self, async_client: AsyncSurge) -> None:
+        blast = await async_client.blasts.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
         )
         assert_matches_type(Blast, blast, path=["response"])
@@ -105,8 +105,8 @@ class TestAsyncBlasts:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_method_blasts_with_all_params(self, async_client: AsyncSurge) -> None:
-        blast = await async_client.blasts.blasts(
+    async def test_method_create_with_all_params(self, async_client: AsyncSurge) -> None:
+        blast = await async_client.blasts.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             attachments=[{"url": "https://example.com/image.jpg"}],
             body="Join us for our grand opening!",
@@ -122,8 +122,8 @@ class TestAsyncBlasts:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_raw_response_blasts(self, async_client: AsyncSurge) -> None:
-        response = await async_client.blasts.with_raw_response.blasts(
+    async def test_raw_response_create(self, async_client: AsyncSurge) -> None:
+        response = await async_client.blasts.with_raw_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
         )
 
@@ -136,8 +136,8 @@ class TestAsyncBlasts:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_streaming_response_blasts(self, async_client: AsyncSurge) -> None:
-        async with async_client.blasts.with_streaming_response.blasts(
+    async def test_streaming_response_create(self, async_client: AsyncSurge) -> None:
+        async with async_client.blasts.with_streaming_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
         ) as response:
             assert not response.is_closed
@@ -152,8 +152,8 @@ class TestAsyncBlasts:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_path_params_blasts(self, async_client: AsyncSurge) -> None:
+    async def test_path_params_create(self, async_client: AsyncSurge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-            await async_client.blasts.with_raw_response.blasts(
+            await async_client.blasts.with_raw_response.create(
                 account_id="",
             )

@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from typing_extensions import TypedDict
 
-__all__ = ["TokenCreateTokenParams"]
+__all__ = ["UserCreateTokenParams"]
 
 
-class TokenCreateTokenParams(TypedDict, total=False):
+class UserCreateTokenParams(TypedDict, total=False):
     duration_seconds: int
     """For how many seconds the token should be accepted. Defaults to 15 minutes."""

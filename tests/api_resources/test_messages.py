@@ -22,8 +22,8 @@ class TestMessages:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_method_send_overload_1(self, client: Surge) -> None:
-        message = client.messages.send(
+    def test_method_create_overload_1(self, client: Surge) -> None:
+        message = client.messages.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             conversation={"contact": {"phone_number": "+18015551234"}},
         )
@@ -33,8 +33,8 @@ class TestMessages:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_method_send_with_all_params_overload_1(self, client: Surge) -> None:
-        message = client.messages.send(
+    def test_method_create_with_all_params_overload_1(self, client: Surge) -> None:
+        message = client.messages.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             conversation={
                 "contact": {
@@ -56,8 +56,8 @@ class TestMessages:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_raw_response_send_overload_1(self, client: Surge) -> None:
-        response = client.messages.with_raw_response.send(
+    def test_raw_response_create_overload_1(self, client: Surge) -> None:
+        response = client.messages.with_raw_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             conversation={"contact": {"phone_number": "+18015551234"}},
         )
@@ -71,8 +71,8 @@ class TestMessages:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_streaming_response_send_overload_1(self, client: Surge) -> None:
-        with client.messages.with_streaming_response.send(
+    def test_streaming_response_create_overload_1(self, client: Surge) -> None:
+        with client.messages.with_streaming_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             conversation={"contact": {"phone_number": "+18015551234"}},
         ) as response:
@@ -88,9 +88,9 @@ class TestMessages:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_path_params_send_overload_1(self, client: Surge) -> None:
+    def test_path_params_create_overload_1(self, client: Surge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-            client.messages.with_raw_response.send(
+            client.messages.with_raw_response.create(
                 account_id="",
                 conversation={"contact": {"phone_number": "+18015551234"}},
             )
@@ -99,8 +99,8 @@ class TestMessages:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_method_send_overload_2(self, client: Surge) -> None:
-        message = client.messages.send(
+    def test_method_create_overload_2(self, client: Surge) -> None:
+        message = client.messages.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             to="+18015551234",
         )
@@ -110,8 +110,8 @@ class TestMessages:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_method_send_with_all_params_overload_2(self, client: Surge) -> None:
-        message = client.messages.send(
+    def test_method_create_with_all_params_overload_2(self, client: Surge) -> None:
+        message = client.messages.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             to="+18015551234",
             attachments=[{"url": "https://toretto.family/coronas.gif"}],
@@ -125,8 +125,8 @@ class TestMessages:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_raw_response_send_overload_2(self, client: Surge) -> None:
-        response = client.messages.with_raw_response.send(
+    def test_raw_response_create_overload_2(self, client: Surge) -> None:
+        response = client.messages.with_raw_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             to="+18015551234",
         )
@@ -140,8 +140,8 @@ class TestMessages:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_streaming_response_send_overload_2(self, client: Surge) -> None:
-        with client.messages.with_streaming_response.send(
+    def test_streaming_response_create_overload_2(self, client: Surge) -> None:
+        with client.messages.with_streaming_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             to="+18015551234",
         ) as response:
@@ -157,9 +157,9 @@ class TestMessages:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    def test_path_params_send_overload_2(self, client: Surge) -> None:
+    def test_path_params_create_overload_2(self, client: Surge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-            client.messages.with_raw_response.send(
+            client.messages.with_raw_response.create(
                 account_id="",
                 to="+18015551234",
             )
@@ -174,8 +174,8 @@ class TestAsyncMessages:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_method_send_overload_1(self, async_client: AsyncSurge) -> None:
-        message = await async_client.messages.send(
+    async def test_method_create_overload_1(self, async_client: AsyncSurge) -> None:
+        message = await async_client.messages.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             conversation={"contact": {"phone_number": "+18015551234"}},
         )
@@ -185,8 +185,8 @@ class TestAsyncMessages:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_method_send_with_all_params_overload_1(self, async_client: AsyncSurge) -> None:
-        message = await async_client.messages.send(
+    async def test_method_create_with_all_params_overload_1(self, async_client: AsyncSurge) -> None:
+        message = await async_client.messages.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             conversation={
                 "contact": {
@@ -208,8 +208,8 @@ class TestAsyncMessages:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_raw_response_send_overload_1(self, async_client: AsyncSurge) -> None:
-        response = await async_client.messages.with_raw_response.send(
+    async def test_raw_response_create_overload_1(self, async_client: AsyncSurge) -> None:
+        response = await async_client.messages.with_raw_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             conversation={"contact": {"phone_number": "+18015551234"}},
         )
@@ -223,8 +223,8 @@ class TestAsyncMessages:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_streaming_response_send_overload_1(self, async_client: AsyncSurge) -> None:
-        async with async_client.messages.with_streaming_response.send(
+    async def test_streaming_response_create_overload_1(self, async_client: AsyncSurge) -> None:
+        async with async_client.messages.with_streaming_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             conversation={"contact": {"phone_number": "+18015551234"}},
         ) as response:
@@ -240,9 +240,9 @@ class TestAsyncMessages:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_path_params_send_overload_1(self, async_client: AsyncSurge) -> None:
+    async def test_path_params_create_overload_1(self, async_client: AsyncSurge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-            await async_client.messages.with_raw_response.send(
+            await async_client.messages.with_raw_response.create(
                 account_id="",
                 conversation={"contact": {"phone_number": "+18015551234"}},
             )
@@ -251,8 +251,8 @@ class TestAsyncMessages:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_method_send_overload_2(self, async_client: AsyncSurge) -> None:
-        message = await async_client.messages.send(
+    async def test_method_create_overload_2(self, async_client: AsyncSurge) -> None:
+        message = await async_client.messages.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             to="+18015551234",
         )
@@ -262,8 +262,8 @@ class TestAsyncMessages:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_method_send_with_all_params_overload_2(self, async_client: AsyncSurge) -> None:
-        message = await async_client.messages.send(
+    async def test_method_create_with_all_params_overload_2(self, async_client: AsyncSurge) -> None:
+        message = await async_client.messages.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             to="+18015551234",
             attachments=[{"url": "https://toretto.family/coronas.gif"}],
@@ -277,8 +277,8 @@ class TestAsyncMessages:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_raw_response_send_overload_2(self, async_client: AsyncSurge) -> None:
-        response = await async_client.messages.with_raw_response.send(
+    async def test_raw_response_create_overload_2(self, async_client: AsyncSurge) -> None:
+        response = await async_client.messages.with_raw_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             to="+18015551234",
         )
@@ -292,8 +292,8 @@ class TestAsyncMessages:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_streaming_response_send_overload_2(self, async_client: AsyncSurge) -> None:
-        async with async_client.messages.with_streaming_response.send(
+    async def test_streaming_response_create_overload_2(self, async_client: AsyncSurge) -> None:
+        async with async_client.messages.with_streaming_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             to="+18015551234",
         ) as response:
@@ -309,9 +309,9 @@ class TestAsyncMessages:
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
     )
     @parametrize
-    async def test_path_params_send_overload_2(self, async_client: AsyncSurge) -> None:
+    async def test_path_params_create_overload_2(self, async_client: AsyncSurge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-            await async_client.messages.with_raw_response.send(
+            await async_client.messages.with_raw_response.create(
                 account_id="",
                 to="+18015551234",
             )

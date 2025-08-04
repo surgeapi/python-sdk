@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import Dict
 from typing_extensions import Required, TypedDict
 
-__all__ = ["UserUsersParams"]
+__all__ = ["UserCreateParams"]
 
 
-class UserUsersParams(TypedDict, total=False):
+class UserCreateParams(TypedDict, total=False):
     first_name: Required[str]
     """The user's first name."""
 

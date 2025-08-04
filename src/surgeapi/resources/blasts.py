@@ -7,7 +7,7 @@ from datetime import datetime
 
 import httpx
 
-from ..types import blast_blasts_params
+from ..types import blast_create_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -45,7 +45,7 @@ class BlastsResource(SyncAPIResource):
         """
         return BlastsResourceWithStreamingResponse(self)
 
-    def blasts(
+    def create(
         self,
         account_id: str,
         *,
@@ -103,7 +103,7 @@ class BlastsResource(SyncAPIResource):
                     "send_at": send_at,
                     "to": to,
                 },
-                blast_blasts_params.BlastBlastsParams,
+                blast_create_params.BlastCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -132,7 +132,7 @@ class AsyncBlastsResource(AsyncAPIResource):
         """
         return AsyncBlastsResourceWithStreamingResponse(self)
 
-    async def blasts(
+    async def create(
         self,
         account_id: str,
         *,
@@ -190,7 +190,7 @@ class AsyncBlastsResource(AsyncAPIResource):
                     "send_at": send_at,
                     "to": to,
                 },
-                blast_blasts_params.BlastBlastsParams,
+                blast_create_params.BlastCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -203,8 +203,8 @@ class BlastsResourceWithRawResponse:
     def __init__(self, blasts: BlastsResource) -> None:
         self._blasts = blasts
 
-        self.blasts = to_raw_response_wrapper(
-            blasts.blasts,
+        self.create = to_raw_response_wrapper(
+            blasts.create,
         )
 
 
@@ -212,8 +212,8 @@ class AsyncBlastsResourceWithRawResponse:
     def __init__(self, blasts: AsyncBlastsResource) -> None:
         self._blasts = blasts
 
-        self.blasts = async_to_raw_response_wrapper(
-            blasts.blasts,
+        self.create = async_to_raw_response_wrapper(
+            blasts.create,
         )
 
 
@@ -221,8 +221,8 @@ class BlastsResourceWithStreamingResponse:
     def __init__(self, blasts: BlastsResource) -> None:
         self._blasts = blasts
 
-        self.blasts = to_streamed_response_wrapper(
-            blasts.blasts,
+        self.create = to_streamed_response_wrapper(
+            blasts.create,
         )
 
 
@@ -230,6 +230,6 @@ class AsyncBlastsResourceWithStreamingResponse:
     def __init__(self, blasts: AsyncBlastsResource) -> None:
         self._blasts = blasts
 
-        self.blasts = async_to_streamed_response_wrapper(
-            blasts.blasts,
+        self.create = async_to_streamed_response_wrapper(
+            blasts.create,
         )

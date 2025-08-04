@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import campaign_campaigns_params
+from ..types import campaign_create_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -44,7 +44,7 @@ class CampaignsResource(SyncAPIResource):
         """
         return CampaignsResourceWithStreamingResponse(self)
 
-    def campaigns(
+    def create(
         self,
         account_id: str,
         *,
@@ -185,7 +185,7 @@ class CampaignsResource(SyncAPIResource):
                     "link_sample": link_sample,
                     "terms_and_conditions_url": terms_and_conditions_url,
                 },
-                campaign_campaigns_params.CampaignCampaignsParams,
+                campaign_create_params.CampaignCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -214,7 +214,7 @@ class AsyncCampaignsResource(AsyncAPIResource):
         """
         return AsyncCampaignsResourceWithStreamingResponse(self)
 
-    async def campaigns(
+    async def create(
         self,
         account_id: str,
         *,
@@ -355,7 +355,7 @@ class AsyncCampaignsResource(AsyncAPIResource):
                     "link_sample": link_sample,
                     "terms_and_conditions_url": terms_and_conditions_url,
                 },
-                campaign_campaigns_params.CampaignCampaignsParams,
+                campaign_create_params.CampaignCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -368,8 +368,8 @@ class CampaignsResourceWithRawResponse:
     def __init__(self, campaigns: CampaignsResource) -> None:
         self._campaigns = campaigns
 
-        self.campaigns = to_raw_response_wrapper(
-            campaigns.campaigns,
+        self.create = to_raw_response_wrapper(
+            campaigns.create,
         )
 
 
@@ -377,8 +377,8 @@ class AsyncCampaignsResourceWithRawResponse:
     def __init__(self, campaigns: AsyncCampaignsResource) -> None:
         self._campaigns = campaigns
 
-        self.campaigns = async_to_raw_response_wrapper(
-            campaigns.campaigns,
+        self.create = async_to_raw_response_wrapper(
+            campaigns.create,
         )
 
 
@@ -386,8 +386,8 @@ class CampaignsResourceWithStreamingResponse:
     def __init__(self, campaigns: CampaignsResource) -> None:
         self._campaigns = campaigns
 
-        self.campaigns = to_streamed_response_wrapper(
-            campaigns.campaigns,
+        self.create = to_streamed_response_wrapper(
+            campaigns.create,
         )
 
 
@@ -395,6 +395,6 @@ class AsyncCampaignsResourceWithStreamingResponse:
     def __init__(self, campaigns: AsyncCampaignsResource) -> None:
         self._campaigns = campaigns
 
-        self.campaigns = async_to_streamed_response_wrapper(
-            campaigns.campaigns,
+        self.create = async_to_streamed_response_wrapper(
+            campaigns.create,
         )
