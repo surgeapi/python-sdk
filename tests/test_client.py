@@ -37,7 +37,7 @@ from surgeapi._base_client import (
 from .utils import update_env
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
-bearer_token = "My Bearer Token"
+api_key = "My API Key"
 
 
 def _get_params(client: BaseClient[Any, Any]) -> dict[str, str]:
@@ -59,7 +59,7 @@ def _get_open_connections(client: Surge | AsyncSurge) -> int:
 
 
 class TestSurge:
-    client = Surge(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+    client = Surge(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response(self, respx_mock: MockRouter) -> None:
@@ -85,9 +85,9 @@ class TestSurge:
         copied = self.client.copy()
         assert id(copied) != id(self.client)
 
-        copied = self.client.copy(bearer_token="another My Bearer Token")
-        assert copied.bearer_token == "another My Bearer Token"
-        assert self.client.bearer_token == "My Bearer Token"
+        copied = self.client.copy(api_key="another My API Key")
+        assert copied.api_key == "another My API Key"
+        assert self.client.api_key == "My API Key"
 
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
@@ -107,10 +107,7 @@ class TestSurge:
 
     def test_copy_default_headers(self) -> None:
         client = Surge(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            _strict_response_validation=True,
-            default_headers={"X-Foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         assert client.default_headers["X-Foo"] == "bar"
 
@@ -144,7 +141,7 @@ class TestSurge:
 
     def test_copy_default_query(self) -> None:
         client = Surge(
-            base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, default_query={"foo": "bar"}
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
 
@@ -269,9 +266,7 @@ class TestSurge:
         assert timeout == httpx.Timeout(100.0)
 
     def test_client_timeout_option(self) -> None:
-        client = Surge(
-            base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, timeout=httpx.Timeout(0)
-        )
+        client = Surge(base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0))
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
@@ -281,7 +276,7 @@ class TestSurge:
         # custom timeout given to the httpx client should be used
         with httpx.Client(timeout=None) as http_client:
             client = Surge(
-                base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, http_client=http_client
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -291,7 +286,7 @@ class TestSurge:
         # no timeout given to the httpx client should not use the httpx default
         with httpx.Client() as http_client:
             client = Surge(
-                base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, http_client=http_client
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -301,7 +296,7 @@ class TestSurge:
         # explicitly passing the default timeout currently results in it being ignored
         with httpx.Client(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
             client = Surge(
-                base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, http_client=http_client
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -313,17 +308,14 @@ class TestSurge:
             async with httpx.AsyncClient() as http_client:
                 Surge(
                     base_url=base_url,
-                    bearer_token=bearer_token,
+                    api_key=api_key,
                     _strict_response_validation=True,
                     http_client=cast(Any, http_client),
                 )
 
     def test_default_headers_option(self) -> None:
         client = Surge(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            _strict_response_validation=True,
-            default_headers={"X-Foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
@@ -331,7 +323,7 @@ class TestSurge:
 
         client2 = Surge(
             base_url=base_url,
-            bearer_token=bearer_token,
+            api_key=api_key,
             _strict_response_validation=True,
             default_headers={
                 "X-Foo": "stainless",
@@ -343,21 +335,18 @@ class TestSurge:
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
     def test_validate_headers(self) -> None:
-        client = Surge(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        client = Surge(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("Authorization") == f"Bearer {bearer_token}"
+        assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
         with pytest.raises(SurgeError):
             with update_env(**{"SURGE_API_KEY": Omit()}):
-                client2 = Surge(base_url=base_url, bearer_token=None, _strict_response_validation=True)
+                client2 = Surge(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
     def test_default_query_option(self) -> None:
         client = Surge(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            _strict_response_validation=True,
-            default_query={"query_param": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         url = httpx.URL(request.url)
@@ -557,9 +546,7 @@ class TestSurge:
         assert response.foo == 2
 
     def test_base_url_setter(self) -> None:
-        client = Surge(
-            base_url="https://example.com/from_init", bearer_token=bearer_token, _strict_response_validation=True
-        )
+        client = Surge(base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True)
         assert client.base_url == "https://example.com/from_init/"
 
         client.base_url = "https://example.com/from_setter"  # type: ignore[assignment]
@@ -568,20 +555,16 @@ class TestSurge:
 
     def test_base_url_env(self) -> None:
         with update_env(SURGE_BASE_URL="http://localhost:5000/from/env"):
-            client = Surge(bearer_token=bearer_token, _strict_response_validation=True)
+            client = Surge(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
         "client",
         [
+            Surge(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
             Surge(
                 base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
-                _strict_response_validation=True,
-            ),
-            Surge(
-                base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
+                api_key=api_key,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -601,14 +584,10 @@ class TestSurge:
     @pytest.mark.parametrize(
         "client",
         [
+            Surge(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
             Surge(
                 base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
-                _strict_response_validation=True,
-            ),
-            Surge(
-                base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
+                api_key=api_key,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -628,14 +607,10 @@ class TestSurge:
     @pytest.mark.parametrize(
         "client",
         [
+            Surge(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
             Surge(
                 base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
-                _strict_response_validation=True,
-            ),
-            Surge(
-                base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
+                api_key=api_key,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -653,7 +628,7 @@ class TestSurge:
         assert request.url == "https://myapi.com/foo"
 
     def test_copied_client_does_not_close_http(self) -> None:
-        client = Surge(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        client = Surge(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -664,7 +639,7 @@ class TestSurge:
         assert not client.is_closed()
 
     def test_client_context_manager(self) -> None:
-        client = Surge(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        client = Surge(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -685,12 +660,7 @@ class TestSurge:
 
     def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
-            Surge(
-                base_url=base_url,
-                bearer_token=bearer_token,
-                _strict_response_validation=True,
-                max_retries=cast(Any, None),
-            )
+            Surge(base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None))
 
     @pytest.mark.respx(base_url=base_url)
     def test_received_text_for_expected_json(self, respx_mock: MockRouter) -> None:
@@ -699,12 +669,12 @@ class TestSurge:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = Surge(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        strict_client = Surge(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             strict_client.get("/foo", cast_to=Model)
 
-        client = Surge(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=False)
+        client = Surge(base_url=base_url, api_key=api_key, _strict_response_validation=False)
 
         response = client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -732,7 +702,7 @@ class TestSurge:
     )
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = Surge(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        client = Surge(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
@@ -900,7 +870,7 @@ class TestSurge:
 
 
 class TestAsyncSurge:
-    client = AsyncSurge(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+    client = AsyncSurge(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
@@ -928,9 +898,9 @@ class TestAsyncSurge:
         copied = self.client.copy()
         assert id(copied) != id(self.client)
 
-        copied = self.client.copy(bearer_token="another My Bearer Token")
-        assert copied.bearer_token == "another My Bearer Token"
-        assert self.client.bearer_token == "My Bearer Token"
+        copied = self.client.copy(api_key="another My API Key")
+        assert copied.api_key == "another My API Key"
+        assert self.client.api_key == "My API Key"
 
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
@@ -950,10 +920,7 @@ class TestAsyncSurge:
 
     def test_copy_default_headers(self) -> None:
         client = AsyncSurge(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            _strict_response_validation=True,
-            default_headers={"X-Foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         assert client.default_headers["X-Foo"] == "bar"
 
@@ -987,7 +954,7 @@ class TestAsyncSurge:
 
     def test_copy_default_query(self) -> None:
         client = AsyncSurge(
-            base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, default_query={"foo": "bar"}
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
 
@@ -1113,7 +1080,7 @@ class TestAsyncSurge:
 
     async def test_client_timeout_option(self) -> None:
         client = AsyncSurge(
-            base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, timeout=httpx.Timeout(0)
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
         )
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1124,7 +1091,7 @@ class TestAsyncSurge:
         # custom timeout given to the httpx client should be used
         async with httpx.AsyncClient(timeout=None) as http_client:
             client = AsyncSurge(
-                base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, http_client=http_client
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1134,7 +1101,7 @@ class TestAsyncSurge:
         # no timeout given to the httpx client should not use the httpx default
         async with httpx.AsyncClient() as http_client:
             client = AsyncSurge(
-                base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, http_client=http_client
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1144,7 +1111,7 @@ class TestAsyncSurge:
         # explicitly passing the default timeout currently results in it being ignored
         async with httpx.AsyncClient(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
             client = AsyncSurge(
-                base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, http_client=http_client
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1156,17 +1123,14 @@ class TestAsyncSurge:
             with httpx.Client() as http_client:
                 AsyncSurge(
                     base_url=base_url,
-                    bearer_token=bearer_token,
+                    api_key=api_key,
                     _strict_response_validation=True,
                     http_client=cast(Any, http_client),
                 )
 
     def test_default_headers_option(self) -> None:
         client = AsyncSurge(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            _strict_response_validation=True,
-            default_headers={"X-Foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
@@ -1174,7 +1138,7 @@ class TestAsyncSurge:
 
         client2 = AsyncSurge(
             base_url=base_url,
-            bearer_token=bearer_token,
+            api_key=api_key,
             _strict_response_validation=True,
             default_headers={
                 "X-Foo": "stainless",
@@ -1186,21 +1150,18 @@ class TestAsyncSurge:
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
     def test_validate_headers(self) -> None:
-        client = AsyncSurge(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        client = AsyncSurge(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("Authorization") == f"Bearer {bearer_token}"
+        assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
         with pytest.raises(SurgeError):
             with update_env(**{"SURGE_API_KEY": Omit()}):
-                client2 = AsyncSurge(base_url=base_url, bearer_token=None, _strict_response_validation=True)
+                client2 = AsyncSurge(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
     def test_default_query_option(self) -> None:
         client = AsyncSurge(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            _strict_response_validation=True,
-            default_query={"query_param": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         url = httpx.URL(request.url)
@@ -1400,9 +1361,7 @@ class TestAsyncSurge:
         assert response.foo == 2
 
     def test_base_url_setter(self) -> None:
-        client = AsyncSurge(
-            base_url="https://example.com/from_init", bearer_token=bearer_token, _strict_response_validation=True
-        )
+        client = AsyncSurge(base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True)
         assert client.base_url == "https://example.com/from_init/"
 
         client.base_url = "https://example.com/from_setter"  # type: ignore[assignment]
@@ -1411,20 +1370,18 @@ class TestAsyncSurge:
 
     def test_base_url_env(self) -> None:
         with update_env(SURGE_BASE_URL="http://localhost:5000/from/env"):
-            client = AsyncSurge(bearer_token=bearer_token, _strict_response_validation=True)
+            client = AsyncSurge(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
         "client",
         [
             AsyncSurge(
-                base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
-                _strict_response_validation=True,
+                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
             AsyncSurge(
                 base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
+                api_key=api_key,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1445,13 +1402,11 @@ class TestAsyncSurge:
         "client",
         [
             AsyncSurge(
-                base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
-                _strict_response_validation=True,
+                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
             AsyncSurge(
                 base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
+                api_key=api_key,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1472,13 +1427,11 @@ class TestAsyncSurge:
         "client",
         [
             AsyncSurge(
-                base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
-                _strict_response_validation=True,
+                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
             AsyncSurge(
                 base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
+                api_key=api_key,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1496,7 +1449,7 @@ class TestAsyncSurge:
         assert request.url == "https://myapi.com/foo"
 
     async def test_copied_client_does_not_close_http(self) -> None:
-        client = AsyncSurge(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        client = AsyncSurge(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -1508,7 +1461,7 @@ class TestAsyncSurge:
         assert not client.is_closed()
 
     async def test_client_context_manager(self) -> None:
-        client = AsyncSurge(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        client = AsyncSurge(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         async with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -1531,10 +1484,7 @@ class TestAsyncSurge:
     async def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
             AsyncSurge(
-                base_url=base_url,
-                bearer_token=bearer_token,
-                _strict_response_validation=True,
-                max_retries=cast(Any, None),
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None)
             )
 
     @pytest.mark.respx(base_url=base_url)
@@ -1545,12 +1495,12 @@ class TestAsyncSurge:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = AsyncSurge(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        strict_client = AsyncSurge(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             await strict_client.get("/foo", cast_to=Model)
 
-        client = AsyncSurge(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=False)
+        client = AsyncSurge(base_url=base_url, api_key=api_key, _strict_response_validation=False)
 
         response = await client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -1579,7 +1529,7 @@ class TestAsyncSurge:
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     @pytest.mark.asyncio
     async def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = AsyncSurge(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        client = AsyncSurge(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)

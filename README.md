@@ -32,7 +32,7 @@ import os
 from surgeapi import Surge
 
 client = Surge(
-    bearer_token=os.environ.get("SURGE_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("SURGE_API_KEY"),  # This is the default and can be omitted
 )
 
 message = client.messages.create(
@@ -50,10 +50,10 @@ message = client.messages.create(
 print(message.id)
 ```
 
-While you can provide a `bearer_token` keyword argument,
+While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `SURGE_API_KEY="My Bearer Token"` to your `.env` file
-so that your Bearer Token is not stored in source control.
+to add `SURGE_API_KEY="My API Key"` to your `.env` file
+so that your API Key is not stored in source control.
 
 ## Async usage
 
@@ -65,7 +65,7 @@ import asyncio
 from surgeapi import AsyncSurge
 
 client = AsyncSurge(
-    bearer_token=os.environ.get("SURGE_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("SURGE_API_KEY"),  # This is the default and can be omitted
 )
 
 
@@ -111,7 +111,7 @@ from surgeapi import AsyncSurge
 
 async def main() -> None:
     async with AsyncSurge(
-        bearer_token="My Bearer Token",
+        api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
         message = await client.messages.create(
