@@ -9,8 +9,7 @@ import pytest
 
 from surgeapi import Surge, AsyncSurge
 from tests.utils import assert_matches_type
-from surgeapi.types import Blast
-from surgeapi._utils import parse_datetime
+from surgeapi.types import BlastCreateResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -26,7 +25,7 @@ class TestBlasts:
         blast = client.blasts.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
         )
-        assert_matches_type(Blast, blast, path=["response"])
+        assert_matches_type(BlastCreateResponse, blast, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -37,13 +36,12 @@ class TestBlasts:
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             attachments=[{"url": "https://example.com/image.jpg"}],
             body="Join us for our grand opening!",
-            contacts=["ctc_01jxwtp1vse91twb5bj977gav9"],
+            contacts=["ctc_01j9dy8mdzfn3r0e8x1tbdrdrf"],
             name="Grand Opening Announcement",
-            segments=["seg_01jxwtwzqhfykb31dt6mvpsa9k"],
-            send_at=parse_datetime("2024-02-01T15:00:00Z"),
-            to=["seg_01j9dy8mdzfn3r0e8x1tbdrdrf", "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf", "+18015551234", "+18015555678"],
+            segments=["seg_01j9dy8mdzfn3r0e8x1tbdrdrf"],
+            send_at="2024-02-01T15:00:00Z",
         )
-        assert_matches_type(Blast, blast, path=["response"])
+        assert_matches_type(BlastCreateResponse, blast, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -57,7 +55,7 @@ class TestBlasts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         blast = response.parse()
-        assert_matches_type(Blast, blast, path=["response"])
+        assert_matches_type(BlastCreateResponse, blast, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -71,7 +69,7 @@ class TestBlasts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             blast = response.parse()
-            assert_matches_type(Blast, blast, path=["response"])
+            assert_matches_type(BlastCreateResponse, blast, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -99,7 +97,7 @@ class TestAsyncBlasts:
         blast = await async_client.blasts.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
         )
-        assert_matches_type(Blast, blast, path=["response"])
+        assert_matches_type(BlastCreateResponse, blast, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -110,13 +108,12 @@ class TestAsyncBlasts:
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             attachments=[{"url": "https://example.com/image.jpg"}],
             body="Join us for our grand opening!",
-            contacts=["ctc_01jxwtp1vse91twb5bj977gav9"],
+            contacts=["ctc_01j9dy8mdzfn3r0e8x1tbdrdrf"],
             name="Grand Opening Announcement",
-            segments=["seg_01jxwtwzqhfykb31dt6mvpsa9k"],
-            send_at=parse_datetime("2024-02-01T15:00:00Z"),
-            to=["seg_01j9dy8mdzfn3r0e8x1tbdrdrf", "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf", "+18015551234", "+18015555678"],
+            segments=["seg_01j9dy8mdzfn3r0e8x1tbdrdrf"],
+            send_at="2024-02-01T15:00:00Z",
         )
-        assert_matches_type(Blast, blast, path=["response"])
+        assert_matches_type(BlastCreateResponse, blast, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -130,7 +127,7 @@ class TestAsyncBlasts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         blast = await response.parse()
-        assert_matches_type(Blast, blast, path=["response"])
+        assert_matches_type(BlastCreateResponse, blast, path=["response"])
 
     @pytest.mark.skip(
         reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
@@ -144,7 +141,7 @@ class TestAsyncBlasts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             blast = await response.parse()
-            assert_matches_type(Blast, blast, path=["response"])
+            assert_matches_type(BlastCreateResponse, blast, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

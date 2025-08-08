@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
-from typing_extensions import Literal
+from typing import Optional
 
 import httpx
 
-from ..types import OrganizationParams, account_create_params, account_update_params, account_retrieve_status_params
+from ..types import account_create_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -19,9 +18,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.account import Account
-from ..types.account_status import AccountStatus
-from ..types.organization_params import OrganizationParams
+from ..types.account_create_response import AccountCreateResponse
 
 __all__ = ["AccountsResource", "AsyncAccountsResource"]
 
@@ -50,34 +47,24 @@ class AccountsResource(SyncAPIResource):
         self,
         *,
         name: str,
-        brand_name: Optional[str] | NotGiven = NOT_GIVEN,
-        organization: OrganizationParams | NotGiven = NOT_GIVEN,
-        time_zone: str | NotGiven = NOT_GIVEN,
+        call_forwarding_number: str | NotGiven = NOT_GIVEN,
+        time_zone: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Account:
+    ) -> AccountCreateResponse:
         """
         Creates a new Account within the calling Platform.
 
         Args:
-          name: The name of the account that will be visible for your internal organizational
-              purposes. This will also be the default public-facing brand name unless you also
-              set a `brand_name`, but otherwise the account name will never be displayed
-              anywhere outside of Surge HQ, and may include your ID for the account or
-              anything else that may help you.
+          name: The name of the account
 
-          brand_name: The name by which the people this account communicates with know it. If not
-              provided, this will match the name field.
+          call_forwarding_number: The phone number to forward calls to
 
-          organization: Parameters describing the legal entity on whose behalf the account will be
-              operated.
-
-          time_zone: This is the time zone in which the account is headquartered. This time zone may
-              be used for compliance with TCPA restrictions on when messages may be sent.
+          time_zone: The time zone for the account
 
           extra_headers: Send extra headers
 
@@ -92,8 +79,7 @@ class AccountsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "name": name,
-                    "brand_name": brand_name,
-                    "organization": organization,
+                    "call_forwarding_number": call_forwarding_number,
                     "time_zone": time_zone,
                 },
                 account_create_params.AccountCreateParams,
@@ -101,109 +87,7 @@ class AccountsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Account,
-        )
-
-    def update(
-        self,
-        id: str,
-        *,
-        brand_name: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        organization: OrganizationParams | NotGiven = NOT_GIVEN,
-        time_zone: Optional[str] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Account:
-        """
-        Updates an Account
-
-        Args:
-          brand_name: The name by which the people this account communicates with know it. If not
-              provided, this will match the name field.
-
-          name: The name of the account that will be visible for your internal organizational
-              purposes. This will also be the default public-facing brand name unless you also
-              set a `brand_name`, but otherwise the account name will never be displayed
-              anywhere outside of Surge HQ, and may include your ID for the account or
-              anything else that may help you.
-
-          organization: Parameters describing the legal entity on whose behalf the account will be
-              operated.
-
-          time_zone: The time zone for the account
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return self._patch(
-            f"/accounts/{id}",
-            body=maybe_transform(
-                {
-                    "brand_name": brand_name,
-                    "name": name,
-                    "organization": organization,
-                    "time_zone": time_zone,
-                },
-                account_update_params.AccountUpdateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=Account,
-        )
-
-    def retrieve_status(
-        self,
-        account_id: str,
-        *,
-        capabilities: List[Literal["local_messaging"]] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountStatus:
-        """
-        Check an account's status and capabilities
-
-        Args:
-          capabilities: capabilities about which to check the status
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return self._get(
-            f"/accounts/{account_id}/status",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {"capabilities": capabilities}, account_retrieve_status_params.AccountRetrieveStatusParams
-                ),
-            ),
-            cast_to=AccountStatus,
+            cast_to=AccountCreateResponse,
         )
 
 
@@ -231,34 +115,24 @@ class AsyncAccountsResource(AsyncAPIResource):
         self,
         *,
         name: str,
-        brand_name: Optional[str] | NotGiven = NOT_GIVEN,
-        organization: OrganizationParams | NotGiven = NOT_GIVEN,
-        time_zone: str | NotGiven = NOT_GIVEN,
+        call_forwarding_number: str | NotGiven = NOT_GIVEN,
+        time_zone: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Account:
+    ) -> AccountCreateResponse:
         """
         Creates a new Account within the calling Platform.
 
         Args:
-          name: The name of the account that will be visible for your internal organizational
-              purposes. This will also be the default public-facing brand name unless you also
-              set a `brand_name`, but otherwise the account name will never be displayed
-              anywhere outside of Surge HQ, and may include your ID for the account or
-              anything else that may help you.
+          name: The name of the account
 
-          brand_name: The name by which the people this account communicates with know it. If not
-              provided, this will match the name field.
+          call_forwarding_number: The phone number to forward calls to
 
-          organization: Parameters describing the legal entity on whose behalf the account will be
-              operated.
-
-          time_zone: This is the time zone in which the account is headquartered. This time zone may
-              be used for compliance with TCPA restrictions on when messages may be sent.
+          time_zone: The time zone for the account
 
           extra_headers: Send extra headers
 
@@ -273,8 +147,7 @@ class AsyncAccountsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "name": name,
-                    "brand_name": brand_name,
-                    "organization": organization,
+                    "call_forwarding_number": call_forwarding_number,
                     "time_zone": time_zone,
                 },
                 account_create_params.AccountCreateParams,
@@ -282,109 +155,7 @@ class AsyncAccountsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Account,
-        )
-
-    async def update(
-        self,
-        id: str,
-        *,
-        brand_name: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        organization: OrganizationParams | NotGiven = NOT_GIVEN,
-        time_zone: Optional[str] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Account:
-        """
-        Updates an Account
-
-        Args:
-          brand_name: The name by which the people this account communicates with know it. If not
-              provided, this will match the name field.
-
-          name: The name of the account that will be visible for your internal organizational
-              purposes. This will also be the default public-facing brand name unless you also
-              set a `brand_name`, but otherwise the account name will never be displayed
-              anywhere outside of Surge HQ, and may include your ID for the account or
-              anything else that may help you.
-
-          organization: Parameters describing the legal entity on whose behalf the account will be
-              operated.
-
-          time_zone: The time zone for the account
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return await self._patch(
-            f"/accounts/{id}",
-            body=await async_maybe_transform(
-                {
-                    "brand_name": brand_name,
-                    "name": name,
-                    "organization": organization,
-                    "time_zone": time_zone,
-                },
-                account_update_params.AccountUpdateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=Account,
-        )
-
-    async def retrieve_status(
-        self,
-        account_id: str,
-        *,
-        capabilities: List[Literal["local_messaging"]] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountStatus:
-        """
-        Check an account's status and capabilities
-
-        Args:
-          capabilities: capabilities about which to check the status
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return await self._get(
-            f"/accounts/{account_id}/status",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {"capabilities": capabilities}, account_retrieve_status_params.AccountRetrieveStatusParams
-                ),
-            ),
-            cast_to=AccountStatus,
+            cast_to=AccountCreateResponse,
         )
 
 
@@ -395,12 +166,6 @@ class AccountsResourceWithRawResponse:
         self.create = to_raw_response_wrapper(
             accounts.create,
         )
-        self.update = to_raw_response_wrapper(
-            accounts.update,
-        )
-        self.retrieve_status = to_raw_response_wrapper(
-            accounts.retrieve_status,
-        )
 
 
 class AsyncAccountsResourceWithRawResponse:
@@ -409,12 +174,6 @@ class AsyncAccountsResourceWithRawResponse:
 
         self.create = async_to_raw_response_wrapper(
             accounts.create,
-        )
-        self.update = async_to_raw_response_wrapper(
-            accounts.update,
-        )
-        self.retrieve_status = async_to_raw_response_wrapper(
-            accounts.retrieve_status,
         )
 
 
@@ -425,12 +184,6 @@ class AccountsResourceWithStreamingResponse:
         self.create = to_streamed_response_wrapper(
             accounts.create,
         )
-        self.update = to_streamed_response_wrapper(
-            accounts.update,
-        )
-        self.retrieve_status = to_streamed_response_wrapper(
-            accounts.retrieve_status,
-        )
 
 
 class AsyncAccountsResourceWithStreamingResponse:
@@ -439,10 +192,4 @@ class AsyncAccountsResourceWithStreamingResponse:
 
         self.create = async_to_streamed_response_wrapper(
             accounts.create,
-        )
-        self.update = async_to_streamed_response_wrapper(
-            accounts.update,
-        )
-        self.retrieve_status = async_to_streamed_response_wrapper(
-            accounts.retrieve_status,
         )

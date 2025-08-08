@@ -17,7 +17,7 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.verification import Verification
-from ..types.verification_check import VerificationCheck
+from ..types.verification_check_response import VerificationCheckResponse
 
 __all__ = ["VerificationsResource", "AsyncVerificationsResource"]
 
@@ -87,7 +87,7 @@ class VerificationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> VerificationCheck:
+    ) -> VerificationCheckResponse:
         """
         Checks the code against a verification.
 
@@ -110,7 +110,7 @@ class VerificationsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=VerificationCheck,
+            cast_to=VerificationCheckResponse,
         )
 
 
@@ -181,7 +181,7 @@ class AsyncVerificationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> VerificationCheck:
+    ) -> VerificationCheckResponse:
         """
         Checks the code against a verification.
 
@@ -204,7 +204,7 @@ class AsyncVerificationsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=VerificationCheck,
+            cast_to=VerificationCheckResponse,
         )
 
 

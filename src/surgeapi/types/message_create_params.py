@@ -2,24 +2,16 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
-from datetime import datetime
-from typing_extensions import Required, Annotated, TypeAlias, TypedDict
+from typing import Iterable
+from typing_extensions import Required, TypedDict
 
-from .._utils import PropertyInfo
-from .shared_params.contact_params import ContactParams
 from .shared_params.attachment_params import AttachmentParams
 
-__all__ = [
-    "MessageCreateParams",
-    "MessageParamsWithConversation",
-    "MessageParamsWithConversationConversation",
-    "SimpleMessageParams",
-]
+__all__ = ["MessageCreateParams", "Conversation", "ConversationContact"]
 
 
-class MessageParamsWithConversation(TypedDict, total=False):
-    conversation: Required[MessageParamsWithConversationConversation]
+class MessageCreateParams(TypedDict, total=False):
+    conversation: Required[Conversation]
     """Params for selecting or creating a new conversation.
 
     Either the id or the Contact must be given.
@@ -30,48 +22,27 @@ class MessageParamsWithConversation(TypedDict, total=False):
     body: str
     """The message body."""
 
-    send_at: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
-    """
-    An optional datetime for scheduling message up to a couple of months in the
-    future.
-    """
 
+class ConversationContact(TypedDict, total=False):
+    id: str
+    """The unique identifier for an existing contact."""
 
-class MessageParamsWithConversationConversation(TypedDict, total=False):
-    contact: Required[ContactParams]
-    """Parameters for creating a contact"""
+    first_name: str
+    """The contact's first name in case a new contact is created."""
+
+    last_name: str
+    """The message's last name in case a new contact is created."""
 
     phone_number: str
-    """The phone number from which to send the message.
+    """The contact's phone number in E.164 format."""
 
-    This can be either the phone number in E.164 format or a Surge phone number id.
+
+class Conversation(TypedDict, total=False):
+    id: str
+    """Unique identifier for the object."""
+
+    contact: ConversationContact
+    """Params for selecting or creating a new contact for sending a message.
+
+    Either the id or the phone number must be given.
     """
-
-
-class SimpleMessageParams(TypedDict, total=False):
-    to: Required[str]
-    """The recipient's phone number in E.164 format.
-
-    Cannot be used together with 'conversation'.
-    """
-
-    attachments: Iterable[AttachmentParams]
-
-    body: str
-    """The message body."""
-
-    from_: Annotated[str, PropertyInfo(alias="from")]
-    """The sender's phone number in E.164 format or phone number ID.
-
-    If omitted, uses the account's default phone number. Cannot be used together
-    with 'conversation'.
-    """
-
-    send_at: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
-    """
-    An optional datetime for scheduling message up to a couple of months in the
-    future.
-    """
-
-
-MessageCreateParams: TypeAlias = Union[MessageParamsWithConversation, SimpleMessageParams]

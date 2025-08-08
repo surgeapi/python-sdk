@@ -21,5 +21,5 @@ class ContactCreateParams(TypedDict, total=False):
     last_name: str
     """The contact's last name."""
 
-    metadata: Dict[str, str]
-    """Set of key-value pairs that will be stored with the object."""
+    metadata: Dict[str, object]
+    """Additional metadata about the contact."""

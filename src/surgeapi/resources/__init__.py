@@ -40,22 +40,6 @@ from .messages import (
     MessagesResourceWithStreamingResponse,
     AsyncMessagesResourceWithStreamingResponse,
 )
-from .campaigns import (
-    CampaignsResource,
-    AsyncCampaignsResource,
-    CampaignsResourceWithRawResponse,
-    AsyncCampaignsResourceWithRawResponse,
-    CampaignsResourceWithStreamingResponse,
-    AsyncCampaignsResourceWithStreamingResponse,
-)
-from .phone_numbers import (
-    PhoneNumbersResource,
-    AsyncPhoneNumbersResource,
-    PhoneNumbersResourceWithRawResponse,
-    AsyncPhoneNumbersResourceWithRawResponse,
-    PhoneNumbersResourceWithStreamingResponse,
-    AsyncPhoneNumbersResourceWithStreamingResponse,
-)
 from .verifications import (
     VerificationsResource,
     AsyncVerificationsResource,
@@ -78,12 +62,6 @@ __all__ = [
     "AsyncBlastsResourceWithRawResponse",
     "BlastsResourceWithStreamingResponse",
     "AsyncBlastsResourceWithStreamingResponse",
-    "CampaignsResource",
-    "AsyncCampaignsResource",
-    "CampaignsResourceWithRawResponse",
-    "AsyncCampaignsResourceWithRawResponse",
-    "CampaignsResourceWithStreamingResponse",
-    "AsyncCampaignsResourceWithStreamingResponse",
     "ContactsResource",
     "AsyncContactsResource",
     "ContactsResourceWithRawResponse",
@@ -96,12 +74,6 @@ __all__ = [
     "AsyncMessagesResourceWithRawResponse",
     "MessagesResourceWithStreamingResponse",
     "AsyncMessagesResourceWithStreamingResponse",
-    "PhoneNumbersResource",
-    "AsyncPhoneNumbersResource",
-    "PhoneNumbersResourceWithRawResponse",
-    "AsyncPhoneNumbersResourceWithRawResponse",
-    "PhoneNumbersResourceWithStreamingResponse",
-    "AsyncPhoneNumbersResourceWithStreamingResponse",
     "UsersResource",
     "AsyncUsersResource",
     "UsersResourceWithRawResponse",

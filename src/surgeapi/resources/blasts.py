@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Iterable
-from datetime import datetime
+from typing import List, Iterable
 
 import httpx
 
@@ -18,8 +17,8 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..types.blast import Blast
 from .._base_client import make_request_options
+from ..types.blast_create_response import BlastCreateResponse
 from ..types.shared_params.attachment_params import AttachmentParams
 
 __all__ = ["BlastsResource", "AsyncBlastsResource"]
@@ -54,32 +53,27 @@ class BlastsResource(SyncAPIResource):
         contacts: List[str] | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         segments: List[str] | NotGiven = NOT_GIVEN,
-        send_at: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        to: List[str] | NotGiven = NOT_GIVEN,
+        send_at: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Blast:
-        """Sends a Blast.
+    ) -> BlastCreateResponse:
+        """
+        Sends a Blast.
 
         Args:
           body: The message body.
 
-          contacts: Deprecated.
-
-        Use `to` instead.
+          contacts: List of contact IDs to send the blast to.
 
           name: Optional name for the blast.
 
-          segments: Deprecated. Use `to` instead.
+          segments: List of segment IDs to send the blast to.
 
           send_at: When to send the blast. If not provided, sends immediately.
-
-          to: List of recipients to whom the blast should be sent. This can be a combination
-              of contact IDs, segment IDs, and phone numbers.
 
           extra_headers: Send extra headers
 
@@ -101,14 +95,13 @@ class BlastsResource(SyncAPIResource):
                     "name": name,
                     "segments": segments,
                     "send_at": send_at,
-                    "to": to,
                 },
                 blast_create_params.BlastCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Blast,
+            cast_to=BlastCreateResponse,
         )
 
 
@@ -141,32 +134,27 @@ class AsyncBlastsResource(AsyncAPIResource):
         contacts: List[str] | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         segments: List[str] | NotGiven = NOT_GIVEN,
-        send_at: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        to: List[str] | NotGiven = NOT_GIVEN,
+        send_at: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Blast:
-        """Sends a Blast.
+    ) -> BlastCreateResponse:
+        """
+        Sends a Blast.
 
         Args:
           body: The message body.
 
-          contacts: Deprecated.
-
-        Use `to` instead.
+          contacts: List of contact IDs to send the blast to.
 
           name: Optional name for the blast.
 
-          segments: Deprecated. Use `to` instead.
+          segments: List of segment IDs to send the blast to.
 
           send_at: When to send the blast. If not provided, sends immediately.
-
-          to: List of recipients to whom the blast should be sent. This can be a combination
-              of contact IDs, segment IDs, and phone numbers.
 
           extra_headers: Send extra headers
 
@@ -188,14 +176,13 @@ class AsyncBlastsResource(AsyncAPIResource):
                     "name": name,
                     "segments": segments,
                     "send_at": send_at,
-                    "to": to,
                 },
                 blast_create_params.BlastCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Blast,
+            cast_to=BlastCreateResponse,
         )
 
 
