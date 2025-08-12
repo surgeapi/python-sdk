@@ -20,9 +20,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestVerifications:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(
-        reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
-    )
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
     def test_method_create(self, client: Surge) -> None:
         verification = client.verifications.create(
@@ -30,9 +28,7 @@ class TestVerifications:
         )
         assert_matches_type(Verification, verification, path=["response"])
 
-    @pytest.mark.skip(
-        reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
-    )
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
     def test_raw_response_create(self, client: Surge) -> None:
         response = client.verifications.with_raw_response.create(
@@ -44,9 +40,7 @@ class TestVerifications:
         verification = response.parse()
         assert_matches_type(Verification, verification, path=["response"])
 
-    @pytest.mark.skip(
-        reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
-    )
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
     def test_streaming_response_create(self, client: Surge) -> None:
         with client.verifications.with_streaming_response.create(
@@ -60,9 +54,7 @@ class TestVerifications:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(
-        reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
-    )
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
     def test_method_check(self, client: Surge) -> None:
         verification = client.verifications.check(
@@ -71,9 +63,7 @@ class TestVerifications:
         )
         assert_matches_type(VerificationCheckResponse, verification, path=["response"])
 
-    @pytest.mark.skip(
-        reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
-    )
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
     def test_raw_response_check(self, client: Surge) -> None:
         response = client.verifications.with_raw_response.check(
@@ -86,9 +76,7 @@ class TestVerifications:
         verification = response.parse()
         assert_matches_type(VerificationCheckResponse, verification, path=["response"])
 
-    @pytest.mark.skip(
-        reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
-    )
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
     def test_streaming_response_check(self, client: Surge) -> None:
         with client.verifications.with_streaming_response.check(
@@ -103,9 +91,7 @@ class TestVerifications:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(
-        reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
-    )
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
     def test_path_params_check(self, client: Surge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -120,9 +106,7 @@ class TestAsyncVerifications:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(
-        reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
-    )
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
     async def test_method_create(self, async_client: AsyncSurge) -> None:
         verification = await async_client.verifications.create(
@@ -130,9 +114,7 @@ class TestAsyncVerifications:
         )
         assert_matches_type(Verification, verification, path=["response"])
 
-    @pytest.mark.skip(
-        reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
-    )
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncSurge) -> None:
         response = await async_client.verifications.with_raw_response.create(
@@ -144,9 +126,7 @@ class TestAsyncVerifications:
         verification = await response.parse()
         assert_matches_type(Verification, verification, path=["response"])
 
-    @pytest.mark.skip(
-        reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
-    )
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncSurge) -> None:
         async with async_client.verifications.with_streaming_response.create(
@@ -160,9 +140,7 @@ class TestAsyncVerifications:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(
-        reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
-    )
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
     async def test_method_check(self, async_client: AsyncSurge) -> None:
         verification = await async_client.verifications.check(
@@ -171,9 +149,7 @@ class TestAsyncVerifications:
         )
         assert_matches_type(VerificationCheckResponse, verification, path=["response"])
 
-    @pytest.mark.skip(
-        reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
-    )
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
     async def test_raw_response_check(self, async_client: AsyncSurge) -> None:
         response = await async_client.verifications.with_raw_response.check(
@@ -186,9 +162,7 @@ class TestAsyncVerifications:
         verification = await response.parse()
         assert_matches_type(VerificationCheckResponse, verification, path=["response"])
 
-    @pytest.mark.skip(
-        reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
-    )
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
     async def test_streaming_response_check(self, async_client: AsyncSurge) -> None:
         async with async_client.verifications.with_streaming_response.check(
@@ -203,9 +177,7 @@ class TestAsyncVerifications:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(
-        reason="currently no good way to test endpoints defining callbacks, Prism mock server will fail trying to reach the provided callback url"
-    )
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
     async def test_path_params_check(self, async_client: AsyncSurge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
