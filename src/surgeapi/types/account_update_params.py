@@ -3,15 +3,21 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict
 
 from .organization_params import OrganizationParams
 
-__all__ = ["AccountCreateParams"]
+__all__ = ["AccountUpdateParams"]
 
 
-class AccountCreateParams(TypedDict, total=False):
-    name: Required[str]
+class AccountUpdateParams(TypedDict, total=False):
+    brand_name: str
+    """The name by which the people this account communicates with know it.
+
+    If not provided, this will match the name field.
+    """
+
+    name: str
     """
     The name of the account that will be visible for your internal organizational
     purposes. This will also be the default public-facing brand name unless you also
@@ -20,21 +26,11 @@ class AccountCreateParams(TypedDict, total=False):
     anything else that may help you.
     """
 
-    brand_name: Optional[str]
-    """The name by which the people this account communicates with know it.
-
-    If not provided, this will match the name field.
-    """
-
     organization: OrganizationParams
     """
     Parameters describing the legal entity on whose behalf the account will be
     operated.
     """
 
-    time_zone: str
-    """This is the time zone in which the account is headquartered.
-
-    This time zone may be used for compliance with TCPA restrictions on when
-    messages may be sent.
-    """
+    time_zone: Optional[str]
+    """The time zone for the account"""

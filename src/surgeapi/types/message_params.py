@@ -11,11 +11,22 @@ from .shared_params.contact_params import ContactParams
 from .shared_params.attachment_params import AttachmentParams
 
 __all__ = [
-    "MessageCreateParams",
+    "MessageParams",
     "MessageParamsWithConversation",
     "MessageParamsWithConversationConversation",
     "SimpleMessageParams",
 ]
+
+
+class MessageParamsWithConversationConversation(TypedDict, total=False):
+    contact: Required[ContactParams]
+    """Parameters for creating a contact"""
+
+    phone_number: str
+    """The phone number from which to send the message.
+
+    This can be either the phone number in E.164 format or a Surge phone number id.
+    """
 
 
 class MessageParamsWithConversation(TypedDict, total=False):
@@ -37,18 +48,16 @@ class MessageParamsWithConversation(TypedDict, total=False):
     """
 
 
-class MessageParamsWithConversationConversation(TypedDict, total=False):
-    contact: Required[ContactParams]
-    """Parameters for creating a contact"""
-
-    phone_number: str
-    """The phone number from which to send the message.
-
-    This can be either the phone number in E.164 format or a Surge phone number id.
-    """
+_SimpleMessageParamsReservedKeywords = TypedDict(
+    "_SimpleMessageParamsReservedKeywords",
+    {
+        "from": str,
+    },
+    total=False,
+)
 
 
-class SimpleMessageParams(TypedDict, total=False):
+class SimpleMessageParams(_SimpleMessageParamsReservedKeywords, total=False):
     to: Required[str]
     """The recipient's phone number in E.164 format.
 
@@ -60,13 +69,6 @@ class SimpleMessageParams(TypedDict, total=False):
     body: str
     """The message body."""
 
-    from_: Annotated[str, PropertyInfo(alias="from")]
-    """The sender's phone number in E.164 format or phone number ID.
-
-    If omitted, uses the account's default phone number. Cannot be used together
-    with 'conversation'.
-    """
-
     send_at: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """
     An optional datetime for scheduling message up to a couple of months in the
@@ -74,4 +76,4 @@ class SimpleMessageParams(TypedDict, total=False):
     """
 
 
-MessageCreateParams: TypeAlias = Union[MessageParamsWithConversation, SimpleMessageParams]
+MessageParams: TypeAlias = Union[MessageParamsWithConversation, SimpleMessageParams]

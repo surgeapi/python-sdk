@@ -153,13 +153,12 @@ client = Surge()
 message = client.messages.create(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
     conversation={
-        "id": "cnv_01j9e0dgmdfkj86c877ws0znae",
         "contact": {
-            "id": "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf",
+            "phone_number": "+18015551234",
             "first_name": "Dominic",
             "last_name": "Toretto",
-            "phone_number": "+18015551234",
         },
+        "phone_number": "+18015556789",
     },
 )
 print(message.conversation)

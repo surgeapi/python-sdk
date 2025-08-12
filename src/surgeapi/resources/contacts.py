@@ -6,7 +6,7 @@ from typing import Dict
 
 import httpx
 
-from ..types import contact_create_params
+from ..types import contact_create_params, contact_update_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -18,8 +18,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.contact_create_response import ContactCreateResponse
-from ..types.contact_retrieve_response import ContactRetrieveResponse
+from ..types.shared.contact import Contact
 
 __all__ = ["ContactsResource", "AsyncContactsResource"]
 
@@ -52,14 +51,14 @@ class ContactsResource(SyncAPIResource):
         email: str | NotGiven = NOT_GIVEN,
         first_name: str | NotGiven = NOT_GIVEN,
         last_name: str | NotGiven = NOT_GIVEN,
-        metadata: Dict[str, object] | NotGiven = NOT_GIVEN,
+        metadata: Dict[str, str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ContactCreateResponse:
+    ) -> Contact:
         """
         Creates a new Contact object.
 
@@ -72,7 +71,7 @@ class ContactsResource(SyncAPIResource):
 
           last_name: The contact's last name.
 
-          metadata: Additional metadata about the contact.
+          metadata: Set of key-value pairs that will be stored with the object.
 
           extra_headers: Send extra headers
 
@@ -99,7 +98,7 @@ class ContactsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ContactCreateResponse,
+            cast_to=Contact,
         )
 
     def retrieve(
@@ -112,7 +111,7 @@ class ContactsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ContactRetrieveResponse:
+    ) -> Contact:
         """
         Retrieves a Contact object.
 
@@ -132,7 +131,66 @@ class ContactsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ContactRetrieveResponse,
+            cast_to=Contact,
+        )
+
+    def update(
+        self,
+        id: str,
+        *,
+        phone_number: str,
+        email: str | NotGiven = NOT_GIVEN,
+        first_name: str | NotGiven = NOT_GIVEN,
+        last_name: str | NotGiven = NOT_GIVEN,
+        metadata: Dict[str, str] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Contact:
+        """
+        Updates the specified contact by setting the values of the parameters passed.
+        Any parameters not provided will be left unchanged.
+
+        Args:
+          phone_number: The contact's phone number in E.164 format.
+
+          email: The contact's email address.
+
+          first_name: The contact's first name.
+
+          last_name: The contact's last name.
+
+          metadata: Set of key-value pairs that will be stored with the object.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._patch(
+            f"/contacts/{id}",
+            body=maybe_transform(
+                {
+                    "phone_number": phone_number,
+                    "email": email,
+                    "first_name": first_name,
+                    "last_name": last_name,
+                    "metadata": metadata,
+                },
+                contact_update_params.ContactUpdateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Contact,
         )
 
 
@@ -164,14 +222,14 @@ class AsyncContactsResource(AsyncAPIResource):
         email: str | NotGiven = NOT_GIVEN,
         first_name: str | NotGiven = NOT_GIVEN,
         last_name: str | NotGiven = NOT_GIVEN,
-        metadata: Dict[str, object] | NotGiven = NOT_GIVEN,
+        metadata: Dict[str, str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ContactCreateResponse:
+    ) -> Contact:
         """
         Creates a new Contact object.
 
@@ -184,7 +242,7 @@ class AsyncContactsResource(AsyncAPIResource):
 
           last_name: The contact's last name.
 
-          metadata: Additional metadata about the contact.
+          metadata: Set of key-value pairs that will be stored with the object.
 
           extra_headers: Send extra headers
 
@@ -211,7 +269,7 @@ class AsyncContactsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ContactCreateResponse,
+            cast_to=Contact,
         )
 
     async def retrieve(
@@ -224,7 +282,7 @@ class AsyncContactsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ContactRetrieveResponse:
+    ) -> Contact:
         """
         Retrieves a Contact object.
 
@@ -244,7 +302,66 @@ class AsyncContactsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ContactRetrieveResponse,
+            cast_to=Contact,
+        )
+
+    async def update(
+        self,
+        id: str,
+        *,
+        phone_number: str,
+        email: str | NotGiven = NOT_GIVEN,
+        first_name: str | NotGiven = NOT_GIVEN,
+        last_name: str | NotGiven = NOT_GIVEN,
+        metadata: Dict[str, str] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Contact:
+        """
+        Updates the specified contact by setting the values of the parameters passed.
+        Any parameters not provided will be left unchanged.
+
+        Args:
+          phone_number: The contact's phone number in E.164 format.
+
+          email: The contact's email address.
+
+          first_name: The contact's first name.
+
+          last_name: The contact's last name.
+
+          metadata: Set of key-value pairs that will be stored with the object.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._patch(
+            f"/contacts/{id}",
+            body=await async_maybe_transform(
+                {
+                    "phone_number": phone_number,
+                    "email": email,
+                    "first_name": first_name,
+                    "last_name": last_name,
+                    "metadata": metadata,
+                },
+                contact_update_params.ContactUpdateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Contact,
         )
 
 
@@ -258,6 +375,9 @@ class ContactsResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             contacts.retrieve,
         )
+        self.update = to_raw_response_wrapper(
+            contacts.update,
+        )
 
 
 class AsyncContactsResourceWithRawResponse:
@@ -269,6 +389,9 @@ class AsyncContactsResourceWithRawResponse:
         )
         self.retrieve = async_to_raw_response_wrapper(
             contacts.retrieve,
+        )
+        self.update = async_to_raw_response_wrapper(
+            contacts.update,
         )
 
 
@@ -282,6 +405,9 @@ class ContactsResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             contacts.retrieve,
         )
+        self.update = to_streamed_response_wrapper(
+            contacts.update,
+        )
 
 
 class AsyncContactsResourceWithStreamingResponse:
@@ -293,4 +419,7 @@ class AsyncContactsResourceWithStreamingResponse:
         )
         self.retrieve = async_to_streamed_response_wrapper(
             contacts.retrieve,
+        )
+        self.update = async_to_streamed_response_wrapper(
+            contacts.update,
         )

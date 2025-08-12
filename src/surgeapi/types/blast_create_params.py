@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable
-from typing_extensions import TypedDict
+from typing import List, Union, Iterable
+from datetime import datetime
+from typing_extensions import Annotated, TypedDict
 
+from .._utils import PropertyInfo
 from .shared_params.attachment_params import AttachmentParams
 
 __all__ = ["BlastCreateParams"]
@@ -17,13 +19,19 @@ class BlastCreateParams(TypedDict, total=False):
     """The message body."""
 
     contacts: List[str]
-    """List of contact IDs to send the blast to."""
+    """Deprecated. Use `to` instead."""
 
     name: str
     """Optional name for the blast."""
 
     segments: List[str]
-    """List of segment IDs to send the blast to."""
+    """Deprecated. Use `to` instead."""
 
-    send_at: str
+    send_at: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """When to send the blast. If not provided, sends immediately."""
+
+    to: List[str]
+    """List of recipients to whom the blast should be sent.
+
+    This can be a combination of contact IDs, segment IDs, and phone numbers.
+    """

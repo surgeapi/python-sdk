@@ -5,21 +5,18 @@ from __future__ import annotations
 from typing import Dict
 from typing_extensions import Required, TypedDict
 
-__all__ = ["ContactCreateParams"]
+__all__ = ["UserUpdateParams"]
 
 
-class ContactCreateParams(TypedDict, total=False):
-    phone_number: Required[str]
-    """The contact's phone number in E.164 format."""
-
-    email: str
-    """The contact's email address."""
-
-    first_name: str
-    """The contact's first name."""
+class UserUpdateParams(TypedDict, total=False):
+    first_name: Required[str]
+    """The user's first name."""
 
     last_name: str
-    """The contact's last name."""
+    """The user's last name."""
 
     metadata: Dict[str, str]
     """Set of key-value pairs that will be stored with the object."""
+
+    photo_url: str
+    """URL of a photo to be used as the user's avatar."""

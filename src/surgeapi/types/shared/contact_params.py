@@ -1,25 +1,24 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from __future__ import annotations
+from typing import Dict, Optional
 
-from typing import Dict
-from typing_extensions import Required, TypedDict
+from ..._models import BaseModel
 
-__all__ = ["ContactCreateParams"]
+__all__ = ["ContactParams"]
 
 
-class ContactCreateParams(TypedDict, total=False):
-    phone_number: Required[str]
+class ContactParams(BaseModel):
+    phone_number: str
     """The contact's phone number in E.164 format."""
 
-    email: str
+    email: Optional[str] = None
     """The contact's email address."""
 
-    first_name: str
+    first_name: Optional[str] = None
     """The contact's first name."""
 
-    last_name: str
+    last_name: Optional[str] = None
     """The contact's last name."""
 
-    metadata: Dict[str, str]
+    metadata: Optional[Dict[str, str]] = None
     """Set of key-value pairs that will be stored with the object."""

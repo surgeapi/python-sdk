@@ -1,10 +1,11 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
+from datetime import datetime
 
 from .._models import BaseModel
 
-__all__ = ["BlastCreateResponse", "Attachment"]
+__all__ = ["Blast", "Attachment"]
 
 
 class Attachment(BaseModel):
@@ -12,7 +13,7 @@ class Attachment(BaseModel):
     """The URL of the attachment."""
 
 
-class BlastCreateResponse(BaseModel):
+class Blast(BaseModel):
     id: Optional[str] = None
     """Unique identifier for the object."""
 
@@ -24,5 +25,5 @@ class BlastCreateResponse(BaseModel):
     name: Optional[str] = None
     """Optional name for the blast."""
 
-    send_at: Optional[str] = None
+    send_at: Optional[datetime] = None
     """When the blast will be or was sent."""

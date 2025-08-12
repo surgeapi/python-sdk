@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import users, blasts, accounts, contacts, messages, verifications
+from .resources import users, blasts, accounts, contacts, messages, campaigns, phone_numbers, verifications
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import SurgeError, APIStatusError
 from ._base_client import (
@@ -36,8 +36,10 @@ __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Surge", "A
 class Surge(SyncAPIClient):
     accounts: accounts.AccountsResource
     blasts: blasts.BlastsResource
+    campaigns: campaigns.CampaignsResource
     contacts: contacts.ContactsResource
     messages: messages.MessagesResource
+    phone_numbers: phone_numbers.PhoneNumbersResource
     users: users.UsersResource
     verifications: verifications.VerificationsResource
     with_raw_response: SurgeWithRawResponse
@@ -99,8 +101,10 @@ class Surge(SyncAPIClient):
 
         self.accounts = accounts.AccountsResource(self)
         self.blasts = blasts.BlastsResource(self)
+        self.campaigns = campaigns.CampaignsResource(self)
         self.contacts = contacts.ContactsResource(self)
         self.messages = messages.MessagesResource(self)
+        self.phone_numbers = phone_numbers.PhoneNumbersResource(self)
         self.users = users.UsersResource(self)
         self.verifications = verifications.VerificationsResource(self)
         self.with_raw_response = SurgeWithRawResponse(self)
@@ -214,8 +218,10 @@ class Surge(SyncAPIClient):
 class AsyncSurge(AsyncAPIClient):
     accounts: accounts.AsyncAccountsResource
     blasts: blasts.AsyncBlastsResource
+    campaigns: campaigns.AsyncCampaignsResource
     contacts: contacts.AsyncContactsResource
     messages: messages.AsyncMessagesResource
+    phone_numbers: phone_numbers.AsyncPhoneNumbersResource
     users: users.AsyncUsersResource
     verifications: verifications.AsyncVerificationsResource
     with_raw_response: AsyncSurgeWithRawResponse
@@ -277,8 +283,10 @@ class AsyncSurge(AsyncAPIClient):
 
         self.accounts = accounts.AsyncAccountsResource(self)
         self.blasts = blasts.AsyncBlastsResource(self)
+        self.campaigns = campaigns.AsyncCampaignsResource(self)
         self.contacts = contacts.AsyncContactsResource(self)
         self.messages = messages.AsyncMessagesResource(self)
+        self.phone_numbers = phone_numbers.AsyncPhoneNumbersResource(self)
         self.users = users.AsyncUsersResource(self)
         self.verifications = verifications.AsyncVerificationsResource(self)
         self.with_raw_response = AsyncSurgeWithRawResponse(self)
@@ -393,8 +401,10 @@ class SurgeWithRawResponse:
     def __init__(self, client: Surge) -> None:
         self.accounts = accounts.AccountsResourceWithRawResponse(client.accounts)
         self.blasts = blasts.BlastsResourceWithRawResponse(client.blasts)
+        self.campaigns = campaigns.CampaignsResourceWithRawResponse(client.campaigns)
         self.contacts = contacts.ContactsResourceWithRawResponse(client.contacts)
         self.messages = messages.MessagesResourceWithRawResponse(client.messages)
+        self.phone_numbers = phone_numbers.PhoneNumbersResourceWithRawResponse(client.phone_numbers)
         self.users = users.UsersResourceWithRawResponse(client.users)
         self.verifications = verifications.VerificationsResourceWithRawResponse(client.verifications)
 
@@ -403,8 +413,10 @@ class AsyncSurgeWithRawResponse:
     def __init__(self, client: AsyncSurge) -> None:
         self.accounts = accounts.AsyncAccountsResourceWithRawResponse(client.accounts)
         self.blasts = blasts.AsyncBlastsResourceWithRawResponse(client.blasts)
+        self.campaigns = campaigns.AsyncCampaignsResourceWithRawResponse(client.campaigns)
         self.contacts = contacts.AsyncContactsResourceWithRawResponse(client.contacts)
         self.messages = messages.AsyncMessagesResourceWithRawResponse(client.messages)
+        self.phone_numbers = phone_numbers.AsyncPhoneNumbersResourceWithRawResponse(client.phone_numbers)
         self.users = users.AsyncUsersResourceWithRawResponse(client.users)
         self.verifications = verifications.AsyncVerificationsResourceWithRawResponse(client.verifications)
 
@@ -413,8 +425,10 @@ class SurgeWithStreamedResponse:
     def __init__(self, client: Surge) -> None:
         self.accounts = accounts.AccountsResourceWithStreamingResponse(client.accounts)
         self.blasts = blasts.BlastsResourceWithStreamingResponse(client.blasts)
+        self.campaigns = campaigns.CampaignsResourceWithStreamingResponse(client.campaigns)
         self.contacts = contacts.ContactsResourceWithStreamingResponse(client.contacts)
         self.messages = messages.MessagesResourceWithStreamingResponse(client.messages)
+        self.phone_numbers = phone_numbers.PhoneNumbersResourceWithStreamingResponse(client.phone_numbers)
         self.users = users.UsersResourceWithStreamingResponse(client.users)
         self.verifications = verifications.VerificationsResourceWithStreamingResponse(client.verifications)
 
@@ -423,8 +437,10 @@ class AsyncSurgeWithStreamedResponse:
     def __init__(self, client: AsyncSurge) -> None:
         self.accounts = accounts.AsyncAccountsResourceWithStreamingResponse(client.accounts)
         self.blasts = blasts.AsyncBlastsResourceWithStreamingResponse(client.blasts)
+        self.campaigns = campaigns.AsyncCampaignsResourceWithStreamingResponse(client.campaigns)
         self.contacts = contacts.AsyncContactsResourceWithStreamingResponse(client.contacts)
         self.messages = messages.AsyncMessagesResourceWithStreamingResponse(client.messages)
+        self.phone_numbers = phone_numbers.AsyncPhoneNumbersResourceWithStreamingResponse(client.phone_numbers)
         self.users = users.AsyncUsersResourceWithStreamingResponse(client.users)
         self.verifications = verifications.AsyncVerificationsResourceWithStreamingResponse(client.verifications)
 

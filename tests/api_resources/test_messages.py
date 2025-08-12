@@ -9,7 +9,8 @@ import pytest
 
 from surgeapi import Surge, AsyncSurge
 from tests.utils import assert_matches_type
-from surgeapi.types import MessageCreateResponse
+from surgeapi.types import Message
+from surgeapi._utils import parse_datetime
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,67 +20,128 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
-    def test_method_create(self, client: Surge) -> None:
+    def test_method_create_overload_1(self, client: Surge) -> None:
         message = client.messages.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-            conversation={},
+            conversation={"contact": {"phone_number": "+18015551234"}},
         )
-        assert_matches_type(MessageCreateResponse, message, path=["response"])
+        assert_matches_type(Message, message, path=["response"])
 
     @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
-    def test_method_create_with_all_params(self, client: Surge) -> None:
+    def test_method_create_with_all_params_overload_1(self, client: Surge) -> None:
         message = client.messages.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             conversation={
-                "id": "cnv_01j9e0dgmdfkj86c877ws0znae",
                 "contact": {
-                    "id": "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf",
+                    "phone_number": "+18015551234",
+                    "email": "dev@stainless.com",
                     "first_name": "Dominic",
                     "last_name": "Toretto",
-                    "phone_number": "+18015551234",
+                    "metadata": {"foo": "string"},
                 },
+                "phone_number": "+18015556789",
             },
             attachments=[{"url": "https://toretto.family/coronas.gif"}],
-            body="Thought you could leave without saying goodbye?",
+            body="body",
+            send_at=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
-        assert_matches_type(MessageCreateResponse, message, path=["response"])
+        assert_matches_type(Message, message, path=["response"])
 
     @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
-    def test_raw_response_create(self, client: Surge) -> None:
+    def test_raw_response_create_overload_1(self, client: Surge) -> None:
         response = client.messages.with_raw_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-            conversation={},
+            conversation={"contact": {"phone_number": "+18015551234"}},
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         message = response.parse()
-        assert_matches_type(MessageCreateResponse, message, path=["response"])
+        assert_matches_type(Message, message, path=["response"])
 
     @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
-    def test_streaming_response_create(self, client: Surge) -> None:
+    def test_streaming_response_create_overload_1(self, client: Surge) -> None:
         with client.messages.with_streaming_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-            conversation={},
+            conversation={"contact": {"phone_number": "+18015551234"}},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             message = response.parse()
-            assert_matches_type(MessageCreateResponse, message, path=["response"])
+            assert_matches_type(Message, message, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
-    def test_path_params_create(self, client: Surge) -> None:
+    def test_path_params_create_overload_1(self, client: Surge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             client.messages.with_raw_response.create(
                 account_id="",
-                conversation={},
+                conversation={"contact": {"phone_number": "+18015551234"}},
+            )
+
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @parametrize
+    def test_method_create_overload_2(self, client: Surge) -> None:
+        message = client.messages.create(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            to="+18015551234",
+        )
+        assert_matches_type(Message, message, path=["response"])
+
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @parametrize
+    def test_method_create_with_all_params_overload_2(self, client: Surge) -> None:
+        message = client.messages.create(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            to="+18015551234",
+            attachments=[{"url": "https://toretto.family/coronas.gif"}],
+            body="body",
+            from_="+18015552345",
+            send_at=parse_datetime("2019-12-27T18:11:19.117Z"),
+        )
+        assert_matches_type(Message, message, path=["response"])
+
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @parametrize
+    def test_raw_response_create_overload_2(self, client: Surge) -> None:
+        response = client.messages.with_raw_response.create(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            to="+18015551234",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        message = response.parse()
+        assert_matches_type(Message, message, path=["response"])
+
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @parametrize
+    def test_streaming_response_create_overload_2(self, client: Surge) -> None:
+        with client.messages.with_streaming_response.create(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            to="+18015551234",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            message = response.parse()
+            assert_matches_type(Message, message, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @parametrize
+    def test_path_params_create_overload_2(self, client: Surge) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
+            client.messages.with_raw_response.create(
+                account_id="",
+                to="+18015551234",
             )
 
 
@@ -90,65 +152,126 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
-    async def test_method_create(self, async_client: AsyncSurge) -> None:
+    async def test_method_create_overload_1(self, async_client: AsyncSurge) -> None:
         message = await async_client.messages.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-            conversation={},
+            conversation={"contact": {"phone_number": "+18015551234"}},
         )
-        assert_matches_type(MessageCreateResponse, message, path=["response"])
+        assert_matches_type(Message, message, path=["response"])
 
     @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncSurge) -> None:
+    async def test_method_create_with_all_params_overload_1(self, async_client: AsyncSurge) -> None:
         message = await async_client.messages.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             conversation={
-                "id": "cnv_01j9e0dgmdfkj86c877ws0znae",
                 "contact": {
-                    "id": "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf",
+                    "phone_number": "+18015551234",
+                    "email": "dev@stainless.com",
                     "first_name": "Dominic",
                     "last_name": "Toretto",
-                    "phone_number": "+18015551234",
+                    "metadata": {"foo": "string"},
                 },
+                "phone_number": "+18015556789",
             },
             attachments=[{"url": "https://toretto.family/coronas.gif"}],
-            body="Thought you could leave without saying goodbye?",
+            body="body",
+            send_at=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
-        assert_matches_type(MessageCreateResponse, message, path=["response"])
+        assert_matches_type(Message, message, path=["response"])
 
     @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
-    async def test_raw_response_create(self, async_client: AsyncSurge) -> None:
+    async def test_raw_response_create_overload_1(self, async_client: AsyncSurge) -> None:
         response = await async_client.messages.with_raw_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-            conversation={},
+            conversation={"contact": {"phone_number": "+18015551234"}},
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         message = await response.parse()
-        assert_matches_type(MessageCreateResponse, message, path=["response"])
+        assert_matches_type(Message, message, path=["response"])
 
     @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncSurge) -> None:
+    async def test_streaming_response_create_overload_1(self, async_client: AsyncSurge) -> None:
         async with async_client.messages.with_streaming_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-            conversation={},
+            conversation={"contact": {"phone_number": "+18015551234"}},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             message = await response.parse()
-            assert_matches_type(MessageCreateResponse, message, path=["response"])
+            assert_matches_type(Message, message, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
     @parametrize
-    async def test_path_params_create(self, async_client: AsyncSurge) -> None:
+    async def test_path_params_create_overload_1(self, async_client: AsyncSurge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             await async_client.messages.with_raw_response.create(
                 account_id="",
-                conversation={},
+                conversation={"contact": {"phone_number": "+18015551234"}},
+            )
+
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @parametrize
+    async def test_method_create_overload_2(self, async_client: AsyncSurge) -> None:
+        message = await async_client.messages.create(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            to="+18015551234",
+        )
+        assert_matches_type(Message, message, path=["response"])
+
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @parametrize
+    async def test_method_create_with_all_params_overload_2(self, async_client: AsyncSurge) -> None:
+        message = await async_client.messages.create(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            to="+18015551234",
+            attachments=[{"url": "https://toretto.family/coronas.gif"}],
+            body="body",
+            from_="+18015552345",
+            send_at=parse_datetime("2019-12-27T18:11:19.117Z"),
+        )
+        assert_matches_type(Message, message, path=["response"])
+
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @parametrize
+    async def test_raw_response_create_overload_2(self, async_client: AsyncSurge) -> None:
+        response = await async_client.messages.with_raw_response.create(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            to="+18015551234",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        message = await response.parse()
+        assert_matches_type(Message, message, path=["response"])
+
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @parametrize
+    async def test_streaming_response_create_overload_2(self, async_client: AsyncSurge) -> None:
+        async with async_client.messages.with_streaming_response.create(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            to="+18015551234",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            message = await response.parse()
+            assert_matches_type(Message, message, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @parametrize
+    async def test_path_params_create_overload_2(self, async_client: AsyncSurge) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
+            await async_client.messages.with_raw_response.create(
+                account_id="",
+                to="+18015551234",
             )

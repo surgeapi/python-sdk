@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import Dict
 from typing_extensions import Required, TypedDict
 
-__all__ = ["ContactCreateParams"]
+__all__ = ["ContactParams"]
 
 
-class ContactCreateParams(TypedDict, total=False):
+class ContactParams(TypedDict, total=False):
     phone_number: Required[str]
     """The contact's phone number in E.164 format."""
 

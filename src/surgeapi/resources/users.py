@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+from typing import Dict
+
 import httpx
 
-from ..types import user_create_params
+from ..types import user_create_params, user_update_params, user_create_token_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -15,9 +17,9 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from ..types.user import User
 from .._base_client import make_request_options
-from ..types.user_create_response import UserCreateResponse
-from ..types.user_retrieve_response import UserRetrieveResponse
+from ..types.user_token_response import UserTokenResponse
 
 __all__ = ["UsersResource", "AsyncUsersResource"]
 
@@ -48,7 +50,7 @@ class UsersResource(SyncAPIResource):
         *,
         first_name: str,
         last_name: str | NotGiven = NOT_GIVEN,
-        metadata: object | NotGiven = NOT_GIVEN,
+        metadata: Dict[str, str] | NotGiven = NOT_GIVEN,
         photo_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -56,7 +58,7 @@ class UsersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> UserCreateResponse:
+    ) -> User:
         """
         Creates a new User object.
 
@@ -65,7 +67,7 @@ class UsersResource(SyncAPIResource):
 
           last_name: The user's last name.
 
-          metadata: Set of key-value pairs that will be stored with the user.
+          metadata: Set of key-value pairs that will be stored with the object.
 
           photo_url: URL of a photo to be used as the user's avatar.
 
@@ -93,7 +95,7 @@ class UsersResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=UserCreateResponse,
+            cast_to=User,
         )
 
     def retrieve(
@@ -106,7 +108,7 @@ class UsersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> UserRetrieveResponse:
+    ) -> User:
         """
         Retrieves a User object.
 
@@ -126,7 +128,101 @@ class UsersResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=UserRetrieveResponse,
+            cast_to=User,
+        )
+
+    def update(
+        self,
+        id: str,
+        *,
+        first_name: str,
+        last_name: str | NotGiven = NOT_GIVEN,
+        metadata: Dict[str, str] | NotGiven = NOT_GIVEN,
+        photo_url: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> User:
+        """
+        Updates an existing User object.
+
+        Args:
+          first_name: The user's first name.
+
+          last_name: The user's last name.
+
+          metadata: Set of key-value pairs that will be stored with the object.
+
+          photo_url: URL of a photo to be used as the user's avatar.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._patch(
+            f"/users/{id}",
+            body=maybe_transform(
+                {
+                    "first_name": first_name,
+                    "last_name": last_name,
+                    "metadata": metadata,
+                    "photo_url": photo_url,
+                },
+                user_update_params.UserUpdateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=User,
+        )
+
+    def create_token(
+        self,
+        user_id: str,
+        *,
+        duration_seconds: int | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> UserTokenResponse:
+        """
+        Provides a mechanism for having Surge create a signed token for embeds instead
+        of signing with your own signing key.
+
+        Args:
+          duration_seconds: For how many seconds the token should be accepted. Defaults to 15 minutes.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not user_id:
+            raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
+        return self._post(
+            f"/users/{user_id}/tokens",
+            body=maybe_transform(
+                {"duration_seconds": duration_seconds}, user_create_token_params.UserCreateTokenParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=UserTokenResponse,
         )
 
 
@@ -156,7 +252,7 @@ class AsyncUsersResource(AsyncAPIResource):
         *,
         first_name: str,
         last_name: str | NotGiven = NOT_GIVEN,
-        metadata: object | NotGiven = NOT_GIVEN,
+        metadata: Dict[str, str] | NotGiven = NOT_GIVEN,
         photo_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -164,7 +260,7 @@ class AsyncUsersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> UserCreateResponse:
+    ) -> User:
         """
         Creates a new User object.
 
@@ -173,7 +269,7 @@ class AsyncUsersResource(AsyncAPIResource):
 
           last_name: The user's last name.
 
-          metadata: Set of key-value pairs that will be stored with the user.
+          metadata: Set of key-value pairs that will be stored with the object.
 
           photo_url: URL of a photo to be used as the user's avatar.
 
@@ -201,7 +297,7 @@ class AsyncUsersResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=UserCreateResponse,
+            cast_to=User,
         )
 
     async def retrieve(
@@ -214,7 +310,7 @@ class AsyncUsersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> UserRetrieveResponse:
+    ) -> User:
         """
         Retrieves a User object.
 
@@ -234,7 +330,101 @@ class AsyncUsersResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=UserRetrieveResponse,
+            cast_to=User,
+        )
+
+    async def update(
+        self,
+        id: str,
+        *,
+        first_name: str,
+        last_name: str | NotGiven = NOT_GIVEN,
+        metadata: Dict[str, str] | NotGiven = NOT_GIVEN,
+        photo_url: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> User:
+        """
+        Updates an existing User object.
+
+        Args:
+          first_name: The user's first name.
+
+          last_name: The user's last name.
+
+          metadata: Set of key-value pairs that will be stored with the object.
+
+          photo_url: URL of a photo to be used as the user's avatar.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._patch(
+            f"/users/{id}",
+            body=await async_maybe_transform(
+                {
+                    "first_name": first_name,
+                    "last_name": last_name,
+                    "metadata": metadata,
+                    "photo_url": photo_url,
+                },
+                user_update_params.UserUpdateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=User,
+        )
+
+    async def create_token(
+        self,
+        user_id: str,
+        *,
+        duration_seconds: int | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> UserTokenResponse:
+        """
+        Provides a mechanism for having Surge create a signed token for embeds instead
+        of signing with your own signing key.
+
+        Args:
+          duration_seconds: For how many seconds the token should be accepted. Defaults to 15 minutes.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not user_id:
+            raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
+        return await self._post(
+            f"/users/{user_id}/tokens",
+            body=await async_maybe_transform(
+                {"duration_seconds": duration_seconds}, user_create_token_params.UserCreateTokenParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=UserTokenResponse,
         )
 
 
@@ -248,6 +438,12 @@ class UsersResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             users.retrieve,
         )
+        self.update = to_raw_response_wrapper(
+            users.update,
+        )
+        self.create_token = to_raw_response_wrapper(
+            users.create_token,
+        )
 
 
 class AsyncUsersResourceWithRawResponse:
@@ -259,6 +455,12 @@ class AsyncUsersResourceWithRawResponse:
         )
         self.retrieve = async_to_raw_response_wrapper(
             users.retrieve,
+        )
+        self.update = async_to_raw_response_wrapper(
+            users.update,
+        )
+        self.create_token = async_to_raw_response_wrapper(
+            users.create_token,
         )
 
 
@@ -272,6 +474,12 @@ class UsersResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             users.retrieve,
         )
+        self.update = to_streamed_response_wrapper(
+            users.update,
+        )
+        self.create_token = to_streamed_response_wrapper(
+            users.create_token,
+        )
 
 
 class AsyncUsersResourceWithStreamingResponse:
@@ -283,4 +491,10 @@ class AsyncUsersResourceWithStreamingResponse:
         )
         self.retrieve = async_to_streamed_response_wrapper(
             users.retrieve,
+        )
+        self.update = async_to_streamed_response_wrapper(
+            users.update,
+        )
+        self.create_token = async_to_streamed_response_wrapper(
+            users.create_token,
         )
