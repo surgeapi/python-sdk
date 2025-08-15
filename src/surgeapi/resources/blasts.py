@@ -20,7 +20,7 @@ from .._response import (
 )
 from ..types.blast import Blast
 from .._base_client import make_request_options
-from ..types.shared_params.attachment_params import AttachmentParams
+from ..types.attachment_params import AttachmentParams
 
 __all__ = ["BlastsResource", "AsyncBlastsResource"]
 

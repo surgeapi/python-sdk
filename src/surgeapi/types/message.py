@@ -3,8 +3,8 @@
 from typing import List, Optional
 from typing_extensions import Literal
 
+from .contact import Contact
 from .._models import BaseModel
-from .shared.contact import Contact
 
 __all__ = ["Message", "Attachment", "Conversation", "ConversationPhoneNumber"]
 

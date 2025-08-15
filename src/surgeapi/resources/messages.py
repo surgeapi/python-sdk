@@ -21,7 +21,7 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.message import Message
-from ..types.shared_params.attachment_params import AttachmentParams
+from ..types.attachment_params import AttachmentParams
 
 __all__ = ["MessagesResource", "AsyncMessagesResource"]
 

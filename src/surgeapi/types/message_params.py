@@ -7,8 +7,8 @@ from datetime import datetime
 from typing_extensions import Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
-from .shared_params.contact_params import ContactParams
-from .shared_params.attachment_params import AttachmentParams
+from .contact_params import ContactParams
+from .attachment_params import AttachmentParams
 
 __all__ = [
     "MessageParams",

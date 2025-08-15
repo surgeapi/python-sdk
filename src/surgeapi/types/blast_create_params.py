@@ -7,7 +7,7 @@ from datetime import datetime
 from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
-from .shared_params.attachment_params import AttachmentParams
+from .attachment_params import AttachmentParams
 
 __all__ = ["BlastCreateParams"]
 

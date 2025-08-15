@@ -2,12 +2,15 @@
 
 from typing import Dict, Optional
 
-from ..._models import BaseModel
+from .._models import BaseModel
 
-__all__ = ["ContactParams"]
+__all__ = ["Contact"]
 
 
-class ContactParams(BaseModel):
+class Contact(BaseModel):
+    id: str
+    """Unique identifier for the object."""
+
     phone_number: str
     """The contact's phone number in E.164 format."""
 

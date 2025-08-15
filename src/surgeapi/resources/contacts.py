@@ -18,7 +18,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.shared.contact import Contact
+from ..types.contact import Contact
 
 __all__ = ["ContactsResource", "AsyncContactsResource"]
 
