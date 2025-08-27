@@ -47,8 +47,10 @@ class PhoneNumbersResource(SyncAPIResource):
         self,
         account_id: str,
         *,
-        type: Literal["local", "toll_free"],
         area_code: str | NotGiven = NOT_GIVEN,
+        latitude: float | NotGiven = NOT_GIVEN,
+        longitude: float | NotGiven = NOT_GIVEN,
+        type: Literal["local", "toll_free"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -56,13 +58,23 @@ class PhoneNumbersResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> PhoneNumber:
-        """
-        Create a new phone number for the account.
+        """Create a new phone number for the account.
+
+        You can specify search criteria or
+        let the system select a random number.
 
         Args:
-          type: Whether the phone number is local or toll-free
+          area_code: The desired area code for this phone number. If provided without type, the type
+              will be inferred.
 
-          area_code: The desired area code for this phone number.
+          latitude: Latitude to search for nearby phone numbers. Must be used with longitude. If
+              provided without type, type will be inferred as 'local'.
+
+          longitude: Longitude to search for nearby phone numbers. Must be used with latitude. If
+              provided without type, type will be inferred as 'local'.
+
+          type: Whether the phone number is local or toll-free. Can be omitted if area_code or
+              latitude/longitude are provided.
 
           extra_headers: Send extra headers
 
@@ -78,8 +90,10 @@ class PhoneNumbersResource(SyncAPIResource):
             f"/accounts/{account_id}/phone_numbers",
             body=maybe_transform(
                 {
-                    "type": type,
                     "area_code": area_code,
+                    "latitude": latitude,
+                    "longitude": longitude,
+                    "type": type,
                 },
                 phone_number_purchase_params.PhoneNumberPurchaseParams,
             ),
@@ -114,8 +128,10 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
         self,
         account_id: str,
         *,
-        type: Literal["local", "toll_free"],
         area_code: str | NotGiven = NOT_GIVEN,
+        latitude: float | NotGiven = NOT_GIVEN,
+        longitude: float | NotGiven = NOT_GIVEN,
+        type: Literal["local", "toll_free"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -123,13 +139,23 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> PhoneNumber:
-        """
-        Create a new phone number for the account.
+        """Create a new phone number for the account.
+
+        You can specify search criteria or
+        let the system select a random number.
 
         Args:
-          type: Whether the phone number is local or toll-free
+          area_code: The desired area code for this phone number. If provided without type, the type
+              will be inferred.
 
-          area_code: The desired area code for this phone number.
+          latitude: Latitude to search for nearby phone numbers. Must be used with longitude. If
+              provided without type, type will be inferred as 'local'.
+
+          longitude: Longitude to search for nearby phone numbers. Must be used with latitude. If
+              provided without type, type will be inferred as 'local'.
+
+          type: Whether the phone number is local or toll-free. Can be omitted if area_code or
+              latitude/longitude are provided.
 
           extra_headers: Send extra headers
 
@@ -145,8 +171,10 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
             f"/accounts/{account_id}/phone_numbers",
             body=await async_maybe_transform(
                 {
-                    "type": type,
                     "area_code": area_code,
+                    "latitude": latitude,
+                    "longitude": longitude,
+                    "type": type,
                 },
                 phone_number_purchase_params.PhoneNumberPurchaseParams,
             ),
