@@ -5,6 +5,8 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import Literal, Required, TypedDict
 
+from .._types import SequenceNotStr
+
 __all__ = ["CampaignCreateParams"]
 
 
@@ -23,7 +25,7 @@ class CampaignCreateParams(TypedDict, total=False):
     messaging to accomplish that purpose.
     """
 
-    message_samples: Required[List[str]]
+    message_samples: Required[SequenceNotStr[str]]
     """
     An array of 2-5 strings with examples of the messages that will be sent from
     this campaign. Typically the first sample should be a compliance message like

@@ -8,7 +8,7 @@ from typing_extensions import Literal
 import httpx
 
 from ..types import campaign_create_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -50,7 +50,7 @@ class CampaignsResource(SyncAPIResource):
         *,
         consent_flow: str,
         description: str,
-        message_samples: List[str],
+        message_samples: SequenceNotStr[str],
         privacy_policy_url: str,
         use_cases: List[
             Literal[
@@ -220,7 +220,7 @@ class AsyncCampaignsResource(AsyncAPIResource):
         *,
         consent_flow: str,
         description: str,
-        message_samples: List[str],
+        message_samples: SequenceNotStr[str],
         privacy_policy_url: str,
         use_cases: List[
             Literal[
