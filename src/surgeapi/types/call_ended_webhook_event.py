@@ -35,5 +35,8 @@ class CallEndedWebhookEvent(BaseModel):
     data: Data
     """The data associated with the event"""
 
+    timestamp: datetime
+    """The timestamp when this event occurred, in ISO8601 format"""
+
     type: Literal["call.ended"]
     """The type of the event. Always `call.ended` for this event."""
