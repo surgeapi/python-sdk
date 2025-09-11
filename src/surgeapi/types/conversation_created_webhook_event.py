@@ -1,6 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from datetime import datetime
 from typing_extensions import Literal
 
 from .contact import Contact
@@ -27,9 +26,6 @@ class ConversationCreatedWebhookEvent(BaseModel):
 
     data: Data
     """The data associated with the event"""
-
-    timestamp: datetime
-    """The timestamp when this event occurred, in ISO8601 format"""
 
     type: Literal["conversation.created"]
     """The type of the event. Always `conversation.created` for this event."""

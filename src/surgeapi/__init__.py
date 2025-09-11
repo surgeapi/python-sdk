@@ -24,6 +24,7 @@ from ._exceptions import (
     InternalServerError,
     PermissionDeniedError,
     UnprocessableEntityError,
+    APIWebhookValidationError,
     APIResponseValidationError,
 )
 from ._base_client import DefaultHttpxClient, DefaultAioHttpClient, DefaultAsyncHttpxClient
@@ -45,6 +46,7 @@ __all__ = [
     "APITimeoutError",
     "APIConnectionError",
     "APIResponseValidationError",
+    "APIWebhookValidationError",
     "BadRequestError",
     "AuthenticationError",
     "PermissionDeniedError",

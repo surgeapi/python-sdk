@@ -48,11 +48,13 @@ class Surge(SyncAPIClient):
 
     # client options
     api_key: str
+    webhook_signing_secret: str | None
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
+        webhook_signing_secret: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -74,7 +76,9 @@ class Surge(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous Surge client instance.
 
-        This automatically infers the `api_key` argument from the `SURGE_API_KEY` environment variable if it is not provided.
+        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
+        - `api_key` from `SURGE_API_KEY`
+        - `webhook_signing_secret` from `SURGE_WEBHOOK_SIGNING_SECRET`
         """
         if api_key is None:
             api_key = os.environ.get("SURGE_API_KEY")
@@ -83,6 +87,10 @@ class Surge(SyncAPIClient):
                 "The api_key client option must be set either by passing api_key to the client or by setting the SURGE_API_KEY environment variable"
             )
         self.api_key = api_key
+
+        if webhook_signing_secret is None:
+            webhook_signing_secret = os.environ.get("SURGE_WEBHOOK_SIGNING_SECRET")
+        self.webhook_signing_secret = webhook_signing_secret
 
         if base_url is None:
             base_url = os.environ.get("SURGE_BASE_URL")
@@ -136,6 +144,7 @@ class Surge(SyncAPIClient):
         self,
         *,
         api_key: str | None = None,
+        webhook_signing_secret: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.Client | None = None,
@@ -170,6 +179,7 @@ class Surge(SyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             api_key=api_key or self.api_key,
+            webhook_signing_secret=webhook_signing_secret or self.webhook_signing_secret,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -232,11 +242,13 @@ class AsyncSurge(AsyncAPIClient):
 
     # client options
     api_key: str
+    webhook_signing_secret: str | None
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
+        webhook_signing_secret: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -258,7 +270,9 @@ class AsyncSurge(AsyncAPIClient):
     ) -> None:
         """Construct a new async AsyncSurge client instance.
 
-        This automatically infers the `api_key` argument from the `SURGE_API_KEY` environment variable if it is not provided.
+        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
+        - `api_key` from `SURGE_API_KEY`
+        - `webhook_signing_secret` from `SURGE_WEBHOOK_SIGNING_SECRET`
         """
         if api_key is None:
             api_key = os.environ.get("SURGE_API_KEY")
@@ -267,6 +281,10 @@ class AsyncSurge(AsyncAPIClient):
                 "The api_key client option must be set either by passing api_key to the client or by setting the SURGE_API_KEY environment variable"
             )
         self.api_key = api_key
+
+        if webhook_signing_secret is None:
+            webhook_signing_secret = os.environ.get("SURGE_WEBHOOK_SIGNING_SECRET")
+        self.webhook_signing_secret = webhook_signing_secret
 
         if base_url is None:
             base_url = os.environ.get("SURGE_BASE_URL")
@@ -320,6 +338,7 @@ class AsyncSurge(AsyncAPIClient):
         self,
         *,
         api_key: str | None = None,
+        webhook_signing_secret: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.AsyncClient | None = None,
@@ -354,6 +373,7 @@ class AsyncSurge(AsyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             api_key=api_key or self.api_key,
+            webhook_signing_secret=webhook_signing_secret or self.webhook_signing_secret,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
