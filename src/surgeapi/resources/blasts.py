@@ -47,7 +47,7 @@ class BlastsResource(SyncAPIResource):
 
     def create(
         self,
-        account_id: object,
+        account_id: str,
         *,
         attachments: Iterable[AttachmentParams] | NotGiven = NOT_GIVEN,
         body: str | NotGiven = NOT_GIVEN,
@@ -63,14 +63,15 @@ class BlastsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Blast:
-        """Sends a Blast.
+        """
+        Sends a Blast.
 
         Args:
+          account_id: The account for which the blast should be sent.
+
           body: The message body.
 
-          contacts: Deprecated.
-
-        Use `to` instead.
+          contacts: Deprecated. Use `to` instead.
 
           name: Optional name for the blast.
 
@@ -89,6 +90,8 @@ class BlastsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._post(
             f"/accounts/{account_id}/blasts",
             body=maybe_transform(
@@ -132,7 +135,7 @@ class AsyncBlastsResource(AsyncAPIResource):
 
     async def create(
         self,
-        account_id: object,
+        account_id: str,
         *,
         attachments: Iterable[AttachmentParams] | NotGiven = NOT_GIVEN,
         body: str | NotGiven = NOT_GIVEN,
@@ -148,14 +151,15 @@ class AsyncBlastsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Blast:
-        """Sends a Blast.
+        """
+        Sends a Blast.
 
         Args:
+          account_id: The account for which the blast should be sent.
+
           body: The message body.
 
-          contacts: Deprecated.
-
-        Use `to` instead.
+          contacts: Deprecated. Use `to` instead.
 
           name: Optional name for the blast.
 
@@ -174,6 +178,8 @@ class AsyncBlastsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._post(
             f"/accounts/{account_id}/blasts",
             body=await async_maybe_transform(

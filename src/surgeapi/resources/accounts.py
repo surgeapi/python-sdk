@@ -168,7 +168,7 @@ class AccountsResource(SyncAPIResource):
 
     def retrieve_status(
         self,
-        account_id: object,
+        account_id: str,
         *,
         capabilities: List[Literal["local_messaging"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -190,6 +190,8 @@ class AccountsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._get(
             f"/accounts/{account_id}/status",
             options=make_request_options(
@@ -347,7 +349,7 @@ class AsyncAccountsResource(AsyncAPIResource):
 
     async def retrieve_status(
         self,
-        account_id: object,
+        account_id: str,
         *,
         capabilities: List[Literal["local_messaging"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -369,6 +371,8 @@ class AsyncAccountsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._get(
             f"/accounts/{account_id}/status",
             options=make_request_options(
