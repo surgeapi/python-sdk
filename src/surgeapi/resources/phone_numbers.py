@@ -64,6 +64,8 @@ class PhoneNumbersResource(SyncAPIResource):
         let the system select a random number.
 
         Args:
+          account_id: The account for which the phone number should be created.
+
           area_code: The desired area code for this phone number. If provided without type, the type
               will be inferred.
 
@@ -145,6 +147,8 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
         let the system select a random number.
 
         Args:
+          account_id: The account for which the phone number should be created.
+
           area_code: The desired area code for this phone number. If provided without type, the type
               will be inferred.
 

@@ -63,6 +63,8 @@ class ContactsResource(SyncAPIResource):
         Creates a new Contact object.
 
         Args:
+          account_id: The account for which the contact should be created.
+
           phone_number: The contact's phone number in E.164 format.
 
           email: The contact's email address.
@@ -116,6 +118,8 @@ class ContactsResource(SyncAPIResource):
         Retrieves a Contact object.
 
         Args:
+          id: The ID of the contact to retrieve.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -155,6 +159,8 @@ class ContactsResource(SyncAPIResource):
         Any parameters not provided will be left unchanged.
 
         Args:
+          id: The ID of the contact to update.
+
           phone_number: The contact's phone number in E.164 format.
 
           email: The contact's email address.
@@ -234,6 +240,8 @@ class AsyncContactsResource(AsyncAPIResource):
         Creates a new Contact object.
 
         Args:
+          account_id: The account for which the contact should be created.
+
           phone_number: The contact's phone number in E.164 format.
 
           email: The contact's email address.
@@ -287,6 +295,8 @@ class AsyncContactsResource(AsyncAPIResource):
         Retrieves a Contact object.
 
         Args:
+          id: The ID of the contact to retrieve.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -326,6 +336,8 @@ class AsyncContactsResource(AsyncAPIResource):
         Any parameters not provided will be left unchanged.
 
         Args:
+          id: The ID of the contact to update.
+
           phone_number: The contact's phone number in E.164 format.
 
           email: The contact's email address.

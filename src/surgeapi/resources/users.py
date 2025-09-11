@@ -63,6 +63,8 @@ class UsersResource(SyncAPIResource):
         Creates a new User object.
 
         Args:
+          account_id: The account for which the user should be created.
+
           first_name: The user's first name.
 
           last_name: The user's last name.
@@ -113,6 +115,8 @@ class UsersResource(SyncAPIResource):
         Retrieves a User object.
 
         Args:
+          id: The ID of the user to retrieve.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -150,6 +154,8 @@ class UsersResource(SyncAPIResource):
         Updates an existing User object.
 
         Args:
+          id: The ID of the user to update.
+
           first_name: The user's first name.
 
           last_name: The user's last name.
@@ -202,6 +208,8 @@ class UsersResource(SyncAPIResource):
         of signing with your own signing key.
 
         Args:
+          user_id: The user for which the token represents authentication.
+
           duration_seconds: For how many seconds the token should be accepted. Defaults to 15 minutes.
 
           extra_headers: Send extra headers
@@ -265,6 +273,8 @@ class AsyncUsersResource(AsyncAPIResource):
         Creates a new User object.
 
         Args:
+          account_id: The account for which the user should be created.
+
           first_name: The user's first name.
 
           last_name: The user's last name.
@@ -315,6 +325,8 @@ class AsyncUsersResource(AsyncAPIResource):
         Retrieves a User object.
 
         Args:
+          id: The ID of the user to retrieve.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -352,6 +364,8 @@ class AsyncUsersResource(AsyncAPIResource):
         Updates an existing User object.
 
         Args:
+          id: The ID of the user to update.
+
           first_name: The user's first name.
 
           last_name: The user's last name.
@@ -404,6 +418,8 @@ class AsyncUsersResource(AsyncAPIResource):
         of signing with your own signing key.
 
         Args:
+          user_id: The user for which the token represents authentication.
+
           duration_seconds: For how many seconds the token should be accepted. Defaults to 15 minutes.
 
           extra_headers: Send extra headers

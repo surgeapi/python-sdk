@@ -81,6 +81,8 @@ class CampaignsResource(SyncAPIResource):
         Creates a campaign to register account to send text messages.
 
         Args:
+          account_id: The account for which the campaign should be created.
+
           consent_flow: A string explaining the method through which end users will opt in to receive
               messages from the brand. Typically this should include URLs for opt-in forms or
               screenshots that might be helpful in explaining the flow to someone unfamiliar
@@ -251,6 +253,8 @@ class AsyncCampaignsResource(AsyncAPIResource):
         Creates a campaign to register account to send text messages.
 
         Args:
+          account_id: The account for which the campaign should be created.
+
           consent_flow: A string explaining the method through which end users will opt in to receive
               messages from the brand. Typically this should include URLs for opt-in forms or
               screenshots that might be helpful in explaining the flow to someone unfamiliar

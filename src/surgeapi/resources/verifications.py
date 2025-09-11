@@ -78,7 +78,7 @@ class VerificationsResource(SyncAPIResource):
 
     def check(
         self,
-        id: str,
+        id: object,
         *,
         code: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -102,8 +102,6 @@ class VerificationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
             f"/verifications/{id}/checks",
             body=maybe_transform({"code": code}, verification_check_params.VerificationCheckParams),
@@ -172,7 +170,7 @@ class AsyncVerificationsResource(AsyncAPIResource):
 
     async def check(
         self,
-        id: str,
+        id: object,
         *,
         code: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -196,8 +194,6 @@ class AsyncVerificationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
             f"/verifications/{id}/checks",
             body=await async_maybe_transform({"code": code}, verification_check_params.VerificationCheckParams),

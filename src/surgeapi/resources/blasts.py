@@ -47,7 +47,7 @@ class BlastsResource(SyncAPIResource):
 
     def create(
         self,
-        account_id: str,
+        account_id: object,
         *,
         attachments: Iterable[AttachmentParams] | NotGiven = NOT_GIVEN,
         body: str | NotGiven = NOT_GIVEN,
@@ -89,8 +89,6 @@ class BlastsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._post(
             f"/accounts/{account_id}/blasts",
             body=maybe_transform(
@@ -134,7 +132,7 @@ class AsyncBlastsResource(AsyncAPIResource):
 
     async def create(
         self,
-        account_id: str,
+        account_id: object,
         *,
         attachments: Iterable[AttachmentParams] | NotGiven = NOT_GIVEN,
         body: str | NotGiven = NOT_GIVEN,
@@ -176,8 +174,6 @@ class AsyncBlastsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._post(
             f"/accounts/{account_id}/blasts",
             body=await async_maybe_transform(

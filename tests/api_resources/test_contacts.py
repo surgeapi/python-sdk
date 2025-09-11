@@ -17,7 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestContacts:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create(self, client: Surge) -> None:
         contact = client.contacts.create(
@@ -26,7 +26,7 @@ class TestContacts:
         )
         assert_matches_type(Contact, contact, path=["response"])
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Surge) -> None:
         contact = client.contacts.create(
@@ -39,7 +39,7 @@ class TestContacts:
         )
         assert_matches_type(Contact, contact, path=["response"])
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Surge) -> None:
         response = client.contacts.with_raw_response.create(
@@ -52,7 +52,7 @@ class TestContacts:
         contact = response.parse()
         assert_matches_type(Contact, contact, path=["response"])
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Surge) -> None:
         with client.contacts.with_streaming_response.create(
@@ -67,7 +67,7 @@ class TestContacts:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_create(self, client: Surge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
@@ -76,19 +76,19 @@ class TestContacts:
                 phone_number="+18015551234",
             )
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Surge) -> None:
         contact = client.contacts.retrieve(
-            "id",
+            "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf",
         )
         assert_matches_type(Contact, contact, path=["response"])
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Surge) -> None:
         response = client.contacts.with_raw_response.retrieve(
-            "id",
+            "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf",
         )
 
         assert response.is_closed is True
@@ -96,11 +96,11 @@ class TestContacts:
         contact = response.parse()
         assert_matches_type(Contact, contact, path=["response"])
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Surge) -> None:
         with client.contacts.with_streaming_response.retrieve(
-            "id",
+            "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -110,7 +110,7 @@ class TestContacts:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Surge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -118,7 +118,7 @@ class TestContacts:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update(self, client: Surge) -> None:
         contact = client.contacts.update(
@@ -127,7 +127,7 @@ class TestContacts:
         )
         assert_matches_type(Contact, contact, path=["response"])
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Surge) -> None:
         contact = client.contacts.update(
@@ -140,7 +140,7 @@ class TestContacts:
         )
         assert_matches_type(Contact, contact, path=["response"])
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Surge) -> None:
         response = client.contacts.with_raw_response.update(
@@ -153,7 +153,7 @@ class TestContacts:
         contact = response.parse()
         assert_matches_type(Contact, contact, path=["response"])
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Surge) -> None:
         with client.contacts.with_streaming_response.update(
@@ -168,7 +168,7 @@ class TestContacts:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_update(self, client: Surge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -183,7 +183,7 @@ class TestAsyncContacts:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncSurge) -> None:
         contact = await async_client.contacts.create(
@@ -192,7 +192,7 @@ class TestAsyncContacts:
         )
         assert_matches_type(Contact, contact, path=["response"])
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncSurge) -> None:
         contact = await async_client.contacts.create(
@@ -205,7 +205,7 @@ class TestAsyncContacts:
         )
         assert_matches_type(Contact, contact, path=["response"])
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncSurge) -> None:
         response = await async_client.contacts.with_raw_response.create(
@@ -218,7 +218,7 @@ class TestAsyncContacts:
         contact = await response.parse()
         assert_matches_type(Contact, contact, path=["response"])
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncSurge) -> None:
         async with async_client.contacts.with_streaming_response.create(
@@ -233,7 +233,7 @@ class TestAsyncContacts:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_create(self, async_client: AsyncSurge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
@@ -242,19 +242,19 @@ class TestAsyncContacts:
                 phone_number="+18015551234",
             )
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncSurge) -> None:
         contact = await async_client.contacts.retrieve(
-            "id",
+            "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf",
         )
         assert_matches_type(Contact, contact, path=["response"])
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncSurge) -> None:
         response = await async_client.contacts.with_raw_response.retrieve(
-            "id",
+            "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf",
         )
 
         assert response.is_closed is True
@@ -262,11 +262,11 @@ class TestAsyncContacts:
         contact = await response.parse()
         assert_matches_type(Contact, contact, path=["response"])
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncSurge) -> None:
         async with async_client.contacts.with_streaming_response.retrieve(
-            "id",
+            "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -276,7 +276,7 @@ class TestAsyncContacts:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncSurge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -284,7 +284,7 @@ class TestAsyncContacts:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncSurge) -> None:
         contact = await async_client.contacts.update(
@@ -293,7 +293,7 @@ class TestAsyncContacts:
         )
         assert_matches_type(Contact, contact, path=["response"])
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncSurge) -> None:
         contact = await async_client.contacts.update(
@@ -306,7 +306,7 @@ class TestAsyncContacts:
         )
         assert_matches_type(Contact, contact, path=["response"])
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncSurge) -> None:
         response = await async_client.contacts.with_raw_response.update(
@@ -319,7 +319,7 @@ class TestAsyncContacts:
         contact = await response.parse()
         assert_matches_type(Contact, contact, path=["response"])
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncSurge) -> None:
         async with async_client.contacts.with_streaming_response.update(
@@ -334,7 +334,7 @@ class TestAsyncContacts:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncSurge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
