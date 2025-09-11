@@ -40,6 +40,7 @@ from .messages import (
     MessagesResourceWithStreamingResponse,
     AsyncMessagesResourceWithStreamingResponse,
 )
+from .webhooks import WebhooksResource, AsyncWebhooksResource
 from .campaigns import (
     CampaignsResource,
     AsyncCampaignsResource,
@@ -114,4 +115,6 @@ __all__ = [
     "AsyncVerificationsResourceWithRawResponse",
     "VerificationsResourceWithStreamingResponse",
     "AsyncVerificationsResourceWithStreamingResponse",
+    "WebhooksResource",
+    "AsyncWebhooksResource",
 ]

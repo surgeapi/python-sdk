@@ -119,3 +119,20 @@ Methods:
 
 - <code title="post /verifications">client.verifications.<a href="./src/surgeapi/resources/verifications.py">create</a>(\*\*<a href="src/surgeapi/types/verification_create_params.py">params</a>) -> <a href="./src/surgeapi/types/verification.py">Verification</a></code>
 - <code title="post /verifications/{id}/checks">client.verifications.<a href="./src/surgeapi/resources/verifications.py">check</a>(id, \*\*<a href="src/surgeapi/types/verification_check_params.py">params</a>) -> <a href="./src/surgeapi/types/verification_check.py">VerificationCheck</a></code>
+
+# Webhooks
+
+Types:
+
+```python
+from surgeapi.types import (
+    CallEndedWebhookEvent,
+    CampaignApprovedWebhookEvent,
+    ConversationCreatedWebhookEvent,
+    MessageDeliveredWebhookEvent,
+    MessageFailedWebhookEvent,
+    MessageReceivedWebhookEvent,
+    MessageSentWebhookEvent,
+    UnwrapWebhookEvent,
+)
+```

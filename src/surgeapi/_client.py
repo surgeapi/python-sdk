@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import users, blasts, accounts, contacts, messages, campaigns, phone_numbers, verifications
+from .resources import users, blasts, accounts, contacts, messages, webhooks, campaigns, phone_numbers, verifications
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import SurgeError, APIStatusError
 from ._base_client import (
@@ -42,6 +42,7 @@ class Surge(SyncAPIClient):
     phone_numbers: phone_numbers.PhoneNumbersResource
     users: users.UsersResource
     verifications: verifications.VerificationsResource
+    webhooks: webhooks.WebhooksResource
     with_raw_response: SurgeWithRawResponse
     with_streaming_response: SurgeWithStreamedResponse
 
@@ -107,6 +108,7 @@ class Surge(SyncAPIClient):
         self.phone_numbers = phone_numbers.PhoneNumbersResource(self)
         self.users = users.UsersResource(self)
         self.verifications = verifications.VerificationsResource(self)
+        self.webhooks = webhooks.WebhooksResource(self)
         self.with_raw_response = SurgeWithRawResponse(self)
         self.with_streaming_response = SurgeWithStreamedResponse(self)
 
@@ -224,6 +226,7 @@ class AsyncSurge(AsyncAPIClient):
     phone_numbers: phone_numbers.AsyncPhoneNumbersResource
     users: users.AsyncUsersResource
     verifications: verifications.AsyncVerificationsResource
+    webhooks: webhooks.AsyncWebhooksResource
     with_raw_response: AsyncSurgeWithRawResponse
     with_streaming_response: AsyncSurgeWithStreamedResponse
 
@@ -289,6 +292,7 @@ class AsyncSurge(AsyncAPIClient):
         self.phone_numbers = phone_numbers.AsyncPhoneNumbersResource(self)
         self.users = users.AsyncUsersResource(self)
         self.verifications = verifications.AsyncVerificationsResource(self)
+        self.webhooks = webhooks.AsyncWebhooksResource(self)
         self.with_raw_response = AsyncSurgeWithRawResponse(self)
         self.with_streaming_response = AsyncSurgeWithStreamedResponse(self)
 
