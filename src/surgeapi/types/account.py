@@ -1,17 +1,18 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from __future__ import annotations
-
 from typing import Optional
-from typing_extensions import TypedDict
 
-from .organization_params import OrganizationParams
+from .._models import BaseModel
+from .organization import Organization
 
-__all__ = ["AccountUpdateParams"]
+__all__ = ["Account"]
 
 
-class AccountUpdateParams(TypedDict, total=False):
-    brand_name: str
+class Account(BaseModel):
+    id: str
+    """The account ID"""
+
+    brand_name: Optional[str] = None
     """The name by which the people this account communicates with know it.
 
     If not provided, this will match the name field.
@@ -26,11 +27,12 @@ class AccountUpdateParams(TypedDict, total=False):
     anything else that may help you.
     """
 
-    organization: OrganizationParams
-    """
-    Parameters describing the legal entity on whose behalf the account will be
-    operated.
-    """
+    organization: Organization
+    """The legal entity on whose behalf the account will be operated."""
 
-    time_zone: Optional[str]
-    """The time zone for the account"""
+    time_zone: Optional[str] = None
+    """This is the time zone in which the account is headquartered.
+
+    This time zone may be used for compliance with TCPA restrictions on when
+    messages may be sent.
+    """

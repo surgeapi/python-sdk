@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import account_create_params, account_update_params, account_retrieve_status_params
+from ..types import OrganizationParams, account_create_params, account_update_params, account_retrieve_status_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -19,9 +19,9 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.account import Account
 from ..types.account_status import AccountStatus
-from ..types.account_create_response import AccountCreateResponse
-from ..types.account_update_response import AccountUpdateResponse
+from ..types.organization_params import OrganizationParams
 
 __all__ = ["AccountsResource", "AsyncAccountsResource"]
 
@@ -51,7 +51,7 @@ class AccountsResource(SyncAPIResource):
         *,
         name: str,
         brand_name: Optional[str] | NotGiven = NOT_GIVEN,
-        organization: account_create_params.Organization | NotGiven = NOT_GIVEN,
+        organization: OrganizationParams | NotGiven = NOT_GIVEN,
         time_zone: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -59,7 +59,7 @@ class AccountsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountCreateResponse:
+    ) -> Account:
         """
         Creates a new Account within the calling Platform.
 
@@ -72,6 +72,9 @@ class AccountsResource(SyncAPIResource):
 
           brand_name: The name by which the people this account communicates with know it. If not
               provided, this will match the name field.
+
+          organization: Parameters describing the legal entity on whose behalf the account will be
+              operated.
 
           time_zone: This is the time zone in which the account is headquartered. This time zone may
               be used for compliance with TCPA restrictions on when messages may be sent.
@@ -98,7 +101,7 @@ class AccountsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountCreateResponse,
+            cast_to=Account,
         )
 
     def update(
@@ -107,7 +110,7 @@ class AccountsResource(SyncAPIResource):
         *,
         brand_name: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
-        organization: account_update_params.Organization | NotGiven = NOT_GIVEN,
+        organization: OrganizationParams | NotGiven = NOT_GIVEN,
         time_zone: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -115,7 +118,7 @@ class AccountsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountUpdateResponse:
+    ) -> Account:
         """
         Updates an Account
 
@@ -130,6 +133,9 @@ class AccountsResource(SyncAPIResource):
               set a `brand_name`, but otherwise the account name will never be displayed
               anywhere outside of Surge HQ, and may include your ID for the account or
               anything else that may help you.
+
+          organization: Parameters describing the legal entity on whose behalf the account will be
+              operated.
 
           time_zone: The time zone for the account
 
@@ -157,7 +163,7 @@ class AccountsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountUpdateResponse,
+            cast_to=Account,
         )
 
     def retrieve_status(
@@ -228,7 +234,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         *,
         name: str,
         brand_name: Optional[str] | NotGiven = NOT_GIVEN,
-        organization: account_create_params.Organization | NotGiven = NOT_GIVEN,
+        organization: OrganizationParams | NotGiven = NOT_GIVEN,
         time_zone: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -236,7 +242,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountCreateResponse:
+    ) -> Account:
         """
         Creates a new Account within the calling Platform.
 
@@ -249,6 +255,9 @@ class AsyncAccountsResource(AsyncAPIResource):
 
           brand_name: The name by which the people this account communicates with know it. If not
               provided, this will match the name field.
+
+          organization: Parameters describing the legal entity on whose behalf the account will be
+              operated.
 
           time_zone: This is the time zone in which the account is headquartered. This time zone may
               be used for compliance with TCPA restrictions on when messages may be sent.
@@ -275,7 +284,7 @@ class AsyncAccountsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountCreateResponse,
+            cast_to=Account,
         )
 
     async def update(
@@ -284,7 +293,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         *,
         brand_name: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
-        organization: account_update_params.Organization | NotGiven = NOT_GIVEN,
+        organization: OrganizationParams | NotGiven = NOT_GIVEN,
         time_zone: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -292,7 +301,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountUpdateResponse:
+    ) -> Account:
         """
         Updates an Account
 
@@ -307,6 +316,9 @@ class AsyncAccountsResource(AsyncAPIResource):
               set a `brand_name`, but otherwise the account name will never be displayed
               anywhere outside of Surge HQ, and may include your ID for the account or
               anything else that may help you.
+
+          organization: Parameters describing the legal entity on whose behalf the account will be
+              operated.
 
           time_zone: The time zone for the account
 
@@ -334,7 +346,7 @@ class AsyncAccountsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccountUpdateResponse,
+            cast_to=Account,
         )
 
     async def retrieve_status(

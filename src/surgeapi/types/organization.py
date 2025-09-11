@@ -5,10 +5,10 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["AccountUpdateResponse", "Organization", "OrganizationAddress", "OrganizationContact"]
+__all__ = ["Organization", "Address", "Contact"]
 
 
-class OrganizationAddress(BaseModel):
+class Address(BaseModel):
     country: Optional[str] = None
     """The two character ISO 3166 country code.
 
@@ -39,7 +39,7 @@ class OrganizationAddress(BaseModel):
     """The state or region"""
 
 
-class OrganizationContact(BaseModel):
+class Contact(BaseModel):
     email: Optional[str] = None
     """An email address at which the individual can be reached.
 
@@ -69,10 +69,10 @@ class OrganizationContact(BaseModel):
 
 
 class Organization(BaseModel):
-    address: OrganizationAddress
+    address: Address
     """The address of the organization's headquarters."""
 
-    contact: OrganizationContact
+    contact: Contact
     """
     An object representing an individual who can be contacted if the carriers have
     any questions about the business.
@@ -221,33 +221,4 @@ class Organization(BaseModel):
 
     The website should be publicly available, clearly reflect the organization's
     purpose, and the URL should start with `https://`
-    """
-
-
-class AccountUpdateResponse(BaseModel):
-    id: str
-    """The account ID"""
-
-    brand_name: Optional[str] = None
-    """The name by which the people this account communicates with know it.
-
-    If not provided, this will match the name field.
-    """
-
-    name: str
-    """
-    The name of the account that will be visible for your internal organizational
-    purposes. This will also be the default public-facing brand name unless you also
-    set a `brand_name`, but otherwise the account name will never be displayed
-    anywhere outside of Surge HQ, and may include your ID for the account or
-    anything else that may help you.
-    """
-
-    organization: Organization
-
-    time_zone: Optional[str] = None
-    """This is the time zone in which the account is headquartered.
-
-    This time zone may be used for compliance with TCPA restrictions on when
-    messages may be sent.
     """

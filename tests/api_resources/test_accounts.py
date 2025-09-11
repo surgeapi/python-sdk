@@ -10,9 +10,8 @@ import pytest
 from surgeapi import Surge, AsyncSurge
 from tests.utils import assert_matches_type
 from surgeapi.types import (
+    Account,
     AccountStatus,
-    AccountCreateResponse,
-    AccountUpdateResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -27,7 +26,7 @@ class TestAccounts:
         account = client.accounts.create(
             name="Account #2840 - DT Precision Auto",
         )
-        assert_matches_type(AccountCreateResponse, account, path=["response"])
+        assert_matches_type(Account, account, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -68,7 +67,7 @@ class TestAccounts:
             },
             time_zone="America/Los_Angeles",
         )
-        assert_matches_type(AccountCreateResponse, account, path=["response"])
+        assert_matches_type(Account, account, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -80,7 +79,7 @@ class TestAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account = response.parse()
-        assert_matches_type(AccountCreateResponse, account, path=["response"])
+        assert_matches_type(Account, account, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -92,7 +91,7 @@ class TestAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account = response.parse()
-            assert_matches_type(AccountCreateResponse, account, path=["response"])
+            assert_matches_type(Account, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -102,7 +101,7 @@ class TestAccounts:
         account = client.accounts.update(
             id="acct_01jpqjvfg9enpt7pyxd60pcmxj",
         )
-        assert_matches_type(AccountUpdateResponse, account, path=["response"])
+        assert_matches_type(Account, account, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -144,7 +143,7 @@ class TestAccounts:
             },
             time_zone="America/Los_Angeles",
         )
-        assert_matches_type(AccountUpdateResponse, account, path=["response"])
+        assert_matches_type(Account, account, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -156,7 +155,7 @@ class TestAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account = response.parse()
-        assert_matches_type(AccountUpdateResponse, account, path=["response"])
+        assert_matches_type(Account, account, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -168,7 +167,7 @@ class TestAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account = response.parse()
-            assert_matches_type(AccountUpdateResponse, account, path=["response"])
+            assert_matches_type(Account, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -243,7 +242,7 @@ class TestAsyncAccounts:
         account = await async_client.accounts.create(
             name="Account #2840 - DT Precision Auto",
         )
-        assert_matches_type(AccountCreateResponse, account, path=["response"])
+        assert_matches_type(Account, account, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -284,7 +283,7 @@ class TestAsyncAccounts:
             },
             time_zone="America/Los_Angeles",
         )
-        assert_matches_type(AccountCreateResponse, account, path=["response"])
+        assert_matches_type(Account, account, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -296,7 +295,7 @@ class TestAsyncAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account = await response.parse()
-        assert_matches_type(AccountCreateResponse, account, path=["response"])
+        assert_matches_type(Account, account, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -308,7 +307,7 @@ class TestAsyncAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account = await response.parse()
-            assert_matches_type(AccountCreateResponse, account, path=["response"])
+            assert_matches_type(Account, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -318,7 +317,7 @@ class TestAsyncAccounts:
         account = await async_client.accounts.update(
             id="acct_01jpqjvfg9enpt7pyxd60pcmxj",
         )
-        assert_matches_type(AccountUpdateResponse, account, path=["response"])
+        assert_matches_type(Account, account, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -360,7 +359,7 @@ class TestAsyncAccounts:
             },
             time_zone="America/Los_Angeles",
         )
-        assert_matches_type(AccountUpdateResponse, account, path=["response"])
+        assert_matches_type(Account, account, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -372,7 +371,7 @@ class TestAsyncAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account = await response.parse()
-        assert_matches_type(AccountUpdateResponse, account, path=["response"])
+        assert_matches_type(Account, account, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -384,7 +383,7 @@ class TestAsyncAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account = await response.parse()
-            assert_matches_type(AccountUpdateResponse, account, path=["response"])
+            assert_matches_type(Account, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
