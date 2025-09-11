@@ -90,7 +90,7 @@ class MessagesResource(SyncAPIResource):
         instead.
 
         Args:
-          account_id: The account for which the message should be sent.
+          account_id: The account from which the message should be sent.
 
           conversation: Params for selecting or creating a new conversation. Either the id or the
               Contact must be given.
@@ -155,7 +155,7 @@ class MessagesResource(SyncAPIResource):
         instead.
 
         Args:
-          account_id: The account for which the message should be sent.
+          account_id: The account from which the message should be sent.
 
           to: The recipient's phone number in E.164 format. Cannot be used together with
               'conversation'.
@@ -282,7 +282,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         instead.
 
         Args:
-          account_id: The account for which the message should be sent.
+          account_id: The account from which the message should be sent.
 
           conversation: Params for selecting or creating a new conversation. Either the id or the
               Contact must be given.
@@ -347,7 +347,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         instead.
 
         Args:
-          account_id: The account for which the message should be sent.
+          account_id: The account from which the message should be sent.
 
           to: The recipient's phone number in E.164 format. Cannot be used together with
               'conversation'.

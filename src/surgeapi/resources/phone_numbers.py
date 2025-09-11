@@ -58,7 +58,7 @@ class PhoneNumbersResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> PhoneNumber:
-        """Create a new phone number for the account.
+        """Purchase a new phone number for the account.
 
         You can specify search criteria or
         let the system select a random number.
@@ -141,7 +141,7 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> PhoneNumber:
-        """Create a new phone number for the account.
+        """Purchase a new phone number for the account.
 
         You can specify search criteria or
         let the system select a random number.
