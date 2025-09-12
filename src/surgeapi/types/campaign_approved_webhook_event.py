@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
@@ -21,6 +22,9 @@ class CampaignApprovedWebhookEvent(BaseModel):
 
     data: Data
     """The data associated with the event"""
+
+    timestamp: datetime
+    """The timestamp when this event occurred, in ISO8601 format"""
 
     type: Literal["campaign.approved"]
     """The type of the event. Always `campaign.approved` for this event."""

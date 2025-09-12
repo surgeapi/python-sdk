@@ -57,5 +57,8 @@ class MessageReceivedWebhookEvent(BaseModel):
     data: Data
     """The data associated with the event"""
 
+    timestamp: datetime
+    """The timestamp when this event occurred, in ISO8601 format"""
+
     type: Literal["message.received"]
     """The type of the event. Always `message.received` for this event."""
