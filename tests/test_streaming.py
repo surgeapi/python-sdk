@@ -5,8 +5,8 @@ from typing import Iterator, AsyncIterator
 import httpx
 import pytest
 
-from surgeapi import Surge, AsyncSurge
-from surgeapi._streaming import Stream, AsyncStream, ServerSentEvent
+from surge import Surge, AsyncSurge
+from surge._streaming import Stream, AsyncStream, ServerSentEvent
 
 
 @pytest.mark.asyncio

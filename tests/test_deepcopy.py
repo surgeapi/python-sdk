@@ -1,4 +1,4 @@
-from surgeapi._utils import deepcopy_minimal
+from surge._utils import deepcopy_minimal
 
 
 def assert_different_identities(obj1: object, obj2: object) -> None:

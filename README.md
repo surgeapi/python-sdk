@@ -1,7 +1,7 @@
 # Surge Python API library
 
 <!-- prettier-ignore -->
-[![PyPI version](https://img.shields.io/pypi/v/surgeapi.svg?label=pypi%20(stable))](https://pypi.org/project/surgeapi/)
+[![PyPI version](https://img.shields.io/pypi/v/surge-sdk.svg?label=pypi%20(stable))](https://pypi.org/project/surge-sdk/)
 
 The Surge Python library provides convenient access to the Surge REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -17,7 +17,7 @@ The REST API documentation can be found on [docs.surge.app](https://docs.surge.a
 
 ```sh
 # install from PyPI
-pip install surgeapi
+pip install surge-sdk
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from surgeapi import Surge
+from surge import Surge
 
 client = Surge(
     api_key=os.environ.get("SURGE_API_KEY"),  # This is the default and can be omitted
@@ -59,7 +59,7 @@ Simply import `AsyncSurge` instead of `Surge` and use `await` with each API call
 ```python
 import os
 import asyncio
-from surgeapi import AsyncSurge
+from surge import AsyncSurge
 
 client = AsyncSurge(
     api_key=os.environ.get("SURGE_API_KEY"),  # This is the default and can be omitted
@@ -95,15 +95,15 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from PyPI
-pip install surgeapi[aiohttp]
+pip install surge-sdk[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
 import asyncio
-from surgeapi import DefaultAioHttpClient
-from surgeapi import AsyncSurge
+from surge import DefaultAioHttpClient
+from surge import AsyncSurge
 
 
 async def main() -> None:
@@ -143,7 +143,7 @@ Typed requests and responses provide autocomplete and documentation within your 
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
 
 ```python
-from surgeapi import Surge
+from surge import Surge
 
 client = Surge()
 
@@ -163,16 +163,16 @@ print(message.conversation)
 
 ## Handling errors
 
-When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `surgeapi.APIConnectionError` is raised.
+When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `surge.APIConnectionError` is raised.
 
 When the API returns a non-success status code (that is, 4xx or 5xx
-response), a subclass of `surgeapi.APIStatusError` is raised, containing `status_code` and `response` properties.
+response), a subclass of `surge.APIStatusError` is raised, containing `status_code` and `response` properties.
 
-All errors inherit from `surgeapi.APIError`.
+All errors inherit from `surge.APIError`.
 
 ```python
-import surgeapi
-from surgeapi import Surge
+import surge
+from surge import Surge
 
 client = Surge()
 
@@ -189,12 +189,12 @@ try:
         attachments=[{"url": "https://toretto.family/coronas.gif"}],
         body="Thought you could leave without saying goodbye?",
     )
-except surgeapi.APIConnectionError as e:
+except surge.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
-except surgeapi.RateLimitError as e:
+except surge.RateLimitError as e:
     print("A 429 status code was received; we should back off a bit.")
-except surgeapi.APIStatusError as e:
+except surge.APIStatusError as e:
     print("Another non-200-range status code was received")
     print(e.status_code)
     print(e.response)
@@ -222,7 +222,7 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from surgeapi import Surge
+from surge import Surge
 
 # Configure the default for all requests:
 client = Surge(
@@ -251,7 +251,7 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
-from surgeapi import Surge
+from surge import Surge
 
 # Configure the default for all requests:
 client = Surge(
@@ -314,7 +314,7 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from surgeapi import Surge
+from surge import Surge
 
 client = Surge()
 response = client.messages.with_raw_response.create(
@@ -337,9 +337,9 @@ message = response.parse()  # get the object that `messages.create()` would have
 print(message.id)
 ```
 
-These methods return an [`APIResponse`](https://github.com/surgeapi/python-sdk/tree/main/src/surgeapi/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/surgeapi/python-sdk/tree/main/src/surge/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/surgeapi/python-sdk/tree/main/src/surgeapi/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/surgeapi/python-sdk/tree/main/src/surge/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -412,7 +412,7 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 
 ```python
 import httpx
-from surgeapi import Surge, DefaultHttpxClient
+from surge import Surge, DefaultHttpxClient
 
 client = Surge(
     # Or use the `SURGE_BASE_URL` env var
@@ -435,7 +435,7 @@ client.with_options(http_client=DefaultHttpxClient(...))
 By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
 
 ```py
-from surgeapi import Surge
+from surge import Surge
 
 with Surge() as client:
   # make requests here
@@ -463,8 +463,8 @@ If you've upgraded to the latest version but aren't seeing any new features you 
 You can determine the version that is being used at runtime with:
 
 ```py
-import surgeapi
-print(surgeapi.__version__)
+import surge
+print(surge.__version__)
 ```
 
 ## Requirements

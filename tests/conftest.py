@@ -10,15 +10,15 @@ import httpx
 import pytest
 from pytest_asyncio import is_async_test
 
-from surgeapi import Surge, AsyncSurge, DefaultAioHttpClient
-from surgeapi._utils import is_dict
+from surge import Surge, AsyncSurge, DefaultAioHttpClient
+from surge._utils import is_dict
 
 if TYPE_CHECKING:
     from _pytest.fixtures import FixtureRequest  # pyright: ignore[reportPrivateImportUsage]
 
 pytest.register_assert_rewrite("tests.utils")
 
-logging.getLogger("surgeapi").setLevel(logging.DEBUG)
+logging.getLogger("surge").setLevel(logging.DEBUG)
 
 
 # automatically add `pytest.mark.asyncio()` to all of our async tests
