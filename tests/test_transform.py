@@ -8,15 +8,15 @@ from typing_extensions import Required, Annotated, TypedDict
 
 import pytest
 
-from surgeapi._types import NOT_GIVEN, Base64FileInput
-from surgeapi._utils import (
+from surge._types import NOT_GIVEN, Base64FileInput
+from surge._utils import (
     PropertyInfo,
     transform as _transform,
     parse_datetime,
     async_transform as _async_transform,
 )
-from surgeapi._compat import PYDANTIC_V1
-from surgeapi._models import BaseModel
+from surge._compat import PYDANTIC_V1
+from surge._models import BaseModel
 
 _T = TypeVar("_T")
 
