@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 (2025-09-16)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/surgeapi/python-sdk/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** add ruby and change python package name ([7c927af](https://github.com/surgeapi/python-sdk/commit/7c927af371870b176fe51805df1be9ac64544f8b))
+
 ## 0.1.0 (2025-09-12)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0](https://github.com/surgeapi/python-sdk/compare/v0.0.1-alpha.0...v0.1.0)
