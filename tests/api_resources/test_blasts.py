@@ -7,10 +7,10 @@ from typing import Any, cast
 
 import pytest
 
-from surgeapi import Surge, AsyncSurge
+from surge import Surge, AsyncSurge
+from surge.types import Blast
 from tests.utils import assert_matches_type
-from surgeapi.types import Blast
-from surgeapi._utils import parse_datetime
+from surge._utils import parse_datetime
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

@@ -18,7 +18,7 @@ class WebhooksResource(SyncAPIResource):
         try:
             from standardwebhooks import Webhook
         except ImportError as exc:
-            raise SurgeError("You need to install `surgeapi[webhooks]` to use this method") from exc
+            raise SurgeError("You need to install `surge-sdk[webhooks]` to use this method") from exc
 
         if key is None:
             key = self._client.webhook_signing_secret
@@ -46,7 +46,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         try:
             from standardwebhooks import Webhook
         except ImportError as exc:
-            raise SurgeError("You need to install `surgeapi[webhooks]` to use this method") from exc
+            raise SurgeError("You need to install `surge-sdk[webhooks]` to use this method") from exc
 
         if key is None:
             key = self._client.webhook_signing_secret
