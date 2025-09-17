@@ -9,7 +9,7 @@ from surge.types import Error
 Types:
 
 ```python
-from surge.types import Account, AccountParams, AccountStatus, Organization, OrganizationParams
+from surge.types import Account, AccountStatus, Organization
 ```
 
 Methods:
@@ -23,7 +23,7 @@ Methods:
 Types:
 
 ```python
-from surge.types import Blast, BlastParams
+from surge.types import Blast
 ```
 
 Methods:
@@ -35,7 +35,7 @@ Methods:
 Types:
 
 ```python
-from surge.types import Campaign, CampaignParams
+from surge.types import Campaign
 ```
 
 Methods:
@@ -47,7 +47,7 @@ Methods:
 Types:
 
 ```python
-from surge.types import Contact, ContactParams
+from surge.types import Contact
 ```
 
 Methods:
@@ -61,7 +61,7 @@ Methods:
 Types:
 
 ```python
-from surge.types import AttachmentParams, Message, MessageParams
+from surge.types import Message
 ```
 
 Methods:
@@ -73,7 +73,7 @@ Methods:
 Types:
 
 ```python
-from surge.types import PhoneNumber, PhoneNumberPurchaseParams
+from surge.types import PhoneNumber
 ```
 
 Methods:
@@ -85,7 +85,7 @@ Methods:
 Types:
 
 ```python
-from surge.types import User, UserParams, UserTokenParams, UserTokenResponse
+from surge.types import User, UserTokenResponse
 ```
 
 Methods:
@@ -100,7 +100,7 @@ Methods:
 Types:
 
 ```python
-from surge.types import Verification, VerificationCheck, VerificationCheckParams, VerificationParams
+from surge.types import Verification, VerificationCheck
 ```
 
 Methods:

@@ -2,19 +2,20 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
+from typing import Dict, Union, Iterable
 from datetime import datetime
 from typing_extensions import Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
-from .contact_params import ContactParams
-from .attachment_params import AttachmentParams
 
 __all__ = [
     "MessageCreateParams",
     "MessageParamsWithConversation",
     "MessageParamsWithConversationConversation",
+    "MessageParamsWithConversationConversationContact",
+    "MessageParamsWithConversationAttachment",
     "SimpleMessageParams",
+    "SimpleMessageParamsAttachment",
 ]
 
 
@@ -25,7 +26,7 @@ class MessageParamsWithConversation(TypedDict, total=False):
     Either the id or the Contact must be given.
     """
 
-    attachments: Iterable[AttachmentParams]
+    attachments: Iterable[MessageParamsWithConversationAttachment]
 
     body: str
     """The message body."""
@@ -37,8 +38,25 @@ class MessageParamsWithConversation(TypedDict, total=False):
     """
 
 
+class MessageParamsWithConversationConversationContact(TypedDict, total=False):
+    phone_number: Required[str]
+    """The contact's phone number in E.164 format."""
+
+    email: str
+    """The contact's email address."""
+
+    first_name: str
+    """The contact's first name."""
+
+    last_name: str
+    """The contact's last name."""
+
+    metadata: Dict[str, str]
+    """Set of key-value pairs that will be stored with the object."""
+
+
 class MessageParamsWithConversationConversation(TypedDict, total=False):
-    contact: Required[ContactParams]
+    contact: Required[MessageParamsWithConversationConversationContact]
     """Parameters for creating a contact"""
 
     phone_number: str
@@ -48,6 +66,11 @@ class MessageParamsWithConversationConversation(TypedDict, total=False):
     """
 
 
+class MessageParamsWithConversationAttachment(TypedDict, total=False):
+    url: Required[str]
+    """The URL of the attachment."""
+
+
 class SimpleMessageParams(TypedDict, total=False):
     to: Required[str]
     """The recipient's phone number in E.164 format.
@@ -55,7 +78,7 @@ class SimpleMessageParams(TypedDict, total=False):
     Cannot be used together with 'conversation'.
     """
 
-    attachments: Iterable[AttachmentParams]
+    attachments: Iterable[SimpleMessageParamsAttachment]
 
     body: str
     """The message body."""
@@ -72,6 +95,11 @@ class SimpleMessageParams(TypedDict, total=False):
     An optional datetime for scheduling message up to a couple of months in the
     future.
     """
+
+
+class SimpleMessageParamsAttachment(TypedDict, total=False):
+    url: Required[str]
+    """The URL of the attachment."""
 
 
 MessageCreateParams: TypeAlias = Union[MessageParamsWithConversation, SimpleMessageParams]
