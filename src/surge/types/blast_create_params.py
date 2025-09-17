@@ -4,17 +4,16 @@ from __future__ import annotations
 
 from typing import Union, Iterable
 from datetime import datetime
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
-from .attachment_params import AttachmentParams
 
-__all__ = ["BlastCreateParams"]
+__all__ = ["BlastCreateParams", "Attachment"]
 
 
 class BlastCreateParams(TypedDict, total=False):
-    attachments: Iterable[AttachmentParams]
+    attachments: Iterable[Attachment]
 
     body: str
     """The message body."""
@@ -36,3 +35,8 @@ class BlastCreateParams(TypedDict, total=False):
 
     This can be a combination of contact IDs, segment IDs, and phone numbers.
     """
+
+
+class Attachment(TypedDict, total=False):
+    url: Required[str]
+    """The URL of the attachment."""

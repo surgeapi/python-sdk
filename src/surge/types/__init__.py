@@ -13,13 +13,10 @@ from .organization import Organization as Organization
 from .phone_number import PhoneNumber as PhoneNumber
 from .verification import Verification as Verification
 from .account_status import AccountStatus as AccountStatus
-from .contact_params import ContactParams as ContactParams
-from .attachment_params import AttachmentParams as AttachmentParams
 from .user_create_params import UserCreateParams as UserCreateParams
 from .user_update_params import UserUpdateParams as UserUpdateParams
 from .verification_check import VerificationCheck as VerificationCheck
 from .blast_create_params import BlastCreateParams as BlastCreateParams
-from .organization_params import OrganizationParams as OrganizationParams
 from .user_token_response import UserTokenResponse as UserTokenResponse
 from .unwrap_webhook_event import UnwrapWebhookEvent as UnwrapWebhookEvent
 from .account_create_params import AccountCreateParams as AccountCreateParams
