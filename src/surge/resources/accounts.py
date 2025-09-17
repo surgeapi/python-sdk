@@ -183,6 +183,8 @@ class AccountsResource(SyncAPIResource):
         Args:
           account_id: ID of the account to check
 
+          capabilities: capabilities about which to check the status
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -365,6 +367,8 @@ class AsyncAccountsResource(AsyncAPIResource):
 
         Args:
           account_id: ID of the account to check
+
+          capabilities: capabilities about which to check the status
 
           extra_headers: Send extra headers
 

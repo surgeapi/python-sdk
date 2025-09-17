@@ -10,3 +10,4 @@ __all__ = ["AccountRetrieveStatusParams"]
 
 class AccountRetrieveStatusParams(TypedDict, total=False):
     capabilities: List[Literal["local_messaging"]]
+    """capabilities about which to check the status"""
