@@ -21,7 +21,6 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.message import Message
-from ..types.attachment_params import AttachmentParams
 
 __all__ = ["MessagesResource", "AsyncMessagesResource"]
 
@@ -52,7 +51,7 @@ class MessagesResource(SyncAPIResource):
         account_id: str,
         *,
         conversation: message_create_params.MessageParamsWithConversationConversation,
-        attachments: Iterable[AttachmentParams] | NotGiven = NOT_GIVEN,
+        attachments: Iterable[message_create_params.MessageParamsWithConversationAttachment] | NotGiven = NOT_GIVEN,
         body: str | NotGiven = NOT_GIVEN,
         send_at: Union[str, datetime] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -116,7 +115,7 @@ class MessagesResource(SyncAPIResource):
         account_id: str,
         *,
         to: str,
-        attachments: Iterable[AttachmentParams] | NotGiven = NOT_GIVEN,
+        attachments: Iterable[message_create_params.SimpleMessageParamsAttachment] | NotGiven = NOT_GIVEN,
         body: str | NotGiven = NOT_GIVEN,
         from_: str | NotGiven = NOT_GIVEN,
         send_at: Union[str, datetime] | NotGiven = NOT_GIVEN,
@@ -184,7 +183,9 @@ class MessagesResource(SyncAPIResource):
         account_id: str,
         *,
         conversation: message_create_params.MessageParamsWithConversationConversation | NotGiven = NOT_GIVEN,
-        attachments: Iterable[AttachmentParams] | NotGiven = NOT_GIVEN,
+        attachments: Iterable[message_create_params.MessageParamsWithConversationAttachment]
+        | Iterable[message_create_params.SimpleMessageParamsAttachment]
+        | NotGiven = NOT_GIVEN,
         body: str | NotGiven = NOT_GIVEN,
         send_at: Union[str, datetime] | NotGiven = NOT_GIVEN,
         to: str | NotGiven = NOT_GIVEN,
@@ -244,7 +245,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         account_id: str,
         *,
         conversation: message_create_params.MessageParamsWithConversationConversation,
-        attachments: Iterable[AttachmentParams] | NotGiven = NOT_GIVEN,
+        attachments: Iterable[message_create_params.MessageParamsWithConversationAttachment] | NotGiven = NOT_GIVEN,
         body: str | NotGiven = NOT_GIVEN,
         send_at: Union[str, datetime] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -308,7 +309,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         account_id: str,
         *,
         to: str,
-        attachments: Iterable[AttachmentParams] | NotGiven = NOT_GIVEN,
+        attachments: Iterable[message_create_params.SimpleMessageParamsAttachment] | NotGiven = NOT_GIVEN,
         body: str | NotGiven = NOT_GIVEN,
         from_: str | NotGiven = NOT_GIVEN,
         send_at: Union[str, datetime] | NotGiven = NOT_GIVEN,
@@ -376,7 +377,9 @@ class AsyncMessagesResource(AsyncAPIResource):
         account_id: str,
         *,
         conversation: message_create_params.MessageParamsWithConversationConversation | NotGiven = NOT_GIVEN,
-        attachments: Iterable[AttachmentParams] | NotGiven = NOT_GIVEN,
+        attachments: Iterable[message_create_params.MessageParamsWithConversationAttachment]
+        | Iterable[message_create_params.SimpleMessageParamsAttachment]
+        | NotGiven = NOT_GIVEN,
         body: str | NotGiven = NOT_GIVEN,
         send_at: Union[str, datetime] | NotGiven = NOT_GIVEN,
         to: str | NotGiven = NOT_GIVEN,
