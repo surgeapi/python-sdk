@@ -9,7 +9,14 @@ from surge.types import Error
 Types:
 
 ```python
-from surge.types import Account, AccountStatus, Organization
+from surge.types import (
+    Account,
+    AccountParams,
+    AccountStatus,
+    AccountUpdateParams,
+    Organization,
+    OrganizationParams,
+)
 ```
 
 Methods:
