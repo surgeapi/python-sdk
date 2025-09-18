@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import account_create_params, account_update_params, account_retrieve_status_params
+from ..types import OrganizationParams, account_create_params, account_update_params, account_retrieve_status_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -21,6 +21,7 @@ from .._response import (
 from .._base_client import make_request_options
 from ..types.account import Account
 from ..types.account_status import AccountStatus
+from ..types.organization_params import OrganizationParams
 
 __all__ = ["AccountsResource", "AsyncAccountsResource"]
 
@@ -50,7 +51,7 @@ class AccountsResource(SyncAPIResource):
         *,
         name: str,
         brand_name: Optional[str] | NotGiven = NOT_GIVEN,
-        organization: account_create_params.Organization | NotGiven = NOT_GIVEN,
+        organization: OrganizationParams | NotGiven = NOT_GIVEN,
         time_zone: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -109,7 +110,7 @@ class AccountsResource(SyncAPIResource):
         *,
         brand_name: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
-        organization: account_update_params.Organization | NotGiven = NOT_GIVEN,
+        organization: OrganizationParams | NotGiven = NOT_GIVEN,
         time_zone: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -235,7 +236,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         *,
         name: str,
         brand_name: Optional[str] | NotGiven = NOT_GIVEN,
-        organization: account_create_params.Organization | NotGiven = NOT_GIVEN,
+        organization: OrganizationParams | NotGiven = NOT_GIVEN,
         time_zone: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -294,7 +295,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         *,
         brand_name: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
-        organization: account_update_params.Organization | NotGiven = NOT_GIVEN,
+        organization: OrganizationParams | NotGiven = NOT_GIVEN,
         time_zone: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
