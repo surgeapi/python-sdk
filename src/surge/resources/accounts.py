@@ -8,7 +8,7 @@ from typing_extensions import Literal
 import httpx
 
 from ..types import account_create_params, account_update_params, account_retrieve_status_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -49,15 +49,15 @@ class AccountsResource(SyncAPIResource):
         self,
         *,
         name: str,
-        brand_name: Optional[str] | NotGiven = NOT_GIVEN,
-        organization: account_create_params.Organization | NotGiven = NOT_GIVEN,
-        time_zone: str | NotGiven = NOT_GIVEN,
+        brand_name: Optional[str] | Omit = omit,
+        organization: account_create_params.Organization | Omit = omit,
+        time_zone: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Account:
         """
         Creates a new Account within the calling Platform.
@@ -107,16 +107,16 @@ class AccountsResource(SyncAPIResource):
         self,
         id: str,
         *,
-        brand_name: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        organization: account_update_params.Organization | NotGiven = NOT_GIVEN,
-        time_zone: Optional[str] | NotGiven = NOT_GIVEN,
+        brand_name: str | Omit = omit,
+        name: str | Omit = omit,
+        organization: account_update_params.Organization | Omit = omit,
+        time_zone: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Account:
         """
         Updates an Account
@@ -169,13 +169,13 @@ class AccountsResource(SyncAPIResource):
         self,
         account_id: str,
         *,
-        capabilities: List[Literal["local_messaging"]] | NotGiven = NOT_GIVEN,
+        capabilities: List[Literal["local_messaging"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountStatus:
         """
         Check an account's status and capabilities
@@ -234,15 +234,15 @@ class AsyncAccountsResource(AsyncAPIResource):
         self,
         *,
         name: str,
-        brand_name: Optional[str] | NotGiven = NOT_GIVEN,
-        organization: account_create_params.Organization | NotGiven = NOT_GIVEN,
-        time_zone: str | NotGiven = NOT_GIVEN,
+        brand_name: Optional[str] | Omit = omit,
+        organization: account_create_params.Organization | Omit = omit,
+        time_zone: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Account:
         """
         Creates a new Account within the calling Platform.
@@ -292,16 +292,16 @@ class AsyncAccountsResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        brand_name: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        organization: account_update_params.Organization | NotGiven = NOT_GIVEN,
-        time_zone: Optional[str] | NotGiven = NOT_GIVEN,
+        brand_name: str | Omit = omit,
+        name: str | Omit = omit,
+        organization: account_update_params.Organization | Omit = omit,
+        time_zone: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Account:
         """
         Updates an Account
@@ -354,13 +354,13 @@ class AsyncAccountsResource(AsyncAPIResource):
         self,
         account_id: str,
         *,
-        capabilities: List[Literal["local_messaging"]] | NotGiven = NOT_GIVEN,
+        capabilities: List[Literal["local_messaging"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountStatus:
         """
         Check an account's status and capabilities
