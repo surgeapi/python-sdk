@@ -116,6 +116,8 @@ Types:
 from surge.types import (
     CallEndedWebhookEvent,
     CampaignApprovedWebhookEvent,
+    ContactOptedInWebhookEvent,
+    ContactOptedOutWebhookEvent,
     ConversationCreatedWebhookEvent,
     MessageDeliveredWebhookEvent,
     MessageFailedWebhookEvent,
