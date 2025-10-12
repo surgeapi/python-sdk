@@ -3,13 +3,13 @@
 from __future__ import annotations
 
 from typing import List
-from typing_extensions import Literal
+from typing_extensions import Literal, overload
 
 import httpx
 
 from ..types import campaign_create_params
 from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import required_args, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -44,6 +44,7 @@ class CampaignsResource(SyncAPIResource):
         """
         return CampaignsResourceWithStreamingResponse(self)
 
+    @overload
     def create(
         self,
         account_id: str,
@@ -171,6 +172,77 @@ class CampaignsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    def create(
+        self,
+        account_id: str,
+        *,
+        tcr_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Campaign:
+        """
+        Creates a campaign to register account to send text messages.
+
+        Args:
+          account_id: The account for which the campaign should be created.
+
+          tcr_id: The Campaign Registry (TCR) ID for the externally registered campaign
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(
+        ["consent_flow", "description", "message_samples", "privacy_policy_url", "use_cases", "volume"], ["tcr_id"]
+    )
+    def create(
+        self,
+        account_id: str,
+        *,
+        consent_flow: str | Omit = omit,
+        description: str | Omit = omit,
+        message_samples: SequenceNotStr[str] | Omit = omit,
+        privacy_policy_url: str | Omit = omit,
+        use_cases: List[
+            Literal[
+                "account_notification",
+                "customer_care",
+                "delivery_notification",
+                "fraud_alert",
+                "higher_education",
+                "marketing",
+                "polling_voting",
+                "public_service_announcement",
+                "security_alert",
+                "two_factor_authentication",
+            ]
+        ]
+        | Omit = omit,
+        volume: Literal["high", "low"] | Omit = omit,
+        includes: List[Literal["links", "phone_numbers", "age_gated", "direct_lending"]] | Omit = omit,
+        link_sample: str | Omit = omit,
+        terms_and_conditions_url: str | Omit = omit,
+        tcr_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Campaign:
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._post(
@@ -186,6 +258,7 @@ class CampaignsResource(SyncAPIResource):
                     "includes": includes,
                     "link_sample": link_sample,
                     "terms_and_conditions_url": terms_and_conditions_url,
+                    "tcr_id": tcr_id,
                 },
                 campaign_create_params.CampaignCreateParams,
             ),
@@ -216,6 +289,7 @@ class AsyncCampaignsResource(AsyncAPIResource):
         """
         return AsyncCampaignsResourceWithStreamingResponse(self)
 
+    @overload
     async def create(
         self,
         account_id: str,
@@ -343,6 +417,77 @@ class AsyncCampaignsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    async def create(
+        self,
+        account_id: str,
+        *,
+        tcr_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Campaign:
+        """
+        Creates a campaign to register account to send text messages.
+
+        Args:
+          account_id: The account for which the campaign should be created.
+
+          tcr_id: The Campaign Registry (TCR) ID for the externally registered campaign
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(
+        ["consent_flow", "description", "message_samples", "privacy_policy_url", "use_cases", "volume"], ["tcr_id"]
+    )
+    async def create(
+        self,
+        account_id: str,
+        *,
+        consent_flow: str | Omit = omit,
+        description: str | Omit = omit,
+        message_samples: SequenceNotStr[str] | Omit = omit,
+        privacy_policy_url: str | Omit = omit,
+        use_cases: List[
+            Literal[
+                "account_notification",
+                "customer_care",
+                "delivery_notification",
+                "fraud_alert",
+                "higher_education",
+                "marketing",
+                "polling_voting",
+                "public_service_announcement",
+                "security_alert",
+                "two_factor_authentication",
+            ]
+        ]
+        | Omit = omit,
+        volume: Literal["high", "low"] | Omit = omit,
+        includes: List[Literal["links", "phone_numbers", "age_gated", "direct_lending"]] | Omit = omit,
+        link_sample: str | Omit = omit,
+        terms_and_conditions_url: str | Omit = omit,
+        tcr_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Campaign:
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._post(
@@ -358,6 +503,7 @@ class AsyncCampaignsResource(AsyncAPIResource):
                     "includes": includes,
                     "link_sample": link_sample,
                     "terms_and_conditions_url": terms_and_conditions_url,
+                    "tcr_id": tcr_id,
                 },
                 campaign_create_params.CampaignCreateParams,
             ),

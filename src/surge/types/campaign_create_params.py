@@ -2,15 +2,15 @@
 
 from __future__ import annotations
 
-from typing import List
-from typing_extensions import Literal, Required, TypedDict
+from typing import List, Union
+from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
 
-__all__ = ["CampaignCreateParams"]
+__all__ = ["CampaignCreateParams", "StandardCampaignParams", "ExternalCampaignParams"]
 
 
-class CampaignCreateParams(TypedDict, total=False):
+class StandardCampaignParams(TypedDict, total=False):
     consent_flow: Required[str]
     """
     A string explaining the method through which end users will opt in to receive
@@ -129,3 +129,11 @@ class CampaignCreateParams(TypedDict, total=False):
     customers if they're the terms that are presented to end users when they opt in
     to messaging.
     """
+
+
+class ExternalCampaignParams(TypedDict, total=False):
+    tcr_id: Required[str]
+    """The Campaign Registry (TCR) ID for the externally registered campaign"""
+
+
+CampaignCreateParams: TypeAlias = Union[StandardCampaignParams, ExternalCampaignParams]

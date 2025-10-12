@@ -19,7 +19,7 @@ class TestCampaigns:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create(self, client: Surge) -> None:
+    def test_method_create_overload_1(self, client: Surge) -> None:
         campaign = client.campaigns.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             consent_flow="When customers bring in their car for service, they will fill out this web form for intake: https://fastauto.shop/bp108c In it they can choose to opt in to text message notifications. If they choose to opt in, we will send them notifications to let them know if our mechanics find issues and once the car is ready to go, as well as links to invoices and to leave us feedback.",
@@ -37,7 +37,7 @@ class TestCampaigns:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_with_all_params(self, client: Surge) -> None:
+    def test_method_create_with_all_params_overload_1(self, client: Surge) -> None:
         campaign = client.campaigns.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             consent_flow="When customers bring in their car for service, they will fill out this web form for intake: https://fastauto.shop/bp108c In it they can choose to opt in to text message notifications. If they choose to opt in, we will send them notifications to let them know if our mechanics find issues and once the car is ready to go, as well as links to invoices and to leave us feedback.",
@@ -58,7 +58,7 @@ class TestCampaigns:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_create(self, client: Surge) -> None:
+    def test_raw_response_create_overload_1(self, client: Surge) -> None:
         response = client.campaigns.with_raw_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             consent_flow="When customers bring in their car for service, they will fill out this web form for intake: https://fastauto.shop/bp108c In it they can choose to opt in to text message notifications. If they choose to opt in, we will send them notifications to let them know if our mechanics find issues and once the car is ready to go, as well as links to invoices and to leave us feedback.",
@@ -80,7 +80,7 @@ class TestCampaigns:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_create(self, client: Surge) -> None:
+    def test_streaming_response_create_overload_1(self, client: Surge) -> None:
         with client.campaigns.with_streaming_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             consent_flow="When customers bring in their car for service, they will fill out this web form for intake: https://fastauto.shop/bp108c In it they can choose to opt in to text message notifications. If they choose to opt in, we will send them notifications to let them know if our mechanics find issues and once the car is ready to go, as well as links to invoices and to leave us feedback.",
@@ -104,7 +104,7 @@ class TestCampaigns:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_create(self, client: Surge) -> None:
+    def test_path_params_create_overload_1(self, client: Surge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             client.campaigns.with_raw_response.create(
                 account_id="",
@@ -120,6 +120,52 @@ class TestCampaigns:
                 volume="high",
             )
 
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_create_overload_2(self, client: Surge) -> None:
+        campaign = client.campaigns.create(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            tcr_id="CABCDE1",
+        )
+        assert_matches_type(Campaign, campaign, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_create_overload_2(self, client: Surge) -> None:
+        response = client.campaigns.with_raw_response.create(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            tcr_id="CABCDE1",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        campaign = response.parse()
+        assert_matches_type(Campaign, campaign, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_create_overload_2(self, client: Surge) -> None:
+        with client.campaigns.with_streaming_response.create(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            tcr_id="CABCDE1",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            campaign = response.parse()
+            assert_matches_type(Campaign, campaign, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_create_overload_2(self, client: Surge) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
+            client.campaigns.with_raw_response.create(
+                account_id="",
+                tcr_id="CABCDE1",
+            )
+
 
 class TestAsyncCampaigns:
     parametrize = pytest.mark.parametrize(
@@ -128,7 +174,7 @@ class TestAsyncCampaigns:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create(self, async_client: AsyncSurge) -> None:
+    async def test_method_create_overload_1(self, async_client: AsyncSurge) -> None:
         campaign = await async_client.campaigns.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             consent_flow="When customers bring in their car for service, they will fill out this web form for intake: https://fastauto.shop/bp108c In it they can choose to opt in to text message notifications. If they choose to opt in, we will send them notifications to let them know if our mechanics find issues and once the car is ready to go, as well as links to invoices and to leave us feedback.",
@@ -146,7 +192,7 @@ class TestAsyncCampaigns:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncSurge) -> None:
+    async def test_method_create_with_all_params_overload_1(self, async_client: AsyncSurge) -> None:
         campaign = await async_client.campaigns.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             consent_flow="When customers bring in their car for service, they will fill out this web form for intake: https://fastauto.shop/bp108c In it they can choose to opt in to text message notifications. If they choose to opt in, we will send them notifications to let them know if our mechanics find issues and once the car is ready to go, as well as links to invoices and to leave us feedback.",
@@ -167,7 +213,7 @@ class TestAsyncCampaigns:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_create(self, async_client: AsyncSurge) -> None:
+    async def test_raw_response_create_overload_1(self, async_client: AsyncSurge) -> None:
         response = await async_client.campaigns.with_raw_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             consent_flow="When customers bring in their car for service, they will fill out this web form for intake: https://fastauto.shop/bp108c In it they can choose to opt in to text message notifications. If they choose to opt in, we will send them notifications to let them know if our mechanics find issues and once the car is ready to go, as well as links to invoices and to leave us feedback.",
@@ -189,7 +235,7 @@ class TestAsyncCampaigns:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncSurge) -> None:
+    async def test_streaming_response_create_overload_1(self, async_client: AsyncSurge) -> None:
         async with async_client.campaigns.with_streaming_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
             consent_flow="When customers bring in their car for service, they will fill out this web form for intake: https://fastauto.shop/bp108c In it they can choose to opt in to text message notifications. If they choose to opt in, we will send them notifications to let them know if our mechanics find issues and once the car is ready to go, as well as links to invoices and to leave us feedback.",
@@ -213,7 +259,7 @@ class TestAsyncCampaigns:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_create(self, async_client: AsyncSurge) -> None:
+    async def test_path_params_create_overload_1(self, async_client: AsyncSurge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             await async_client.campaigns.with_raw_response.create(
                 account_id="",
@@ -227,4 +273,50 @@ class TestAsyncCampaigns:
                 privacy_policy_url="https://fastauto.shop/sms-privacy",
                 use_cases=["account_notification", "customer_care", "marketing"],
                 volume="high",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_create_overload_2(self, async_client: AsyncSurge) -> None:
+        campaign = await async_client.campaigns.create(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            tcr_id="CABCDE1",
+        )
+        assert_matches_type(Campaign, campaign, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_create_overload_2(self, async_client: AsyncSurge) -> None:
+        response = await async_client.campaigns.with_raw_response.create(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            tcr_id="CABCDE1",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        campaign = await response.parse()
+        assert_matches_type(Campaign, campaign, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_create_overload_2(self, async_client: AsyncSurge) -> None:
+        async with async_client.campaigns.with_streaming_response.create(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            tcr_id="CABCDE1",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            campaign = await response.parse()
+            assert_matches_type(Campaign, campaign, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_create_overload_2(self, async_client: AsyncSurge) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
+            await async_client.campaigns.with_raw_response.create(
+                account_id="",
+                tcr_id="CABCDE1",
             )
