@@ -72,7 +72,8 @@ class OrganizationContact(TypedDict, total=False):
     Typically an email using the same domain name as the website URL will be
     preferred (e.g. with a website domain of `https://dtprecisionauto.com`, an email
     like `dom@dtprecisionauto.com` will be preferred over one like
-    `dom@anothergarage.com` or `dom.toretto@gmail.com`)
+    `dom@anothergarage.com` or `dom.toretto@gmail.com`. `dtprecisionauto@gmail.com`
+    would also be acceptable, but not preferred)
     """
 
     first_name: Optional[str]
@@ -100,8 +101,11 @@ class Organization(TypedDict, total=False):
 
     contact: Optional[OrganizationContact]
     """
-    An object representing an individual who can be contacted if the carriers have
-    any questions about the business.
+    An object representing an individual who can be contacted if Surge or our
+    carrier partners have any questions about the business. If you are registering
+    on behalf of your customer, this must be a contact from your customer's company
+    rather than your own. The individual will likely never be contacted unless there
+    are issues with spam.
     """
 
     country: Optional[str]
