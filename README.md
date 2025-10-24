@@ -34,15 +34,7 @@ client = Surge(
 
 message = client.messages.create(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-    conversation={
-        "contact": {
-            "first_name": "Dom",
-            "last_name": "Toretto",
-            "phone_number": "+13235556439",
-        }
-    },
-    attachments=[{"url": "https://toretto.family/coronas.gif"}],
-    body="Thought you could leave without saying goodbye?",
+    params={"conversation": {"contact": {"phone_number": "+18015551234"}}},
 )
 print(message.id)
 ```
@@ -69,15 +61,7 @@ client = AsyncSurge(
 async def main() -> None:
     message = await client.messages.create(
         account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-        conversation={
-            "contact": {
-                "first_name": "Dom",
-                "last_name": "Toretto",
-                "phone_number": "+13235556439",
-            }
-        },
-        attachments=[{"url": "https://toretto.family/coronas.gif"}],
-        body="Thought you could leave without saying goodbye?",
+        params={"conversation": {"contact": {"phone_number": "+18015551234"}}},
     )
     print(message.id)
 
@@ -113,15 +97,7 @@ async def main() -> None:
     ) as client:
         message = await client.messages.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-            conversation={
-                "contact": {
-                    "first_name": "Dom",
-                    "last_name": "Toretto",
-                    "phone_number": "+13235556439",
-                }
-            },
-            attachments=[{"url": "https://toretto.family/coronas.gif"}],
-            body="Thought you could leave without saying goodbye?",
+            params={"conversation": {"contact": {"phone_number": "+18015551234"}}},
         )
         print(message.id)
 
@@ -147,18 +123,41 @@ from surge import Surge
 
 client = Surge()
 
-message = client.messages.create(
-    account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-    conversation={
+account = client.accounts.create(
+    name="Account #2840 - DT Precision Auto",
+    organization={
+        "address": {
+            "country": "US",
+            "line1": "2640 Huron St",
+            "line2": None,
+            "locality": "Los Angeles",
+            "name": "DT Precision Auto",
+            "postal_code": "90065",
+            "region": "CA",
+        },
         "contact": {
-            "phone_number": "+18015551234",
+            "email": "dom@dtprecisionauto.com",
             "first_name": "Dominic",
             "last_name": "Toretto",
+            "phone_number": "+13235556439",
+            "title": "other",
+            "title_other": "Owner",
         },
-        "phone_number": "+18015556789",
+        "country": "US",
+        "email": "dom@dtprecisionauto.com",
+        "identifier": "123456789",
+        "identifier_type": "ein",
+        "industry": "automotive",
+        "mobile_number": "+13235556439",
+        "regions_of_operation": ["usa_and_canada"],
+        "registered_name": "DT Precision Auto LLC",
+        "stock_exchange": None,
+        "stock_symbol": None,
+        "type": "llc",
+        "website": "https://dtprecisionauto.com",
     },
 )
-print(message.conversation)
+print(account.organization)
 ```
 
 ## Handling errors
@@ -179,15 +178,7 @@ client = Surge()
 try:
     client.messages.create(
         account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-        conversation={
-            "contact": {
-                "first_name": "Dom",
-                "last_name": "Toretto",
-                "phone_number": "+13235556439",
-            }
-        },
-        attachments=[{"url": "https://toretto.family/coronas.gif"}],
-        body="Thought you could leave without saying goodbye?",
+        params={"conversation": {"contact": {"phone_number": "+18015551234"}}},
     )
 except surge.APIConnectionError as e:
     print("The server could not be reached")
@@ -233,15 +224,7 @@ client = Surge(
 # Or, configure per-request:
 client.with_options(max_retries=5).messages.create(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-    conversation={
-        "contact": {
-            "first_name": "Dom",
-            "last_name": "Toretto",
-            "phone_number": "+13235556439",
-        }
-    },
-    attachments=[{"url": "https://toretto.family/coronas.gif"}],
-    body="Thought you could leave without saying goodbye?",
+    params={"conversation": {"contact": {"phone_number": "+18015551234"}}},
 )
 ```
 
@@ -267,15 +250,7 @@ client = Surge(
 # Override per-request:
 client.with_options(timeout=5.0).messages.create(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-    conversation={
-        "contact": {
-            "first_name": "Dom",
-            "last_name": "Toretto",
-            "phone_number": "+13235556439",
-        }
-    },
-    attachments=[{"url": "https://toretto.family/coronas.gif"}],
-    body="Thought you could leave without saying goodbye?",
+    params={"conversation": {"contact": {"phone_number": "+18015551234"}}},
 )
 ```
 
@@ -319,17 +294,13 @@ from surge import Surge
 client = Surge()
 response = client.messages.with_raw_response.create(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-    conversation={
-        "contact": {
-            "first_name": "Dom",
-            "last_name": "Toretto",
-            "phone_number": "+13235556439",
+    params={
+        "conversation": {
+            "contact": {
+                "phone_number": "+18015551234"
+            }
         }
     },
-    attachments=[{
-        "url": "https://toretto.family/coronas.gif"
-    }],
-    body="Thought you could leave without saying goodbye?",
 )
 print(response.headers.get('X-My-Header'))
 
@@ -350,15 +321,7 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 ```python
 with client.messages.with_streaming_response.create(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-    conversation={
-        "contact": {
-            "first_name": "Dom",
-            "last_name": "Toretto",
-            "phone_number": "+13235556439",
-        }
-    },
-    attachments=[{"url": "https://toretto.family/coronas.gif"}],
-    body="Thought you could leave without saying goodbye?",
+    params={"conversation": {"contact": {"phone_number": "+18015551234"}}},
 ) as response:
     print(response.headers.get("X-My-Header"))
 

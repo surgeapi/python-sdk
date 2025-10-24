@@ -718,7 +718,8 @@ class TestSurge:
 
         with pytest.raises(APITimeoutError):
             client.messages.with_streaming_response.create(
-                account_id="acct_01j9a43avnfqzbjfch6pygv1td", conversation={"contact": {"phone_number": "+18015551234"}}
+                account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+                params={"conversation": {"contact": {"phone_number": "+18015551234"}}},
             ).__enter__()
 
         assert _get_open_connections(self.client) == 0
@@ -730,7 +731,8 @@ class TestSurge:
 
         with pytest.raises(APIStatusError):
             client.messages.with_streaming_response.create(
-                account_id="acct_01j9a43avnfqzbjfch6pygv1td", conversation={"contact": {"phone_number": "+18015551234"}}
+                account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+                params={"conversation": {"contact": {"phone_number": "+18015551234"}}},
             ).__enter__()
         assert _get_open_connections(self.client) == 0
 
@@ -761,7 +763,8 @@ class TestSurge:
         respx_mock.post("/accounts/acct_01j9a43avnfqzbjfch6pygv1td/messages").mock(side_effect=retry_handler)
 
         response = client.messages.with_raw_response.create(
-            account_id="acct_01j9a43avnfqzbjfch6pygv1td", conversation={"contact": {"phone_number": "+18015551234"}}
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            params={"conversation": {"contact": {"phone_number": "+18015551234"}}},
         )
 
         assert response.retries_taken == failures_before_success
@@ -786,7 +789,7 @@ class TestSurge:
 
         response = client.messages.with_raw_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-            conversation={"contact": {"phone_number": "+18015551234"}},
+            params={"conversation": {"contact": {"phone_number": "+18015551234"}}},
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -813,7 +816,7 @@ class TestSurge:
 
         response = client.messages.with_raw_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-            conversation={"contact": {"phone_number": "+18015551234"}},
+            params={"conversation": {"contact": {"phone_number": "+18015551234"}}},
             extra_headers={"x-stainless-retry-count": "42"},
         )
 
@@ -1545,7 +1548,8 @@ class TestAsyncSurge:
 
         with pytest.raises(APITimeoutError):
             await async_client.messages.with_streaming_response.create(
-                account_id="acct_01j9a43avnfqzbjfch6pygv1td", conversation={"contact": {"phone_number": "+18015551234"}}
+                account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+                params={"conversation": {"contact": {"phone_number": "+18015551234"}}},
             ).__aenter__()
 
         assert _get_open_connections(self.client) == 0
@@ -1557,7 +1561,8 @@ class TestAsyncSurge:
 
         with pytest.raises(APIStatusError):
             await async_client.messages.with_streaming_response.create(
-                account_id="acct_01j9a43avnfqzbjfch6pygv1td", conversation={"contact": {"phone_number": "+18015551234"}}
+                account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+                params={"conversation": {"contact": {"phone_number": "+18015551234"}}},
             ).__aenter__()
         assert _get_open_connections(self.client) == 0
 
@@ -1589,7 +1594,8 @@ class TestAsyncSurge:
         respx_mock.post("/accounts/acct_01j9a43avnfqzbjfch6pygv1td/messages").mock(side_effect=retry_handler)
 
         response = await client.messages.with_raw_response.create(
-            account_id="acct_01j9a43avnfqzbjfch6pygv1td", conversation={"contact": {"phone_number": "+18015551234"}}
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            params={"conversation": {"contact": {"phone_number": "+18015551234"}}},
         )
 
         assert response.retries_taken == failures_before_success
@@ -1617,7 +1623,7 @@ class TestAsyncSurge:
 
         response = await client.messages.with_raw_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-            conversation={"contact": {"phone_number": "+18015551234"}},
+            params={"conversation": {"contact": {"phone_number": "+18015551234"}}},
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -1645,7 +1651,7 @@ class TestAsyncSurge:
 
         response = await client.messages.with_raw_response.create(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
-            conversation={"contact": {"phone_number": "+18015551234"}},
+            params={"conversation": {"contact": {"phone_number": "+18015551234"}}},
             extra_headers={"x-stainless-retry-count": "42"},
         )
 

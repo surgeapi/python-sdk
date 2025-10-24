@@ -7,10 +7,18 @@ from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
 
-__all__ = ["CampaignCreateParams", "StandardCampaignParams", "ExternalCampaignParams"]
+__all__ = ["CampaignCreateParams", "Params", "ParamsStandardCampaignParams", "ParamsExternalCampaignParams"]
 
 
-class StandardCampaignParams(TypedDict, total=False):
+class CampaignCreateParams(TypedDict, total=False):
+    params: Required[Params]
+    """Parameters for creating a new campaign.
+
+    Either provide full campaign details or import using a TCR ID.
+    """
+
+
+class ParamsStandardCampaignParams(TypedDict, total=False):
     consent_flow: Required[str]
     """
     A string explaining the method through which end users will opt in to receive
@@ -131,9 +139,9 @@ class StandardCampaignParams(TypedDict, total=False):
     """
 
 
-class ExternalCampaignParams(TypedDict, total=False):
+class ParamsExternalCampaignParams(TypedDict, total=False):
     tcr_id: Required[str]
     """The Campaign Registry (TCR) ID for the externally registered campaign"""
 
 
-CampaignCreateParams: TypeAlias = Union[StandardCampaignParams, ExternalCampaignParams]
+Params: TypeAlias = Union[ParamsStandardCampaignParams, ParamsExternalCampaignParams]

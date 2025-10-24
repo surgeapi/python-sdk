@@ -10,35 +10,27 @@ from .._utils import PropertyInfo
 
 __all__ = [
     "MessageCreateParams",
-    "MessageParamsWithConversation",
-    "MessageParamsWithConversationConversation",
-    "MessageParamsWithConversationConversationContact",
-    "MessageParamsWithConversationAttachment",
-    "SimpleMessageParams",
-    "SimpleMessageParamsAttachment",
+    "Params",
+    "ParamsMessageParamsWithConversation",
+    "ParamsMessageParamsWithConversationConversation",
+    "ParamsMessageParamsWithConversationConversationContact",
+    "ParamsMessageParamsWithConversationAttachment",
+    "ParamsSimpleMessageParams",
+    "ParamsSimpleMessageParamsAttachment",
 ]
 
 
-class MessageParamsWithConversation(TypedDict, total=False):
-    conversation: Required[MessageParamsWithConversationConversation]
-    """Params for selecting or creating a new conversation.
+class MessageCreateParams(TypedDict, total=False):
+    params: Required[Params]
+    """Payload for creating a message.
 
-    Either the id or the Contact must be given.
-    """
-
-    attachments: Iterable[MessageParamsWithConversationAttachment]
-
-    body: str
-    """The message body."""
-
-    send_at: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
-    """
-    An optional datetime for scheduling message up to a couple of months in the
-    future.
+    Either an attachment or the body must be given. You can specify the recipient
+    either using the 'conversation' parameter or the 'to'/'from' parameters, but not
+    both.
     """
 
 
-class MessageParamsWithConversationConversationContact(TypedDict, total=False):
+class ParamsMessageParamsWithConversationConversationContact(TypedDict, total=False):
     phone_number: Required[str]
     """The contact's phone number in E.164 format."""
 
@@ -55,8 +47,8 @@ class MessageParamsWithConversationConversationContact(TypedDict, total=False):
     """Set of key-value pairs that will be stored with the object."""
 
 
-class MessageParamsWithConversationConversation(TypedDict, total=False):
-    contact: Required[MessageParamsWithConversationConversationContact]
+class ParamsMessageParamsWithConversationConversation(TypedDict, total=False):
+    contact: Required[ParamsMessageParamsWithConversationConversationContact]
     """Parameters for creating a contact"""
 
     phone_number: str
@@ -66,29 +58,22 @@ class MessageParamsWithConversationConversation(TypedDict, total=False):
     """
 
 
-class MessageParamsWithConversationAttachment(TypedDict, total=False):
+class ParamsMessageParamsWithConversationAttachment(TypedDict, total=False):
     url: Required[str]
     """The URL of the attachment."""
 
 
-class SimpleMessageParams(TypedDict, total=False):
-    to: Required[str]
-    """The recipient's phone number in E.164 format.
+class ParamsMessageParamsWithConversation(TypedDict, total=False):
+    conversation: Required[ParamsMessageParamsWithConversationConversation]
+    """Params for selecting or creating a new conversation.
 
-    Cannot be used together with 'conversation'.
+    Either the id or the Contact must be given.
     """
 
-    attachments: Iterable[SimpleMessageParamsAttachment]
+    attachments: Iterable[ParamsMessageParamsWithConversationAttachment]
 
     body: str
     """The message body."""
-
-    from_: Annotated[str, PropertyInfo(alias="from")]
-    """The sender's phone number in E.164 format or phone number ID.
-
-    If omitted, uses the account's default phone number. Cannot be used together
-    with 'conversation'.
-    """
 
     send_at: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """
@@ -97,9 +82,37 @@ class SimpleMessageParams(TypedDict, total=False):
     """
 
 
-class SimpleMessageParamsAttachment(TypedDict, total=False):
+class ParamsSimpleMessageParamsAttachment(TypedDict, total=False):
     url: Required[str]
     """The URL of the attachment."""
 
 
-MessageCreateParams: TypeAlias = Union[MessageParamsWithConversation, SimpleMessageParams]
+_ParamsSimpleMessageParamsReservedKeywords = TypedDict(
+    "_ParamsSimpleMessageParamsReservedKeywords",
+    {
+        "from": str,
+    },
+    total=False,
+)
+
+
+class ParamsSimpleMessageParams(_ParamsSimpleMessageParamsReservedKeywords, total=False):
+    to: Required[str]
+    """The recipient's phone number in E.164 format.
+
+    Cannot be used together with 'conversation'.
+    """
+
+    attachments: Iterable[ParamsSimpleMessageParamsAttachment]
+
+    body: str
+    """The message body."""
+
+    send_at: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
+    """
+    An optional datetime for scheduling message up to a couple of months in the
+    future.
+    """
+
+
+Params: TypeAlias = Union[ParamsMessageParamsWithConversation, ParamsSimpleMessageParams]
