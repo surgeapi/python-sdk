@@ -13,7 +13,6 @@ from .organization import Organization as Organization
 from .phone_number import PhoneNumber as PhoneNumber
 from .verification import Verification as Verification
 from .account_status import AccountStatus as AccountStatus
-from .message_params import MessageParams as MessageParams
 from .user_create_params import UserCreateParams as UserCreateParams
 from .user_update_params import UserUpdateParams as UserUpdateParams
 from .verification_check import VerificationCheck as VerificationCheck
