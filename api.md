@@ -35,7 +35,7 @@ Methods:
 Types:
 
 ```python
-from surge.types import Campaign
+from surge.types import Campaign, CampaignParams
 ```
 
 Methods:
