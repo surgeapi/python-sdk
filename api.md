@@ -61,7 +61,7 @@ Methods:
 Types:
 
 ```python
-from surge.types import Message
+from surge.types import Message, MessageParams
 ```
 
 Methods:

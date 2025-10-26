@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ..types import message_create_params
+from ..types import MessageParams, message_create_params
 from .._types import Body, Query, Headers, NotGiven, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -17,6 +17,7 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.message import Message
+from ..types.message_params import MessageParams
 
 __all__ = ["MessagesResource", "AsyncMessagesResource"]
 
@@ -45,7 +46,7 @@ class MessagesResource(SyncAPIResource):
         self,
         account_id: str,
         *,
-        params: message_create_params.Params,
+        params: MessageParams,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -131,7 +132,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         self,
         account_id: str,
         *,
-        params: message_create_params.Params,
+        params: MessageParams,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
