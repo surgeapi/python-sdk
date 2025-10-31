@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.3.1 (2025-10-31)
+
+Full Changelog: [v0.3.0...v0.3.1](https://github.com/surgeapi/python-sdk/compare/v0.3.0...v0.3.1)
+
+### Features
+
+* **api:** create externally registered campaigns ([2aaae37](https://github.com/surgeapi/python-sdk/commit/2aaae3778862c64d85485e2eb9b9c6508a87606c))
+
+
+### Bug Fixes
+
+* **client:** close streams without requiring full consumption ([46da11c](https://github.com/surgeapi/python-sdk/commit/46da11c9f87b0bf9b20f93fa97ea1abca8389a5c))
+
+
+### Chores
+
+* bump `httpx-aiohttp` version to 0.1.9 ([50983ab](https://github.com/surgeapi/python-sdk/commit/50983ab68d34871cea4ac5db3fc94a7da9373c6e))
+* **internal/tests:** avoid race condition with implicit client cleanup ([1785037](https://github.com/surgeapi/python-sdk/commit/17850379f87317638de53bd04492db2e7f3d2532))
+* **internal:** codegen related update ([e7eb248](https://github.com/surgeapi/python-sdk/commit/e7eb2485f250c6fe2108385a50c62cb56f547f73))
+* **internal:** detect missing future annotations with ruff ([3e0ad24](https://github.com/surgeapi/python-sdk/commit/3e0ad247d55004c3dc572f7b1bc611d24d362431))
+
+
+### Documentation
+
+* **api:** add context around organization contacts ([fb0897c](https://github.com/surgeapi/python-sdk/commit/fb0897ce5361bc708db7d1bb9e96eba573bb3d97))
+
 ## 0.3.0 (2025-10-09)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/surgeapi/python-sdk/compare/v0.2.0...v0.3.0)
