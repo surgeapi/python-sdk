@@ -1,8 +1,9 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Union
-from typing_extensions import TypeAlias
+from typing_extensions import Annotated, TypeAlias
 
+from .._utils import PropertyInfo
 from .call_ended_webhook_event import CallEndedWebhookEvent
 from .message_sent_webhook_event import MessageSentWebhookEvent
 from .message_failed_webhook_event import MessageFailedWebhookEvent
@@ -15,14 +16,17 @@ from .conversation_created_webhook_event import ConversationCreatedWebhookEvent
 
 __all__ = ["UnwrapWebhookEvent"]
 
-UnwrapWebhookEvent: TypeAlias = Union[
-    CallEndedWebhookEvent,
-    CampaignApprovedWebhookEvent,
-    ContactOptedInWebhookEvent,
-    ContactOptedOutWebhookEvent,
-    ConversationCreatedWebhookEvent,
-    MessageDeliveredWebhookEvent,
-    MessageFailedWebhookEvent,
-    MessageReceivedWebhookEvent,
-    MessageSentWebhookEvent,
+UnwrapWebhookEvent: TypeAlias = Annotated[
+    Union[
+        CallEndedWebhookEvent,
+        CampaignApprovedWebhookEvent,
+        ContactOptedInWebhookEvent,
+        ContactOptedOutWebhookEvent,
+        ConversationCreatedWebhookEvent,
+        MessageDeliveredWebhookEvent,
+        MessageFailedWebhookEvent,
+        MessageReceivedWebhookEvent,
+        MessageSentWebhookEvent,
+    ],
+    PropertyInfo(discriminator="type"),
 ]
