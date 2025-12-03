@@ -101,6 +101,7 @@ pip install surge-sdk[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from surge import DefaultAioHttpClient
 from surge import AsyncSurge
@@ -108,7 +109,7 @@ from surge import AsyncSurge
 
 async def main() -> None:
     async with AsyncSurge(
-        api_key="My API Key",
+        api_key=os.environ.get("SURGE_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         message = await client.messages.create(
