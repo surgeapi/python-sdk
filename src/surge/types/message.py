@@ -10,6 +10,8 @@ __all__ = ["Message", "Attachment", "Conversation", "ConversationPhoneNumber"]
 
 
 class Attachment(BaseModel):
+    """An Attachment is a file that can be sent with a message."""
+
     id: Optional[str] = None
     """Unique identifier for the object."""
 
@@ -21,6 +23,8 @@ class Attachment(BaseModel):
 
 
 class ConversationPhoneNumber(BaseModel):
+    """This is the phone number tied to the Surge account."""
+
     id: str
     """Unique identifier for the phone number"""
 
@@ -32,6 +36,8 @@ class ConversationPhoneNumber(BaseModel):
 
 
 class Conversation(BaseModel):
+    """A conversation with a Contact"""
+
     id: str
     """Unique identifier for the object."""
 
@@ -43,6 +49,8 @@ class Conversation(BaseModel):
 
 
 class Message(BaseModel):
+    """A Message is a communication sent to a Contact."""
+
     id: Optional[str] = None
     """Unique identifier for the object."""
 

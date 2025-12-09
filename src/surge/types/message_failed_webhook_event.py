@@ -12,6 +12,8 @@ __all__ = ["MessageFailedWebhookEvent", "Data", "DataConversation", "DataAttachm
 
 
 class DataConversation(BaseModel):
+    """The conversation this message belongs to"""
+
     id: str
     """The unique identifier for the conversation"""
 
@@ -34,6 +36,8 @@ class DataAttachment(BaseModel):
 
 
 class Data(BaseModel):
+    """The data associated with the event"""
+
     id: str
     """The unique identifier for the message"""
 

@@ -38,5 +38,7 @@ class BlastCreateParams(TypedDict, total=False):
 
 
 class Attachment(TypedDict, total=False):
+    """Params for creating an attachment"""
+
     url: Required[str]
     """The URL of the attachment."""

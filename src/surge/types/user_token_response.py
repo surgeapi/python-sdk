@@ -8,5 +8,7 @@ __all__ = ["UserTokenResponse"]
 
 
 class UserTokenResponse(BaseModel):
+    """Response when token has been created successfully"""
+
     token: Optional[str] = None
     """The created token."""

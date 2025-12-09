@@ -8,6 +8,8 @@ __all__ = ["PhoneNumber"]
 
 
 class PhoneNumber(BaseModel):
+    """A phone number that can be used to send and receive messages and calls"""
+
     id: str
     """Unique identifier for the phone number"""
 

@@ -9,6 +9,8 @@ __all__ = ["ContactOptedOutWebhookEvent", "Data"]
 
 
 class Data(BaseModel):
+    """The data associated with the event"""
+
     id: str
     """The unique identifier for the contact"""
 

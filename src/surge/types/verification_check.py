@@ -10,6 +10,8 @@ __all__ = ["VerificationCheck"]
 
 
 class VerificationCheck(BaseModel):
+    """The result of checking a Verification code"""
+
     result: Optional[Literal["ok", "incorrect", "exhausted", "expired", "already_verified"]] = None
     """The result of the code check."""
 

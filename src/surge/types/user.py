@@ -8,6 +8,8 @@ __all__ = ["User"]
 
 
 class User(BaseModel):
+    """A user of the app"""
+
     first_name: str
     """The user's first name."""
 
