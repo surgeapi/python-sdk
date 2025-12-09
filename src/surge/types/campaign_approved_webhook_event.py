@@ -9,6 +9,8 @@ __all__ = ["CampaignApprovedWebhookEvent", "Data"]
 
 
 class Data(BaseModel):
+    """The data associated with the event"""
+
     id: str
     """The unique identifier for the campaign"""
 

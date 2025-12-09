@@ -8,6 +8,8 @@ __all__ = ["Verification"]
 
 
 class Verification(BaseModel):
+    """A phone number verification"""
+
     id: str
     """Unique identifier for the object."""
 

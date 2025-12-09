@@ -39,6 +39,8 @@ class MessageParamsWithConversation(TypedDict, total=False):
 
 
 class MessageParamsWithConversationConversationContact(TypedDict, total=False):
+    """Parameters for creating a contact"""
+
     phone_number: Required[str]
     """The contact's phone number in E.164 format."""
 
@@ -56,6 +58,11 @@ class MessageParamsWithConversationConversationContact(TypedDict, total=False):
 
 
 class MessageParamsWithConversationConversation(TypedDict, total=False):
+    """Params for selecting or creating a new conversation.
+
+    Either the id or the Contact must be given.
+    """
+
     contact: Required[MessageParamsWithConversationConversationContact]
     """Parameters for creating a contact"""
 
@@ -67,6 +74,8 @@ class MessageParamsWithConversationConversation(TypedDict, total=False):
 
 
 class MessageParamsWithConversationAttachment(TypedDict, total=False):
+    """Params for creating an attachment"""
+
     url: Required[str]
     """The URL of the attachment."""
 
@@ -98,6 +107,8 @@ class SimpleMessageParams(TypedDict, total=False):
 
 
 class SimpleMessageParamsAttachment(TypedDict, total=False):
+    """Params for creating an attachment"""
+
     url: Required[str]
     """The URL of the attachment."""
 

@@ -10,6 +10,8 @@ __all__ = ["CallEndedWebhookEvent", "Data"]
 
 
 class Data(BaseModel):
+    """The data associated with the event"""
+
     id: str
     """The unique identifier for the call"""
 

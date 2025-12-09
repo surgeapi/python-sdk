@@ -14,6 +14,8 @@ class Attachment(BaseModel):
 
 
 class Blast(BaseModel):
+    """A Blast is a message sent to multiple recipients at once."""
+
     id: Optional[str] = None
     """Unique identifier for the object."""
 
