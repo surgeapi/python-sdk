@@ -8,6 +8,8 @@ __all__ = ["Error"]
 
 
 class Error(BaseModel):
+    """An error response"""
+
     message: str
     """A human-readable error message."""
 

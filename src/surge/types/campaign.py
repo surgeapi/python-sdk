@@ -9,6 +9,10 @@ __all__ = ["Campaign"]
 
 
 class Campaign(BaseModel):
+    """
+    A campaign represents the context in which one or more of your phone numbers communicates with your contacts. Consent and opt-outs are tied to the campaign.
+    """
+
     id: str
     """The campaign ID"""
 

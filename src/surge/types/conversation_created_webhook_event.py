@@ -11,6 +11,8 @@ __all__ = ["ConversationCreatedWebhookEvent", "Data"]
 
 
 class Data(BaseModel):
+    """The data associated with the event"""
+
     id: str
     """The unique identifier for the conversation"""
 

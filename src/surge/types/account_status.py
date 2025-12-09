@@ -44,6 +44,8 @@ class Capabilities(BaseModel):
 
 
 class AccountStatus(BaseModel):
+    """Response containing account status information"""
+
     capabilities: Dict[str, Capabilities]
     """
     An object where the fields are the capabilities passed in the `capabilities`

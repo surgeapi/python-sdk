@@ -8,6 +8,8 @@ __all__ = ["Contact"]
 
 
 class Contact(BaseModel):
+    """A contact who has consented to receive messages"""
+
     id: str
     """Unique identifier for the object."""
 

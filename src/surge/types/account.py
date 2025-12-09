@@ -9,6 +9,8 @@ __all__ = ["Account"]
 
 
 class Account(BaseModel):
+    """Response containing account information."""
+
     id: str
     """The account ID"""
 

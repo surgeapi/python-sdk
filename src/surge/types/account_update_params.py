@@ -35,6 +35,8 @@ class AccountUpdateParams(TypedDict, total=False):
 
 
 class OrganizationAddress(TypedDict, total=False):
+    """The address of the organization's headquarters."""
+
     country: Optional[str]
     """The two character ISO 3166 country code.
 
@@ -66,6 +68,10 @@ class OrganizationAddress(TypedDict, total=False):
 
 
 class OrganizationContact(TypedDict, total=False):
+    """
+    An object representing an individual who can be contacted if Surge or our carrier partners have any questions about the business. If you are registering on behalf of your customer, this must be a contact from your customer's company rather than your own. The individual will likely never be contacted unless there are issues with spam.
+    """
+
     email: Optional[str]
     """An email address at which the individual can be reached.
 
@@ -96,6 +102,10 @@ class OrganizationContact(TypedDict, total=False):
 
 
 class Organization(TypedDict, total=False):
+    """
+    Parameters describing the legal entity on whose behalf the account will be operated.
+    """
+
     address: OrganizationAddress
     """The address of the organization's headquarters."""
 

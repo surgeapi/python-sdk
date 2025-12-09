@@ -9,6 +9,8 @@ __all__ = ["Organization", "Address", "Contact"]
 
 
 class Address(BaseModel):
+    """The address of the organization's headquarters."""
+
     country: Optional[str] = None
     """The two character ISO 3166 country code.
 
@@ -40,6 +42,10 @@ class Address(BaseModel):
 
 
 class Contact(BaseModel):
+    """
+    An object representing an individual who can be contacted if the carriers have any questions about the business.
+    """
+
     email: Optional[str] = None
     """An email address at which the individual can be reached.
 
@@ -69,6 +75,8 @@ class Contact(BaseModel):
 
 
 class Organization(BaseModel):
+    """The legal entity on whose behalf the account will be operated."""
+
     address: Address
     """The address of the organization's headquarters."""
 
