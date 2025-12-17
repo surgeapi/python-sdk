@@ -144,6 +144,48 @@ class TestMessages:
                 to="+18015551234",
             )
 
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_retrieve(self, client: Surge) -> None:
+        message = client.messages.retrieve(
+            "msg_01j9e0m1m6fc38gsv2vkfqgzz2",
+        )
+        assert_matches_type(Message, message, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_retrieve(self, client: Surge) -> None:
+        response = client.messages.with_raw_response.retrieve(
+            "msg_01j9e0m1m6fc38gsv2vkfqgzz2",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        message = response.parse()
+        assert_matches_type(Message, message, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Surge) -> None:
+        with client.messages.with_streaming_response.retrieve(
+            "msg_01j9e0m1m6fc38gsv2vkfqgzz2",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            message = response.parse()
+            assert_matches_type(Message, message, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_retrieve(self, client: Surge) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.messages.with_raw_response.retrieve(
+                "",
+            )
+
 
 class TestAsyncMessages:
     parametrize = pytest.mark.parametrize(
@@ -274,4 +316,46 @@ class TestAsyncMessages:
             await async_client.messages.with_raw_response.create(
                 account_id="",
                 to="+18015551234",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_retrieve(self, async_client: AsyncSurge) -> None:
+        message = await async_client.messages.retrieve(
+            "msg_01j9e0m1m6fc38gsv2vkfqgzz2",
+        )
+        assert_matches_type(Message, message, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_retrieve(self, async_client: AsyncSurge) -> None:
+        response = await async_client.messages.with_raw_response.retrieve(
+            "msg_01j9e0m1m6fc38gsv2vkfqgzz2",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        message = await response.parse()
+        assert_matches_type(Message, message, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_retrieve(self, async_client: AsyncSurge) -> None:
+        async with async_client.messages.with_streaming_response.retrieve(
+            "msg_01j9e0m1m6fc38gsv2vkfqgzz2",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            message = await response.parse()
+            assert_matches_type(Message, message, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_retrieve(self, async_client: AsyncSurge) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.messages.with_raw_response.retrieve(
+                "",
             )

@@ -218,6 +218,41 @@ class MessagesResource(SyncAPIResource):
             cast_to=Message,
         )
 
+    def retrieve(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Message:
+        """
+        Retrieves a Message object.
+
+        Args:
+          id: The ID of the message to retrieve.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._get(
+            f"/messages/{id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Message,
+        )
+
 
 class AsyncMessagesResource(AsyncAPIResource):
     @cached_property
@@ -412,6 +447,41 @@ class AsyncMessagesResource(AsyncAPIResource):
             cast_to=Message,
         )
 
+    async def retrieve(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Message:
+        """
+        Retrieves a Message object.
+
+        Args:
+          id: The ID of the message to retrieve.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._get(
+            f"/messages/{id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Message,
+        )
+
 
 class MessagesResourceWithRawResponse:
     def __init__(self, messages: MessagesResource) -> None:
@@ -419,6 +489,9 @@ class MessagesResourceWithRawResponse:
 
         self.create = to_raw_response_wrapper(
             messages.create,
+        )
+        self.retrieve = to_raw_response_wrapper(
+            messages.retrieve,
         )
 
 
@@ -429,6 +502,9 @@ class AsyncMessagesResourceWithRawResponse:
         self.create = async_to_raw_response_wrapper(
             messages.create,
         )
+        self.retrieve = async_to_raw_response_wrapper(
+            messages.retrieve,
+        )
 
 
 class MessagesResourceWithStreamingResponse:
@@ -438,6 +514,9 @@ class MessagesResourceWithStreamingResponse:
         self.create = to_streamed_response_wrapper(
             messages.create,
         )
+        self.retrieve = to_streamed_response_wrapper(
+            messages.retrieve,
+        )
 
 
 class AsyncMessagesResourceWithStreamingResponse:
@@ -446,4 +525,7 @@ class AsyncMessagesResourceWithStreamingResponse:
 
         self.create = async_to_streamed_response_wrapper(
             messages.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            messages.retrieve,
         )
