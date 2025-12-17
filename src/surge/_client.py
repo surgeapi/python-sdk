@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -20,8 +20,8 @@ from ._types import (
     not_given,
 )
 from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
-from .resources import users, blasts, accounts, contacts, messages, webhooks, campaigns, phone_numbers, verifications
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import SurgeError, APIStatusError
 from ._base_client import (
@@ -30,22 +30,22 @@ from ._base_client import (
     AsyncAPIClient,
 )
 
+if TYPE_CHECKING:
+    from .resources import users, blasts, accounts, contacts, messages, campaigns, phone_numbers, verifications
+    from .resources.users import UsersResource, AsyncUsersResource
+    from .resources.blasts import BlastsResource, AsyncBlastsResource
+    from .resources.accounts import AccountsResource, AsyncAccountsResource
+    from .resources.contacts import ContactsResource, AsyncContactsResource
+    from .resources.messages import MessagesResource, AsyncMessagesResource
+    from .resources.webhooks import WebhooksResource, AsyncWebhooksResource
+    from .resources.campaigns import CampaignsResource, AsyncCampaignsResource
+    from .resources.phone_numbers import PhoneNumbersResource, AsyncPhoneNumbersResource
+    from .resources.verifications import VerificationsResource, AsyncVerificationsResource
+
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Surge", "AsyncSurge", "Client", "AsyncClient"]
 
 
 class Surge(SyncAPIClient):
-    accounts: accounts.AccountsResource
-    blasts: blasts.BlastsResource
-    campaigns: campaigns.CampaignsResource
-    contacts: contacts.ContactsResource
-    messages: messages.MessagesResource
-    phone_numbers: phone_numbers.PhoneNumbersResource
-    users: users.UsersResource
-    verifications: verifications.VerificationsResource
-    webhooks: webhooks.WebhooksResource
-    with_raw_response: SurgeWithRawResponse
-    with_streaming_response: SurgeWithStreamedResponse
-
     # client options
     api_key: str
     webhook_signing_secret: str | None
@@ -108,17 +108,67 @@ class Surge(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.accounts = accounts.AccountsResource(self)
-        self.blasts = blasts.BlastsResource(self)
-        self.campaigns = campaigns.CampaignsResource(self)
-        self.contacts = contacts.ContactsResource(self)
-        self.messages = messages.MessagesResource(self)
-        self.phone_numbers = phone_numbers.PhoneNumbersResource(self)
-        self.users = users.UsersResource(self)
-        self.verifications = verifications.VerificationsResource(self)
-        self.webhooks = webhooks.WebhooksResource(self)
-        self.with_raw_response = SurgeWithRawResponse(self)
-        self.with_streaming_response = SurgeWithStreamedResponse(self)
+    @cached_property
+    def accounts(self) -> AccountsResource:
+        from .resources.accounts import AccountsResource
+
+        return AccountsResource(self)
+
+    @cached_property
+    def blasts(self) -> BlastsResource:
+        from .resources.blasts import BlastsResource
+
+        return BlastsResource(self)
+
+    @cached_property
+    def campaigns(self) -> CampaignsResource:
+        from .resources.campaigns import CampaignsResource
+
+        return CampaignsResource(self)
+
+    @cached_property
+    def contacts(self) -> ContactsResource:
+        from .resources.contacts import ContactsResource
+
+        return ContactsResource(self)
+
+    @cached_property
+    def messages(self) -> MessagesResource:
+        from .resources.messages import MessagesResource
+
+        return MessagesResource(self)
+
+    @cached_property
+    def phone_numbers(self) -> PhoneNumbersResource:
+        from .resources.phone_numbers import PhoneNumbersResource
+
+        return PhoneNumbersResource(self)
+
+    @cached_property
+    def users(self) -> UsersResource:
+        from .resources.users import UsersResource
+
+        return UsersResource(self)
+
+    @cached_property
+    def verifications(self) -> VerificationsResource:
+        from .resources.verifications import VerificationsResource
+
+        return VerificationsResource(self)
+
+    @cached_property
+    def webhooks(self) -> WebhooksResource:
+        from .resources.webhooks import WebhooksResource
+
+        return WebhooksResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> SurgeWithRawResponse:
+        return SurgeWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> SurgeWithStreamedResponse:
+        return SurgeWithStreamedResponse(self)
 
     @property
     @override
@@ -228,18 +278,6 @@ class Surge(SyncAPIClient):
 
 
 class AsyncSurge(AsyncAPIClient):
-    accounts: accounts.AsyncAccountsResource
-    blasts: blasts.AsyncBlastsResource
-    campaigns: campaigns.AsyncCampaignsResource
-    contacts: contacts.AsyncContactsResource
-    messages: messages.AsyncMessagesResource
-    phone_numbers: phone_numbers.AsyncPhoneNumbersResource
-    users: users.AsyncUsersResource
-    verifications: verifications.AsyncVerificationsResource
-    webhooks: webhooks.AsyncWebhooksResource
-    with_raw_response: AsyncSurgeWithRawResponse
-    with_streaming_response: AsyncSurgeWithStreamedResponse
-
     # client options
     api_key: str
     webhook_signing_secret: str | None
@@ -302,17 +340,67 @@ class AsyncSurge(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.accounts = accounts.AsyncAccountsResource(self)
-        self.blasts = blasts.AsyncBlastsResource(self)
-        self.campaigns = campaigns.AsyncCampaignsResource(self)
-        self.contacts = contacts.AsyncContactsResource(self)
-        self.messages = messages.AsyncMessagesResource(self)
-        self.phone_numbers = phone_numbers.AsyncPhoneNumbersResource(self)
-        self.users = users.AsyncUsersResource(self)
-        self.verifications = verifications.AsyncVerificationsResource(self)
-        self.webhooks = webhooks.AsyncWebhooksResource(self)
-        self.with_raw_response = AsyncSurgeWithRawResponse(self)
-        self.with_streaming_response = AsyncSurgeWithStreamedResponse(self)
+    @cached_property
+    def accounts(self) -> AsyncAccountsResource:
+        from .resources.accounts import AsyncAccountsResource
+
+        return AsyncAccountsResource(self)
+
+    @cached_property
+    def blasts(self) -> AsyncBlastsResource:
+        from .resources.blasts import AsyncBlastsResource
+
+        return AsyncBlastsResource(self)
+
+    @cached_property
+    def campaigns(self) -> AsyncCampaignsResource:
+        from .resources.campaigns import AsyncCampaignsResource
+
+        return AsyncCampaignsResource(self)
+
+    @cached_property
+    def contacts(self) -> AsyncContactsResource:
+        from .resources.contacts import AsyncContactsResource
+
+        return AsyncContactsResource(self)
+
+    @cached_property
+    def messages(self) -> AsyncMessagesResource:
+        from .resources.messages import AsyncMessagesResource
+
+        return AsyncMessagesResource(self)
+
+    @cached_property
+    def phone_numbers(self) -> AsyncPhoneNumbersResource:
+        from .resources.phone_numbers import AsyncPhoneNumbersResource
+
+        return AsyncPhoneNumbersResource(self)
+
+    @cached_property
+    def users(self) -> AsyncUsersResource:
+        from .resources.users import AsyncUsersResource
+
+        return AsyncUsersResource(self)
+
+    @cached_property
+    def verifications(self) -> AsyncVerificationsResource:
+        from .resources.verifications import AsyncVerificationsResource
+
+        return AsyncVerificationsResource(self)
+
+    @cached_property
+    def webhooks(self) -> AsyncWebhooksResource:
+        from .resources.webhooks import AsyncWebhooksResource
+
+        return AsyncWebhooksResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncSurgeWithRawResponse:
+        return AsyncSurgeWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncSurgeWithStreamedResponse:
+        return AsyncSurgeWithStreamedResponse(self)
 
     @property
     @override
@@ -422,51 +510,223 @@ class AsyncSurge(AsyncAPIClient):
 
 
 class SurgeWithRawResponse:
+    _client: Surge
+
     def __init__(self, client: Surge) -> None:
-        self.accounts = accounts.AccountsResourceWithRawResponse(client.accounts)
-        self.blasts = blasts.BlastsResourceWithRawResponse(client.blasts)
-        self.campaigns = campaigns.CampaignsResourceWithRawResponse(client.campaigns)
-        self.contacts = contacts.ContactsResourceWithRawResponse(client.contacts)
-        self.messages = messages.MessagesResourceWithRawResponse(client.messages)
-        self.phone_numbers = phone_numbers.PhoneNumbersResourceWithRawResponse(client.phone_numbers)
-        self.users = users.UsersResourceWithRawResponse(client.users)
-        self.verifications = verifications.VerificationsResourceWithRawResponse(client.verifications)
+        self._client = client
+
+    @cached_property
+    def accounts(self) -> accounts.AccountsResourceWithRawResponse:
+        from .resources.accounts import AccountsResourceWithRawResponse
+
+        return AccountsResourceWithRawResponse(self._client.accounts)
+
+    @cached_property
+    def blasts(self) -> blasts.BlastsResourceWithRawResponse:
+        from .resources.blasts import BlastsResourceWithRawResponse
+
+        return BlastsResourceWithRawResponse(self._client.blasts)
+
+    @cached_property
+    def campaigns(self) -> campaigns.CampaignsResourceWithRawResponse:
+        from .resources.campaigns import CampaignsResourceWithRawResponse
+
+        return CampaignsResourceWithRawResponse(self._client.campaigns)
+
+    @cached_property
+    def contacts(self) -> contacts.ContactsResourceWithRawResponse:
+        from .resources.contacts import ContactsResourceWithRawResponse
+
+        return ContactsResourceWithRawResponse(self._client.contacts)
+
+    @cached_property
+    def messages(self) -> messages.MessagesResourceWithRawResponse:
+        from .resources.messages import MessagesResourceWithRawResponse
+
+        return MessagesResourceWithRawResponse(self._client.messages)
+
+    @cached_property
+    def phone_numbers(self) -> phone_numbers.PhoneNumbersResourceWithRawResponse:
+        from .resources.phone_numbers import PhoneNumbersResourceWithRawResponse
+
+        return PhoneNumbersResourceWithRawResponse(self._client.phone_numbers)
+
+    @cached_property
+    def users(self) -> users.UsersResourceWithRawResponse:
+        from .resources.users import UsersResourceWithRawResponse
+
+        return UsersResourceWithRawResponse(self._client.users)
+
+    @cached_property
+    def verifications(self) -> verifications.VerificationsResourceWithRawResponse:
+        from .resources.verifications import VerificationsResourceWithRawResponse
+
+        return VerificationsResourceWithRawResponse(self._client.verifications)
 
 
 class AsyncSurgeWithRawResponse:
+    _client: AsyncSurge
+
     def __init__(self, client: AsyncSurge) -> None:
-        self.accounts = accounts.AsyncAccountsResourceWithRawResponse(client.accounts)
-        self.blasts = blasts.AsyncBlastsResourceWithRawResponse(client.blasts)
-        self.campaigns = campaigns.AsyncCampaignsResourceWithRawResponse(client.campaigns)
-        self.contacts = contacts.AsyncContactsResourceWithRawResponse(client.contacts)
-        self.messages = messages.AsyncMessagesResourceWithRawResponse(client.messages)
-        self.phone_numbers = phone_numbers.AsyncPhoneNumbersResourceWithRawResponse(client.phone_numbers)
-        self.users = users.AsyncUsersResourceWithRawResponse(client.users)
-        self.verifications = verifications.AsyncVerificationsResourceWithRawResponse(client.verifications)
+        self._client = client
+
+    @cached_property
+    def accounts(self) -> accounts.AsyncAccountsResourceWithRawResponse:
+        from .resources.accounts import AsyncAccountsResourceWithRawResponse
+
+        return AsyncAccountsResourceWithRawResponse(self._client.accounts)
+
+    @cached_property
+    def blasts(self) -> blasts.AsyncBlastsResourceWithRawResponse:
+        from .resources.blasts import AsyncBlastsResourceWithRawResponse
+
+        return AsyncBlastsResourceWithRawResponse(self._client.blasts)
+
+    @cached_property
+    def campaigns(self) -> campaigns.AsyncCampaignsResourceWithRawResponse:
+        from .resources.campaigns import AsyncCampaignsResourceWithRawResponse
+
+        return AsyncCampaignsResourceWithRawResponse(self._client.campaigns)
+
+    @cached_property
+    def contacts(self) -> contacts.AsyncContactsResourceWithRawResponse:
+        from .resources.contacts import AsyncContactsResourceWithRawResponse
+
+        return AsyncContactsResourceWithRawResponse(self._client.contacts)
+
+    @cached_property
+    def messages(self) -> messages.AsyncMessagesResourceWithRawResponse:
+        from .resources.messages import AsyncMessagesResourceWithRawResponse
+
+        return AsyncMessagesResourceWithRawResponse(self._client.messages)
+
+    @cached_property
+    def phone_numbers(self) -> phone_numbers.AsyncPhoneNumbersResourceWithRawResponse:
+        from .resources.phone_numbers import AsyncPhoneNumbersResourceWithRawResponse
+
+        return AsyncPhoneNumbersResourceWithRawResponse(self._client.phone_numbers)
+
+    @cached_property
+    def users(self) -> users.AsyncUsersResourceWithRawResponse:
+        from .resources.users import AsyncUsersResourceWithRawResponse
+
+        return AsyncUsersResourceWithRawResponse(self._client.users)
+
+    @cached_property
+    def verifications(self) -> verifications.AsyncVerificationsResourceWithRawResponse:
+        from .resources.verifications import AsyncVerificationsResourceWithRawResponse
+
+        return AsyncVerificationsResourceWithRawResponse(self._client.verifications)
 
 
 class SurgeWithStreamedResponse:
+    _client: Surge
+
     def __init__(self, client: Surge) -> None:
-        self.accounts = accounts.AccountsResourceWithStreamingResponse(client.accounts)
-        self.blasts = blasts.BlastsResourceWithStreamingResponse(client.blasts)
-        self.campaigns = campaigns.CampaignsResourceWithStreamingResponse(client.campaigns)
-        self.contacts = contacts.ContactsResourceWithStreamingResponse(client.contacts)
-        self.messages = messages.MessagesResourceWithStreamingResponse(client.messages)
-        self.phone_numbers = phone_numbers.PhoneNumbersResourceWithStreamingResponse(client.phone_numbers)
-        self.users = users.UsersResourceWithStreamingResponse(client.users)
-        self.verifications = verifications.VerificationsResourceWithStreamingResponse(client.verifications)
+        self._client = client
+
+    @cached_property
+    def accounts(self) -> accounts.AccountsResourceWithStreamingResponse:
+        from .resources.accounts import AccountsResourceWithStreamingResponse
+
+        return AccountsResourceWithStreamingResponse(self._client.accounts)
+
+    @cached_property
+    def blasts(self) -> blasts.BlastsResourceWithStreamingResponse:
+        from .resources.blasts import BlastsResourceWithStreamingResponse
+
+        return BlastsResourceWithStreamingResponse(self._client.blasts)
+
+    @cached_property
+    def campaigns(self) -> campaigns.CampaignsResourceWithStreamingResponse:
+        from .resources.campaigns import CampaignsResourceWithStreamingResponse
+
+        return CampaignsResourceWithStreamingResponse(self._client.campaigns)
+
+    @cached_property
+    def contacts(self) -> contacts.ContactsResourceWithStreamingResponse:
+        from .resources.contacts import ContactsResourceWithStreamingResponse
+
+        return ContactsResourceWithStreamingResponse(self._client.contacts)
+
+    @cached_property
+    def messages(self) -> messages.MessagesResourceWithStreamingResponse:
+        from .resources.messages import MessagesResourceWithStreamingResponse
+
+        return MessagesResourceWithStreamingResponse(self._client.messages)
+
+    @cached_property
+    def phone_numbers(self) -> phone_numbers.PhoneNumbersResourceWithStreamingResponse:
+        from .resources.phone_numbers import PhoneNumbersResourceWithStreamingResponse
+
+        return PhoneNumbersResourceWithStreamingResponse(self._client.phone_numbers)
+
+    @cached_property
+    def users(self) -> users.UsersResourceWithStreamingResponse:
+        from .resources.users import UsersResourceWithStreamingResponse
+
+        return UsersResourceWithStreamingResponse(self._client.users)
+
+    @cached_property
+    def verifications(self) -> verifications.VerificationsResourceWithStreamingResponse:
+        from .resources.verifications import VerificationsResourceWithStreamingResponse
+
+        return VerificationsResourceWithStreamingResponse(self._client.verifications)
 
 
 class AsyncSurgeWithStreamedResponse:
+    _client: AsyncSurge
+
     def __init__(self, client: AsyncSurge) -> None:
-        self.accounts = accounts.AsyncAccountsResourceWithStreamingResponse(client.accounts)
-        self.blasts = blasts.AsyncBlastsResourceWithStreamingResponse(client.blasts)
-        self.campaigns = campaigns.AsyncCampaignsResourceWithStreamingResponse(client.campaigns)
-        self.contacts = contacts.AsyncContactsResourceWithStreamingResponse(client.contacts)
-        self.messages = messages.AsyncMessagesResourceWithStreamingResponse(client.messages)
-        self.phone_numbers = phone_numbers.AsyncPhoneNumbersResourceWithStreamingResponse(client.phone_numbers)
-        self.users = users.AsyncUsersResourceWithStreamingResponse(client.users)
-        self.verifications = verifications.AsyncVerificationsResourceWithStreamingResponse(client.verifications)
+        self._client = client
+
+    @cached_property
+    def accounts(self) -> accounts.AsyncAccountsResourceWithStreamingResponse:
+        from .resources.accounts import AsyncAccountsResourceWithStreamingResponse
+
+        return AsyncAccountsResourceWithStreamingResponse(self._client.accounts)
+
+    @cached_property
+    def blasts(self) -> blasts.AsyncBlastsResourceWithStreamingResponse:
+        from .resources.blasts import AsyncBlastsResourceWithStreamingResponse
+
+        return AsyncBlastsResourceWithStreamingResponse(self._client.blasts)
+
+    @cached_property
+    def campaigns(self) -> campaigns.AsyncCampaignsResourceWithStreamingResponse:
+        from .resources.campaigns import AsyncCampaignsResourceWithStreamingResponse
+
+        return AsyncCampaignsResourceWithStreamingResponse(self._client.campaigns)
+
+    @cached_property
+    def contacts(self) -> contacts.AsyncContactsResourceWithStreamingResponse:
+        from .resources.contacts import AsyncContactsResourceWithStreamingResponse
+
+        return AsyncContactsResourceWithStreamingResponse(self._client.contacts)
+
+    @cached_property
+    def messages(self) -> messages.AsyncMessagesResourceWithStreamingResponse:
+        from .resources.messages import AsyncMessagesResourceWithStreamingResponse
+
+        return AsyncMessagesResourceWithStreamingResponse(self._client.messages)
+
+    @cached_property
+    def phone_numbers(self) -> phone_numbers.AsyncPhoneNumbersResourceWithStreamingResponse:
+        from .resources.phone_numbers import AsyncPhoneNumbersResourceWithStreamingResponse
+
+        return AsyncPhoneNumbersResourceWithStreamingResponse(self._client.phone_numbers)
+
+    @cached_property
+    def users(self) -> users.AsyncUsersResourceWithStreamingResponse:
+        from .resources.users import AsyncUsersResourceWithStreamingResponse
+
+        return AsyncUsersResourceWithStreamingResponse(self._client.users)
+
+    @cached_property
+    def verifications(self) -> verifications.AsyncVerificationsResourceWithStreamingResponse:
+        from .resources.verifications import AsyncVerificationsResourceWithStreamingResponse
+
+        return AsyncVerificationsResourceWithStreamingResponse(self._client.verifications)
 
 
 Client = Surge
