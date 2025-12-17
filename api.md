@@ -67,6 +67,7 @@ from surge.types import Message
 Methods:
 
 - <code title="post /accounts/{account_id}/messages">client.messages.<a href="./src/surge/resources/messages.py">create</a>(account_id, \*\*<a href="src/surge/types/message_create_params.py">params</a>) -> <a href="./src/surge/types/message.py">Message</a></code>
+- <code title="get /messages/{id}">client.messages.<a href="./src/surge/resources/messages.py">retrieve</a>(id) -> <a href="./src/surge/types/message.py">Message</a></code>
 
 # PhoneNumbers
 
