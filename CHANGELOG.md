@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.5.0 (2026-01-09)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/surgeapi/python-sdk/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **api:** add archive account endpoint ([ac52910](https://github.com/surgeapi/python-sdk/commit/ac52910b127e1691a752d8a8b8555d0cc8b7d6c6))
+
+
+### Bug Fixes
+
+* use async_to_httpx_files in patch method ([ba4b8d7](https://github.com/surgeapi/python-sdk/commit/ba4b8d75e30520955e90b68bd1476e62f57e0aac))
+
+
+### Chores
+
+* **internal:** add `--fix` argument to lint script ([c47bbfb](https://github.com/surgeapi/python-sdk/commit/c47bbfb4de382eae8fef2424d737798671939f27))
+* **internal:** codegen related update ([c5e779b](https://github.com/surgeapi/python-sdk/commit/c5e779bde9a46405b994dab6b201feb03aa4956b))
+
 ## 0.4.0 (2025-12-17)
 
 Full Changelog: [v0.3.1...v0.4.0](https://github.com/surgeapi/python-sdk/compare/v0.3.1...v0.4.0)
