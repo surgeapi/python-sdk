@@ -16,6 +16,7 @@ Methods:
 
 - <code title="post /accounts">client.accounts.<a href="./src/surge/resources/accounts.py">create</a>(\*\*<a href="src/surge/types/account_create_params.py">params</a>) -> <a href="./src/surge/types/account.py">Account</a></code>
 - <code title="patch /accounts/{id}">client.accounts.<a href="./src/surge/resources/accounts.py">update</a>(id, \*\*<a href="src/surge/types/account_update_params.py">params</a>) -> <a href="./src/surge/types/account.py">Account</a></code>
+- <code title="delete /accounts/{id}">client.accounts.<a href="./src/surge/resources/accounts.py">archive</a>(id) -> <a href="./src/surge/types/account.py">Account</a></code>
 - <code title="get /accounts/{account_id}/status">client.accounts.<a href="./src/surge/resources/accounts.py">retrieve_status</a>(account_id, \*\*<a href="src/surge/types/account_retrieve_status_params.py">params</a>) -> <a href="./src/surge/types/account_status.py">AccountStatus</a></code>
 
 # Blasts
