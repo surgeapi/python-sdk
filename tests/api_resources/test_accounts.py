@@ -181,6 +181,48 @@ class TestAccounts:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    def test_method_archive(self, client: Surge) -> None:
+        account = client.accounts.archive(
+            "acct_01jpqjvfg9enpt7pyxd60pcmxj",
+        )
+        assert_matches_type(Account, account, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_archive(self, client: Surge) -> None:
+        response = client.accounts.with_raw_response.archive(
+            "acct_01jpqjvfg9enpt7pyxd60pcmxj",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account = response.parse()
+        assert_matches_type(Account, account, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_archive(self, client: Surge) -> None:
+        with client.accounts.with_streaming_response.archive(
+            "acct_01jpqjvfg9enpt7pyxd60pcmxj",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account = response.parse()
+            assert_matches_type(Account, account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_archive(self, client: Surge) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.accounts.with_raw_response.archive(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     def test_method_retrieve_status(self, client: Surge) -> None:
         account = client.accounts.retrieve_status(
             account_id="acct_01jpqjvfg9enpt7pyxd60pcmxj",
@@ -393,6 +435,48 @@ class TestAsyncAccounts:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.accounts.with_raw_response.update(
                 id="",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_archive(self, async_client: AsyncSurge) -> None:
+        account = await async_client.accounts.archive(
+            "acct_01jpqjvfg9enpt7pyxd60pcmxj",
+        )
+        assert_matches_type(Account, account, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_archive(self, async_client: AsyncSurge) -> None:
+        response = await async_client.accounts.with_raw_response.archive(
+            "acct_01jpqjvfg9enpt7pyxd60pcmxj",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account = await response.parse()
+        assert_matches_type(Account, account, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_archive(self, async_client: AsyncSurge) -> None:
+        async with async_client.accounts.with_streaming_response.archive(
+            "acct_01jpqjvfg9enpt7pyxd60pcmxj",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account = await response.parse()
+            assert_matches_type(Account, account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_archive(self, async_client: AsyncSurge) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.accounts.with_raw_response.archive(
+                "",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")

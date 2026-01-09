@@ -165,6 +165,50 @@ class AccountsResource(SyncAPIResource):
             cast_to=Account,
         )
 
+    def archive(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Account:
+        """
+        Archives an account and releases all associated resources.
+
+        **Warning**: This action will:
+
+        - Release all phone numbers associated with the account
+        - Deactivate all campaigns
+        - Make the account unusable for sending messages
+
+        This operation is irreversible. If you need to send SMS in the future, you will
+        need to re-register new phone numbers and campaigns.
+
+        Args:
+          id: The ID of the account to archive.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._delete(
+            f"/accounts/{id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Account,
+        )
+
     def retrieve_status(
         self,
         account_id: str,
@@ -350,6 +394,50 @@ class AsyncAccountsResource(AsyncAPIResource):
             cast_to=Account,
         )
 
+    async def archive(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Account:
+        """
+        Archives an account and releases all associated resources.
+
+        **Warning**: This action will:
+
+        - Release all phone numbers associated with the account
+        - Deactivate all campaigns
+        - Make the account unusable for sending messages
+
+        This operation is irreversible. If you need to send SMS in the future, you will
+        need to re-register new phone numbers and campaigns.
+
+        Args:
+          id: The ID of the account to archive.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._delete(
+            f"/accounts/{id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Account,
+        )
+
     async def retrieve_status(
         self,
         account_id: str,
@@ -405,6 +493,9 @@ class AccountsResourceWithRawResponse:
         self.update = to_raw_response_wrapper(
             accounts.update,
         )
+        self.archive = to_raw_response_wrapper(
+            accounts.archive,
+        )
         self.retrieve_status = to_raw_response_wrapper(
             accounts.retrieve_status,
         )
@@ -419,6 +510,9 @@ class AsyncAccountsResourceWithRawResponse:
         )
         self.update = async_to_raw_response_wrapper(
             accounts.update,
+        )
+        self.archive = async_to_raw_response_wrapper(
+            accounts.archive,
         )
         self.retrieve_status = async_to_raw_response_wrapper(
             accounts.retrieve_status,
@@ -435,6 +529,9 @@ class AccountsResourceWithStreamingResponse:
         self.update = to_streamed_response_wrapper(
             accounts.update,
         )
+        self.archive = to_streamed_response_wrapper(
+            accounts.archive,
+        )
         self.retrieve_status = to_streamed_response_wrapper(
             accounts.retrieve_status,
         )
@@ -449,6 +546,9 @@ class AsyncAccountsResourceWithStreamingResponse:
         )
         self.update = async_to_streamed_response_wrapper(
             accounts.update,
+        )
+        self.archive = async_to_streamed_response_wrapper(
+            accounts.archive,
         )
         self.retrieve_status = async_to_streamed_response_wrapper(
             accounts.retrieve_status,
