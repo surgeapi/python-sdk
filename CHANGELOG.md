@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.0 (2026-01-15)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/surgeapi/python-sdk/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** add delete user endpoint ([621a07f](https://github.com/surgeapi/python-sdk/commit/621a07f73f9a342b51c9cdd37e5263b86514749e))
+* **client:** add support for binary request streaming ([f0b5766](https://github.com/surgeapi/python-sdk/commit/f0b5766fbf7f2b695b62e7f74472a93895a14223))
+
 ## 0.5.0 (2026-01-09)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/surgeapi/python-sdk/compare/v0.4.0...v0.5.0)
