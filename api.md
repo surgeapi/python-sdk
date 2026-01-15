@@ -95,6 +95,7 @@ Methods:
 - <code title="post /accounts/{account_id}/users">client.users.<a href="./src/surge/resources/users.py">create</a>(account_id, \*\*<a href="src/surge/types/user_create_params.py">params</a>) -> <a href="./src/surge/types/user.py">User</a></code>
 - <code title="get /users/{id}">client.users.<a href="./src/surge/resources/users.py">retrieve</a>(id) -> <a href="./src/surge/types/user.py">User</a></code>
 - <code title="patch /users/{id}">client.users.<a href="./src/surge/resources/users.py">update</a>(id, \*\*<a href="src/surge/types/user_update_params.py">params</a>) -> <a href="./src/surge/types/user.py">User</a></code>
+- <code title="delete /users/{id}">client.users.<a href="./src/surge/resources/users.py">delete</a>(id) -> <a href="./src/surge/types/user.py">User</a></code>
 - <code title="post /users/{user_id}/tokens">client.users.<a href="./src/surge/resources/users.py">create_token</a>(user_id, \*\*<a href="src/surge/types/user_create_token_params.py">params</a>) -> <a href="./src/surge/types/user_token_response.py">UserTokenResponse</a></code>
 
 # Verifications

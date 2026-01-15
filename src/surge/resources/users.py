@@ -191,6 +191,45 @@ class UsersResource(SyncAPIResource):
             cast_to=User,
         )
 
+    def delete(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> User:
+        """
+        Deletes a user.
+
+        Once a user has been deleted, they will no longer be permitted to access any of
+        the embedded components. Attempting to access a deleted user will return a 404
+        Not Found error.
+
+        Args:
+          id: The ID of the user to delete.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._delete(
+            f"/users/{id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=User,
+        )
+
     def create_token(
         self,
         user_id: str,
@@ -401,6 +440,45 @@ class AsyncUsersResource(AsyncAPIResource):
             cast_to=User,
         )
 
+    async def delete(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> User:
+        """
+        Deletes a user.
+
+        Once a user has been deleted, they will no longer be permitted to access any of
+        the embedded components. Attempting to access a deleted user will return a 404
+        Not Found error.
+
+        Args:
+          id: The ID of the user to delete.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._delete(
+            f"/users/{id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=User,
+        )
+
     async def create_token(
         self,
         user_id: str,
@@ -457,6 +535,9 @@ class UsersResourceWithRawResponse:
         self.update = to_raw_response_wrapper(
             users.update,
         )
+        self.delete = to_raw_response_wrapper(
+            users.delete,
+        )
         self.create_token = to_raw_response_wrapper(
             users.create_token,
         )
@@ -474,6 +555,9 @@ class AsyncUsersResourceWithRawResponse:
         )
         self.update = async_to_raw_response_wrapper(
             users.update,
+        )
+        self.delete = async_to_raw_response_wrapper(
+            users.delete,
         )
         self.create_token = async_to_raw_response_wrapper(
             users.create_token,
@@ -493,6 +577,9 @@ class UsersResourceWithStreamingResponse:
         self.update = to_streamed_response_wrapper(
             users.update,
         )
+        self.delete = to_streamed_response_wrapper(
+            users.delete,
+        )
         self.create_token = to_streamed_response_wrapper(
             users.create_token,
         )
@@ -510,6 +597,9 @@ class AsyncUsersResourceWithStreamingResponse:
         )
         self.update = async_to_streamed_response_wrapper(
             users.update,
+        )
+        self.delete = async_to_streamed_response_wrapper(
+            users.delete,
         )
         self.create_token = async_to_streamed_response_wrapper(
             users.create_token,
