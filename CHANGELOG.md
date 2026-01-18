@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.7.0 (2026-01-18)
+
+Full Changelog: [v0.6.0...v0.7.0](https://github.com/surgeapi/python-sdk/compare/v0.6.0...v0.7.0)
+
+### Features
+
+* **api:** api update ([5ddec3e](https://github.com/surgeapi/python-sdk/commit/5ddec3e114ce0b8d027cbfd694bdf98b3e8594ad))
+
+
+### Chores
+
+* **internal:** update `actions/checkout` version ([962b119](https://github.com/surgeapi/python-sdk/commit/962b11979229dc82946389f638fd242495794391))
+
 ## 0.6.0 (2026-01-15)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/surgeapi/python-sdk/compare/v0.5.0...v0.6.0)
