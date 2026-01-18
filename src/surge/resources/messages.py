@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
+from typing import Dict, Union, Iterable
 from datetime import datetime
 from typing_extensions import overload
 
@@ -53,6 +53,7 @@ class MessagesResource(SyncAPIResource):
         conversation: message_create_params.MessageParamsWithConversationConversation,
         attachments: Iterable[message_create_params.MessageParamsWithConversationAttachment] | Omit = omit,
         body: str | Omit = omit,
+        metadata: Dict[str, str] | Omit = omit,
         send_at: Union[str, datetime] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -96,6 +97,8 @@ class MessagesResource(SyncAPIResource):
 
           body: The message body.
 
+          metadata: Set of key-value pairs that will be stored with the object.
+
           send_at: An optional datetime for scheduling message up to a couple of months in the
               future.
 
@@ -118,6 +121,7 @@ class MessagesResource(SyncAPIResource):
         attachments: Iterable[message_create_params.SimpleMessageParamsAttachment] | Omit = omit,
         body: str | Omit = omit,
         from_: str | Omit = omit,
+        metadata: Dict[str, str] | Omit = omit,
         send_at: Union[str, datetime] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -164,6 +168,8 @@ class MessagesResource(SyncAPIResource):
           from_: The sender's phone number in E.164 format or phone number ID. If omitted, uses
               the account's default phone number. Cannot be used together with 'conversation'.
 
+          metadata: Set of key-value pairs that will be stored with the object.
+
           send_at: An optional datetime for scheduling message up to a couple of months in the
               future.
 
@@ -187,6 +193,7 @@ class MessagesResource(SyncAPIResource):
         | Iterable[message_create_params.SimpleMessageParamsAttachment]
         | Omit = omit,
         body: str | Omit = omit,
+        metadata: Dict[str, str] | Omit = omit,
         send_at: Union[str, datetime] | Omit = omit,
         to: str | Omit = omit,
         from_: str | Omit = omit,
@@ -206,6 +213,7 @@ class MessagesResource(SyncAPIResource):
                     "conversation": conversation,
                     "attachments": attachments,
                     "body": body,
+                    "metadata": metadata,
                     "send_at": send_at,
                     "to": to,
                     "from_": from_,
@@ -282,6 +290,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         conversation: message_create_params.MessageParamsWithConversationConversation,
         attachments: Iterable[message_create_params.MessageParamsWithConversationAttachment] | Omit = omit,
         body: str | Omit = omit,
+        metadata: Dict[str, str] | Omit = omit,
         send_at: Union[str, datetime] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -325,6 +334,8 @@ class AsyncMessagesResource(AsyncAPIResource):
 
           body: The message body.
 
+          metadata: Set of key-value pairs that will be stored with the object.
+
           send_at: An optional datetime for scheduling message up to a couple of months in the
               future.
 
@@ -347,6 +358,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         attachments: Iterable[message_create_params.SimpleMessageParamsAttachment] | Omit = omit,
         body: str | Omit = omit,
         from_: str | Omit = omit,
+        metadata: Dict[str, str] | Omit = omit,
         send_at: Union[str, datetime] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -393,6 +405,8 @@ class AsyncMessagesResource(AsyncAPIResource):
           from_: The sender's phone number in E.164 format or phone number ID. If omitted, uses
               the account's default phone number. Cannot be used together with 'conversation'.
 
+          metadata: Set of key-value pairs that will be stored with the object.
+
           send_at: An optional datetime for scheduling message up to a couple of months in the
               future.
 
@@ -416,6 +430,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         | Iterable[message_create_params.SimpleMessageParamsAttachment]
         | Omit = omit,
         body: str | Omit = omit,
+        metadata: Dict[str, str] | Omit = omit,
         send_at: Union[str, datetime] | Omit = omit,
         to: str | Omit = omit,
         from_: str | Omit = omit,
@@ -435,6 +450,7 @@ class AsyncMessagesResource(AsyncAPIResource):
                     "conversation": conversation,
                     "attachments": attachments,
                     "body": body,
+                    "metadata": metadata,
                     "send_at": send_at,
                     "to": to,
                     "from_": from_,
