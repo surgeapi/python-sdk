@@ -6,6 +6,7 @@ from typing_extensions import Annotated, TypeAlias
 from .._utils import PropertyInfo
 from .call_ended_webhook_event import CallEndedWebhookEvent
 from .message_sent_webhook_event import MessageSentWebhookEvent
+from .link_followed_webhook_event import LinkFollowedWebhookEvent
 from .message_failed_webhook_event import MessageFailedWebhookEvent
 from .contact_opted_in_webhook_event import ContactOptedInWebhookEvent
 from .message_received_webhook_event import MessageReceivedWebhookEvent
@@ -23,6 +24,7 @@ UnwrapWebhookEvent: TypeAlias = Annotated[
         ContactOptedInWebhookEvent,
         ContactOptedOutWebhookEvent,
         ConversationCreatedWebhookEvent,
+        LinkFollowedWebhookEvent,
         MessageDeliveredWebhookEvent,
         MessageFailedWebhookEvent,
         MessageReceivedWebhookEvent,
