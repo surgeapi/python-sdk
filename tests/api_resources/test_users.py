@@ -35,7 +35,7 @@ class TestUsers:
             last_name="O'Conner",
             metadata={
                 "email": "boconner@toretti.family",
-                "user_id": "string",
+                "user_id": "1234",
             },
             photo_url="https://toretti.family/people/brian.jpg",
         )
@@ -138,7 +138,7 @@ class TestUsers:
             last_name="O'Conner",
             metadata={
                 "email": "boconner@toretti.family",
-                "user_id": "string",
+                "user_id": "1234",
             },
             photo_url="https://toretti.family/people/brian.jpg",
         )
@@ -298,7 +298,7 @@ class TestAsyncUsers:
             last_name="O'Conner",
             metadata={
                 "email": "boconner@toretti.family",
-                "user_id": "string",
+                "user_id": "1234",
             },
             photo_url="https://toretti.family/people/brian.jpg",
         )
@@ -401,7 +401,7 @@ class TestAsyncUsers:
             last_name="O'Conner",
             metadata={
                 "email": "boconner@toretti.family",
-                "user_id": "string",
+                "user_id": "1234",
             },
             photo_url="https://toretti.family/people/brian.jpg",
         )
