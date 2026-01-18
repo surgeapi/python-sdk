@@ -44,6 +44,7 @@ class TestMessages:
             },
             attachments=[{"url": "https://toretto.family/coronas.gif"}],
             body="body",
+            metadata={"foo": "string"},
             send_at=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
         assert_matches_type(Message, message, path=["response"])
@@ -103,6 +104,7 @@ class TestMessages:
             attachments=[{"url": "https://toretto.family/coronas.gif"}],
             body="body",
             from_="+18015552345",
+            metadata={"foo": "string"},
             send_at=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
         assert_matches_type(Message, message, path=["response"])
@@ -218,6 +220,7 @@ class TestAsyncMessages:
             },
             attachments=[{"url": "https://toretto.family/coronas.gif"}],
             body="body",
+            metadata={"foo": "string"},
             send_at=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
         assert_matches_type(Message, message, path=["response"])
@@ -277,6 +280,7 @@ class TestAsyncMessages:
             attachments=[{"url": "https://toretto.family/coronas.gif"}],
             body="body",
             from_="+18015552345",
+            metadata={"foo": "string"},
             send_at=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
         assert_matches_type(Message, message, path=["response"])

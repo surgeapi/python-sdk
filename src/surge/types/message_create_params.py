@@ -31,6 +31,9 @@ class MessageParamsWithConversation(TypedDict, total=False):
     body: str
     """The message body."""
 
+    metadata: Dict[str, str]
+    """Set of key-value pairs that will be stored with the object."""
+
     send_at: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """
     An optional datetime for scheduling message up to a couple of months in the
@@ -98,6 +101,9 @@ class SimpleMessageParams(TypedDict, total=False):
     If omitted, uses the account's default phone number. Cannot be used together
     with 'conversation'.
     """
+
+    metadata: Dict[str, str]
+    """Set of key-value pairs that will be stored with the object."""
 
     send_at: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """

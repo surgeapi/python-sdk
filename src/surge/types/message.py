@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 from typing_extensions import Literal
 
 from .contact import Contact
@@ -61,3 +61,6 @@ class Message(BaseModel):
 
     conversation: Optional[Conversation] = None
     """A conversation with a Contact"""
+
+    metadata: Optional[Dict[str, str]] = None
+    """Set of key-value pairs that will be stored with the object."""
