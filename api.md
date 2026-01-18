@@ -122,6 +122,7 @@ from surge.types import (
     ContactOptedInWebhookEvent,
     ContactOptedOutWebhookEvent,
     ConversationCreatedWebhookEvent,
+    LinkFollowedWebhookEvent,
     MessageDeliveredWebhookEvent,
     MessageFailedWebhookEvent,
     MessageReceivedWebhookEvent,
