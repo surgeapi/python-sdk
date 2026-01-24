@@ -53,6 +53,12 @@ class Data(BaseModel):
     attachments: Optional[List[DataAttachment]] = None
     """Attachments included with the message"""
 
+    blast_id: Optional[str] = None
+    """The ID of the blast this message belongs to, if any.
+
+    This can be used to attribute messages back to a specific blast.
+    """
+
 
 class MessageDeliveredWebhookEvent(BaseModel):
     account_id: str
