@@ -16,5 +16,5 @@ class PhoneNumber(BaseModel):
     number: str
     """The phone number in E.164 format"""
 
-    type: Literal["local", "toll_free"]
+    type: Literal["local", "short_code", "toll_free"]
     """Whether the phone number is local, toll-free, or short code"""
