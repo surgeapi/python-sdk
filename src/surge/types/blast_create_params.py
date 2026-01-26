@@ -21,6 +21,13 @@ class BlastCreateParams(TypedDict, total=False):
     contacts: SequenceNotStr[str]
     """Deprecated. Use `to` instead."""
 
+    from_: Annotated[str, PropertyInfo(alias="from")]
+    """The phone number from which to send the blast.
+
+    This can be either the phone number in E.164 format or a Surge phone number id.
+    If not provided, the account's default phone number is used.
+    """
+
     name: str
     """Optional name for the blast."""
 
