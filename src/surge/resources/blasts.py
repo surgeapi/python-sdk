@@ -51,6 +51,7 @@ class BlastsResource(SyncAPIResource):
         attachments: Iterable[blast_create_params.Attachment] | Omit = omit,
         body: str | Omit = omit,
         contacts: SequenceNotStr[str] | Omit = omit,
+        from_: str | Omit = omit,
         name: str | Omit = omit,
         segments: SequenceNotStr[str] | Omit = omit,
         send_at: Union[str, datetime] | Omit = omit,
@@ -71,6 +72,10 @@ class BlastsResource(SyncAPIResource):
           body: The message body.
 
           contacts: Deprecated. Use `to` instead.
+
+          from_: The phone number from which to send the blast. This can be either the phone
+              number in E.164 format or a Surge phone number id. If not provided, the
+              account's default phone number is used.
 
           name: Optional name for the blast.
 
@@ -98,6 +103,7 @@ class BlastsResource(SyncAPIResource):
                     "attachments": attachments,
                     "body": body,
                     "contacts": contacts,
+                    "from_": from_,
                     "name": name,
                     "segments": segments,
                     "send_at": send_at,
@@ -139,6 +145,7 @@ class AsyncBlastsResource(AsyncAPIResource):
         attachments: Iterable[blast_create_params.Attachment] | Omit = omit,
         body: str | Omit = omit,
         contacts: SequenceNotStr[str] | Omit = omit,
+        from_: str | Omit = omit,
         name: str | Omit = omit,
         segments: SequenceNotStr[str] | Omit = omit,
         send_at: Union[str, datetime] | Omit = omit,
@@ -159,6 +166,10 @@ class AsyncBlastsResource(AsyncAPIResource):
           body: The message body.
 
           contacts: Deprecated. Use `to` instead.
+
+          from_: The phone number from which to send the blast. This can be either the phone
+              number in E.164 format or a Surge phone number id. If not provided, the
+              account's default phone number is used.
 
           name: Optional name for the blast.
 
@@ -186,6 +197,7 @@ class AsyncBlastsResource(AsyncAPIResource):
                     "attachments": attachments,
                     "body": body,
                     "contacts": contacts,
+                    "from_": from_,
                     "name": name,
                     "segments": segments,
                     "send_at": send_at,
