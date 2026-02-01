@@ -6,7 +6,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import phone_number_purchase_params
+from ..types import phone_number_list_params, phone_number_purchase_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -19,6 +19,7 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.phone_number import PhoneNumber
+from ..types.phone_number_list_response import PhoneNumberListResponse
 
 __all__ = ["PhoneNumbersResource", "AsyncPhoneNumbersResource"]
 
@@ -42,6 +43,58 @@ class PhoneNumbersResource(SyncAPIResource):
         For more information, see https://www.github.com/surgeapi/python-sdk#with_streaming_response
         """
         return PhoneNumbersResourceWithStreamingResponse(self)
+
+    def list(
+        self,
+        account_id: str,
+        *,
+        after: str | Omit = omit,
+        before: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PhoneNumberListResponse:
+        """
+        List all phone numbers for an account with cursor-based pagination.
+
+        Args:
+          account_id: The account ID to list phone numbers for.
+
+          after: Cursor for forward pagination. Use the next_cursor from a previous response.
+
+          before: Cursor for backward pagination. Use the previous_cursor from a previous
+              response.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return self._get(
+            f"/accounts/{account_id}/phone_numbers",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "after": after,
+                        "before": before,
+                    },
+                    phone_number_list_params.PhoneNumberListParams,
+                ),
+            ),
+            cast_to=PhoneNumberListResponse,
+        )
 
     def purchase(
         self,
@@ -126,6 +179,58 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
         """
         return AsyncPhoneNumbersResourceWithStreamingResponse(self)
 
+    async def list(
+        self,
+        account_id: str,
+        *,
+        after: str | Omit = omit,
+        before: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PhoneNumberListResponse:
+        """
+        List all phone numbers for an account with cursor-based pagination.
+
+        Args:
+          account_id: The account ID to list phone numbers for.
+
+          after: Cursor for forward pagination. Use the next_cursor from a previous response.
+
+          before: Cursor for backward pagination. Use the previous_cursor from a previous
+              response.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return await self._get(
+            f"/accounts/{account_id}/phone_numbers",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "after": after,
+                        "before": before,
+                    },
+                    phone_number_list_params.PhoneNumberListParams,
+                ),
+            ),
+            cast_to=PhoneNumberListResponse,
+        )
+
     async def purchase(
         self,
         account_id: str,
@@ -193,6 +298,9 @@ class PhoneNumbersResourceWithRawResponse:
     def __init__(self, phone_numbers: PhoneNumbersResource) -> None:
         self._phone_numbers = phone_numbers
 
+        self.list = to_raw_response_wrapper(
+            phone_numbers.list,
+        )
         self.purchase = to_raw_response_wrapper(
             phone_numbers.purchase,
         )
@@ -202,6 +310,9 @@ class AsyncPhoneNumbersResourceWithRawResponse:
     def __init__(self, phone_numbers: AsyncPhoneNumbersResource) -> None:
         self._phone_numbers = phone_numbers
 
+        self.list = async_to_raw_response_wrapper(
+            phone_numbers.list,
+        )
         self.purchase = async_to_raw_response_wrapper(
             phone_numbers.purchase,
         )
@@ -211,6 +322,9 @@ class PhoneNumbersResourceWithStreamingResponse:
     def __init__(self, phone_numbers: PhoneNumbersResource) -> None:
         self._phone_numbers = phone_numbers
 
+        self.list = to_streamed_response_wrapper(
+            phone_numbers.list,
+        )
         self.purchase = to_streamed_response_wrapper(
             phone_numbers.purchase,
         )
@@ -220,6 +334,9 @@ class AsyncPhoneNumbersResourceWithStreamingResponse:
     def __init__(self, phone_numbers: AsyncPhoneNumbersResource) -> None:
         self._phone_numbers = phone_numbers
 
+        self.list = async_to_streamed_response_wrapper(
+            phone_numbers.list,
+        )
         self.purchase = async_to_streamed_response_wrapper(
             phone_numbers.purchase,
         )
