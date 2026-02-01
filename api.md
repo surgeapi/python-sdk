@@ -75,11 +75,12 @@ Methods:
 Types:
 
 ```python
-from surge.types import PhoneNumber
+from surge.types import PhoneNumber, PhoneNumberListResponse
 ```
 
 Methods:
 
+- <code title="get /accounts/{account_id}/phone_numbers">client.phone_numbers.<a href="./src/surge/resources/phone_numbers.py">list</a>(account_id, \*\*<a href="src/surge/types/phone_number_list_params.py">params</a>) -> <a href="./src/surge/types/phone_number_list_response.py">PhoneNumberListResponse</a></code>
 - <code title="post /accounts/{account_id}/phone_numbers">client.phone_numbers.<a href="./src/surge/resources/phone_numbers.py">purchase</a>(account_id, \*\*<a href="src/surge/types/phone_number_purchase_params.py">params</a>) -> <a href="./src/surge/types/phone_number.py">PhoneNumber</a></code>
 
 # Users
