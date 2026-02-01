@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
+from typing import Union, Iterable, Optional
 from datetime import datetime
 
 import httpx
@@ -49,7 +49,7 @@ class BlastsResource(SyncAPIResource):
         account_id: str,
         *,
         attachments: Iterable[blast_create_params.Attachment] | Omit = omit,
-        body: str | Omit = omit,
+        body: Optional[str] | Omit = omit,
         contacts: SequenceNotStr[str] | Omit = omit,
         from_: str | Omit = omit,
         name: str | Omit = omit,
@@ -143,7 +143,7 @@ class AsyncBlastsResource(AsyncAPIResource):
         account_id: str,
         *,
         attachments: Iterable[blast_create_params.Attachment] | Omit = omit,
-        body: str | Omit = omit,
+        body: Optional[str] | Omit = omit,
         contacts: SequenceNotStr[str] | Omit = omit,
         from_: str | Omit = omit,
         name: str | Omit = omit,

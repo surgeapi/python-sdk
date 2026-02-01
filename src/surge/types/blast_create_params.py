@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
+from typing import Union, Iterable, Optional
 from datetime import datetime
 from typing_extensions import Required, Annotated, TypedDict
 
@@ -15,7 +15,7 @@ __all__ = ["BlastCreateParams", "Attachment"]
 class BlastCreateParams(TypedDict, total=False):
     attachments: Iterable[Attachment]
 
-    body: str
+    body: Optional[str]
     """The message body."""
 
     contacts: SequenceNotStr[str]
