@@ -48,7 +48,7 @@ Methods:
 Types:
 
 ```python
-from surge.types import Contact
+from surge.types import Contact, ContactListResponse
 ```
 
 Methods:
@@ -56,6 +56,7 @@ Methods:
 - <code title="post /accounts/{account_id}/contacts">client.contacts.<a href="./src/surge/resources/contacts.py">create</a>(account_id, \*\*<a href="src/surge/types/contact_create_params.py">params</a>) -> <a href="./src/surge/types/contact.py">Contact</a></code>
 - <code title="get /contacts/{id}">client.contacts.<a href="./src/surge/resources/contacts.py">retrieve</a>(id) -> <a href="./src/surge/types/contact.py">Contact</a></code>
 - <code title="patch /contacts/{id}">client.contacts.<a href="./src/surge/resources/contacts.py">update</a>(id, \*\*<a href="src/surge/types/contact_update_params.py">params</a>) -> <a href="./src/surge/types/contact.py">Contact</a></code>
+- <code title="get /accounts/{account_id}/contacts">client.contacts.<a href="./src/surge/resources/contacts.py">list</a>(account_id, \*\*<a href="src/surge/types/contact_list_params.py">params</a>) -> <a href="./src/surge/types/contact_list_response.py">ContactListResponse</a></code>
 
 # Messages
 
