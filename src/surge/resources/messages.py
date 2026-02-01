@@ -8,7 +8,7 @@ from typing_extensions import overload
 
 import httpx
 
-from ..types import message_create_params
+from ..types import message_list_params, message_create_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import required_args, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -21,6 +21,7 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.message import Message
+from ..types.message_list_response import MessageListResponse
 
 __all__ = ["MessagesResource", "AsyncMessagesResource"]
 
@@ -261,6 +262,58 @@ class MessagesResource(SyncAPIResource):
             cast_to=Message,
         )
 
+    def list(
+        self,
+        account_id: str,
+        *,
+        after: str | Omit = omit,
+        before: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MessageListResponse:
+        """
+        List all messages for an account with cursor-based pagination.
+
+        Args:
+          account_id: The account ID to list messages for.
+
+          after: Cursor for forward pagination. Use the next_cursor from a previous response.
+
+          before: Cursor for backward pagination. Use the previous_cursor from a previous
+              response.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return self._get(
+            f"/accounts/{account_id}/messages",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "after": after,
+                        "before": before,
+                    },
+                    message_list_params.MessageListParams,
+                ),
+            ),
+            cast_to=MessageListResponse,
+        )
+
 
 class AsyncMessagesResource(AsyncAPIResource):
     @cached_property
@@ -498,6 +551,58 @@ class AsyncMessagesResource(AsyncAPIResource):
             cast_to=Message,
         )
 
+    async def list(
+        self,
+        account_id: str,
+        *,
+        after: str | Omit = omit,
+        before: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MessageListResponse:
+        """
+        List all messages for an account with cursor-based pagination.
+
+        Args:
+          account_id: The account ID to list messages for.
+
+          after: Cursor for forward pagination. Use the next_cursor from a previous response.
+
+          before: Cursor for backward pagination. Use the previous_cursor from a previous
+              response.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return await self._get(
+            f"/accounts/{account_id}/messages",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "after": after,
+                        "before": before,
+                    },
+                    message_list_params.MessageListParams,
+                ),
+            ),
+            cast_to=MessageListResponse,
+        )
+
 
 class MessagesResourceWithRawResponse:
     def __init__(self, messages: MessagesResource) -> None:
@@ -508,6 +613,9 @@ class MessagesResourceWithRawResponse:
         )
         self.retrieve = to_raw_response_wrapper(
             messages.retrieve,
+        )
+        self.list = to_raw_response_wrapper(
+            messages.list,
         )
 
 
@@ -521,6 +629,9 @@ class AsyncMessagesResourceWithRawResponse:
         self.retrieve = async_to_raw_response_wrapper(
             messages.retrieve,
         )
+        self.list = async_to_raw_response_wrapper(
+            messages.list,
+        )
 
 
 class MessagesResourceWithStreamingResponse:
@@ -533,6 +644,9 @@ class MessagesResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             messages.retrieve,
         )
+        self.list = to_streamed_response_wrapper(
+            messages.list,
+        )
 
 
 class AsyncMessagesResourceWithStreamingResponse:
@@ -544,4 +658,7 @@ class AsyncMessagesResourceWithStreamingResponse:
         )
         self.retrieve = async_to_streamed_response_wrapper(
             messages.retrieve,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            messages.list,
         )
