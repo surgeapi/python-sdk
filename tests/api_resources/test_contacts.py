@@ -8,7 +8,7 @@ from typing import Any, cast
 import pytest
 
 from surge import Surge, AsyncSurge
-from surge.types import Contact
+from surge.types import Contact, ContactListResponse
 from tests.utils import assert_matches_type
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -177,6 +177,58 @@ class TestContacts:
                 phone_number="+18015551234",
             )
 
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_list(self, client: Surge) -> None:
+        contact = client.contacts.list(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+        )
+        assert_matches_type(ContactListResponse, contact, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_list_with_all_params(self, client: Surge) -> None:
+        contact = client.contacts.list(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            after="after",
+            before="before",
+        )
+        assert_matches_type(ContactListResponse, contact, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_list(self, client: Surge) -> None:
+        response = client.contacts.with_raw_response.list(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        contact = response.parse()
+        assert_matches_type(ContactListResponse, contact, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_list(self, client: Surge) -> None:
+        with client.contacts.with_streaming_response.list(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            contact = response.parse()
+            assert_matches_type(ContactListResponse, contact, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_list(self, client: Surge) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
+            client.contacts.with_raw_response.list(
+                account_id="",
+            )
+
 
 class TestAsyncContacts:
     parametrize = pytest.mark.parametrize(
@@ -341,4 +393,56 @@ class TestAsyncContacts:
             await async_client.contacts.with_raw_response.update(
                 id="",
                 phone_number="+18015551234",
+            )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_list(self, async_client: AsyncSurge) -> None:
+        contact = await async_client.contacts.list(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+        )
+        assert_matches_type(ContactListResponse, contact, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncSurge) -> None:
+        contact = await async_client.contacts.list(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            after="after",
+            before="before",
+        )
+        assert_matches_type(ContactListResponse, contact, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_list(self, async_client: AsyncSurge) -> None:
+        response = await async_client.contacts.with_raw_response.list(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        contact = await response.parse()
+        assert_matches_type(ContactListResponse, contact, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_list(self, async_client: AsyncSurge) -> None:
+        async with async_client.contacts.with_streaming_response.list(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            contact = await response.parse()
+            assert_matches_type(ContactListResponse, contact, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_list(self, async_client: AsyncSurge) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
+            await async_client.contacts.with_raw_response.list(
+                account_id="",
             )
