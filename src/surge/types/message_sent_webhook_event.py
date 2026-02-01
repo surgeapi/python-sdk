@@ -41,7 +41,7 @@ class Data(BaseModel):
     id: str
     """The unique identifier for the message"""
 
-    body: str
+    body: Optional[str] = None
     """The content of the message"""
 
     conversation: DataConversation
