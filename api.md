@@ -48,7 +48,7 @@ Methods:
 Types:
 
 ```python
-from surge.types import Contact, ContactListResponse
+from surge.types import Contact
 ```
 
 Methods:
@@ -56,33 +56,33 @@ Methods:
 - <code title="post /accounts/{account_id}/contacts">client.contacts.<a href="./src/surge/resources/contacts.py">create</a>(account_id, \*\*<a href="src/surge/types/contact_create_params.py">params</a>) -> <a href="./src/surge/types/contact.py">Contact</a></code>
 - <code title="get /contacts/{id}">client.contacts.<a href="./src/surge/resources/contacts.py">retrieve</a>(id) -> <a href="./src/surge/types/contact.py">Contact</a></code>
 - <code title="patch /contacts/{id}">client.contacts.<a href="./src/surge/resources/contacts.py">update</a>(id, \*\*<a href="src/surge/types/contact_update_params.py">params</a>) -> <a href="./src/surge/types/contact.py">Contact</a></code>
-- <code title="get /accounts/{account_id}/contacts">client.contacts.<a href="./src/surge/resources/contacts.py">list</a>(account_id, \*\*<a href="src/surge/types/contact_list_params.py">params</a>) -> <a href="./src/surge/types/contact_list_response.py">ContactListResponse</a></code>
+- <code title="get /accounts/{account_id}/contacts">client.contacts.<a href="./src/surge/resources/contacts.py">list</a>(account_id, \*\*<a href="src/surge/types/contact_list_params.py">params</a>) -> <a href="./src/surge/types/contact.py">SyncCursor[Contact]</a></code>
 
 # Messages
 
 Types:
 
 ```python
-from surge.types import Message, MessageListResponse
+from surge.types import Message
 ```
 
 Methods:
 
 - <code title="post /accounts/{account_id}/messages">client.messages.<a href="./src/surge/resources/messages.py">create</a>(account_id, \*\*<a href="src/surge/types/message_create_params.py">params</a>) -> <a href="./src/surge/types/message.py">Message</a></code>
 - <code title="get /messages/{id}">client.messages.<a href="./src/surge/resources/messages.py">retrieve</a>(id) -> <a href="./src/surge/types/message.py">Message</a></code>
-- <code title="get /accounts/{account_id}/messages">client.messages.<a href="./src/surge/resources/messages.py">list</a>(account_id, \*\*<a href="src/surge/types/message_list_params.py">params</a>) -> <a href="./src/surge/types/message_list_response.py">MessageListResponse</a></code>
+- <code title="get /accounts/{account_id}/messages">client.messages.<a href="./src/surge/resources/messages.py">list</a>(account_id, \*\*<a href="src/surge/types/message_list_params.py">params</a>) -> <a href="./src/surge/types/message.py">SyncCursor[Message]</a></code>
 
 # PhoneNumbers
 
 Types:
 
 ```python
-from surge.types import PhoneNumber, PhoneNumberListResponse
+from surge.types import PhoneNumber
 ```
 
 Methods:
 
-- <code title="get /accounts/{account_id}/phone_numbers">client.phone_numbers.<a href="./src/surge/resources/phone_numbers.py">list</a>(account_id, \*\*<a href="src/surge/types/phone_number_list_params.py">params</a>) -> <a href="./src/surge/types/phone_number_list_response.py">PhoneNumberListResponse</a></code>
+- <code title="get /accounts/{account_id}/phone_numbers">client.phone_numbers.<a href="./src/surge/resources/phone_numbers.py">list</a>(account_id, \*\*<a href="src/surge/types/phone_number_list_params.py">params</a>) -> <a href="./src/surge/types/phone_number.py">SyncCursor[PhoneNumber]</a></code>
 - <code title="post /accounts/{account_id}/phone_numbers">client.phone_numbers.<a href="./src/surge/resources/phone_numbers.py">purchase</a>(account_id, \*\*<a href="src/surge/types/phone_number_purchase_params.py">params</a>) -> <a href="./src/surge/types/phone_number.py">PhoneNumber</a></code>
 
 # Users

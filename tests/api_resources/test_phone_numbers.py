@@ -8,8 +8,9 @@ from typing import Any, cast
 import pytest
 
 from surge import Surge, AsyncSurge
-from surge.types import PhoneNumber, PhoneNumberListResponse
+from surge.types import PhoneNumber
 from tests.utils import assert_matches_type
+from surge.pagination import SyncCursor, AsyncCursor
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -23,7 +24,7 @@ class TestPhoneNumbers:
         phone_number = client.phone_numbers.list(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
         )
-        assert_matches_type(PhoneNumberListResponse, phone_number, path=["response"])
+        assert_matches_type(SyncCursor[PhoneNumber], phone_number, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -33,7 +34,7 @@ class TestPhoneNumbers:
             after="after",
             before="before",
         )
-        assert_matches_type(PhoneNumberListResponse, phone_number, path=["response"])
+        assert_matches_type(SyncCursor[PhoneNumber], phone_number, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -45,7 +46,7 @@ class TestPhoneNumbers:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         phone_number = response.parse()
-        assert_matches_type(PhoneNumberListResponse, phone_number, path=["response"])
+        assert_matches_type(SyncCursor[PhoneNumber], phone_number, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -57,7 +58,7 @@ class TestPhoneNumbers:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             phone_number = response.parse()
-            assert_matches_type(PhoneNumberListResponse, phone_number, path=["response"])
+            assert_matches_type(SyncCursor[PhoneNumber], phone_number, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -135,7 +136,7 @@ class TestAsyncPhoneNumbers:
         phone_number = await async_client.phone_numbers.list(
             account_id="acct_01j9a43avnfqzbjfch6pygv1td",
         )
-        assert_matches_type(PhoneNumberListResponse, phone_number, path=["response"])
+        assert_matches_type(AsyncCursor[PhoneNumber], phone_number, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -145,7 +146,7 @@ class TestAsyncPhoneNumbers:
             after="after",
             before="before",
         )
-        assert_matches_type(PhoneNumberListResponse, phone_number, path=["response"])
+        assert_matches_type(AsyncCursor[PhoneNumber], phone_number, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -157,7 +158,7 @@ class TestAsyncPhoneNumbers:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         phone_number = await response.parse()
-        assert_matches_type(PhoneNumberListResponse, phone_number, path=["response"])
+        assert_matches_type(AsyncCursor[PhoneNumber], phone_number, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -169,7 +170,7 @@ class TestAsyncPhoneNumbers:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             phone_number = await response.parse()
-            assert_matches_type(PhoneNumberListResponse, phone_number, path=["response"])
+            assert_matches_type(AsyncCursor[PhoneNumber], phone_number, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
