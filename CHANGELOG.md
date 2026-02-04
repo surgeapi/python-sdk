@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.10.0 (2026-02-04)
+
+Full Changelog: [v0.9.0...v0.10.0](https://github.com/surgeapi/python-sdk/compare/v0.9.0...v0.10.0)
+
+### Features
+
+* **api:** add list contacts endpoint ([366eada](https://github.com/surgeapi/python-sdk/commit/366eada13d0406378a14cb0dfd3806962e5ead4b))
+* **api:** add list messages endpoint ([e98690f](https://github.com/surgeapi/python-sdk/commit/e98690fb2c7affd8fb9c79fd88d2c865dfb54d18))
+* **api:** add list phone numbers endpoint ([bd92d8c](https://github.com/surgeapi/python-sdk/commit/bd92d8c3178afe49b6669d0843f4a3c937c901bc))
+* **client:** add custom JSON encoder for extended type support ([7026006](https://github.com/surgeapi/python-sdk/commit/7026006a71d7be946ed0e8b2ae00ff3491fd3087))
+* **sdks:** set up pagination ([ffea470](https://github.com/surgeapi/python-sdk/commit/ffea470f67051a338cbb366bb4b4da3c9da0c6f9))
+
+
+### Bug Fixes
+
+* **api:** make message body nullable ([6b675c3](https://github.com/surgeapi/python-sdk/commit/6b675c3b167b4668ac7f552caa5e7210bb206834))
+
 ## 0.9.0 (2026-01-26)
 
 Full Changelog: [v0.8.0...v0.9.0](https://github.com/surgeapi/python-sdk/compare/v0.8.0...v0.9.0)
