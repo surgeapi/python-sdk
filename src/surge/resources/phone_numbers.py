@@ -17,9 +17,9 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
+from ..pagination import SyncCursor, AsyncCursor
+from .._base_client import AsyncPaginator, make_request_options
 from ..types.phone_number import PhoneNumber
-from ..types.phone_number_list_response import PhoneNumberListResponse
 
 __all__ = ["PhoneNumbersResource", "AsyncPhoneNumbersResource"]
 
@@ -56,7 +56,7 @@ class PhoneNumbersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PhoneNumberListResponse:
+    ) -> SyncCursor[PhoneNumber]:
         """
         List all phone numbers for an account with cursor-based pagination.
 
@@ -78,8 +78,9 @@ class PhoneNumbersResource(SyncAPIResource):
         """
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return self._get(
+        return self._get_api_list(
             f"/accounts/{account_id}/phone_numbers",
+            page=SyncCursor[PhoneNumber],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -93,7 +94,7 @@ class PhoneNumbersResource(SyncAPIResource):
                     phone_number_list_params.PhoneNumberListParams,
                 ),
             ),
-            cast_to=PhoneNumberListResponse,
+            model=PhoneNumber,
         )
 
     def purchase(
@@ -179,7 +180,7 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
         """
         return AsyncPhoneNumbersResourceWithStreamingResponse(self)
 
-    async def list(
+    def list(
         self,
         account_id: str,
         *,
@@ -191,7 +192,7 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PhoneNumberListResponse:
+    ) -> AsyncPaginator[PhoneNumber, AsyncCursor[PhoneNumber]]:
         """
         List all phone numbers for an account with cursor-based pagination.
 
@@ -213,14 +214,15 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
         """
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        return await self._get(
+        return self._get_api_list(
             f"/accounts/{account_id}/phone_numbers",
+            page=AsyncCursor[PhoneNumber],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
                         "after": after,
                         "before": before,
@@ -228,7 +230,7 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
                     phone_number_list_params.PhoneNumberListParams,
                 ),
             ),
-            cast_to=PhoneNumberListResponse,
+            model=PhoneNumber,
         )
 
     async def purchase(
