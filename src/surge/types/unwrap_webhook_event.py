@@ -13,6 +13,7 @@ from .message_received_webhook_event import MessageReceivedWebhookEvent
 from .campaign_approved_webhook_event import CampaignApprovedWebhookEvent
 from .contact_opted_out_webhook_event import ContactOptedOutWebhookEvent
 from .message_delivered_webhook_event import MessageDeliveredWebhookEvent
+from .voicemail_received_webhook_event import VoicemailReceivedWebhookEvent
 from .conversation_created_webhook_event import ConversationCreatedWebhookEvent
 
 __all__ = ["UnwrapWebhookEvent"]
@@ -29,6 +30,7 @@ UnwrapWebhookEvent: TypeAlias = Annotated[
         MessageFailedWebhookEvent,
         MessageReceivedWebhookEvent,
         MessageSentWebhookEvent,
+        VoicemailReceivedWebhookEvent,
     ],
     PropertyInfo(discriminator="type"),
 ]
