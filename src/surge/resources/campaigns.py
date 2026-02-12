@@ -268,6 +268,41 @@ class CampaignsResource(SyncAPIResource):
             cast_to=Campaign,
         )
 
+    def retrieve(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Campaign:
+        """
+        Retrieves a Campaign object.
+
+        Args:
+          id: The ID of the campaign to retrieve.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._get(
+            f"/campaigns/{id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Campaign,
+        )
+
 
 class AsyncCampaignsResource(AsyncAPIResource):
     @cached_property
@@ -513,6 +548,41 @@ class AsyncCampaignsResource(AsyncAPIResource):
             cast_to=Campaign,
         )
 
+    async def retrieve(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Campaign:
+        """
+        Retrieves a Campaign object.
+
+        Args:
+          id: The ID of the campaign to retrieve.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._get(
+            f"/campaigns/{id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Campaign,
+        )
+
 
 class CampaignsResourceWithRawResponse:
     def __init__(self, campaigns: CampaignsResource) -> None:
@@ -520,6 +590,9 @@ class CampaignsResourceWithRawResponse:
 
         self.create = to_raw_response_wrapper(
             campaigns.create,
+        )
+        self.retrieve = to_raw_response_wrapper(
+            campaigns.retrieve,
         )
 
 
@@ -530,6 +603,9 @@ class AsyncCampaignsResourceWithRawResponse:
         self.create = async_to_raw_response_wrapper(
             campaigns.create,
         )
+        self.retrieve = async_to_raw_response_wrapper(
+            campaigns.retrieve,
+        )
 
 
 class CampaignsResourceWithStreamingResponse:
@@ -539,6 +615,9 @@ class CampaignsResourceWithStreamingResponse:
         self.create = to_streamed_response_wrapper(
             campaigns.create,
         )
+        self.retrieve = to_streamed_response_wrapper(
+            campaigns.retrieve,
+        )
 
 
 class AsyncCampaignsResourceWithStreamingResponse:
@@ -547,4 +626,7 @@ class AsyncCampaignsResourceWithStreamingResponse:
 
         self.create = async_to_streamed_response_wrapper(
             campaigns.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            campaigns.retrieve,
         )
