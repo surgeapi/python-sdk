@@ -61,6 +61,9 @@ class Campaign(BaseModel):
     users when they opt in to messaging.
     """
 
+    status: Literal["active", "canceled", "created", "deactivated", "in_review", "pending", "rejected"]
+    """The current status of the campaign."""
+
     use_cases: List[
         Literal[
             "account_notification",
