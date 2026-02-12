@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.11.0 (2026-02-12)
+
+Full Changelog: [v0.10.0...v0.11.0](https://github.com/surgeapi/python-sdk/compare/v0.10.0...v0.11.0)
+
+### Features
+
+* **api:** add campaign.status field ([6609a8e](https://github.com/surgeapi/python-sdk/commit/6609a8e9331eefb146feca8b7299abebad3f76e9))
+* **api:** add get campaign endpoint ([3de865c](https://github.com/surgeapi/python-sdk/commit/3de865c2443720646edf06fbbd8184225aecd727))
+* **api:** add recording.completed webhook ([fbf48ec](https://github.com/surgeapi/python-sdk/commit/fbf48ec7def9ede6ceed1ef25f9c80fb262c1f4d))
+* **api:** add voicemail.received webhook ([08343a3](https://github.com/surgeapi/python-sdk/commit/08343a33073fa5c5b30036c8eae2b1704146ba5e))
+* **api:** get recording file ([6f11bec](https://github.com/surgeapi/python-sdk/commit/6f11bece32534c3a59e85637809991e3eeb36064))
+
+
+### Chores
+
+* **internal:** bump dependencies ([2f2bce2](https://github.com/surgeapi/python-sdk/commit/2f2bce223c262d71580cd6aa4cba54c2f2a971c3))
+
 ## 0.10.0 (2026-02-04)
 
 Full Changelog: [v0.9.0...v0.10.0](https://github.com/surgeapi/python-sdk/compare/v0.9.0...v0.10.0)
