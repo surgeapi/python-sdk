@@ -31,7 +31,17 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import users, blasts, accounts, contacts, messages, campaigns, phone_numbers, verifications
+    from .resources import (
+        users,
+        blasts,
+        accounts,
+        contacts,
+        messages,
+        campaigns,
+        recordings,
+        phone_numbers,
+        verifications,
+    )
     from .resources.users import UsersResource, AsyncUsersResource
     from .resources.blasts import BlastsResource, AsyncBlastsResource
     from .resources.accounts import AccountsResource, AsyncAccountsResource
@@ -39,6 +49,7 @@ if TYPE_CHECKING:
     from .resources.messages import MessagesResource, AsyncMessagesResource
     from .resources.webhooks import WebhooksResource, AsyncWebhooksResource
     from .resources.campaigns import CampaignsResource, AsyncCampaignsResource
+    from .resources.recordings import RecordingsResource, AsyncRecordingsResource
     from .resources.phone_numbers import PhoneNumbersResource, AsyncPhoneNumbersResource
     from .resources.verifications import VerificationsResource, AsyncVerificationsResource
 
@@ -143,6 +154,12 @@ class Surge(SyncAPIClient):
         from .resources.phone_numbers import PhoneNumbersResource
 
         return PhoneNumbersResource(self)
+
+    @cached_property
+    def recordings(self) -> RecordingsResource:
+        from .resources.recordings import RecordingsResource
+
+        return RecordingsResource(self)
 
     @cached_property
     def users(self) -> UsersResource:
@@ -377,6 +394,12 @@ class AsyncSurge(AsyncAPIClient):
         return AsyncPhoneNumbersResource(self)
 
     @cached_property
+    def recordings(self) -> AsyncRecordingsResource:
+        from .resources.recordings import AsyncRecordingsResource
+
+        return AsyncRecordingsResource(self)
+
+    @cached_property
     def users(self) -> AsyncUsersResource:
         from .resources.users import AsyncUsersResource
 
@@ -552,6 +575,12 @@ class SurgeWithRawResponse:
         return PhoneNumbersResourceWithRawResponse(self._client.phone_numbers)
 
     @cached_property
+    def recordings(self) -> recordings.RecordingsResourceWithRawResponse:
+        from .resources.recordings import RecordingsResourceWithRawResponse
+
+        return RecordingsResourceWithRawResponse(self._client.recordings)
+
+    @cached_property
     def users(self) -> users.UsersResourceWithRawResponse:
         from .resources.users import UsersResourceWithRawResponse
 
@@ -605,6 +634,12 @@ class AsyncSurgeWithRawResponse:
         from .resources.phone_numbers import AsyncPhoneNumbersResourceWithRawResponse
 
         return AsyncPhoneNumbersResourceWithRawResponse(self._client.phone_numbers)
+
+    @cached_property
+    def recordings(self) -> recordings.AsyncRecordingsResourceWithRawResponse:
+        from .resources.recordings import AsyncRecordingsResourceWithRawResponse
+
+        return AsyncRecordingsResourceWithRawResponse(self._client.recordings)
 
     @cached_property
     def users(self) -> users.AsyncUsersResourceWithRawResponse:
@@ -662,6 +697,12 @@ class SurgeWithStreamedResponse:
         return PhoneNumbersResourceWithStreamingResponse(self._client.phone_numbers)
 
     @cached_property
+    def recordings(self) -> recordings.RecordingsResourceWithStreamingResponse:
+        from .resources.recordings import RecordingsResourceWithStreamingResponse
+
+        return RecordingsResourceWithStreamingResponse(self._client.recordings)
+
+    @cached_property
     def users(self) -> users.UsersResourceWithStreamingResponse:
         from .resources.users import UsersResourceWithStreamingResponse
 
@@ -715,6 +756,12 @@ class AsyncSurgeWithStreamedResponse:
         from .resources.phone_numbers import AsyncPhoneNumbersResourceWithStreamingResponse
 
         return AsyncPhoneNumbersResourceWithStreamingResponse(self._client.phone_numbers)
+
+    @cached_property
+    def recordings(self) -> recordings.AsyncRecordingsResourceWithStreamingResponse:
+        from .resources.recordings import AsyncRecordingsResourceWithStreamingResponse
+
+        return AsyncRecordingsResourceWithStreamingResponse(self._client.recordings)
 
     @cached_property
     def users(self) -> users.AsyncUsersResourceWithStreamingResponse:

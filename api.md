@@ -85,6 +85,18 @@ Methods:
 - <code title="get /accounts/{account_id}/phone_numbers">client.phone_numbers.<a href="./src/surge/resources/phone_numbers.py">list</a>(account_id, \*\*<a href="src/surge/types/phone_number_list_params.py">params</a>) -> <a href="./src/surge/types/phone_number.py">SyncCursor[PhoneNumber]</a></code>
 - <code title="post /accounts/{account_id}/phone_numbers">client.phone_numbers.<a href="./src/surge/resources/phone_numbers.py">purchase</a>(account_id, \*\*<a href="src/surge/types/phone_number_purchase_params.py">params</a>) -> <a href="./src/surge/types/phone_number.py">PhoneNumber</a></code>
 
+# Recordings
+
+Types:
+
+```python
+from surge.types import RecordingGetFileResponse
+```
+
+Methods:
+
+- <code title="get /recordings/{recording_id}/file">client.recordings.<a href="./src/surge/resources/recordings.py">get_file</a>(recording_id) -> <a href="./src/surge/types/recording_get_file_response.py">RecordingGetFileResponse</a></code>
+
 # Users
 
 Types:
