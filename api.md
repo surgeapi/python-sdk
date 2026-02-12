@@ -130,6 +130,7 @@ from surge.types import (
     MessageFailedWebhookEvent,
     MessageReceivedWebhookEvent,
     MessageSentWebhookEvent,
+    VoicemailReceivedWebhookEvent,
     UnwrapWebhookEvent,
 )
 ```
