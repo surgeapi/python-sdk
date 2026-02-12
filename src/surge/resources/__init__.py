@@ -49,6 +49,14 @@ from .campaigns import (
     CampaignsResourceWithStreamingResponse,
     AsyncCampaignsResourceWithStreamingResponse,
 )
+from .recordings import (
+    RecordingsResource,
+    AsyncRecordingsResource,
+    RecordingsResourceWithRawResponse,
+    AsyncRecordingsResourceWithRawResponse,
+    RecordingsResourceWithStreamingResponse,
+    AsyncRecordingsResourceWithStreamingResponse,
+)
 from .phone_numbers import (
     PhoneNumbersResource,
     AsyncPhoneNumbersResource,
@@ -103,6 +111,12 @@ __all__ = [
     "AsyncPhoneNumbersResourceWithRawResponse",
     "PhoneNumbersResourceWithStreamingResponse",
     "AsyncPhoneNumbersResourceWithStreamingResponse",
+    "RecordingsResource",
+    "AsyncRecordingsResource",
+    "RecordingsResourceWithRawResponse",
+    "AsyncRecordingsResourceWithRawResponse",
+    "RecordingsResourceWithStreamingResponse",
+    "AsyncRecordingsResourceWithStreamingResponse",
     "UsersResource",
     "AsyncUsersResource",
     "UsersResourceWithRawResponse",
