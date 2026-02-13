@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.11.1 (2026-02-13)
+
+Full Changelog: [v0.11.0...v0.11.1](https://github.com/surgeapi/python-sdk/compare/v0.11.0...v0.11.1)
+
+### Chores
+
+* format all `api.md` files ([f862135](https://github.com/surgeapi/python-sdk/commit/f8621354800c8323130a4395169907b97b0ebd98))
+* **internal:** fix lint error on Python 3.14 ([e0d7a11](https://github.com/surgeapi/python-sdk/commit/e0d7a1156a8704f50f384051ec655c27f383f46d))
+
 ## 0.11.0 (2026-02-12)
 
 Full Changelog: [v0.10.0...v0.11.0](https://github.com/surgeapi/python-sdk/compare/v0.10.0...v0.11.0)
