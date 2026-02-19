@@ -91,11 +91,12 @@ Methods:
 Types:
 
 ```python
-from surge.types import RecordingGetFileResponse
+from surge.types import RecordingDeleteResponse, RecordingGetFileResponse
 ```
 
 Methods:
 
+- <code title="delete /recordings/{id}">client.recordings.<a href="./src/surge/resources/recordings.py">delete</a>(id) -> <a href="./src/surge/types/recording_delete_response.py">RecordingDeleteResponse</a></code>
 - <code title="get /recordings/{recording_id}/file">client.recordings.<a href="./src/surge/resources/recordings.py">get_file</a>(recording_id) -> <a href="./src/surge/types/recording_get_file_response.py">RecordingGetFileResponse</a></code>
 
 # Users
