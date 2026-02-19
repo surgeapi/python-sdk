@@ -30,6 +30,7 @@ from .campaign_create_params import CampaignCreateParams as CampaignCreateParams
 from .call_ended_webhook_event import CallEndedWebhookEvent as CallEndedWebhookEvent
 from .phone_number_list_params import PhoneNumberListParams as PhoneNumberListParams
 from .user_create_token_params import UserCreateTokenParams as UserCreateTokenParams
+from .recording_delete_response import RecordingDeleteResponse as RecordingDeleteResponse
 from .verification_check_params import VerificationCheckParams as VerificationCheckParams
 from .message_sent_webhook_event import MessageSentWebhookEvent as MessageSentWebhookEvent
 from .verification_create_params import VerificationCreateParams as VerificationCreateParams
