@@ -14,6 +14,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.recording_delete_response import RecordingDeleteResponse
 from ..types.recording_get_file_response import RecordingGetFileResponse
 
 __all__ = ["RecordingsResource", "AsyncRecordingsResource"]
@@ -38,6 +39,43 @@ class RecordingsResource(SyncAPIResource):
         For more information, see https://www.github.com/surgeapi/python-sdk#with_streaming_response
         """
         return RecordingsResourceWithStreamingResponse(self)
+
+    def delete(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> RecordingDeleteResponse:
+        """Deletes a recording.
+
+        The recording file will be removed from storage
+        asynchronously.
+
+        Args:
+          id: The ID of the recording.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._delete(
+            f"/recordings/{id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=RecordingDeleteResponse,
+        )
 
     def get_file(
         self,
@@ -97,6 +135,43 @@ class AsyncRecordingsResource(AsyncAPIResource):
         """
         return AsyncRecordingsResourceWithStreamingResponse(self)
 
+    async def delete(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> RecordingDeleteResponse:
+        """Deletes a recording.
+
+        The recording file will be removed from storage
+        asynchronously.
+
+        Args:
+          id: The ID of the recording.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._delete(
+            f"/recordings/{id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=RecordingDeleteResponse,
+        )
+
     async def get_file(
         self,
         recording_id: str,
@@ -139,6 +214,9 @@ class RecordingsResourceWithRawResponse:
     def __init__(self, recordings: RecordingsResource) -> None:
         self._recordings = recordings
 
+        self.delete = to_raw_response_wrapper(
+            recordings.delete,
+        )
         self.get_file = to_raw_response_wrapper(
             recordings.get_file,
         )
@@ -148,6 +226,9 @@ class AsyncRecordingsResourceWithRawResponse:
     def __init__(self, recordings: AsyncRecordingsResource) -> None:
         self._recordings = recordings
 
+        self.delete = async_to_raw_response_wrapper(
+            recordings.delete,
+        )
         self.get_file = async_to_raw_response_wrapper(
             recordings.get_file,
         )
@@ -157,6 +238,9 @@ class RecordingsResourceWithStreamingResponse:
     def __init__(self, recordings: RecordingsResource) -> None:
         self._recordings = recordings
 
+        self.delete = to_streamed_response_wrapper(
+            recordings.delete,
+        )
         self.get_file = to_streamed_response_wrapper(
             recordings.get_file,
         )
@@ -166,6 +250,9 @@ class AsyncRecordingsResourceWithStreamingResponse:
     def __init__(self, recordings: AsyncRecordingsResource) -> None:
         self._recordings = recordings
 
+        self.delete = async_to_streamed_response_wrapper(
+            recordings.delete,
+        )
         self.get_file = async_to_streamed_response_wrapper(
             recordings.get_file,
         )
