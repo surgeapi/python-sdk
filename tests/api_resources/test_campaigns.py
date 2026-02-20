@@ -17,7 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestCampaigns:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_overload_1(self, client: Surge) -> None:
         campaign = client.campaigns.create(
@@ -35,7 +35,7 @@ class TestCampaigns:
         )
         assert_matches_type(Campaign, campaign, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params_overload_1(self, client: Surge) -> None:
         campaign = client.campaigns.create(
@@ -56,7 +56,7 @@ class TestCampaigns:
         )
         assert_matches_type(Campaign, campaign, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create_overload_1(self, client: Surge) -> None:
         response = client.campaigns.with_raw_response.create(
@@ -78,7 +78,7 @@ class TestCampaigns:
         campaign = response.parse()
         assert_matches_type(Campaign, campaign, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create_overload_1(self, client: Surge) -> None:
         with client.campaigns.with_streaming_response.create(
@@ -102,7 +102,7 @@ class TestCampaigns:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_create_overload_1(self, client: Surge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
@@ -120,7 +120,7 @@ class TestCampaigns:
                 volume="high",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_overload_2(self, client: Surge) -> None:
         campaign = client.campaigns.create(
@@ -129,7 +129,7 @@ class TestCampaigns:
         )
         assert_matches_type(Campaign, campaign, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create_overload_2(self, client: Surge) -> None:
         response = client.campaigns.with_raw_response.create(
@@ -142,7 +142,7 @@ class TestCampaigns:
         campaign = response.parse()
         assert_matches_type(Campaign, campaign, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create_overload_2(self, client: Surge) -> None:
         with client.campaigns.with_streaming_response.create(
@@ -157,7 +157,7 @@ class TestCampaigns:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_create_overload_2(self, client: Surge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
@@ -166,7 +166,7 @@ class TestCampaigns:
                 tcr_id="CABCDE1",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Surge) -> None:
         campaign = client.campaigns.retrieve(
@@ -174,7 +174,7 @@ class TestCampaigns:
         )
         assert_matches_type(Campaign, campaign, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Surge) -> None:
         response = client.campaigns.with_raw_response.retrieve(
@@ -186,7 +186,7 @@ class TestCampaigns:
         campaign = response.parse()
         assert_matches_type(Campaign, campaign, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Surge) -> None:
         with client.campaigns.with_streaming_response.retrieve(
@@ -200,7 +200,7 @@ class TestCampaigns:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Surge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -214,7 +214,7 @@ class TestAsyncCampaigns:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_overload_1(self, async_client: AsyncSurge) -> None:
         campaign = await async_client.campaigns.create(
@@ -232,7 +232,7 @@ class TestAsyncCampaigns:
         )
         assert_matches_type(Campaign, campaign, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params_overload_1(self, async_client: AsyncSurge) -> None:
         campaign = await async_client.campaigns.create(
@@ -253,7 +253,7 @@ class TestAsyncCampaigns:
         )
         assert_matches_type(Campaign, campaign, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create_overload_1(self, async_client: AsyncSurge) -> None:
         response = await async_client.campaigns.with_raw_response.create(
@@ -275,7 +275,7 @@ class TestAsyncCampaigns:
         campaign = await response.parse()
         assert_matches_type(Campaign, campaign, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create_overload_1(self, async_client: AsyncSurge) -> None:
         async with async_client.campaigns.with_streaming_response.create(
@@ -299,7 +299,7 @@ class TestAsyncCampaigns:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_create_overload_1(self, async_client: AsyncSurge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
@@ -317,7 +317,7 @@ class TestAsyncCampaigns:
                 volume="high",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_overload_2(self, async_client: AsyncSurge) -> None:
         campaign = await async_client.campaigns.create(
@@ -326,7 +326,7 @@ class TestAsyncCampaigns:
         )
         assert_matches_type(Campaign, campaign, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create_overload_2(self, async_client: AsyncSurge) -> None:
         response = await async_client.campaigns.with_raw_response.create(
@@ -339,7 +339,7 @@ class TestAsyncCampaigns:
         campaign = await response.parse()
         assert_matches_type(Campaign, campaign, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create_overload_2(self, async_client: AsyncSurge) -> None:
         async with async_client.campaigns.with_streaming_response.create(
@@ -354,7 +354,7 @@ class TestAsyncCampaigns:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_create_overload_2(self, async_client: AsyncSurge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
@@ -363,7 +363,7 @@ class TestAsyncCampaigns:
                 tcr_id="CABCDE1",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncSurge) -> None:
         campaign = await async_client.campaigns.retrieve(
@@ -371,7 +371,7 @@ class TestAsyncCampaigns:
         )
         assert_matches_type(Campaign, campaign, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncSurge) -> None:
         response = await async_client.campaigns.with_raw_response.retrieve(
@@ -383,7 +383,7 @@ class TestAsyncCampaigns:
         campaign = await response.parse()
         assert_matches_type(Campaign, campaign, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncSurge) -> None:
         async with async_client.campaigns.with_streaming_response.retrieve(
@@ -397,7 +397,7 @@ class TestAsyncCampaigns:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncSurge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
