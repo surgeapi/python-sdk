@@ -18,7 +18,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestPhoneNumbers:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Surge) -> None:
         phone_number = client.phone_numbers.list(
@@ -26,7 +26,7 @@ class TestPhoneNumbers:
         )
         assert_matches_type(SyncCursor[PhoneNumber], phone_number, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Surge) -> None:
         phone_number = client.phone_numbers.list(
@@ -36,7 +36,7 @@ class TestPhoneNumbers:
         )
         assert_matches_type(SyncCursor[PhoneNumber], phone_number, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Surge) -> None:
         response = client.phone_numbers.with_raw_response.list(
@@ -48,7 +48,7 @@ class TestPhoneNumbers:
         phone_number = response.parse()
         assert_matches_type(SyncCursor[PhoneNumber], phone_number, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Surge) -> None:
         with client.phone_numbers.with_streaming_response.list(
@@ -62,7 +62,7 @@ class TestPhoneNumbers:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_list(self, client: Surge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
@@ -70,7 +70,7 @@ class TestPhoneNumbers:
                 account_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_purchase(self, client: Surge) -> None:
         phone_number = client.phone_numbers.purchase(
@@ -78,7 +78,7 @@ class TestPhoneNumbers:
         )
         assert_matches_type(PhoneNumber, phone_number, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_purchase_with_all_params(self, client: Surge) -> None:
         phone_number = client.phone_numbers.purchase(
@@ -90,7 +90,7 @@ class TestPhoneNumbers:
         )
         assert_matches_type(PhoneNumber, phone_number, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_purchase(self, client: Surge) -> None:
         response = client.phone_numbers.with_raw_response.purchase(
@@ -102,7 +102,7 @@ class TestPhoneNumbers:
         phone_number = response.parse()
         assert_matches_type(PhoneNumber, phone_number, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_purchase(self, client: Surge) -> None:
         with client.phone_numbers.with_streaming_response.purchase(
@@ -116,7 +116,7 @@ class TestPhoneNumbers:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_purchase(self, client: Surge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
@@ -130,7 +130,7 @@ class TestAsyncPhoneNumbers:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncSurge) -> None:
         phone_number = await async_client.phone_numbers.list(
@@ -138,7 +138,7 @@ class TestAsyncPhoneNumbers:
         )
         assert_matches_type(AsyncCursor[PhoneNumber], phone_number, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncSurge) -> None:
         phone_number = await async_client.phone_numbers.list(
@@ -148,7 +148,7 @@ class TestAsyncPhoneNumbers:
         )
         assert_matches_type(AsyncCursor[PhoneNumber], phone_number, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncSurge) -> None:
         response = await async_client.phone_numbers.with_raw_response.list(
@@ -160,7 +160,7 @@ class TestAsyncPhoneNumbers:
         phone_number = await response.parse()
         assert_matches_type(AsyncCursor[PhoneNumber], phone_number, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncSurge) -> None:
         async with async_client.phone_numbers.with_streaming_response.list(
@@ -174,7 +174,7 @@ class TestAsyncPhoneNumbers:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_list(self, async_client: AsyncSurge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
@@ -182,7 +182,7 @@ class TestAsyncPhoneNumbers:
                 account_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_purchase(self, async_client: AsyncSurge) -> None:
         phone_number = await async_client.phone_numbers.purchase(
@@ -190,7 +190,7 @@ class TestAsyncPhoneNumbers:
         )
         assert_matches_type(PhoneNumber, phone_number, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_purchase_with_all_params(self, async_client: AsyncSurge) -> None:
         phone_number = await async_client.phone_numbers.purchase(
@@ -202,7 +202,7 @@ class TestAsyncPhoneNumbers:
         )
         assert_matches_type(PhoneNumber, phone_number, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_purchase(self, async_client: AsyncSurge) -> None:
         response = await async_client.phone_numbers.with_raw_response.purchase(
@@ -214,7 +214,7 @@ class TestAsyncPhoneNumbers:
         phone_number = await response.parse()
         assert_matches_type(PhoneNumber, phone_number, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_purchase(self, async_client: AsyncSurge) -> None:
         async with async_client.phone_numbers.with_streaming_response.purchase(
@@ -228,7 +228,7 @@ class TestAsyncPhoneNumbers:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_purchase(self, async_client: AsyncSurge) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
