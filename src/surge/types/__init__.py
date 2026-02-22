@@ -20,6 +20,7 @@ from .blast_create_params import BlastCreateParams as BlastCreateParams
 from .contact_list_params import ContactListParams as ContactListParams
 from .message_list_params import MessageListParams as MessageListParams
 from .user_token_response import UserTokenResponse as UserTokenResponse
+from .campaign_list_params import CampaignListParams as CampaignListParams
 from .unwrap_webhook_event import UnwrapWebhookEvent as UnwrapWebhookEvent
 from .account_create_params import AccountCreateParams as AccountCreateParams
 from .account_update_params import AccountUpdateParams as AccountUpdateParams

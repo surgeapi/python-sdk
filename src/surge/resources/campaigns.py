@@ -7,7 +7,7 @@ from typing_extensions import Literal, overload
 
 import httpx
 
-from ..types import campaign_create_params
+from ..types import campaign_list_params, campaign_create_params
 from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import required_args, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -18,7 +18,8 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
+from ..pagination import SyncCursor, AsyncCursor
+from .._base_client import AsyncPaginator, make_request_options
 from ..types.campaign import Campaign
 
 __all__ = ["CampaignsResource", "AsyncCampaignsResource"]
@@ -303,6 +304,59 @@ class CampaignsResource(SyncAPIResource):
             cast_to=Campaign,
         )
 
+    def list(
+        self,
+        account_id: str,
+        *,
+        after: str | Omit = omit,
+        before: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SyncCursor[Campaign]:
+        """
+        List all campaigns for an account with cursor-based pagination.
+
+        Args:
+          account_id: The account ID to list campaigns for.
+
+          after: Cursor for forward pagination. Use the next_cursor from a previous response.
+
+          before: Cursor for backward pagination. Use the previous_cursor from a previous
+              response.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return self._get_api_list(
+            f"/accounts/{account_id}/campaigns",
+            page=SyncCursor[Campaign],
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "after": after,
+                        "before": before,
+                    },
+                    campaign_list_params.CampaignListParams,
+                ),
+            ),
+            model=Campaign,
+        )
+
 
 class AsyncCampaignsResource(AsyncAPIResource):
     @cached_property
@@ -583,6 +637,59 @@ class AsyncCampaignsResource(AsyncAPIResource):
             cast_to=Campaign,
         )
 
+    def list(
+        self,
+        account_id: str,
+        *,
+        after: str | Omit = omit,
+        before: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AsyncPaginator[Campaign, AsyncCursor[Campaign]]:
+        """
+        List all campaigns for an account with cursor-based pagination.
+
+        Args:
+          account_id: The account ID to list campaigns for.
+
+          after: Cursor for forward pagination. Use the next_cursor from a previous response.
+
+          before: Cursor for backward pagination. Use the previous_cursor from a previous
+              response.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return self._get_api_list(
+            f"/accounts/{account_id}/campaigns",
+            page=AsyncCursor[Campaign],
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "after": after,
+                        "before": before,
+                    },
+                    campaign_list_params.CampaignListParams,
+                ),
+            ),
+            model=Campaign,
+        )
+
 
 class CampaignsResourceWithRawResponse:
     def __init__(self, campaigns: CampaignsResource) -> None:
@@ -593,6 +700,9 @@ class CampaignsResourceWithRawResponse:
         )
         self.retrieve = to_raw_response_wrapper(
             campaigns.retrieve,
+        )
+        self.list = to_raw_response_wrapper(
+            campaigns.list,
         )
 
 
@@ -606,6 +716,9 @@ class AsyncCampaignsResourceWithRawResponse:
         self.retrieve = async_to_raw_response_wrapper(
             campaigns.retrieve,
         )
+        self.list = async_to_raw_response_wrapper(
+            campaigns.list,
+        )
 
 
 class CampaignsResourceWithStreamingResponse:
@@ -618,6 +731,9 @@ class CampaignsResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             campaigns.retrieve,
         )
+        self.list = to_streamed_response_wrapper(
+            campaigns.list,
+        )
 
 
 class AsyncCampaignsResourceWithStreamingResponse:
@@ -629,4 +745,7 @@ class AsyncCampaignsResourceWithStreamingResponse:
         )
         self.retrieve = async_to_streamed_response_wrapper(
             campaigns.retrieve,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            campaigns.list,
         )

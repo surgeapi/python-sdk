@@ -10,6 +10,7 @@ import pytest
 from surge import Surge, AsyncSurge
 from surge.types import Campaign
 from tests.utils import assert_matches_type
+from surge.pagination import SyncCursor, AsyncCursor
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -208,6 +209,58 @@ class TestCampaigns:
                 "",
             )
 
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list(self, client: Surge) -> None:
+        campaign = client.campaigns.list(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+        )
+        assert_matches_type(SyncCursor[Campaign], campaign, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list_with_all_params(self, client: Surge) -> None:
+        campaign = client.campaigns.list(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            after="after",
+            before="before",
+        )
+        assert_matches_type(SyncCursor[Campaign], campaign, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_list(self, client: Surge) -> None:
+        response = client.campaigns.with_raw_response.list(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        campaign = response.parse()
+        assert_matches_type(SyncCursor[Campaign], campaign, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_list(self, client: Surge) -> None:
+        with client.campaigns.with_streaming_response.list(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            campaign = response.parse()
+            assert_matches_type(SyncCursor[Campaign], campaign, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_list(self, client: Surge) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
+            client.campaigns.with_raw_response.list(
+                account_id="",
+            )
+
 
 class TestAsyncCampaigns:
     parametrize = pytest.mark.parametrize(
@@ -403,4 +456,56 @@ class TestAsyncCampaigns:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.campaigns.with_raw_response.retrieve(
                 "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list(self, async_client: AsyncSurge) -> None:
+        campaign = await async_client.campaigns.list(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+        )
+        assert_matches_type(AsyncCursor[Campaign], campaign, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncSurge) -> None:
+        campaign = await async_client.campaigns.list(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+            after="after",
+            before="before",
+        )
+        assert_matches_type(AsyncCursor[Campaign], campaign, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_list(self, async_client: AsyncSurge) -> None:
+        response = await async_client.campaigns.with_raw_response.list(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        campaign = await response.parse()
+        assert_matches_type(AsyncCursor[Campaign], campaign, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_list(self, async_client: AsyncSurge) -> None:
+        async with async_client.campaigns.with_streaming_response.list(
+            account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            campaign = await response.parse()
+            assert_matches_type(AsyncCursor[Campaign], campaign, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_list(self, async_client: AsyncSurge) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
+            await async_client.campaigns.with_raw_response.list(
+                account_id="",
             )
