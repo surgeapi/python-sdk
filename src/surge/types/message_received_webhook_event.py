@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -46,6 +46,9 @@ class Data(BaseModel):
 
     conversation: DataConversation
     """The conversation this message belongs to"""
+
+    metadata: Dict[str, str]
+    """Set of key-value pairs that will be stored with the object."""
 
     received_at: datetime
     """When the message was received"""
