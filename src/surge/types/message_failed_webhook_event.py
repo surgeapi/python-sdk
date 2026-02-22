@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -52,6 +52,9 @@ class Data(BaseModel):
 
     failure_reason: str
     """The reason the message failed to be delivered"""
+
+    metadata: Dict[str, str]
+    """Set of key-value pairs that will be stored with the object."""
 
     attachments: Optional[List[DataAttachment]] = None
     """Attachments included with the message"""
