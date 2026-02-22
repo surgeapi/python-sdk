@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.12.0 (2026-02-22)
+
+Full Changelog: [v0.11.0...v0.12.0](https://github.com/surgeapi/python-sdk/compare/v0.11.0...v0.12.0)
+
+### Features
+
+* **api:** add list campaigns endpoint ([7c546c3](https://github.com/surgeapi/python-sdk/commit/7c546c3a7271db8d0f45c581cff8bdfe83df6cd5))
+* **api:** add metadata to message webhooks ([b6e794a](https://github.com/surgeapi/python-sdk/commit/b6e794a304eb02168442d9a9ddf43357b5bac293))
+* **api:** delete recording endpoint ([f0c9d1d](https://github.com/surgeapi/python-sdk/commit/f0c9d1d3f98ba0948a8059f7bdb5c69bb6a64e6a))
+* **api:** make attachment type an enum ([a5556bc](https://github.com/surgeapi/python-sdk/commit/a5556bc9c6e2dde38589bea08775653f5c7f0e07))
+
+
+### Chores
+
+* format all `api.md` files ([f862135](https://github.com/surgeapi/python-sdk/commit/f8621354800c8323130a4395169907b97b0ebd98))
+* **internal:** fix lint error on Python 3.14 ([e0d7a11](https://github.com/surgeapi/python-sdk/commit/e0d7a1156a8704f50f384051ec655c27f383f46d))
+* **internal:** remove mock server code ([00ad53a](https://github.com/surgeapi/python-sdk/commit/00ad53a11f706bbdab70148e2212598a4fe62805))
+* **test:** update skip reason message ([82a587f](https://github.com/surgeapi/python-sdk/commit/82a587f96b1c6418e1245d2d3eeadbcf48a6966e))
+* update mock server docs ([5e2e5af](https://github.com/surgeapi/python-sdk/commit/5e2e5af6e2968abcbea53d71a74cff647bfdd969))
+
 ## 0.11.0 (2026-02-12)
 
 Full Changelog: [v0.10.0...v0.11.0](https://github.com/surgeapi/python-sdk/compare/v0.10.0...v0.11.0)
