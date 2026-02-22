@@ -150,14 +150,14 @@ from surge import Surge
 
 client = Surge()
 
-all_contacts = []
+all_campaigns = []
 # Automatically fetches more pages as needed.
-for contact in client.contacts.list(
+for campaign in client.campaigns.list(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
 ):
-    # Do something with contact here
-    all_contacts.append(contact)
-print(all_contacts)
+    # Do something with campaign here
+    all_campaigns.append(campaign)
+print(all_campaigns)
 ```
 
 Or, asynchronously:
@@ -170,13 +170,13 @@ client = AsyncSurge()
 
 
 async def main() -> None:
-    all_contacts = []
+    all_campaigns = []
     # Iterate through items across all pages, issuing requests as needed.
-    async for contact in client.contacts.list(
+    async for campaign in client.campaigns.list(
         account_id="acct_01j9a43avnfqzbjfch6pygv1td",
     ):
-        all_contacts.append(contact)
-    print(all_contacts)
+        all_campaigns.append(campaign)
+    print(all_campaigns)
 
 
 asyncio.run(main())
@@ -185,7 +185,7 @@ asyncio.run(main())
 Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
 
 ```python
-first_page = await client.contacts.list(
+first_page = await client.campaigns.list(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
 )
 if first_page.has_next_page():
@@ -199,13 +199,13 @@ if first_page.has_next_page():
 Or just work directly with the returned data:
 
 ```python
-first_page = await client.contacts.list(
+first_page = await client.campaigns.list(
     account_id="acct_01j9a43avnfqzbjfch6pygv1td",
 )
 
 print(f"next page cursor: {first_page.pagination.next_cursor}")  # => "next page cursor: ..."
-for contact in first_page.data:
-    print(contact.id)
+for campaign in first_page.data:
+    print(campaign.id)
 
 # Remove `await` for non-async usage.
 ```
