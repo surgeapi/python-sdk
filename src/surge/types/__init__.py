@@ -48,3 +48,6 @@ from .message_delivered_webhook_event import MessageDeliveredWebhookEvent as Mes
 from .voicemail_received_webhook_event import VoicemailReceivedWebhookEvent as VoicemailReceivedWebhookEvent
 from .recording_completed_webhook_event import RecordingCompletedWebhookEvent as RecordingCompletedWebhookEvent
 from .conversation_created_webhook_event import ConversationCreatedWebhookEvent as ConversationCreatedWebhookEvent
+from .phone_number_attached_to_campaign_webhook_event import (
+    PhoneNumberAttachedToCampaignWebhookEvent as PhoneNumberAttachedToCampaignWebhookEvent,
+)
