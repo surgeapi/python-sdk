@@ -32,7 +32,7 @@ class BlastCreateParams(TypedDict, total=False):
     """Optional name for the blast."""
 
     segments: SequenceNotStr[str]
-    """Deprecated. Use `to` instead."""
+    """Deprecated. Use `to` with audience IDs instead."""
 
     send_at: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """When to send the blast. If not provided, sends immediately."""
@@ -40,7 +40,7 @@ class BlastCreateParams(TypedDict, total=False):
     to: SequenceNotStr[str]
     """List of recipients to whom the blast should be sent.
 
-    This can be a combination of contact IDs, segment IDs, and phone numbers.
+    This can be a combination of contact IDs, audience IDs, and phone numbers.
     """
 
 
