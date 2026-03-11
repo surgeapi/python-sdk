@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.13.0 (2026-03-11)
+
+Full Changelog: [v0.12.0...v0.13.0](https://github.com/surgeapi/python-sdk/compare/v0.12.0...v0.13.0)
+
+### Features
+
+* **api:** add campaign ID to phone numbers ([0e51d36](https://github.com/surgeapi/python-sdk/commit/0e51d369c478446fbe88315e1e2b26d5b43f702f))
+* **api:** add phoneNumberAttachedToCampaign webhook ([ae2844f](https://github.com/surgeapi/python-sdk/commit/ae2844fb07dac358e9ef1428382e403f0f482abb))
+* **api:** remove 'pending' campaign status ([3088b15](https://github.com/surgeapi/python-sdk/commit/3088b15d753ee0dadbcc1936097aae419bdabc1a))
+* **api:** rename segments to audiences ([798e60c](https://github.com/surgeapi/python-sdk/commit/798e60cad12e5c92fe83b6bfea2d4b73952407ca))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([d8bb15a](https://github.com/surgeapi/python-sdk/commit/d8bb15aecfe2f4a0f20ea60b1a610709897fbb06))
+* **dependencies:** require standardwebhooks 1.0.1 ([5e4fb88](https://github.com/surgeapi/python-sdk/commit/5e4fb8836d01faf0d1cbd1c72f1fbcf9fbfdf9bd))
+* **internal:** add request options to SSE classes ([e84cf02](https://github.com/surgeapi/python-sdk/commit/e84cf02ed7c59d8f31889b26224b07360bef9ee7))
+* **internal:** make `test_proxy_environment_variables` more resilient ([9aae19d](https://github.com/surgeapi/python-sdk/commit/9aae19dbc2bb8207ad07a1226d8cf7905e25845a))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([b3ed71d](https://github.com/surgeapi/python-sdk/commit/b3ed71dc48b367967f505da7ea05878eae5977de))
+* **tests:** update webhook tests ([0bff74e](https://github.com/surgeapi/python-sdk/commit/0bff74ede7d437a6dfc742c0fbe0062e6c8e356d))
+
 ## 0.12.0 (2026-02-22)
 
 Full Changelog: [v0.11.0...v0.12.0](https://github.com/surgeapi/python-sdk/compare/v0.11.0...v0.12.0)
