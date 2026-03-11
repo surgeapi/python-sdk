@@ -36,9 +36,9 @@ class TestBlasts:
             contacts=["ctc_01jxwtp1vse91twb5bj977gav9"],
             from_="+18015552345",
             name="Grand Opening Announcement",
-            segments=["seg_01jxwtwzqhfykb31dt6mvpsa9k"],
+            segments=["aud_01jxwtwzqhfykb31dt6mvpsa9k"],
             send_at=parse_datetime("2024-02-01T15:00:00Z"),
-            to=["seg_01j9dy8mdzfn3r0e8x1tbdrdrf", "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf", "+18015551234", "+18015555678"],
+            to=["aud_01j9dy8mdzfn3r0e8x1tbdrdrf", "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf", "+18015551234", "+18015555678"],
         )
         assert_matches_type(Blast, blast, path=["response"])
 
@@ -100,9 +100,9 @@ class TestAsyncBlasts:
             contacts=["ctc_01jxwtp1vse91twb5bj977gav9"],
             from_="+18015552345",
             name="Grand Opening Announcement",
-            segments=["seg_01jxwtwzqhfykb31dt6mvpsa9k"],
+            segments=["aud_01jxwtwzqhfykb31dt6mvpsa9k"],
             send_at=parse_datetime("2024-02-01T15:00:00Z"),
-            to=["seg_01j9dy8mdzfn3r0e8x1tbdrdrf", "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf", "+18015551234", "+18015555678"],
+            to=["aud_01j9dy8mdzfn3r0e8x1tbdrdrf", "ctc_01j9dy8mdzfn3r0e8x1tbdrdrf", "+18015551234", "+18015555678"],
         )
         assert_matches_type(Blast, blast, path=["response"])
 

@@ -79,12 +79,12 @@ class BlastsResource(SyncAPIResource):
 
           name: Optional name for the blast.
 
-          segments: Deprecated. Use `to` instead.
+          segments: Deprecated. Use `to` with audience IDs instead.
 
           send_at: When to send the blast. If not provided, sends immediately.
 
           to: List of recipients to whom the blast should be sent. This can be a combination
-              of contact IDs, segment IDs, and phone numbers.
+              of contact IDs, audience IDs, and phone numbers.
 
           extra_headers: Send extra headers
 
@@ -173,12 +173,12 @@ class AsyncBlastsResource(AsyncAPIResource):
 
           name: Optional name for the blast.
 
-          segments: Deprecated. Use `to` instead.
+          segments: Deprecated. Use `to` with audience IDs instead.
 
           send_at: When to send the blast. If not provided, sends immediately.
 
           to: List of recipients to whom the blast should be sent. This can be a combination
-              of contact IDs, segment IDs, and phone numbers.
+              of contact IDs, audience IDs, and phone numbers.
 
           extra_headers: Send extra headers
 
