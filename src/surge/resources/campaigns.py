@@ -9,7 +9,7 @@ import httpx
 
 from ..types import campaign_list_params, campaign_create_params
 from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
-from .._utils import required_args, maybe_transform, async_maybe_transform
+from .._utils import path_template, required_args, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -247,7 +247,7 @@ class CampaignsResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._post(
-            f"/accounts/{account_id}/campaigns",
+            path_template("/accounts/{account_id}/campaigns", account_id=account_id),
             body=maybe_transform(
                 {
                     "consent_flow": consent_flow,
@@ -297,7 +297,7 @@ class CampaignsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            f"/campaigns/{id}",
+            path_template("/campaigns/{id}", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -339,7 +339,7 @@ class CampaignsResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._get_api_list(
-            f"/accounts/{account_id}/campaigns",
+            path_template("/accounts/{account_id}/campaigns", account_id=account_id),
             page=SyncCursor[Campaign],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -580,7 +580,7 @@ class AsyncCampaignsResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._post(
-            f"/accounts/{account_id}/campaigns",
+            path_template("/accounts/{account_id}/campaigns", account_id=account_id),
             body=await async_maybe_transform(
                 {
                     "consent_flow": consent_flow,
@@ -630,7 +630,7 @@ class AsyncCampaignsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            f"/campaigns/{id}",
+            path_template("/campaigns/{id}", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -672,7 +672,7 @@ class AsyncCampaignsResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._get_api_list(
-            f"/accounts/{account_id}/campaigns",
+            path_template("/accounts/{account_id}/campaigns", account_id=account_id),
             page=AsyncCursor[Campaign],
             options=make_request_options(
                 extra_headers=extra_headers,
