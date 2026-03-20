@@ -10,7 +10,7 @@ import httpx
 
 from ..types import message_list_params, message_create_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import required_args, maybe_transform, async_maybe_transform
+from .._utils import path_template, required_args, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -208,7 +208,7 @@ class MessagesResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._post(
-            f"/accounts/{account_id}/messages",
+            path_template("/accounts/{account_id}/messages", account_id=account_id),
             body=maybe_transform(
                 {
                     "conversation": conversation,
@@ -255,7 +255,7 @@ class MessagesResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            f"/messages/{id}",
+            path_template("/messages/{id}", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -297,7 +297,7 @@ class MessagesResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._get_api_list(
-            f"/accounts/{account_id}/messages",
+            path_template("/accounts/{account_id}/messages", account_id=account_id),
             page=SyncCursor[Message],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -498,7 +498,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._post(
-            f"/accounts/{account_id}/messages",
+            path_template("/accounts/{account_id}/messages", account_id=account_id),
             body=await async_maybe_transform(
                 {
                     "conversation": conversation,
@@ -545,7 +545,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            f"/messages/{id}",
+            path_template("/messages/{id}", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -587,7 +587,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._get_api_list(
-            f"/accounts/{account_id}/messages",
+            path_template("/accounts/{account_id}/messages", account_id=account_id),
             page=AsyncCursor[Message],
             options=make_request_options(
                 extra_headers=extra_headers,
