@@ -8,7 +8,7 @@ import httpx
 
 from ..types import contact_list_params, contact_create_params, contact_update_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -87,7 +87,7 @@ class ContactsResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._post(
-            f"/accounts/{account_id}/contacts",
+            path_template("/accounts/{account_id}/contacts", account_id=account_id),
             body=maybe_transform(
                 {
                     "phone_number": phone_number,
@@ -132,7 +132,7 @@ class ContactsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            f"/contacts/{id}",
+            path_template("/contacts/{id}", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -183,7 +183,7 @@ class ContactsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._patch(
-            f"/contacts/{id}",
+            path_template("/contacts/{id}", id=id),
             body=maybe_transform(
                 {
                     "phone_number": phone_number,
@@ -235,7 +235,7 @@ class ContactsResource(SyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._get_api_list(
-            f"/accounts/{account_id}/contacts",
+            path_template("/accounts/{account_id}/contacts", account_id=account_id),
             page=SyncCursor[Contact],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -317,7 +317,7 @@ class AsyncContactsResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._post(
-            f"/accounts/{account_id}/contacts",
+            path_template("/accounts/{account_id}/contacts", account_id=account_id),
             body=await async_maybe_transform(
                 {
                     "phone_number": phone_number,
@@ -362,7 +362,7 @@ class AsyncContactsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            f"/contacts/{id}",
+            path_template("/contacts/{id}", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -413,7 +413,7 @@ class AsyncContactsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._patch(
-            f"/contacts/{id}",
+            path_template("/contacts/{id}", id=id),
             body=await async_maybe_transform(
                 {
                     "phone_number": phone_number,
@@ -465,7 +465,7 @@ class AsyncContactsResource(AsyncAPIResource):
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._get_api_list(
-            f"/accounts/{account_id}/contacts",
+            path_template("/accounts/{account_id}/contacts", account_id=account_id),
             page=AsyncCursor[Contact],
             options=make_request_options(
                 extra_headers=extra_headers,
