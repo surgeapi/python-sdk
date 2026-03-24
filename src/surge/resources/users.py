@@ -6,7 +6,7 @@ from typing import Dict
 
 import httpx
 
-from ..types import user_create_params, user_update_params, user_create_token_params
+from ..types import user_list_params, user_create_params, user_update_params, user_create_token_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -17,8 +17,9 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from ..pagination import SyncCursor, AsyncCursor
 from ..types.user import User
-from .._base_client import make_request_options
+from .._base_client import AsyncPaginator, make_request_options
 from ..types.user_token_response import UserTokenResponse
 
 __all__ = ["UsersResource", "AsyncUsersResource"]
@@ -189,6 +190,59 @@ class UsersResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=User,
+        )
+
+    def list(
+        self,
+        account_id: str,
+        *,
+        after: str | Omit = omit,
+        before: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SyncCursor[User]:
+        """
+        List all users for an account with cursor-based pagination.
+
+        Args:
+          account_id: The account ID to list users for.
+
+          after: Cursor for forward pagination. Use the next_cursor from a previous response.
+
+          before: Cursor for backward pagination. Use the previous_cursor from a previous
+              response.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return self._get_api_list(
+            path_template("/accounts/{account_id}/users", account_id=account_id),
+            page=SyncCursor[User],
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "after": after,
+                        "before": before,
+                    },
+                    user_list_params.UserListParams,
+                ),
+            ),
+            model=User,
         )
 
     def delete(
@@ -440,6 +494,59 @@ class AsyncUsersResource(AsyncAPIResource):
             cast_to=User,
         )
 
+    def list(
+        self,
+        account_id: str,
+        *,
+        after: str | Omit = omit,
+        before: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AsyncPaginator[User, AsyncCursor[User]]:
+        """
+        List all users for an account with cursor-based pagination.
+
+        Args:
+          account_id: The account ID to list users for.
+
+          after: Cursor for forward pagination. Use the next_cursor from a previous response.
+
+          before: Cursor for backward pagination. Use the previous_cursor from a previous
+              response.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return self._get_api_list(
+            path_template("/accounts/{account_id}/users", account_id=account_id),
+            page=AsyncCursor[User],
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "after": after,
+                        "before": before,
+                    },
+                    user_list_params.UserListParams,
+                ),
+            ),
+            model=User,
+        )
+
     async def delete(
         self,
         id: str,
@@ -535,6 +642,9 @@ class UsersResourceWithRawResponse:
         self.update = to_raw_response_wrapper(
             users.update,
         )
+        self.list = to_raw_response_wrapper(
+            users.list,
+        )
         self.delete = to_raw_response_wrapper(
             users.delete,
         )
@@ -555,6 +665,9 @@ class AsyncUsersResourceWithRawResponse:
         )
         self.update = async_to_raw_response_wrapper(
             users.update,
+        )
+        self.list = async_to_raw_response_wrapper(
+            users.list,
         )
         self.delete = async_to_raw_response_wrapper(
             users.delete,
@@ -577,6 +690,9 @@ class UsersResourceWithStreamingResponse:
         self.update = to_streamed_response_wrapper(
             users.update,
         )
+        self.list = to_streamed_response_wrapper(
+            users.list,
+        )
         self.delete = to_streamed_response_wrapper(
             users.delete,
         )
@@ -597,6 +713,9 @@ class AsyncUsersResourceWithStreamingResponse:
         )
         self.update = async_to_streamed_response_wrapper(
             users.update,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            users.list,
         )
         self.delete = async_to_streamed_response_wrapper(
             users.delete,
