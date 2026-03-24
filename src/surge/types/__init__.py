@@ -27,7 +27,9 @@ from .account_update_params import AccountUpdateParams as AccountUpdateParams
 from .contact_create_params import ContactCreateParams as ContactCreateParams
 from .contact_update_params import ContactUpdateParams as ContactUpdateParams
 from .message_create_params import MessageCreateParams as MessageCreateParams
+from .recording_list_params import RecordingListParams as RecordingListParams
 from .campaign_create_params import CampaignCreateParams as CampaignCreateParams
+from .recording_list_response import RecordingListResponse as RecordingListResponse
 from .call_ended_webhook_event import CallEndedWebhookEvent as CallEndedWebhookEvent
 from .phone_number_list_params import PhoneNumberListParams as PhoneNumberListParams
 from .user_create_token_params import UserCreateTokenParams as UserCreateTokenParams
@@ -37,6 +39,7 @@ from .message_sent_webhook_event import MessageSentWebhookEvent as MessageSentWe
 from .verification_create_params import VerificationCreateParams as VerificationCreateParams
 from .link_followed_webhook_event import LinkFollowedWebhookEvent as LinkFollowedWebhookEvent
 from .recording_get_file_response import RecordingGetFileResponse as RecordingGetFileResponse
+from .recording_retrieve_response import RecordingRetrieveResponse as RecordingRetrieveResponse
 from .message_failed_webhook_event import MessageFailedWebhookEvent as MessageFailedWebhookEvent
 from .phone_number_purchase_params import PhoneNumberPurchaseParams as PhoneNumberPurchaseParams
 from .account_retrieve_status_params import AccountRetrieveStatusParams as AccountRetrieveStatusParams
