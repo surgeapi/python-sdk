@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.14.0 (2026-03-24)
+
+Full Changelog: [v0.13.0...v0.14.0](https://github.com/surgeapi/python-sdk/compare/v0.13.0...v0.14.0)
+
+### Features
+
+* **api:** get and list recordings endpoints ([6c6708c](https://github.com/surgeapi/python-sdk/commit/6c6708c638e2be30037da2924687396d35ea8a2d))
+* **api:** list users endpoint ([68363dc](https://github.com/surgeapi/python-sdk/commit/68363dc5c1e16a6c6f3f4338e2bf58d72d4c745e))
+
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([aa8ba6f](https://github.com/surgeapi/python-sdk/commit/aa8ba6fb822f18b12967a0afa6fe15372b11b267))
+* **pydantic:** do not pass `by_alias` unless set ([f5efffe](https://github.com/surgeapi/python-sdk/commit/f5efffe7c979ff1bcaf759c0109e81c97692dca5))
+* sanitize endpoint path params ([859f37d](https://github.com/surgeapi/python-sdk/commit/859f37d4330b55c6bb48223fc903d14d1a1094a2))
+
+
+### Chores
+
+* **internal:** tweak CI branches ([d74dbf6](https://github.com/surgeapi/python-sdk/commit/d74dbf61b220b77ee3dc5bbf6da150f836520202))
+* **internal:** update gitignore ([c8df3a3](https://github.com/surgeapi/python-sdk/commit/c8df3a3cc07ca0a1a2ee549f5c9eb3527cb61239))
+
 ## 0.13.0 (2026-03-11)
 
 Full Changelog: [v0.12.0...v0.13.0](https://github.com/surgeapi/python-sdk/compare/v0.12.0...v0.13.0)
