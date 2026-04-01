@@ -150,14 +150,14 @@ from surge import Surge
 
 client = Surge()
 
-all_campaigns = []
+all_audiences = []
 # Automatically fetches more pages as needed.
-for campaign in client.campaigns.list(
-    account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+for audience in client.audiences.list_contacts(
+    audience_id="aud_01j9a43avnfqzbjfch6pygv1td",
 ):
-    # Do something with campaign here
-    all_campaigns.append(campaign)
-print(all_campaigns)
+    # Do something with audience here
+    all_audiences.append(audience)
+print(all_audiences)
 ```
 
 Or, asynchronously:
@@ -170,13 +170,13 @@ client = AsyncSurge()
 
 
 async def main() -> None:
-    all_campaigns = []
+    all_audiences = []
     # Iterate through items across all pages, issuing requests as needed.
-    async for campaign in client.campaigns.list(
-        account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+    async for audience in client.audiences.list_contacts(
+        audience_id="aud_01j9a43avnfqzbjfch6pygv1td",
     ):
-        all_campaigns.append(campaign)
-    print(all_campaigns)
+        all_audiences.append(audience)
+    print(all_audiences)
 
 
 asyncio.run(main())
@@ -185,8 +185,8 @@ asyncio.run(main())
 Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
 
 ```python
-first_page = await client.campaigns.list(
-    account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+first_page = await client.audiences.list_contacts(
+    audience_id="aud_01j9a43avnfqzbjfch6pygv1td",
 )
 if first_page.has_next_page():
     print(f"will fetch next page using these details: {first_page.next_page_info()}")
@@ -199,13 +199,13 @@ if first_page.has_next_page():
 Or just work directly with the returned data:
 
 ```python
-first_page = await client.campaigns.list(
-    account_id="acct_01j9a43avnfqzbjfch6pygv1td",
+first_page = await client.audiences.list_contacts(
+    audience_id="aud_01j9a43avnfqzbjfch6pygv1td",
 )
 
 print(f"next page cursor: {first_page.pagination.next_cursor}")  # => "next page cursor: ..."
-for campaign in first_page.data:
-    print(campaign.id)
+for audience in first_page.data:
+    print(audience.id)
 
 # Remove `await` for non-async usage.
 ```
