@@ -192,8 +192,8 @@ class Organization(TypedDict, total=False):
 
     mobile_number: Optional[str]
     """
-    For sole proprietors, this must be a valid US mobile phone number to which a
-    verification text message will be sent. (E.164 format)
+    For sole proprietors, this must be a valid US or Canadian mobile phone number to
+    which a verification text message will be sent. (E.164 format)
     """
 
     regions_of_operation: Optional[
