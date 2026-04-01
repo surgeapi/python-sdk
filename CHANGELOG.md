@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.15.0 (2026-04-01)
+
+Full Changelog: [v0.14.0...v0.15.0](https://github.com/surgeapi/python-sdk/compare/v0.14.0...v0.15.0)
+
+### Features
+
+* **api:** add a contact to an audience ([165faea](https://github.com/surgeapi/python-sdk/commit/165faeaab6ba9647ad09224f0a1cb92538cb8cd5))
+* **api:** allow canadian organizations ([6fdc307](https://github.com/surgeapi/python-sdk/commit/6fdc3072d36fcc529dd99627dd76a6dc17857466))
+* **api:** list contacts in audiences ([8d250d8](https://github.com/surgeapi/python-sdk/commit/8d250d81acb5c3d87ad9d8052ef9b6b8e0282e85))
+* **internal:** implement indices array format for query and form serialization ([1a15830](https://github.com/surgeapi/python-sdk/commit/1a1583061167ba5a0e774fae1d4e552ffacbb33c))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([b0c7411](https://github.com/surgeapi/python-sdk/commit/b0c7411ccc4aad8278beb8d5ede4360231423b1f))
+
+
+### Documentation
+
+* **api:** allow Canadian mobile number ([b06654f](https://github.com/surgeapi/python-sdk/commit/b06654fb187f23449817d3b5c69214d73fa17917))
+
 ## 0.14.0 (2026-03-24)
 
 Full Changelog: [v0.13.0...v0.14.0](https://github.com/surgeapi/python-sdk/compare/v0.13.0...v0.14.0)
