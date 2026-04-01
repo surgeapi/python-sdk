@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import httpx
 
-from ..types import audience_list_contacts_params
+from ..types import audience_add_contact_params, audience_list_contacts_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import path_template, maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -41,6 +41,46 @@ class AudiencesResource(SyncAPIResource):
         For more information, see https://www.github.com/surgeapi/python-sdk#with_streaming_response
         """
         return AudiencesResourceWithStreamingResponse(self)
+
+    def add_contact(
+        self,
+        audience_id: str,
+        *,
+        id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Contact:
+        """
+        Adds an existing contact to a manual audience.
+
+        Args:
+          audience_id: The audience ID to add the contact to.
+
+          id: The ID of the contact to add. The contact must belong to the same account as the
+              audience.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not audience_id:
+            raise ValueError(f"Expected a non-empty value for `audience_id` but received {audience_id!r}")
+        return self._post(
+            path_template("/audiences/{audience_id}/contacts", audience_id=audience_id),
+            body=maybe_transform({"id": id}, audience_add_contact_params.AudienceAddContactParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Contact,
+        )
 
     def list_contacts(
         self,
@@ -118,6 +158,46 @@ class AsyncAudiencesResource(AsyncAPIResource):
         """
         return AsyncAudiencesResourceWithStreamingResponse(self)
 
+    async def add_contact(
+        self,
+        audience_id: str,
+        *,
+        id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Contact:
+        """
+        Adds an existing contact to a manual audience.
+
+        Args:
+          audience_id: The audience ID to add the contact to.
+
+          id: The ID of the contact to add. The contact must belong to the same account as the
+              audience.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not audience_id:
+            raise ValueError(f"Expected a non-empty value for `audience_id` but received {audience_id!r}")
+        return await self._post(
+            path_template("/audiences/{audience_id}/contacts", audience_id=audience_id),
+            body=await async_maybe_transform({"id": id}, audience_add_contact_params.AudienceAddContactParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Contact,
+        )
+
     def list_contacts(
         self,
         audience_id: str,
@@ -178,6 +258,9 @@ class AudiencesResourceWithRawResponse:
     def __init__(self, audiences: AudiencesResource) -> None:
         self._audiences = audiences
 
+        self.add_contact = to_raw_response_wrapper(
+            audiences.add_contact,
+        )
         self.list_contacts = to_raw_response_wrapper(
             audiences.list_contacts,
         )
@@ -187,6 +270,9 @@ class AsyncAudiencesResourceWithRawResponse:
     def __init__(self, audiences: AsyncAudiencesResource) -> None:
         self._audiences = audiences
 
+        self.add_contact = async_to_raw_response_wrapper(
+            audiences.add_contact,
+        )
         self.list_contacts = async_to_raw_response_wrapper(
             audiences.list_contacts,
         )
@@ -196,6 +282,9 @@ class AudiencesResourceWithStreamingResponse:
     def __init__(self, audiences: AudiencesResource) -> None:
         self._audiences = audiences
 
+        self.add_contact = to_streamed_response_wrapper(
+            audiences.add_contact,
+        )
         self.list_contacts = to_streamed_response_wrapper(
             audiences.list_contacts,
         )
@@ -205,6 +294,9 @@ class AsyncAudiencesResourceWithStreamingResponse:
     def __init__(self, audiences: AsyncAudiencesResource) -> None:
         self._audiences = audiences
 
+        self.add_contact = async_to_streamed_response_wrapper(
+            audiences.add_contact,
+        )
         self.list_contacts = async_to_streamed_response_wrapper(
             audiences.list_contacts,
         )
