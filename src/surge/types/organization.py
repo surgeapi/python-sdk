@@ -105,13 +105,14 @@ class Organization(BaseModel):
     """The value of the identifier whose type is specified in the identifier_type
     field.
 
-    Typically this will be an EIN, and can be formatted with or without the hyphen.
+    For EIN, can be formatted with or without the hyphen. For CBN, must be exactly 9
+    digits.
     """
 
-    identifier_type: Optional[Literal["ein"]] = None
+    identifier_type: Optional[Literal["ein", "cbn"]] = None
     """The type of identifier being provided for the organization.
 
-    Support for more values will be added in the future.
+    Use "ein" for US businesses or "cbn" for Canadian businesses.
     """
 
     industry: Optional[
