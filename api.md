@@ -19,6 +19,12 @@ Methods:
 - <code title="delete /accounts/{id}">client.accounts.<a href="./src/surge/resources/accounts.py">archive</a>(id) -> <a href="./src/surge/types/account.py">Account</a></code>
 - <code title="get /accounts/{account_id}/status">client.accounts.<a href="./src/surge/resources/accounts.py">retrieve_status</a>(account_id, \*\*<a href="src/surge/types/account_retrieve_status_params.py">params</a>) -> <a href="./src/surge/types/account_status.py">AccountStatus</a></code>
 
+# Audiences
+
+Methods:
+
+- <code title="get /audiences/{audience_id}/contacts">client.audiences.<a href="./src/surge/resources/audiences.py">list_contacts</a>(audience_id, \*\*<a href="src/surge/types/audience_list_contacts_params.py">params</a>) -> <a href="./src/surge/types/contact.py">SyncCursor[Contact]</a></code>
+
 # Blasts
 
 Types:

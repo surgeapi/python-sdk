@@ -41,6 +41,14 @@ from .messages import (
     AsyncMessagesResourceWithStreamingResponse,
 )
 from .webhooks import WebhooksResource, AsyncWebhooksResource
+from .audiences import (
+    AudiencesResource,
+    AsyncAudiencesResource,
+    AudiencesResourceWithRawResponse,
+    AsyncAudiencesResourceWithRawResponse,
+    AudiencesResourceWithStreamingResponse,
+    AsyncAudiencesResourceWithStreamingResponse,
+)
 from .campaigns import (
     CampaignsResource,
     AsyncCampaignsResource,
@@ -81,6 +89,12 @@ __all__ = [
     "AsyncAccountsResourceWithRawResponse",
     "AccountsResourceWithStreamingResponse",
     "AsyncAccountsResourceWithStreamingResponse",
+    "AudiencesResource",
+    "AsyncAudiencesResource",
+    "AudiencesResourceWithRawResponse",
+    "AsyncAudiencesResourceWithRawResponse",
+    "AudiencesResourceWithStreamingResponse",
+    "AsyncAudiencesResourceWithStreamingResponse",
     "BlastsResource",
     "AsyncBlastsResource",
     "BlastsResourceWithRawResponse",
