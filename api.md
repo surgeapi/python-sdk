@@ -21,8 +21,15 @@ Methods:
 
 # Audiences
 
+Types:
+
+```python
+from surge.types import AudienceCreateResponse
+```
+
 Methods:
 
+- <code title="post /accounts/{account_id}/audiences">client.audiences.<a href="./src/surge/resources/audiences.py">create</a>(account_id, \*\*<a href="src/surge/types/audience_create_params.py">params</a>) -> <a href="./src/surge/types/audience_create_response.py">AudienceCreateResponse</a></code>
 - <code title="post /audiences/{audience_id}/contacts">client.audiences.<a href="./src/surge/resources/audiences.py">add_contact</a>(audience_id, \*\*<a href="src/surge/types/audience_add_contact_params.py">params</a>) -> <a href="./src/surge/types/contact.py">Contact</a></code>
 - <code title="get /audiences/{audience_id}/contacts">client.audiences.<a href="./src/surge/resources/audiences.py">list_contacts</a>(audience_id, \*\*<a href="src/surge/types/audience_list_contacts_params.py">params</a>) -> <a href="./src/surge/types/contact.py">SyncCursor[Contact]</a></code>
 

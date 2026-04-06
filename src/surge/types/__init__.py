@@ -29,9 +29,11 @@ from .contact_create_params import ContactCreateParams as ContactCreateParams
 from .contact_update_params import ContactUpdateParams as ContactUpdateParams
 from .message_create_params import MessageCreateParams as MessageCreateParams
 from .recording_list_params import RecordingListParams as RecordingListParams
+from .audience_create_params import AudienceCreateParams as AudienceCreateParams
 from .campaign_create_params import CampaignCreateParams as CampaignCreateParams
 from .campaign_update_params import CampaignUpdateParams as CampaignUpdateParams
 from .recording_list_response import RecordingListResponse as RecordingListResponse
+from .audience_create_response import AudienceCreateResponse as AudienceCreateResponse
 from .call_ended_webhook_event import CallEndedWebhookEvent as CallEndedWebhookEvent
 from .phone_number_list_params import PhoneNumberListParams as PhoneNumberListParams
 from .user_create_token_params import UserCreateTokenParams as UserCreateTokenParams
