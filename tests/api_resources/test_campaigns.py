@@ -31,6 +31,7 @@ class TestCampaigns:
                 "Your car is ready to go. See your invoice here: https://l.fastauto.shop/s034ij",
             ],
             privacy_policy_url="https://fastauto.shop/sms-privacy",
+            terms_and_conditions_url="https://fastauto.shop/terms-and-conditions",
             use_cases=["account_notification", "customer_care", "marketing"],
             volume="high",
         )
@@ -49,11 +50,11 @@ class TestCampaigns:
                 "Your car is ready to go. See your invoice here: https://l.fastauto.shop/s034ij",
             ],
             privacy_policy_url="https://fastauto.shop/sms-privacy",
+            terms_and_conditions_url="https://fastauto.shop/terms-and-conditions",
             use_cases=["account_notification", "customer_care", "marketing"],
             volume="high",
             includes=["links", "phone_numbers"],
             link_sample="https://l.fastauto.shop/s034ij",
-            terms_and_conditions_url="https://fastauto.shop/terms-and-conditions",
         )
         assert_matches_type(Campaign, campaign, path=["response"])
 
@@ -70,6 +71,7 @@ class TestCampaigns:
                 "Your car is ready to go. See your invoice here: https://l.fastauto.shop/s034ij",
             ],
             privacy_policy_url="https://fastauto.shop/sms-privacy",
+            terms_and_conditions_url="https://fastauto.shop/terms-and-conditions",
             use_cases=["account_notification", "customer_care", "marketing"],
             volume="high",
         )
@@ -92,6 +94,7 @@ class TestCampaigns:
                 "Your car is ready to go. See your invoice here: https://l.fastauto.shop/s034ij",
             ],
             privacy_policy_url="https://fastauto.shop/sms-privacy",
+            terms_and_conditions_url="https://fastauto.shop/terms-and-conditions",
             use_cases=["account_notification", "customer_care", "marketing"],
             volume="high",
         ) as response:
@@ -117,6 +120,7 @@ class TestCampaigns:
                     "Your car is ready to go. See your invoice here: https://l.fastauto.shop/s034ij",
                 ],
                 privacy_policy_url="https://fastauto.shop/sms-privacy",
+                terms_and_conditions_url="https://fastauto.shop/terms-and-conditions",
                 use_cases=["account_notification", "customer_care", "marketing"],
                 volume="high",
             )
@@ -280,6 +284,7 @@ class TestAsyncCampaigns:
                 "Your car is ready to go. See your invoice here: https://l.fastauto.shop/s034ij",
             ],
             privacy_policy_url="https://fastauto.shop/sms-privacy",
+            terms_and_conditions_url="https://fastauto.shop/terms-and-conditions",
             use_cases=["account_notification", "customer_care", "marketing"],
             volume="high",
         )
@@ -298,11 +303,11 @@ class TestAsyncCampaigns:
                 "Your car is ready to go. See your invoice here: https://l.fastauto.shop/s034ij",
             ],
             privacy_policy_url="https://fastauto.shop/sms-privacy",
+            terms_and_conditions_url="https://fastauto.shop/terms-and-conditions",
             use_cases=["account_notification", "customer_care", "marketing"],
             volume="high",
             includes=["links", "phone_numbers"],
             link_sample="https://l.fastauto.shop/s034ij",
-            terms_and_conditions_url="https://fastauto.shop/terms-and-conditions",
         )
         assert_matches_type(Campaign, campaign, path=["response"])
 
@@ -319,6 +324,7 @@ class TestAsyncCampaigns:
                 "Your car is ready to go. See your invoice here: https://l.fastauto.shop/s034ij",
             ],
             privacy_policy_url="https://fastauto.shop/sms-privacy",
+            terms_and_conditions_url="https://fastauto.shop/terms-and-conditions",
             use_cases=["account_notification", "customer_care", "marketing"],
             volume="high",
         )
@@ -341,6 +347,7 @@ class TestAsyncCampaigns:
                 "Your car is ready to go. See your invoice here: https://l.fastauto.shop/s034ij",
             ],
             privacy_policy_url="https://fastauto.shop/sms-privacy",
+            terms_and_conditions_url="https://fastauto.shop/terms-and-conditions",
             use_cases=["account_notification", "customer_care", "marketing"],
             volume="high",
         ) as response:
@@ -366,6 +373,7 @@ class TestAsyncCampaigns:
                     "Your car is ready to go. See your invoice here: https://l.fastauto.shop/s034ij",
                 ],
                 privacy_policy_url="https://fastauto.shop/sms-privacy",
+                terms_and_conditions_url="https://fastauto.shop/terms-and-conditions",
                 use_cases=["account_notification", "customer_care", "marketing"],
                 volume="high",
             )
