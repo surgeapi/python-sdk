@@ -43,6 +43,14 @@ class StandardCampaignParams(TypedDict, total=False):
     users when they opt in to messaging.
     """
 
+    terms_and_conditions_url: Required[str]
+    """
+    The URL of the terms and conditions presented to end users when they opt in to
+    messaging. These terms and conditions may be shared among all of a platform's
+    customers if they're the terms that are presented to end users when they opt in
+    to messaging.
+    """
+
     use_cases: Required[
         List[
             Literal[
@@ -120,14 +128,6 @@ class StandardCampaignParams(TypedDict, total=False):
     likely to be filtered by the carriers. If link shortening is enabled for the
     account, the link shortener URL will be used instead of what is provided. Reach
     out to support if you would like to disable automatic link shortening.
-    """
-
-    terms_and_conditions_url: str
-    """
-    The URL of the terms and conditions presented to end users when they opt in to
-    messaging. These terms and conditions may be shared among all of a platform's
-    customers if they're the terms that are presented to end users when they opt in
-    to messaging.
     """
 
 
