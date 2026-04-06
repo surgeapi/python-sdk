@@ -7,7 +7,7 @@ from typing_extensions import Literal, overload
 
 import httpx
 
-from ..types import campaign_list_params, campaign_create_params
+from ..types import campaign_list_params, campaign_create_params, campaign_update_params
 from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import path_template, required_args, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -307,6 +307,247 @@ class CampaignsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
             path_template("/campaigns/{id}", id=id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Campaign,
+        )
+
+    @overload
+    def update(
+        self,
+        id: str,
+        *,
+        consent_flow: str,
+        description: str,
+        message_samples: SequenceNotStr[str],
+        privacy_policy_url: str,
+        terms_and_conditions_url: str,
+        use_cases: List[
+            Literal[
+                "account_notification",
+                "customer_care",
+                "delivery_notification",
+                "fraud_alert",
+                "higher_education",
+                "marketing",
+                "polling_voting",
+                "public_service_announcement",
+                "security_alert",
+                "two_factor_authentication",
+            ]
+        ],
+        volume: Literal["high", "low"],
+        includes: List[Literal["links", "phone_numbers", "age_gated", "direct_lending"]] | Omit = omit,
+        link_sample: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Campaign:
+        """Updates a campaign that has not yet been approved.
+
+        This can be used to fix
+        issues flagged during review and resubmit the campaign. Returns an error if the
+        campaign is currently in review, has already been approved, or has been
+        deactivated.
+
+        Args:
+          id: The ID of the campaign to update.
+
+          consent_flow: A string explaining the method through which end users will opt in to receive
+              messages from the brand. Typically this should include URLs for opt-in forms or
+              screenshots that might be helpful in explaining the flow to someone unfamiliar
+              with the organization's purpose.
+
+          description: An explanation of the organization's purpose and how it will be using text
+              messaging to accomplish that purpose.
+
+          message_samples: An array of 2-5 strings with examples of the messages that will be sent from
+              this campaign. Typically the first sample should be a compliance message like
+              `You are now opted in to messages from {brand name}. Frequency varies. Msg&data rates apply. Reply STOP to opt out.`
+              These samples don't necessarily need to be the only templates that will be used
+              for the campaign, but they should reflect the purpose of the messages that will
+              be sent. Any variable content can be reflected by wrapping it in square brackets
+              like `[customer name]`.
+
+          privacy_policy_url: The URL of the privacy policy for the brand in question. This may be a shared
+              privacy policy if it's the policy that is displayed to end users when they opt
+              in to messaging.
+
+          terms_and_conditions_url: The URL of the terms and conditions presented to end users when they opt in to
+              messaging. These terms and conditions may be shared among all of a platform's
+              customers if they're the terms that are presented to end users when they opt in
+              to messaging.
+
+          use_cases: A list containing 1-5 types of messages that will be sent with this campaign.
+
+              The following use cases are typically available to all brands:
+
+              - `account_notification` - For sending reminders, alerts, and general
+                account-related notifications like booking confirmations or appointment
+                reminders.
+              - `customer_care` - For account support, troubleshooting, and general customer
+                service communication.
+              - `delivery_notification` - For notifying customers about the status of product
+                or service deliveries.
+              - `fraud_alert` - For warning customers about suspicious or potentially
+                fraudulent activity.
+              - `higher_education` - For messaging related to colleges, universities, and
+                school districts outside of K–12.
+              - `marketing` - For promotional or advertising messages intended to market
+                products or services.
+              - `polling_voting` - For conducting surveys, polls, or voting-related messaging.
+              - `public_service_announcement` - For raising awareness about social issues or
+                important public information.
+              - `security_alert` - For alerts related to potential security breaches or
+                compromised systems requiring user action.
+              - `two_factor_authentication` - For sending one-time passwords or verification
+                codes for login or password reset.
+
+              For access to special use cases not shown here, reach out to support@surge.app.
+
+          volume:
+              This will be one of the following:
+
+              - `low` - The campaign will be allowed to send up to 2000 SMS segments to
+                T-Mobile customers each day. In this case your platform will be charged for
+                the setup fee for a low volume number upon receipt of the API request.
+              - `high` - The campaign will be allowed to send up to 200k SMS segments to
+                T-Mobile customers each day, depending on the trust score assigned by The
+                Campaign Registry. Your platform will be charged for the setup fee for a high
+                volume number upon receipt of the API request, and phone numbers will be
+                charged as high volume numbers going forward.
+
+          includes: A list of properties that this campaign should include. These properties can be
+              any of the following values:
+
+              - `links` - whether the campaign might send links in messages
+              - `phone_numbers` - whether the campaign might send phone numbers in messages
+              - `age_gated` - whether the campaign contains age gated content (controlled
+                substances or adult content)
+              - `direct_lending` - whether the campaign contains content related to direct
+                lending or other loan arrangements
+
+          link_sample: A sample link that might be sent by this campaign. If links from other domains
+              are sent through this campaign, they are much more likely to be filtered by the
+              carriers. If link shortening is enabled for the account, the link shortener URL
+              will be used instead of what is provided. Reach out to support if you would like
+              to disable automatic link shortening.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    def update(
+        self,
+        id: str,
+        *,
+        tcr_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Campaign:
+        """Updates a campaign that has not yet been approved.
+
+        This can be used to fix
+        issues flagged during review and resubmit the campaign. Returns an error if the
+        campaign is currently in review, has already been approved, or has been
+        deactivated.
+
+        Args:
+          id: The ID of the campaign to update.
+
+          tcr_id: The Campaign Registry (TCR) ID for the externally registered campaign
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(
+        [
+            "consent_flow",
+            "description",
+            "message_samples",
+            "privacy_policy_url",
+            "terms_and_conditions_url",
+            "use_cases",
+            "volume",
+        ],
+        ["tcr_id"],
+    )
+    def update(
+        self,
+        id: str,
+        *,
+        consent_flow: str | Omit = omit,
+        description: str | Omit = omit,
+        message_samples: SequenceNotStr[str] | Omit = omit,
+        privacy_policy_url: str | Omit = omit,
+        terms_and_conditions_url: str | Omit = omit,
+        use_cases: List[
+            Literal[
+                "account_notification",
+                "customer_care",
+                "delivery_notification",
+                "fraud_alert",
+                "higher_education",
+                "marketing",
+                "polling_voting",
+                "public_service_announcement",
+                "security_alert",
+                "two_factor_authentication",
+            ]
+        ]
+        | Omit = omit,
+        volume: Literal["high", "low"] | Omit = omit,
+        includes: List[Literal["links", "phone_numbers", "age_gated", "direct_lending"]] | Omit = omit,
+        link_sample: str | Omit = omit,
+        tcr_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Campaign:
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._patch(
+            path_template("/campaigns/{id}", id=id),
+            body=maybe_transform(
+                {
+                    "consent_flow": consent_flow,
+                    "description": description,
+                    "message_samples": message_samples,
+                    "privacy_policy_url": privacy_policy_url,
+                    "terms_and_conditions_url": terms_and_conditions_url,
+                    "use_cases": use_cases,
+                    "volume": volume,
+                    "includes": includes,
+                    "link_sample": link_sample,
+                    "tcr_id": tcr_id,
+                },
+                campaign_update_params.CampaignUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -655,6 +896,247 @@ class AsyncCampaignsResource(AsyncAPIResource):
             cast_to=Campaign,
         )
 
+    @overload
+    async def update(
+        self,
+        id: str,
+        *,
+        consent_flow: str,
+        description: str,
+        message_samples: SequenceNotStr[str],
+        privacy_policy_url: str,
+        terms_and_conditions_url: str,
+        use_cases: List[
+            Literal[
+                "account_notification",
+                "customer_care",
+                "delivery_notification",
+                "fraud_alert",
+                "higher_education",
+                "marketing",
+                "polling_voting",
+                "public_service_announcement",
+                "security_alert",
+                "two_factor_authentication",
+            ]
+        ],
+        volume: Literal["high", "low"],
+        includes: List[Literal["links", "phone_numbers", "age_gated", "direct_lending"]] | Omit = omit,
+        link_sample: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Campaign:
+        """Updates a campaign that has not yet been approved.
+
+        This can be used to fix
+        issues flagged during review and resubmit the campaign. Returns an error if the
+        campaign is currently in review, has already been approved, or has been
+        deactivated.
+
+        Args:
+          id: The ID of the campaign to update.
+
+          consent_flow: A string explaining the method through which end users will opt in to receive
+              messages from the brand. Typically this should include URLs for opt-in forms or
+              screenshots that might be helpful in explaining the flow to someone unfamiliar
+              with the organization's purpose.
+
+          description: An explanation of the organization's purpose and how it will be using text
+              messaging to accomplish that purpose.
+
+          message_samples: An array of 2-5 strings with examples of the messages that will be sent from
+              this campaign. Typically the first sample should be a compliance message like
+              `You are now opted in to messages from {brand name}. Frequency varies. Msg&data rates apply. Reply STOP to opt out.`
+              These samples don't necessarily need to be the only templates that will be used
+              for the campaign, but they should reflect the purpose of the messages that will
+              be sent. Any variable content can be reflected by wrapping it in square brackets
+              like `[customer name]`.
+
+          privacy_policy_url: The URL of the privacy policy for the brand in question. This may be a shared
+              privacy policy if it's the policy that is displayed to end users when they opt
+              in to messaging.
+
+          terms_and_conditions_url: The URL of the terms and conditions presented to end users when they opt in to
+              messaging. These terms and conditions may be shared among all of a platform's
+              customers if they're the terms that are presented to end users when they opt in
+              to messaging.
+
+          use_cases: A list containing 1-5 types of messages that will be sent with this campaign.
+
+              The following use cases are typically available to all brands:
+
+              - `account_notification` - For sending reminders, alerts, and general
+                account-related notifications like booking confirmations or appointment
+                reminders.
+              - `customer_care` - For account support, troubleshooting, and general customer
+                service communication.
+              - `delivery_notification` - For notifying customers about the status of product
+                or service deliveries.
+              - `fraud_alert` - For warning customers about suspicious or potentially
+                fraudulent activity.
+              - `higher_education` - For messaging related to colleges, universities, and
+                school districts outside of K–12.
+              - `marketing` - For promotional or advertising messages intended to market
+                products or services.
+              - `polling_voting` - For conducting surveys, polls, or voting-related messaging.
+              - `public_service_announcement` - For raising awareness about social issues or
+                important public information.
+              - `security_alert` - For alerts related to potential security breaches or
+                compromised systems requiring user action.
+              - `two_factor_authentication` - For sending one-time passwords or verification
+                codes for login or password reset.
+
+              For access to special use cases not shown here, reach out to support@surge.app.
+
+          volume:
+              This will be one of the following:
+
+              - `low` - The campaign will be allowed to send up to 2000 SMS segments to
+                T-Mobile customers each day. In this case your platform will be charged for
+                the setup fee for a low volume number upon receipt of the API request.
+              - `high` - The campaign will be allowed to send up to 200k SMS segments to
+                T-Mobile customers each day, depending on the trust score assigned by The
+                Campaign Registry. Your platform will be charged for the setup fee for a high
+                volume number upon receipt of the API request, and phone numbers will be
+                charged as high volume numbers going forward.
+
+          includes: A list of properties that this campaign should include. These properties can be
+              any of the following values:
+
+              - `links` - whether the campaign might send links in messages
+              - `phone_numbers` - whether the campaign might send phone numbers in messages
+              - `age_gated` - whether the campaign contains age gated content (controlled
+                substances or adult content)
+              - `direct_lending` - whether the campaign contains content related to direct
+                lending or other loan arrangements
+
+          link_sample: A sample link that might be sent by this campaign. If links from other domains
+              are sent through this campaign, they are much more likely to be filtered by the
+              carriers. If link shortening is enabled for the account, the link shortener URL
+              will be used instead of what is provided. Reach out to support if you would like
+              to disable automatic link shortening.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    async def update(
+        self,
+        id: str,
+        *,
+        tcr_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Campaign:
+        """Updates a campaign that has not yet been approved.
+
+        This can be used to fix
+        issues flagged during review and resubmit the campaign. Returns an error if the
+        campaign is currently in review, has already been approved, or has been
+        deactivated.
+
+        Args:
+          id: The ID of the campaign to update.
+
+          tcr_id: The Campaign Registry (TCR) ID for the externally registered campaign
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(
+        [
+            "consent_flow",
+            "description",
+            "message_samples",
+            "privacy_policy_url",
+            "terms_and_conditions_url",
+            "use_cases",
+            "volume",
+        ],
+        ["tcr_id"],
+    )
+    async def update(
+        self,
+        id: str,
+        *,
+        consent_flow: str | Omit = omit,
+        description: str | Omit = omit,
+        message_samples: SequenceNotStr[str] | Omit = omit,
+        privacy_policy_url: str | Omit = omit,
+        terms_and_conditions_url: str | Omit = omit,
+        use_cases: List[
+            Literal[
+                "account_notification",
+                "customer_care",
+                "delivery_notification",
+                "fraud_alert",
+                "higher_education",
+                "marketing",
+                "polling_voting",
+                "public_service_announcement",
+                "security_alert",
+                "two_factor_authentication",
+            ]
+        ]
+        | Omit = omit,
+        volume: Literal["high", "low"] | Omit = omit,
+        includes: List[Literal["links", "phone_numbers", "age_gated", "direct_lending"]] | Omit = omit,
+        link_sample: str | Omit = omit,
+        tcr_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Campaign:
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._patch(
+            path_template("/campaigns/{id}", id=id),
+            body=await async_maybe_transform(
+                {
+                    "consent_flow": consent_flow,
+                    "description": description,
+                    "message_samples": message_samples,
+                    "privacy_policy_url": privacy_policy_url,
+                    "terms_and_conditions_url": terms_and_conditions_url,
+                    "use_cases": use_cases,
+                    "volume": volume,
+                    "includes": includes,
+                    "link_sample": link_sample,
+                    "tcr_id": tcr_id,
+                },
+                campaign_update_params.CampaignUpdateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Campaign,
+        )
+
     def list(
         self,
         account_id: str,
@@ -719,6 +1201,9 @@ class CampaignsResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             campaigns.retrieve,
         )
+        self.update = to_raw_response_wrapper(
+            campaigns.update,
+        )
         self.list = to_raw_response_wrapper(
             campaigns.list,
         )
@@ -733,6 +1218,9 @@ class AsyncCampaignsResourceWithRawResponse:
         )
         self.retrieve = async_to_raw_response_wrapper(
             campaigns.retrieve,
+        )
+        self.update = async_to_raw_response_wrapper(
+            campaigns.update,
         )
         self.list = async_to_raw_response_wrapper(
             campaigns.list,
@@ -749,6 +1237,9 @@ class CampaignsResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             campaigns.retrieve,
         )
+        self.update = to_streamed_response_wrapper(
+            campaigns.update,
+        )
         self.list = to_streamed_response_wrapper(
             campaigns.list,
         )
@@ -763,6 +1254,9 @@ class AsyncCampaignsResourceWithStreamingResponse:
         )
         self.retrieve = async_to_streamed_response_wrapper(
             campaigns.retrieve,
+        )
+        self.update = async_to_streamed_response_wrapper(
+            campaigns.update,
         )
         self.list = async_to_streamed_response_wrapper(
             campaigns.list,
