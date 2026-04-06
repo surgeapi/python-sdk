@@ -30,6 +30,7 @@ from .contact_update_params import ContactUpdateParams as ContactUpdateParams
 from .message_create_params import MessageCreateParams as MessageCreateParams
 from .recording_list_params import RecordingListParams as RecordingListParams
 from .campaign_create_params import CampaignCreateParams as CampaignCreateParams
+from .campaign_update_params import CampaignUpdateParams as CampaignUpdateParams
 from .recording_list_response import RecordingListResponse as RecordingListResponse
 from .call_ended_webhook_event import CallEndedWebhookEvent as CallEndedWebhookEvent
 from .phone_number_list_params import PhoneNumberListParams as PhoneNumberListParams

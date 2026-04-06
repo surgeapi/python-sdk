@@ -50,6 +50,7 @@ Methods:
 
 - <code title="post /accounts/{account_id}/campaigns">client.campaigns.<a href="./src/surge/resources/campaigns.py">create</a>(account_id, \*\*<a href="src/surge/types/campaign_create_params.py">params</a>) -> <a href="./src/surge/types/campaign.py">Campaign</a></code>
 - <code title="get /campaigns/{id}">client.campaigns.<a href="./src/surge/resources/campaigns.py">retrieve</a>(id) -> <a href="./src/surge/types/campaign.py">Campaign</a></code>
+- <code title="patch /campaigns/{id}">client.campaigns.<a href="./src/surge/resources/campaigns.py">update</a>(id, \*\*<a href="src/surge/types/campaign_update_params.py">params</a>) -> <a href="./src/surge/types/campaign.py">Campaign</a></code>
 - <code title="get /accounts/{account_id}/campaigns">client.campaigns.<a href="./src/surge/resources/campaigns.py">list</a>(account_id, \*\*<a href="src/surge/types/campaign_list_params.py">params</a>) -> <a href="./src/surge/types/campaign.py">SyncCursor[Campaign]</a></code>
 
 # Contacts
