@@ -54,6 +54,7 @@ class CampaignsResource(SyncAPIResource):
         description: str,
         message_samples: SequenceNotStr[str],
         privacy_policy_url: str,
+        terms_and_conditions_url: str,
         use_cases: List[
             Literal[
                 "account_notification",
@@ -71,7 +72,6 @@ class CampaignsResource(SyncAPIResource):
         volume: Literal["high", "low"],
         includes: List[Literal["links", "phone_numbers", "age_gated", "direct_lending"]] | Omit = omit,
         link_sample: str | Omit = omit,
-        terms_and_conditions_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -104,6 +104,11 @@ class CampaignsResource(SyncAPIResource):
           privacy_policy_url: The URL of the privacy policy for the brand in question. This may be a shared
               privacy policy if it's the policy that is displayed to end users when they opt
               in to messaging.
+
+          terms_and_conditions_url: The URL of the terms and conditions presented to end users when they opt in to
+              messaging. These terms and conditions may be shared among all of a platform's
+              customers if they're the terms that are presented to end users when they opt in
+              to messaging.
 
           use_cases: A list containing 1-5 types of messages that will be sent with this campaign.
 
@@ -160,11 +165,6 @@ class CampaignsResource(SyncAPIResource):
               will be used instead of what is provided. Reach out to support if you would like
               to disable automatic link shortening.
 
-          terms_and_conditions_url: The URL of the terms and conditions presented to end users when they opt in to
-              messaging. These terms and conditions may be shared among all of a platform's
-              customers if they're the terms that are presented to end users when they opt in
-              to messaging.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -207,7 +207,16 @@ class CampaignsResource(SyncAPIResource):
         ...
 
     @required_args(
-        ["consent_flow", "description", "message_samples", "privacy_policy_url", "use_cases", "volume"], ["tcr_id"]
+        [
+            "consent_flow",
+            "description",
+            "message_samples",
+            "privacy_policy_url",
+            "terms_and_conditions_url",
+            "use_cases",
+            "volume",
+        ],
+        ["tcr_id"],
     )
     def create(
         self,
@@ -217,6 +226,7 @@ class CampaignsResource(SyncAPIResource):
         description: str | Omit = omit,
         message_samples: SequenceNotStr[str] | Omit = omit,
         privacy_policy_url: str | Omit = omit,
+        terms_and_conditions_url: str | Omit = omit,
         use_cases: List[
             Literal[
                 "account_notification",
@@ -235,7 +245,6 @@ class CampaignsResource(SyncAPIResource):
         volume: Literal["high", "low"] | Omit = omit,
         includes: List[Literal["links", "phone_numbers", "age_gated", "direct_lending"]] | Omit = omit,
         link_sample: str | Omit = omit,
-        terms_and_conditions_url: str | Omit = omit,
         tcr_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -254,11 +263,11 @@ class CampaignsResource(SyncAPIResource):
                     "description": description,
                     "message_samples": message_samples,
                     "privacy_policy_url": privacy_policy_url,
+                    "terms_and_conditions_url": terms_and_conditions_url,
                     "use_cases": use_cases,
                     "volume": volume,
                     "includes": includes,
                     "link_sample": link_sample,
-                    "terms_and_conditions_url": terms_and_conditions_url,
                     "tcr_id": tcr_id,
                 },
                 campaign_create_params.CampaignCreateParams,
@@ -387,6 +396,7 @@ class AsyncCampaignsResource(AsyncAPIResource):
         description: str,
         message_samples: SequenceNotStr[str],
         privacy_policy_url: str,
+        terms_and_conditions_url: str,
         use_cases: List[
             Literal[
                 "account_notification",
@@ -404,7 +414,6 @@ class AsyncCampaignsResource(AsyncAPIResource):
         volume: Literal["high", "low"],
         includes: List[Literal["links", "phone_numbers", "age_gated", "direct_lending"]] | Omit = omit,
         link_sample: str | Omit = omit,
-        terms_and_conditions_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -437,6 +446,11 @@ class AsyncCampaignsResource(AsyncAPIResource):
           privacy_policy_url: The URL of the privacy policy for the brand in question. This may be a shared
               privacy policy if it's the policy that is displayed to end users when they opt
               in to messaging.
+
+          terms_and_conditions_url: The URL of the terms and conditions presented to end users when they opt in to
+              messaging. These terms and conditions may be shared among all of a platform's
+              customers if they're the terms that are presented to end users when they opt in
+              to messaging.
 
           use_cases: A list containing 1-5 types of messages that will be sent with this campaign.
 
@@ -493,11 +507,6 @@ class AsyncCampaignsResource(AsyncAPIResource):
               will be used instead of what is provided. Reach out to support if you would like
               to disable automatic link shortening.
 
-          terms_and_conditions_url: The URL of the terms and conditions presented to end users when they opt in to
-              messaging. These terms and conditions may be shared among all of a platform's
-              customers if they're the terms that are presented to end users when they opt in
-              to messaging.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -540,7 +549,16 @@ class AsyncCampaignsResource(AsyncAPIResource):
         ...
 
     @required_args(
-        ["consent_flow", "description", "message_samples", "privacy_policy_url", "use_cases", "volume"], ["tcr_id"]
+        [
+            "consent_flow",
+            "description",
+            "message_samples",
+            "privacy_policy_url",
+            "terms_and_conditions_url",
+            "use_cases",
+            "volume",
+        ],
+        ["tcr_id"],
     )
     async def create(
         self,
@@ -550,6 +568,7 @@ class AsyncCampaignsResource(AsyncAPIResource):
         description: str | Omit = omit,
         message_samples: SequenceNotStr[str] | Omit = omit,
         privacy_policy_url: str | Omit = omit,
+        terms_and_conditions_url: str | Omit = omit,
         use_cases: List[
             Literal[
                 "account_notification",
@@ -568,7 +587,6 @@ class AsyncCampaignsResource(AsyncAPIResource):
         volume: Literal["high", "low"] | Omit = omit,
         includes: List[Literal["links", "phone_numbers", "age_gated", "direct_lending"]] | Omit = omit,
         link_sample: str | Omit = omit,
-        terms_and_conditions_url: str | Omit = omit,
         tcr_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -587,11 +605,11 @@ class AsyncCampaignsResource(AsyncAPIResource):
                     "description": description,
                     "message_samples": message_samples,
                     "privacy_policy_url": privacy_policy_url,
+                    "terms_and_conditions_url": terms_and_conditions_url,
                     "use_cases": use_cases,
                     "volume": volume,
                     "includes": includes,
                     "link_sample": link_sample,
-                    "terms_and_conditions_url": terms_and_conditions_url,
                     "tcr_id": tcr_id,
                 },
                 campaign_create_params.CampaignCreateParams,
