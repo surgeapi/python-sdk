@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.16.0 (2026-04-06)
+
+Full Changelog: [v0.15.0...v0.16.0](https://github.com/surgeapi/python-sdk/compare/v0.15.0...v0.16.0)
+
+### Features
+
+* **api:** create an audience ([9727f07](https://github.com/surgeapi/python-sdk/commit/9727f073425376bed9b81696a33bc6e0b14dd0e4))
+* **api:** require terms_and_conditions_url for campaigns ([de1f3ea](https://github.com/surgeapi/python-sdk/commit/de1f3ea22f7353a14d3324ec847f8652c4c8a0da))
+* **api:** update a campaign ([148f377](https://github.com/surgeapi/python-sdk/commit/148f37712485144a8879c0e7276bc2b165d201c5))
+
 ## 0.15.0 (2026-04-01)
 
 Full Changelog: [v0.14.0...v0.15.0](https://github.com/surgeapi/python-sdk/compare/v0.14.0...v0.15.0)
