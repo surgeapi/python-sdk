@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.16.1 (2026-04-18)
+
+Full Changelog: [v0.16.0...v0.16.1](https://github.com/surgeapi/python-sdk/compare/v0.16.0...v0.16.1)
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([9bfc593](https://github.com/surgeapi/python-sdk/commit/9bfc5937c6fe24b38e761a27f1cef3462597b2b5))
+* ensure file data are only sent as 1 parameter ([a039c6f](https://github.com/surgeapi/python-sdk/commit/a039c6facab2de743ba6db5b354fe9c84c7cb9de))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([ee2ed42](https://github.com/surgeapi/python-sdk/commit/ee2ed4214740085fd67c4ec4ad75b974533a379b))
+
 ## 0.16.0 (2026-04-06)
 
 Full Changelog: [v0.15.0...v0.16.0](https://github.com/surgeapi/python-sdk/compare/v0.15.0...v0.16.0)
