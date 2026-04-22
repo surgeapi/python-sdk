@@ -40,6 +40,7 @@ if TYPE_CHECKING:
         audiences,
         campaigns,
         recordings,
+        attachments,
         phone_numbers,
         verifications,
     )
@@ -52,6 +53,7 @@ if TYPE_CHECKING:
     from .resources.audiences import AudiencesResource, AsyncAudiencesResource
     from .resources.campaigns import CampaignsResource, AsyncCampaignsResource
     from .resources.recordings import RecordingsResource, AsyncRecordingsResource
+    from .resources.attachments import AttachmentsResource, AsyncAttachmentsResource
     from .resources.phone_numbers import PhoneNumbersResource, AsyncPhoneNumbersResource
     from .resources.verifications import VerificationsResource, AsyncVerificationsResource
 
@@ -126,6 +128,12 @@ class Surge(SyncAPIClient):
         from .resources.accounts import AccountsResource
 
         return AccountsResource(self)
+
+    @cached_property
+    def attachments(self) -> AttachmentsResource:
+        from .resources.attachments import AttachmentsResource
+
+        return AttachmentsResource(self)
 
     @cached_property
     def audiences(self) -> AudiencesResource:
@@ -372,6 +380,12 @@ class AsyncSurge(AsyncAPIClient):
         return AsyncAccountsResource(self)
 
     @cached_property
+    def attachments(self) -> AsyncAttachmentsResource:
+        from .resources.attachments import AsyncAttachmentsResource
+
+        return AsyncAttachmentsResource(self)
+
+    @cached_property
     def audiences(self) -> AsyncAudiencesResource:
         from .resources.audiences import AsyncAudiencesResource
 
@@ -559,6 +573,12 @@ class SurgeWithRawResponse:
         return AccountsResourceWithRawResponse(self._client.accounts)
 
     @cached_property
+    def attachments(self) -> attachments.AttachmentsResourceWithRawResponse:
+        from .resources.attachments import AttachmentsResourceWithRawResponse
+
+        return AttachmentsResourceWithRawResponse(self._client.attachments)
+
+    @cached_property
     def audiences(self) -> audiences.AudiencesResourceWithRawResponse:
         from .resources.audiences import AudiencesResourceWithRawResponse
 
@@ -624,6 +644,12 @@ class AsyncSurgeWithRawResponse:
         from .resources.accounts import AsyncAccountsResourceWithRawResponse
 
         return AsyncAccountsResourceWithRawResponse(self._client.accounts)
+
+    @cached_property
+    def attachments(self) -> attachments.AsyncAttachmentsResourceWithRawResponse:
+        from .resources.attachments import AsyncAttachmentsResourceWithRawResponse
+
+        return AsyncAttachmentsResourceWithRawResponse(self._client.attachments)
 
     @cached_property
     def audiences(self) -> audiences.AsyncAudiencesResourceWithRawResponse:
@@ -693,6 +719,12 @@ class SurgeWithStreamedResponse:
         return AccountsResourceWithStreamingResponse(self._client.accounts)
 
     @cached_property
+    def attachments(self) -> attachments.AttachmentsResourceWithStreamingResponse:
+        from .resources.attachments import AttachmentsResourceWithStreamingResponse
+
+        return AttachmentsResourceWithStreamingResponse(self._client.attachments)
+
+    @cached_property
     def audiences(self) -> audiences.AudiencesResourceWithStreamingResponse:
         from .resources.audiences import AudiencesResourceWithStreamingResponse
 
@@ -758,6 +790,12 @@ class AsyncSurgeWithStreamedResponse:
         from .resources.accounts import AsyncAccountsResourceWithStreamingResponse
 
         return AsyncAccountsResourceWithStreamingResponse(self._client.accounts)
+
+    @cached_property
+    def attachments(self) -> attachments.AsyncAttachmentsResourceWithStreamingResponse:
+        from .resources.attachments import AsyncAttachmentsResourceWithStreamingResponse
+
+        return AsyncAttachmentsResourceWithStreamingResponse(self._client.attachments)
 
     @cached_property
     def audiences(self) -> audiences.AsyncAudiencesResourceWithStreamingResponse:

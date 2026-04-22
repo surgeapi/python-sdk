@@ -19,6 +19,18 @@ Methods:
 - <code title="delete /accounts/{id}">client.accounts.<a href="./src/surge/resources/accounts.py">archive</a>(id) -> <a href="./src/surge/types/account.py">Account</a></code>
 - <code title="get /accounts/{account_id}/status">client.accounts.<a href="./src/surge/resources/accounts.py">retrieve_status</a>(account_id, \*\*<a href="src/surge/types/account_retrieve_status_params.py">params</a>) -> <a href="./src/surge/types/account_status.py">AccountStatus</a></code>
 
+# Attachments
+
+Types:
+
+```python
+from surge.types import AttachmentGetFileResponse
+```
+
+Methods:
+
+- <code title="get /attachments/{attachment_id}/file">client.attachments.<a href="./src/surge/resources/attachments.py">get_file</a>(attachment_id) -> <a href="./src/surge/types/attachment_get_file_response.py">AttachmentGetFileResponse</a></code>
+
 # Audiences
 
 Types:
