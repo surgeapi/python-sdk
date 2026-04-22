@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.17.1 (2026-04-22)
+
+Full Changelog: [v0.17.0...v0.17.1](https://github.com/surgeapi/python-sdk/compare/v0.17.0...v0.17.1)
+
+### Chores
+
+* **sdk:** switch rye to uv ([7bb255f](https://github.com/surgeapi/python-sdk/commit/7bb255f892b90c14f69605261793e9c8a04bfc82))
+
 ## 0.17.0 (2026-04-22)
 
 Full Changelog: [v0.16.0...v0.17.0](https://github.com/surgeapi/python-sdk/compare/v0.16.0...v0.17.0)
