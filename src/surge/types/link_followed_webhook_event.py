@@ -1,8 +1,10 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
 
+from .message import Message
 from .._models import BaseModel
 
 __all__ = ["LinkFollowedWebhookEvent", "Data"]
@@ -14,8 +16,11 @@ class Data(BaseModel):
     id: str
     """The unique identifier for the link"""
 
-    message_id: str
-    """The unique identifier for the message that contained the link"""
+    message: Optional[Message] = None
+    """A Message is a communication sent to a Contact."""
+
+    message_id: Optional[str] = None
+    """Deprecated. The unique identifier for the message that contained the link."""
 
     url: str
     """The original URL that was shortened"""
