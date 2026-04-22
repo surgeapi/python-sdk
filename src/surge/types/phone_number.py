@@ -17,6 +17,9 @@ class PhoneNumber(BaseModel):
     campaign_id: Optional[str] = None
     """The unique identifier of the campaign this phone number is attached to, if any"""
 
+    name: Optional[str] = None
+    """A human-readable name for the phone number"""
+
     number: str
     """The phone number in E.164 format"""
 

@@ -86,6 +86,7 @@ class TestPhoneNumbers:
             area_code="801",
             latitude=40.7128,
             longitude=-74.006,
+            name="Support Line",
             type="local",
         )
         assert_matches_type(PhoneNumber, phone_number, path=["response"])
@@ -198,6 +199,7 @@ class TestAsyncPhoneNumbers:
             area_code="801",
             latitude=40.7128,
             longitude=-74.006,
+            name="Support Line",
             type="local",
         )
         assert_matches_type(PhoneNumber, phone_number, path=["response"])
