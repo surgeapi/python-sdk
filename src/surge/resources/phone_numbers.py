@@ -104,6 +104,7 @@ class PhoneNumbersResource(SyncAPIResource):
         area_code: str | Omit = omit,
         latitude: float | Omit = omit,
         longitude: float | Omit = omit,
+        name: str | Omit = omit,
         type: Literal["local", "toll_free"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -129,6 +130,9 @@ class PhoneNumbersResource(SyncAPIResource):
           longitude: Longitude to search for nearby phone numbers. Must be used with latitude. If
               provided without type, type will be inferred as 'local'.
 
+          name: A human-readable name for the phone number. If not provided, defaults to the
+              formatted phone number.
+
           type: Whether the phone number is local or toll-free. Can be omitted if area_code or
               latitude/longitude are provided.
 
@@ -149,6 +153,7 @@ class PhoneNumbersResource(SyncAPIResource):
                     "area_code": area_code,
                     "latitude": latitude,
                     "longitude": longitude,
+                    "name": name,
                     "type": type,
                 },
                 phone_number_purchase_params.PhoneNumberPurchaseParams,
@@ -240,6 +245,7 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
         area_code: str | Omit = omit,
         latitude: float | Omit = omit,
         longitude: float | Omit = omit,
+        name: str | Omit = omit,
         type: Literal["local", "toll_free"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -265,6 +271,9 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
           longitude: Longitude to search for nearby phone numbers. Must be used with latitude. If
               provided without type, type will be inferred as 'local'.
 
+          name: A human-readable name for the phone number. If not provided, defaults to the
+              formatted phone number.
+
           type: Whether the phone number is local or toll-free. Can be omitted if area_code or
               latitude/longitude are provided.
 
@@ -285,6 +294,7 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
                     "area_code": area_code,
                     "latitude": latitude,
                     "longitude": longitude,
+                    "name": name,
                     "type": type,
                 },
                 phone_number_purchase_params.PhoneNumberPurchaseParams,
