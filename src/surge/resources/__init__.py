@@ -65,6 +65,14 @@ from .recordings import (
     RecordingsResourceWithStreamingResponse,
     AsyncRecordingsResourceWithStreamingResponse,
 )
+from .attachments import (
+    AttachmentsResource,
+    AsyncAttachmentsResource,
+    AttachmentsResourceWithRawResponse,
+    AsyncAttachmentsResourceWithRawResponse,
+    AttachmentsResourceWithStreamingResponse,
+    AsyncAttachmentsResourceWithStreamingResponse,
+)
 from .phone_numbers import (
     PhoneNumbersResource,
     AsyncPhoneNumbersResource,
@@ -89,6 +97,12 @@ __all__ = [
     "AsyncAccountsResourceWithRawResponse",
     "AccountsResourceWithStreamingResponse",
     "AsyncAccountsResourceWithStreamingResponse",
+    "AttachmentsResource",
+    "AsyncAttachmentsResource",
+    "AttachmentsResourceWithRawResponse",
+    "AsyncAttachmentsResourceWithRawResponse",
+    "AttachmentsResourceWithStreamingResponse",
+    "AsyncAttachmentsResourceWithStreamingResponse",
     "AudiencesResource",
     "AsyncAudiencesResource",
     "AudiencesResourceWithRawResponse",
