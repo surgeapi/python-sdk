@@ -28,6 +28,12 @@ class PhoneNumberPurchaseParams(TypedDict, total=False):
     'local'.
     """
 
+    name: str
+    """A human-readable name for the phone number.
+
+    If not provided, defaults to the formatted phone number.
+    """
+
     type: Literal["local", "toll_free"]
     """Whether the phone number is local or toll-free.
 

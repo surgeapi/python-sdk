@@ -28,6 +28,9 @@ class ConversationPhoneNumber(BaseModel):
     id: str
     """Unique identifier for the phone number"""
 
+    name: Optional[str] = None
+    """A human-readable name for the phone number"""
+
     number: str
     """The canonical format of the phone number."""
 

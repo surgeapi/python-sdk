@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -16,6 +17,9 @@ class Data(BaseModel):
 
     campaign_id: str
     """The unique identifier of the campaign this phone number is attached to"""
+
+    name: Optional[str] = None
+    """A human-readable name for the phone number"""
 
     number: str
     """The phone number in E.164 format"""
