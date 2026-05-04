@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.18.0 (2026-05-04)
+
+Full Changelog: [v0.17.1...v0.18.0](https://github.com/surgeapi/python-sdk/compare/v0.17.1...v0.18.0)
+
+### Features
+
+* **api:** list accounts endpoint ([61e2505](https://github.com/surgeapi/python-sdk/commit/61e2505305c9ddf87ea4f026621b6c5037705831))
+* support setting headers via env ([1f5d3d7](https://github.com/surgeapi/python-sdk/commit/1f5d3d73fc58508606b87adc8c7ae86a272c79f3))
+
+
+### Bug Fixes
+
+* use correct field name format for multipart file arrays ([1bc4e48](https://github.com/surgeapi/python-sdk/commit/1bc4e48985d121f8a5a2fc6e7496f4a30098527e))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([d6b41ab](https://github.com/surgeapi/python-sdk/commit/d6b41ab30813de90a4b10f80c8afa74f6166331c))
+* **internal:** reformat pyproject.toml ([0b792c1](https://github.com/surgeapi/python-sdk/commit/0b792c13be2b7d9824c94d3be724f4e3aad30ef3))
+
 ## 0.17.1 (2026-04-22)
 
 Full Changelog: [v0.17.0...v0.17.1](https://github.com/surgeapi/python-sdk/compare/v0.17.0...v0.17.1)
