@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import account_create_params, account_update_params, account_retrieve_status_params
+from ..types import account_list_params, account_create_params, account_update_params, account_retrieve_status_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -18,7 +18,8 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
+from ..pagination import SyncCursor, AsyncCursor
+from .._base_client import AsyncPaginator, make_request_options
 from ..types.account import Account
 from ..types.account_status import AccountStatus
 
@@ -163,6 +164,54 @@ class AccountsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Account,
+        )
+
+    def list(
+        self,
+        *,
+        after: str | Omit = omit,
+        before: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SyncCursor[Account]:
+        """
+        List all accounts for the calling platform with cursor-based pagination.
+
+        Args:
+          after: Cursor for forward pagination. Use the next_cursor from a previous response.
+
+          before: Cursor for backward pagination. Use the previous_cursor from a previous
+              response.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get_api_list(
+            "/accounts",
+            page=SyncCursor[Account],
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "after": after,
+                        "before": before,
+                    },
+                    account_list_params.AccountListParams,
+                ),
+            ),
+            model=Account,
         )
 
     def archive(
@@ -394,6 +443,54 @@ class AsyncAccountsResource(AsyncAPIResource):
             cast_to=Account,
         )
 
+    def list(
+        self,
+        *,
+        after: str | Omit = omit,
+        before: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AsyncPaginator[Account, AsyncCursor[Account]]:
+        """
+        List all accounts for the calling platform with cursor-based pagination.
+
+        Args:
+          after: Cursor for forward pagination. Use the next_cursor from a previous response.
+
+          before: Cursor for backward pagination. Use the previous_cursor from a previous
+              response.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get_api_list(
+            "/accounts",
+            page=AsyncCursor[Account],
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "after": after,
+                        "before": before,
+                    },
+                    account_list_params.AccountListParams,
+                ),
+            ),
+            model=Account,
+        )
+
     async def archive(
         self,
         id: str,
@@ -493,6 +590,9 @@ class AccountsResourceWithRawResponse:
         self.update = to_raw_response_wrapper(
             accounts.update,
         )
+        self.list = to_raw_response_wrapper(
+            accounts.list,
+        )
         self.archive = to_raw_response_wrapper(
             accounts.archive,
         )
@@ -510,6 +610,9 @@ class AsyncAccountsResourceWithRawResponse:
         )
         self.update = async_to_raw_response_wrapper(
             accounts.update,
+        )
+        self.list = async_to_raw_response_wrapper(
+            accounts.list,
         )
         self.archive = async_to_raw_response_wrapper(
             accounts.archive,
@@ -529,6 +632,9 @@ class AccountsResourceWithStreamingResponse:
         self.update = to_streamed_response_wrapper(
             accounts.update,
         )
+        self.list = to_streamed_response_wrapper(
+            accounts.list,
+        )
         self.archive = to_streamed_response_wrapper(
             accounts.archive,
         )
@@ -546,6 +652,9 @@ class AsyncAccountsResourceWithStreamingResponse:
         )
         self.update = async_to_streamed_response_wrapper(
             accounts.update,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            accounts.list,
         )
         self.archive = async_to_streamed_response_wrapper(
             accounts.archive,

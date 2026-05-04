@@ -13,6 +13,7 @@ from surge.types import (
     AccountStatus,
 )
 from tests.utils import assert_matches_type
+from surge.pagination import SyncCursor, AsyncCursor
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -178,6 +179,43 @@ class TestAccounts:
             client.accounts.with_raw_response.update(
                 id="",
             )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list(self, client: Surge) -> None:
+        account = client.accounts.list()
+        assert_matches_type(SyncCursor[Account], account, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list_with_all_params(self, client: Surge) -> None:
+        account = client.accounts.list(
+            after="after",
+            before="before",
+        )
+        assert_matches_type(SyncCursor[Account], account, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_list(self, client: Surge) -> None:
+        response = client.accounts.with_raw_response.list()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account = response.parse()
+        assert_matches_type(SyncCursor[Account], account, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_list(self, client: Surge) -> None:
+        with client.accounts.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account = response.parse()
+            assert_matches_type(SyncCursor[Account], account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -436,6 +474,43 @@ class TestAsyncAccounts:
             await async_client.accounts.with_raw_response.update(
                 id="",
             )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list(self, async_client: AsyncSurge) -> None:
+        account = await async_client.accounts.list()
+        assert_matches_type(AsyncCursor[Account], account, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncSurge) -> None:
+        account = await async_client.accounts.list(
+            after="after",
+            before="before",
+        )
+        assert_matches_type(AsyncCursor[Account], account, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_list(self, async_client: AsyncSurge) -> None:
+        response = await async_client.accounts.with_raw_response.list()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account = await response.parse()
+        assert_matches_type(AsyncCursor[Account], account, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_list(self, async_client: AsyncSurge) -> None:
+        async with async_client.accounts.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account = await response.parse()
+            assert_matches_type(AsyncCursor[Account], account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize

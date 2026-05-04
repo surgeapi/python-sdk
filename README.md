@@ -150,14 +150,12 @@ from surge import Surge
 
 client = Surge()
 
-all_audiences = []
+all_accounts = []
 # Automatically fetches more pages as needed.
-for audience in client.audiences.list_contacts(
-    audience_id="aud_01j9a43avnfqzbjfch6pygv1td",
-):
-    # Do something with audience here
-    all_audiences.append(audience)
-print(all_audiences)
+for account in client.accounts.list():
+    # Do something with account here
+    all_accounts.append(account)
+print(all_accounts)
 ```
 
 Or, asynchronously:
@@ -170,13 +168,11 @@ client = AsyncSurge()
 
 
 async def main() -> None:
-    all_audiences = []
+    all_accounts = []
     # Iterate through items across all pages, issuing requests as needed.
-    async for audience in client.audiences.list_contacts(
-        audience_id="aud_01j9a43avnfqzbjfch6pygv1td",
-    ):
-        all_audiences.append(audience)
-    print(all_audiences)
+    async for account in client.accounts.list():
+        all_accounts.append(account)
+    print(all_accounts)
 
 
 asyncio.run(main())
@@ -185,9 +181,7 @@ asyncio.run(main())
 Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
 
 ```python
-first_page = await client.audiences.list_contacts(
-    audience_id="aud_01j9a43avnfqzbjfch6pygv1td",
-)
+first_page = await client.accounts.list()
 if first_page.has_next_page():
     print(f"will fetch next page using these details: {first_page.next_page_info()}")
     next_page = await first_page.get_next_page()
@@ -199,13 +193,11 @@ if first_page.has_next_page():
 Or just work directly with the returned data:
 
 ```python
-first_page = await client.audiences.list_contacts(
-    audience_id="aud_01j9a43avnfqzbjfch6pygv1td",
-)
+first_page = await client.accounts.list()
 
 print(f"next page cursor: {first_page.pagination.next_cursor}")  # => "next page cursor: ..."
-for audience in first_page.data:
-    print(audience.id)
+for account in first_page.data:
+    print(account.id)
 
 # Remove `await` for non-async usage.
 ```
