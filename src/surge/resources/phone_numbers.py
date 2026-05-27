@@ -164,6 +164,41 @@ class PhoneNumbersResource(SyncAPIResource):
             cast_to=PhoneNumber,
         )
 
+    def release(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PhoneNumber:
+        """
+        Releases a phone number from the account.
+
+        Args:
+          id: The ID of the phone number to release.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._delete(
+            path_template("/phone_numbers/{id}", id=id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PhoneNumber,
+        )
+
 
 class AsyncPhoneNumbersResource(AsyncAPIResource):
     @cached_property
@@ -305,6 +340,41 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
             cast_to=PhoneNumber,
         )
 
+    async def release(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PhoneNumber:
+        """
+        Releases a phone number from the account.
+
+        Args:
+          id: The ID of the phone number to release.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._delete(
+            path_template("/phone_numbers/{id}", id=id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PhoneNumber,
+        )
+
 
 class PhoneNumbersResourceWithRawResponse:
     def __init__(self, phone_numbers: PhoneNumbersResource) -> None:
@@ -315,6 +385,9 @@ class PhoneNumbersResourceWithRawResponse:
         )
         self.purchase = to_raw_response_wrapper(
             phone_numbers.purchase,
+        )
+        self.release = to_raw_response_wrapper(
+            phone_numbers.release,
         )
 
 
@@ -328,6 +401,9 @@ class AsyncPhoneNumbersResourceWithRawResponse:
         self.purchase = async_to_raw_response_wrapper(
             phone_numbers.purchase,
         )
+        self.release = async_to_raw_response_wrapper(
+            phone_numbers.release,
+        )
 
 
 class PhoneNumbersResourceWithStreamingResponse:
@@ -340,6 +416,9 @@ class PhoneNumbersResourceWithStreamingResponse:
         self.purchase = to_streamed_response_wrapper(
             phone_numbers.purchase,
         )
+        self.release = to_streamed_response_wrapper(
+            phone_numbers.release,
+        )
 
 
 class AsyncPhoneNumbersResourceWithStreamingResponse:
@@ -351,4 +430,7 @@ class AsyncPhoneNumbersResourceWithStreamingResponse:
         )
         self.purchase = async_to_streamed_response_wrapper(
             phone_numbers.purchase,
+        )
+        self.release = async_to_streamed_response_wrapper(
+            phone_numbers.release,
         )
