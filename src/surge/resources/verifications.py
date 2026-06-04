@@ -44,6 +44,7 @@ class VerificationsResource(SyncAPIResource):
 
     def create(
         self,
+        account_id: str,
         *,
         phone_number: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -54,9 +55,12 @@ class VerificationsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Verification:
         """
-        Creates a new Verification and sends the code to the given phone number.
+        Creates a new Verification for an account and sends the code to the given phone
+        number.
 
         Args:
+          account_id: The account to associate with the verification.
+
           phone_number: The phone number to be verified. In E.164 format.
 
           extra_headers: Send extra headers
@@ -67,8 +71,10 @@ class VerificationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._post(
-            "/verifications",
+            path_template("/accounts/{account_id}/verifications", account_id=account_id),
             body=maybe_transform({"phone_number": phone_number}, verification_create_params.VerificationCreateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -138,6 +144,7 @@ class AsyncVerificationsResource(AsyncAPIResource):
 
     async def create(
         self,
+        account_id: str,
         *,
         phone_number: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -148,9 +155,12 @@ class AsyncVerificationsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Verification:
         """
-        Creates a new Verification and sends the code to the given phone number.
+        Creates a new Verification for an account and sends the code to the given phone
+        number.
 
         Args:
+          account_id: The account to associate with the verification.
+
           phone_number: The phone number to be verified. In E.164 format.
 
           extra_headers: Send extra headers
@@ -161,8 +171,10 @@ class AsyncVerificationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._post(
-            "/verifications",
+            path_template("/accounts/{account_id}/verifications", account_id=account_id),
             body=await async_maybe_transform(
                 {"phone_number": phone_number}, verification_create_params.VerificationCreateParams
             ),
