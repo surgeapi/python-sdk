@@ -163,7 +163,7 @@ from surge.types import Verification, VerificationCheck
 
 Methods:
 
-- <code title="post /verifications">client.verifications.<a href="./src/surge/resources/verifications.py">create</a>(\*\*<a href="src/surge/types/verification_create_params.py">params</a>) -> <a href="./src/surge/types/verification.py">Verification</a></code>
+- <code title="post /accounts/{account_id}/verifications">client.verifications.<a href="./src/surge/resources/verifications.py">create</a>(account_id, \*\*<a href="src/surge/types/verification_create_params.py">params</a>) -> <a href="./src/surge/types/verification.py">Verification</a></code>
 - <code title="post /verifications/{id}/checks">client.verifications.<a href="./src/surge/resources/verifications.py">check</a>(id, \*\*<a href="src/surge/types/verification_check_params.py">params</a>) -> <a href="./src/surge/types/verification_check.py">VerificationCheck</a></code>
 
 # Webhooks
