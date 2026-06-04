@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.20.0 (2026-06-04)
+
+Full Changelog: [v0.19.0...v0.20.0](https://github.com/surgeapi/python-sdk/compare/v0.19.0...v0.20.0)
+
+### Features
+
+* **api:** use account-scoped verifications endpoint ([29e5e17](https://github.com/surgeapi/python-sdk/commit/29e5e172e35f1e16eaed15bde115566bda56a654))
+
 ## 0.19.0 (2026-05-27)
 
 Full Changelog: [v0.18.0...v0.19.0](https://github.com/surgeapi/python-sdk/compare/v0.18.0...v0.19.0)
