@@ -6,7 +6,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import phone_number_list_params, phone_number_purchase_params
+from ..types import phone_number_list_params, phone_number_update_params, phone_number_purchase_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -43,6 +43,54 @@ class PhoneNumbersResource(SyncAPIResource):
         For more information, see https://www.github.com/surgeapi/python-sdk#with_streaming_response
         """
         return PhoneNumbersResourceWithStreamingResponse(self)
+
+    def update(
+        self,
+        id: str,
+        *,
+        campaign_id: str | Omit = omit,
+        name: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PhoneNumber:
+        """
+        Updates a phone number's details.
+
+        Args:
+          id: The ID of the phone number to update.
+
+          campaign_id: Campaign ID to attach this number to (`cpn_...`).
+
+          name: A human-readable name for the phone number.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._patch(
+            path_template("/phone_numbers/{id}", id=id),
+            body=maybe_transform(
+                {
+                    "campaign_id": campaign_id,
+                    "name": name,
+                },
+                phone_number_update_params.PhoneNumberUpdateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PhoneNumber,
+        )
 
     def list(
         self,
@@ -220,6 +268,54 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
         """
         return AsyncPhoneNumbersResourceWithStreamingResponse(self)
 
+    async def update(
+        self,
+        id: str,
+        *,
+        campaign_id: str | Omit = omit,
+        name: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PhoneNumber:
+        """
+        Updates a phone number's details.
+
+        Args:
+          id: The ID of the phone number to update.
+
+          campaign_id: Campaign ID to attach this number to (`cpn_...`).
+
+          name: A human-readable name for the phone number.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._patch(
+            path_template("/phone_numbers/{id}", id=id),
+            body=await async_maybe_transform(
+                {
+                    "campaign_id": campaign_id,
+                    "name": name,
+                },
+                phone_number_update_params.PhoneNumberUpdateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PhoneNumber,
+        )
+
     def list(
         self,
         account_id: str,
@@ -380,6 +476,9 @@ class PhoneNumbersResourceWithRawResponse:
     def __init__(self, phone_numbers: PhoneNumbersResource) -> None:
         self._phone_numbers = phone_numbers
 
+        self.update = to_raw_response_wrapper(
+            phone_numbers.update,
+        )
         self.list = to_raw_response_wrapper(
             phone_numbers.list,
         )
@@ -395,6 +494,9 @@ class AsyncPhoneNumbersResourceWithRawResponse:
     def __init__(self, phone_numbers: AsyncPhoneNumbersResource) -> None:
         self._phone_numbers = phone_numbers
 
+        self.update = async_to_raw_response_wrapper(
+            phone_numbers.update,
+        )
         self.list = async_to_raw_response_wrapper(
             phone_numbers.list,
         )
@@ -410,6 +512,9 @@ class PhoneNumbersResourceWithStreamingResponse:
     def __init__(self, phone_numbers: PhoneNumbersResource) -> None:
         self._phone_numbers = phone_numbers
 
+        self.update = to_streamed_response_wrapper(
+            phone_numbers.update,
+        )
         self.list = to_streamed_response_wrapper(
             phone_numbers.list,
         )
@@ -425,6 +530,9 @@ class AsyncPhoneNumbersResourceWithStreamingResponse:
     def __init__(self, phone_numbers: AsyncPhoneNumbersResource) -> None:
         self._phone_numbers = phone_numbers
 
+        self.update = async_to_streamed_response_wrapper(
+            phone_numbers.update,
+        )
         self.list = async_to_streamed_response_wrapper(
             phone_numbers.list,
         )
