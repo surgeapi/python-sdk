@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Dict, Union, Iterable
 from datetime import datetime
-from typing_extensions import Required, Annotated, TypeAlias, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -14,8 +14,10 @@ __all__ = [
     "MessageParamsWithConversationConversation",
     "MessageParamsWithConversationConversationContact",
     "MessageParamsWithConversationAttachment",
+    "MessageParamsWithConversationSettings",
     "SimpleMessageParams",
     "SimpleMessageParamsAttachment",
+    "SimpleMessageParamsSettings",
 ]
 
 
@@ -39,6 +41,9 @@ class MessageParamsWithConversation(TypedDict, total=False):
     An optional datetime for scheduling message up to a couple of months in the
     future.
     """
+
+    settings: MessageParamsWithConversationSettings
+    """Per-message setting overrides."""
 
 
 class MessageParamsWithConversationConversationContact(TypedDict, total=False):
@@ -83,6 +88,13 @@ class MessageParamsWithConversationAttachment(TypedDict, total=False):
     """The URL of the attachment."""
 
 
+class MessageParamsWithConversationSettings(TypedDict, total=False):
+    """Per-message setting overrides."""
+
+    link_shortening: Literal["enabled", "disabled"]
+    """Override link shortening for this message."""
+
+
 class SimpleMessageParams(TypedDict, total=False):
     to: Required[str]
     """The recipient's phone number in E.164 format.
@@ -111,12 +123,22 @@ class SimpleMessageParams(TypedDict, total=False):
     future.
     """
 
+    settings: SimpleMessageParamsSettings
+    """Per-message setting overrides."""
+
 
 class SimpleMessageParamsAttachment(TypedDict, total=False):
     """Params for creating an attachment"""
 
     url: Required[str]
     """The URL of the attachment."""
+
+
+class SimpleMessageParamsSettings(TypedDict, total=False):
+    """Per-message setting overrides."""
+
+    link_shortening: Literal["enabled", "disabled"]
+    """Override link shortening for this message."""
 
 
 MessageCreateParams: TypeAlias = Union[MessageParamsWithConversation, SimpleMessageParams]
