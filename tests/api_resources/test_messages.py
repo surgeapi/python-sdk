@@ -47,6 +47,7 @@ class TestMessages:
             body="body",
             metadata={"foo": "string"},
             send_at=parse_datetime("2019-12-27T18:11:19.117Z"),
+            settings={"link_shortening": "enabled"},
         )
         assert_matches_type(Message, message, path=["response"])
 
@@ -107,6 +108,7 @@ class TestMessages:
             from_="+18015552345",
             metadata={"foo": "string"},
             send_at=parse_datetime("2019-12-27T18:11:19.117Z"),
+            settings={"link_shortening": "enabled"},
         )
         assert_matches_type(Message, message, path=["response"])
 
@@ -275,6 +277,7 @@ class TestAsyncMessages:
             body="body",
             metadata={"foo": "string"},
             send_at=parse_datetime("2019-12-27T18:11:19.117Z"),
+            settings={"link_shortening": "enabled"},
         )
         assert_matches_type(Message, message, path=["response"])
 
@@ -335,6 +338,7 @@ class TestAsyncMessages:
             from_="+18015552345",
             metadata={"foo": "string"},
             send_at=parse_datetime("2019-12-27T18:11:19.117Z"),
+            settings={"link_shortening": "enabled"},
         )
         assert_matches_type(Message, message, path=["response"])
 

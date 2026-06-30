@@ -56,6 +56,7 @@ class MessagesResource(SyncAPIResource):
         body: str | Omit = omit,
         metadata: Dict[str, str] | Omit = omit,
         send_at: Union[str, datetime] | Omit = omit,
+        settings: message_create_params.MessageParamsWithConversationSettings | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -90,6 +91,10 @@ class MessagesResource(SyncAPIResource):
         `conversation` field, and `conversation.phone_number` should be specified
         instead.
 
+        Optionally, you can pass a `settings` object to override account-level settings
+        for this message. Currently the only supported setting is `link_shortening`,
+        which accepts `"enabled"` or `"disabled"`.
+
         Args:
           account_id: The account from which the message should be sent.
 
@@ -102,6 +107,8 @@ class MessagesResource(SyncAPIResource):
 
           send_at: An optional datetime for scheduling message up to a couple of months in the
               future.
+
+          settings: Per-message setting overrides.
 
           extra_headers: Send extra headers
 
@@ -124,6 +131,7 @@ class MessagesResource(SyncAPIResource):
         from_: str | Omit = omit,
         metadata: Dict[str, str] | Omit = omit,
         send_at: Union[str, datetime] | Omit = omit,
+        settings: message_create_params.SimpleMessageParamsSettings | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -158,6 +166,10 @@ class MessagesResource(SyncAPIResource):
         `conversation` field, and `conversation.phone_number` should be specified
         instead.
 
+        Optionally, you can pass a `settings` object to override account-level settings
+        for this message. Currently the only supported setting is `link_shortening`,
+        which accepts `"enabled"` or `"disabled"`.
+
         Args:
           account_id: The account from which the message should be sent.
 
@@ -173,6 +185,8 @@ class MessagesResource(SyncAPIResource):
 
           send_at: An optional datetime for scheduling message up to a couple of months in the
               future.
+
+          settings: Per-message setting overrides.
 
           extra_headers: Send extra headers
 
@@ -196,6 +210,9 @@ class MessagesResource(SyncAPIResource):
         body: str | Omit = omit,
         metadata: Dict[str, str] | Omit = omit,
         send_at: Union[str, datetime] | Omit = omit,
+        settings: message_create_params.MessageParamsWithConversationSettings
+        | message_create_params.SimpleMessageParamsSettings
+        | Omit = omit,
         to: str | Omit = omit,
         from_: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -216,6 +233,7 @@ class MessagesResource(SyncAPIResource):
                     "body": body,
                     "metadata": metadata,
                     "send_at": send_at,
+                    "settings": settings,
                     "to": to,
                     "from_": from_,
                 },
@@ -346,6 +364,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         body: str | Omit = omit,
         metadata: Dict[str, str] | Omit = omit,
         send_at: Union[str, datetime] | Omit = omit,
+        settings: message_create_params.MessageParamsWithConversationSettings | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -380,6 +399,10 @@ class AsyncMessagesResource(AsyncAPIResource):
         `conversation` field, and `conversation.phone_number` should be specified
         instead.
 
+        Optionally, you can pass a `settings` object to override account-level settings
+        for this message. Currently the only supported setting is `link_shortening`,
+        which accepts `"enabled"` or `"disabled"`.
+
         Args:
           account_id: The account from which the message should be sent.
 
@@ -392,6 +415,8 @@ class AsyncMessagesResource(AsyncAPIResource):
 
           send_at: An optional datetime for scheduling message up to a couple of months in the
               future.
+
+          settings: Per-message setting overrides.
 
           extra_headers: Send extra headers
 
@@ -414,6 +439,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         from_: str | Omit = omit,
         metadata: Dict[str, str] | Omit = omit,
         send_at: Union[str, datetime] | Omit = omit,
+        settings: message_create_params.SimpleMessageParamsSettings | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -448,6 +474,10 @@ class AsyncMessagesResource(AsyncAPIResource):
         `conversation` field, and `conversation.phone_number` should be specified
         instead.
 
+        Optionally, you can pass a `settings` object to override account-level settings
+        for this message. Currently the only supported setting is `link_shortening`,
+        which accepts `"enabled"` or `"disabled"`.
+
         Args:
           account_id: The account from which the message should be sent.
 
@@ -463,6 +493,8 @@ class AsyncMessagesResource(AsyncAPIResource):
 
           send_at: An optional datetime for scheduling message up to a couple of months in the
               future.
+
+          settings: Per-message setting overrides.
 
           extra_headers: Send extra headers
 
@@ -486,6 +518,9 @@ class AsyncMessagesResource(AsyncAPIResource):
         body: str | Omit = omit,
         metadata: Dict[str, str] | Omit = omit,
         send_at: Union[str, datetime] | Omit = omit,
+        settings: message_create_params.MessageParamsWithConversationSettings
+        | message_create_params.SimpleMessageParamsSettings
+        | Omit = omit,
         to: str | Omit = omit,
         from_: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -506,6 +541,7 @@ class AsyncMessagesResource(AsyncAPIResource):
                     "body": body,
                     "metadata": metadata,
                     "send_at": send_at,
+                    "settings": settings,
                     "to": to,
                     "from_": from_,
                 },
