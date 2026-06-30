@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.21.0 (2026-06-30)
+
+Full Changelog: [v0.20.0...v0.21.0](https://github.com/surgeapi/python-sdk/compare/v0.20.0...v0.21.0)
+
+### Features
+
+* **api:** add contact to attachment types ([9c1d944](https://github.com/surgeapi/python-sdk/commit/9c1d944c61d057b28d5a8c9613cfa59a30ea9fb1))
+* **api:** add message settings ([2d7ae2c](https://github.com/surgeapi/python-sdk/commit/2d7ae2c71115be80d042262117d60979896b33dc))
+* **api:** add update phone number endpoint ([3416191](https://github.com/surgeapi/python-sdk/commit/3416191160783472ed267dfc2e2ae6bd4c35aca2))
+
+
+### Chores
+
+* remove custom code ([269dc5b](https://github.com/surgeapi/python-sdk/commit/269dc5b03aaaf5007e2ac94dd433d40baf29e886))
+
 ## 0.20.0 (2026-06-04)
 
 Full Changelog: [v0.19.0...v0.20.0](https://github.com/surgeapi/python-sdk/compare/v0.19.0...v0.20.0)
