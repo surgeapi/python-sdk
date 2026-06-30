@@ -15,7 +15,7 @@ class Attachment(BaseModel):
     id: Optional[str] = None
     """Unique identifier for the object."""
 
-    type: Optional[Literal["file", "image", "link", "video"]] = None
+    type: Optional[Literal["file", "image", "link", "contact", "video"]] = None
     """The type of attachment."""
 
     url: Optional[str] = None

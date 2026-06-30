@@ -28,7 +28,7 @@ class DataAttachment(BaseModel):
     id: str
     """The unique identifier for the attachment"""
 
-    type: Literal["file", "image", "link", "video"]
+    type: Literal["file", "image", "link", "contact", "video"]
     """The type of attachment"""
 
     url: str
