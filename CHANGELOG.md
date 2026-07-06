@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.22.0 (2026-07-06)
+
+Full Changelog: [v0.21.0...v0.22.0](https://github.com/surgeapi/python-sdk/compare/v0.21.0...v0.22.0)
+
+### Features
+
+* **api:** add phone numbers to call webhooks ([286cb5a](https://github.com/surgeapi/python-sdk/commit/286cb5a61aae99f45183106d387f238422bf6f43))
+
 ## 0.21.0 (2026-06-30)
 
 Full Changelog: [v0.20.0...v0.21.0](https://github.com/surgeapi/python-sdk/compare/v0.20.0...v0.21.0)
