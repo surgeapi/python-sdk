@@ -1,7 +1,10 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
+
+from pydantic import Field as FieldInfo
 
 from .contact import Contact
 from .._models import BaseModel
@@ -28,6 +31,15 @@ class DataCall(BaseModel):
         "busy", "canceled", "completed", "failed", "in_progress", "missed", "no_answer", "queued", "ringing"
     ]
     """The status of the call"""
+
+    from_: Optional[str] = FieldInfo(alias="from", default=None)
+    """The E.164 phone number of the caller"""
+
+    phone_number_id: Optional[str] = None
+    """The Surge phone number ID (e.g. pn\\__...)"""
+
+    to: Optional[str] = None
+    """The E.164 phone number of the callee"""
 
 
 class Data(BaseModel):
