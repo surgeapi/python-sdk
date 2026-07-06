@@ -31,7 +31,7 @@ class TestWebhooks:
 
         client = client.with_options(webhook_signing_secret=client_opt)
 
-        data = """{"account_id":"acct_01japd271aeatb7txrzr2xj8sg","data":{"id":"call_01jjnn7s0zfx5tdcsxjfy93et2","contact":{"id":"ctc_01ja88cboqffhswjx8zbak3ykk","phone_number":"+18015551234","email":"dom@toretto.family","first_name":"Dominic","last_name":"Toretto","metadata":{"car":"1970 Dodge Charger R/T"}},"duration":184,"initiated_at":"2025-03-31T21:01:37Z","status":"completed"},"timestamp":"2024-10-21T23:29:41Z","type":"call.ended"}"""
+        data = """{"account_id":"acct_01japd271aeatb7txrzr2xj8sg","data":{"id":"call_01jjnn7s0zfx5tdcsxjfy93et2","contact":{"id":"ctc_01ja88cboqffhswjx8zbak3ykk","phone_number":"+18015551234","email":"dom@toretto.family","first_name":"Dominic","last_name":"Toretto","metadata":{"car":"1970 Dodge Charger R/T"}},"duration":184,"initiated_at":"2025-03-31T21:01:37Z","status":"completed","from":"+18015551234","phone_number_id":"pn_01jsjwe4d9fx3tpymgtg958d9w","to":"+18015556789"},"timestamp":"2024-10-21T23:29:41Z","type":"call.ended"}"""
         msg_id = "1"
         timestamp = datetime.now(tz=timezone.utc)
         sig = hook.sign(msg_id=msg_id, timestamp=timestamp, data=data)
@@ -76,7 +76,7 @@ class TestAsyncWebhooks:
 
         async_client = async_client.with_options(webhook_signing_secret=client_opt)
 
-        data = """{"account_id":"acct_01japd271aeatb7txrzr2xj8sg","data":{"id":"call_01jjnn7s0zfx5tdcsxjfy93et2","contact":{"id":"ctc_01ja88cboqffhswjx8zbak3ykk","phone_number":"+18015551234","email":"dom@toretto.family","first_name":"Dominic","last_name":"Toretto","metadata":{"car":"1970 Dodge Charger R/T"}},"duration":184,"initiated_at":"2025-03-31T21:01:37Z","status":"completed"},"timestamp":"2024-10-21T23:29:41Z","type":"call.ended"}"""
+        data = """{"account_id":"acct_01japd271aeatb7txrzr2xj8sg","data":{"id":"call_01jjnn7s0zfx5tdcsxjfy93et2","contact":{"id":"ctc_01ja88cboqffhswjx8zbak3ykk","phone_number":"+18015551234","email":"dom@toretto.family","first_name":"Dominic","last_name":"Toretto","metadata":{"car":"1970 Dodge Charger R/T"}},"duration":184,"initiated_at":"2025-03-31T21:01:37Z","status":"completed","from":"+18015551234","phone_number_id":"pn_01jsjwe4d9fx3tpymgtg958d9w","to":"+18015556789"},"timestamp":"2024-10-21T23:29:41Z","type":"call.ended"}"""
         msg_id = "1"
         timestamp = datetime.now(tz=timezone.utc)
         sig = hook.sign(msg_id=msg_id, timestamp=timestamp, data=data)
