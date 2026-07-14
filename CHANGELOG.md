@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.23.0 (2026-07-14)
+
+Full Changelog: [v0.22.0...v0.23.0](https://github.com/surgeapi/python-sdk/compare/v0.22.0...v0.23.0)
+
+### Features
+
+* **api:** add campaign to phone numbers ([db4a98d](https://github.com/surgeapi/python-sdk/commit/db4a98d215b2fc3525b8105f2ad7b050a69c95a7))
+* **api:** add list available phone numbers endpoint ([1d88b5e](https://github.com/surgeapi/python-sdk/commit/1d88b5e51b16dd93baa8a7bbc8893cb61a0d21e3))
+* **api:** add phone number field to purchase endpoint ([f69f8bf](https://github.com/surgeapi/python-sdk/commit/f69f8bfa9e22be43860db162d60ef4c7d8537281))
+* **api:** add retrieve phone number endpoint ([fb84443](https://github.com/surgeapi/python-sdk/commit/fb84443c31478f269ccb2be25db397a3ed2f6a73))
+
+
+### Bug Fixes
+
+* **internal:** resolve build failures ([74951a5](https://github.com/surgeapi/python-sdk/commit/74951a5202a7208ab8b4cfaf15a48ed80bf50608))
+
 ## 0.22.0 (2026-07-06)
 
 Full Changelog: [v0.21.0...v0.22.0](https://github.com/surgeapi/python-sdk/compare/v0.21.0...v0.22.0)
