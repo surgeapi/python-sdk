@@ -34,6 +34,12 @@ class PhoneNumberPurchaseParams(TypedDict, total=False):
     If not provided, defaults to the formatted phone number.
     """
 
+    phone_number: str
+    """The exact phone number to purchase in E.164 format.
+
+    When provided, all other search parameters are ignored.
+    """
+
     type: Literal["local", "toll_free"]
     """Whether the phone number is local or toll-free.
 

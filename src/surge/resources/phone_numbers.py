@@ -261,6 +261,7 @@ class PhoneNumbersResource(SyncAPIResource):
         latitude: float | Omit = omit,
         longitude: float | Omit = omit,
         name: str | Omit = omit,
+        phone_number: str | Omit = omit,
         type: Literal["local", "toll_free"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -271,8 +272,10 @@ class PhoneNumbersResource(SyncAPIResource):
     ) -> PhoneNumber:
         """Purchase a new phone number for the account.
 
-        You can specify search criteria or
-        let the system select a random number.
+        You can specify an exact phone
+        number, search criteria, or let the system select a random number.
+
+        When `phone_number` is provided, all other search parameters are ignored.
 
         Args:
           account_id: The account for which the phone number should be created.
@@ -288,6 +291,9 @@ class PhoneNumbersResource(SyncAPIResource):
 
           name: A human-readable name for the phone number. If not provided, defaults to the
               formatted phone number.
+
+          phone_number: The exact phone number to purchase in E.164 format. When provided, all other
+              search parameters are ignored.
 
           type: Whether the phone number is local or toll-free. Can be omitted if area_code or
               latitude/longitude are provided.
@@ -310,6 +316,7 @@ class PhoneNumbersResource(SyncAPIResource):
                     "latitude": latitude,
                     "longitude": longitude,
                     "name": name,
+                    "phone_number": phone_number,
                     "type": type,
                 },
                 phone_number_purchase_params.PhoneNumberPurchaseParams,
@@ -587,6 +594,7 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
         latitude: float | Omit = omit,
         longitude: float | Omit = omit,
         name: str | Omit = omit,
+        phone_number: str | Omit = omit,
         type: Literal["local", "toll_free"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -597,8 +605,10 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
     ) -> PhoneNumber:
         """Purchase a new phone number for the account.
 
-        You can specify search criteria or
-        let the system select a random number.
+        You can specify an exact phone
+        number, search criteria, or let the system select a random number.
+
+        When `phone_number` is provided, all other search parameters are ignored.
 
         Args:
           account_id: The account for which the phone number should be created.
@@ -614,6 +624,9 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
 
           name: A human-readable name for the phone number. If not provided, defaults to the
               formatted phone number.
+
+          phone_number: The exact phone number to purchase in E.164 format. When provided, all other
+              search parameters are ignored.
 
           type: Whether the phone number is local or toll-free. Can be omitted if area_code or
               latitude/longitude are provided.
@@ -636,6 +649,7 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
                     "latitude": latitude,
                     "longitude": longitude,
                     "name": name,
+                    "phone_number": phone_number,
                     "type": type,
                 },
                 phone_number_purchase_params.PhoneNumberPurchaseParams,
