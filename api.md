@@ -107,7 +107,7 @@ Methods:
 Types:
 
 ```python
-from surge.types import PhoneNumber
+from surge.types import PhoneNumber, PhoneNumberListAvailableNumbersResponse
 ```
 
 Methods:
@@ -115,6 +115,7 @@ Methods:
 - <code title="get /phone_numbers/{id}">client.phone_numbers.<a href="./src/surge/resources/phone_numbers.py">retrieve</a>(id) -> <a href="./src/surge/types/phone_number.py">PhoneNumber</a></code>
 - <code title="patch /phone_numbers/{id}">client.phone_numbers.<a href="./src/surge/resources/phone_numbers.py">update</a>(id, \*\*<a href="src/surge/types/phone_number_update_params.py">params</a>) -> <a href="./src/surge/types/phone_number.py">PhoneNumber</a></code>
 - <code title="get /accounts/{account_id}/phone_numbers">client.phone_numbers.<a href="./src/surge/resources/phone_numbers.py">list</a>(account_id, \*\*<a href="src/surge/types/phone_number_list_params.py">params</a>) -> <a href="./src/surge/types/phone_number.py">SyncCursor[PhoneNumber]</a></code>
+- <code title="get /accounts/{account_id}/available_phone_numbers">client.phone_numbers.<a href="./src/surge/resources/phone_numbers.py">list_available_numbers</a>(account_id, \*\*<a href="src/surge/types/phone_number_list_available_numbers_params.py">params</a>) -> <a href="./src/surge/types/phone_number_list_available_numbers_response.py">SyncCursor[PhoneNumberListAvailableNumbersResponse]</a></code>
 - <code title="post /accounts/{account_id}/phone_numbers">client.phone_numbers.<a href="./src/surge/resources/phone_numbers.py">purchase</a>(account_id, \*\*<a href="src/surge/types/phone_number_purchase_params.py">params</a>) -> <a href="./src/surge/types/phone_number.py">PhoneNumber</a></code>
 - <code title="delete /phone_numbers/{id}">client.phone_numbers.<a href="./src/surge/resources/phone_numbers.py">release</a>(id) -> <a href="./src/surge/types/phone_number.py">PhoneNumber</a></code>
 
