@@ -6,7 +6,12 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import phone_number_list_params, phone_number_update_params, phone_number_purchase_params
+from ..types import (
+    phone_number_list_params,
+    phone_number_update_params,
+    phone_number_purchase_params,
+    phone_number_list_available_numbers_params,
+)
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -20,6 +25,7 @@ from .._response import (
 from ..pagination import SyncCursor, AsyncCursor
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.phone_number import PhoneNumber
+from ..types.phone_number_list_available_numbers_response import PhoneNumberListAvailableNumbersResponse
 
 __all__ = ["PhoneNumbersResource", "AsyncPhoneNumbersResource"]
 
@@ -178,6 +184,73 @@ class PhoneNumbersResource(SyncAPIResource):
                 ),
             ),
             model=PhoneNumber,
+        )
+
+    def list_available_numbers(
+        self,
+        account_id: str,
+        *,
+        type: Literal["local", "toll_free"],
+        after: str | Omit = omit,
+        area_code: str | Omit = omit,
+        before: str | Omit = omit,
+        country: Literal["US", "CA"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SyncCursor[PhoneNumberListAvailableNumbersResponse]:
+        """
+        Browse purchasable phone numbers from Surge inventory before buying.
+
+        Pagination cursors are always null for now.
+
+        Args:
+          account_id: The account ID to list available phone numbers for.
+
+          type: Whether to search for local or toll-free numbers.
+
+          after: Cursor for forward pagination. Use the next_cursor from a previous response.
+
+          area_code: Filter by 3-digit area code.
+
+          before: Cursor for backward pagination. Use the previous_cursor from a previous
+              response.
+
+          country: ISO country code to search in.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return self._get_api_list(
+            path_template("/accounts/{account_id}/available_phone_numbers", account_id=account_id),
+            page=SyncCursor[PhoneNumberListAvailableNumbersResponse],
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "type": type,
+                        "after": after,
+                        "area_code": area_code,
+                        "before": before,
+                        "country": country,
+                    },
+                    phone_number_list_available_numbers_params.PhoneNumberListAvailableNumbersParams,
+                ),
+            ),
+            model=PhoneNumberListAvailableNumbersResponse,
         )
 
     def purchase(
@@ -439,6 +512,73 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
             model=PhoneNumber,
         )
 
+    def list_available_numbers(
+        self,
+        account_id: str,
+        *,
+        type: Literal["local", "toll_free"],
+        after: str | Omit = omit,
+        area_code: str | Omit = omit,
+        before: str | Omit = omit,
+        country: Literal["US", "CA"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AsyncPaginator[PhoneNumberListAvailableNumbersResponse, AsyncCursor[PhoneNumberListAvailableNumbersResponse]]:
+        """
+        Browse purchasable phone numbers from Surge inventory before buying.
+
+        Pagination cursors are always null for now.
+
+        Args:
+          account_id: The account ID to list available phone numbers for.
+
+          type: Whether to search for local or toll-free numbers.
+
+          after: Cursor for forward pagination. Use the next_cursor from a previous response.
+
+          area_code: Filter by 3-digit area code.
+
+          before: Cursor for backward pagination. Use the previous_cursor from a previous
+              response.
+
+          country: ISO country code to search in.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return self._get_api_list(
+            path_template("/accounts/{account_id}/available_phone_numbers", account_id=account_id),
+            page=AsyncCursor[PhoneNumberListAvailableNumbersResponse],
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "type": type,
+                        "after": after,
+                        "area_code": area_code,
+                        "before": before,
+                        "country": country,
+                    },
+                    phone_number_list_available_numbers_params.PhoneNumberListAvailableNumbersParams,
+                ),
+            ),
+            model=PhoneNumberListAvailableNumbersResponse,
+        )
+
     async def purchase(
         self,
         account_id: str,
@@ -555,6 +695,9 @@ class PhoneNumbersResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             phone_numbers.list,
         )
+        self.list_available_numbers = to_raw_response_wrapper(
+            phone_numbers.list_available_numbers,
+        )
         self.purchase = to_raw_response_wrapper(
             phone_numbers.purchase,
         )
@@ -575,6 +718,9 @@ class AsyncPhoneNumbersResourceWithRawResponse:
         )
         self.list = async_to_raw_response_wrapper(
             phone_numbers.list,
+        )
+        self.list_available_numbers = async_to_raw_response_wrapper(
+            phone_numbers.list_available_numbers,
         )
         self.purchase = async_to_raw_response_wrapper(
             phone_numbers.purchase,
@@ -597,6 +743,9 @@ class PhoneNumbersResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             phone_numbers.list,
         )
+        self.list_available_numbers = to_streamed_response_wrapper(
+            phone_numbers.list_available_numbers,
+        )
         self.purchase = to_streamed_response_wrapper(
             phone_numbers.purchase,
         )
@@ -617,6 +766,9 @@ class AsyncPhoneNumbersResourceWithStreamingResponse:
         )
         self.list = async_to_streamed_response_wrapper(
             phone_numbers.list,
+        )
+        self.list_available_numbers = async_to_streamed_response_wrapper(
+            phone_numbers.list_available_numbers,
         )
         self.purchase = async_to_streamed_response_wrapper(
             phone_numbers.purchase,
