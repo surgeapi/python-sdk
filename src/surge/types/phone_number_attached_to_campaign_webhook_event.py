@@ -6,7 +6,17 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["PhoneNumberAttachedToCampaignWebhookEvent", "Data"]
+__all__ = ["PhoneNumberAttachedToCampaignWebhookEvent", "Data", "DataCampaign"]
+
+
+class DataCampaign(BaseModel):
+    """Campaign attachment details for a domestic local phone number"""
+
+    id: str
+    """The unique identifier of the campaign this phone number is attached to"""
+
+    attachment_status: Literal["attached", "attachment_pending", "detached", "detachment_pending"]
+    """The current campaign attachment status for this phone number."""
 
 
 class Data(BaseModel):
@@ -15,8 +25,14 @@ class Data(BaseModel):
     id: str
     """The unique identifier for the phone number"""
 
+    campaign: Optional[DataCampaign] = None
+    """Campaign attachment details for a domestic local phone number"""
+
     campaign_id: str
-    """The unique identifier of the campaign this phone number is attached to"""
+    """Deprecated.
+
+    The unique identifier of the campaign this phone number is attached to
+    """
 
     name: Optional[str] = None
     """A human-readable name for the phone number"""
