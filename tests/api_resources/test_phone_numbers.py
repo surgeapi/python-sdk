@@ -243,6 +243,7 @@ class TestPhoneNumbers:
             latitude=40.7128,
             longitude=-74.006,
             name="Support Line",
+            phone_number="+18015551234",
             type="local",
         )
         assert_matches_type(PhoneNumber, phone_number, path=["response"])
@@ -551,6 +552,7 @@ class TestAsyncPhoneNumbers:
             latitude=40.7128,
             longitude=-74.006,
             name="Support Line",
+            phone_number="+18015551234",
             type="local",
         )
         assert_matches_type(PhoneNumber, phone_number, path=["response"])
