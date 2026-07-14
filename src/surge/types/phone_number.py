@@ -5,7 +5,17 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["PhoneNumber"]
+__all__ = ["PhoneNumber", "Campaign"]
+
+
+class Campaign(BaseModel):
+    """Campaign attachment details for a domestic local phone number"""
+
+    id: str
+    """The unique identifier of the campaign this phone number is attached to"""
+
+    attachment_status: Literal["attached", "attachment_pending", "detached", "detachment_pending"]
+    """The current campaign attachment status for this phone number."""
 
 
 class PhoneNumber(BaseModel):
@@ -14,8 +24,14 @@ class PhoneNumber(BaseModel):
     id: str
     """Unique identifier for the phone number"""
 
+    campaign: Optional[Campaign] = None
+    """Campaign attachment details for a domestic local phone number"""
+
     campaign_id: Optional[str] = None
-    """The unique identifier of the campaign this phone number is attached to, if any"""
+    """Deprecated.
+
+    The unique identifier of the campaign this phone number is attached to, if any
+    """
 
     name: Optional[str] = None
     """A human-readable name for the phone number"""
