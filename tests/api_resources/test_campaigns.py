@@ -8,7 +8,10 @@ from typing import Any, cast
 import pytest
 
 from surge import Surge, AsyncSurge
-from surge.types import Campaign
+from surge.types import (
+    Campaign,
+    CampaignResendBrandVerificationMessageResponse,
+)
 from tests.utils import assert_matches_type
 from surge.pagination import SyncCursor, AsyncCursor
 
@@ -418,6 +421,48 @@ class TestCampaigns:
                 account_id="",
             )
 
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_resend_brand_verification_message(self, client: Surge) -> None:
+        campaign = client.campaigns.resend_brand_verification_message(
+            "acct_01j9a43avnfqzbjfch6pygv1td",
+        )
+        assert_matches_type(CampaignResendBrandVerificationMessageResponse, campaign, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_resend_brand_verification_message(self, client: Surge) -> None:
+        response = client.campaigns.with_raw_response.resend_brand_verification_message(
+            "acct_01j9a43avnfqzbjfch6pygv1td",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        campaign = response.parse()
+        assert_matches_type(CampaignResendBrandVerificationMessageResponse, campaign, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_resend_brand_verification_message(self, client: Surge) -> None:
+        with client.campaigns.with_streaming_response.resend_brand_verification_message(
+            "acct_01j9a43avnfqzbjfch6pygv1td",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            campaign = response.parse()
+            assert_matches_type(CampaignResendBrandVerificationMessageResponse, campaign, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_resend_brand_verification_message(self, client: Surge) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
+            client.campaigns.with_raw_response.resend_brand_verification_message(
+                "",
+            )
+
 
 class TestAsyncCampaigns:
     parametrize = pytest.mark.parametrize(
@@ -822,4 +867,46 @@ class TestAsyncCampaigns:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             await async_client.campaigns.with_raw_response.list(
                 account_id="",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_resend_brand_verification_message(self, async_client: AsyncSurge) -> None:
+        campaign = await async_client.campaigns.resend_brand_verification_message(
+            "acct_01j9a43avnfqzbjfch6pygv1td",
+        )
+        assert_matches_type(CampaignResendBrandVerificationMessageResponse, campaign, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_resend_brand_verification_message(self, async_client: AsyncSurge) -> None:
+        response = await async_client.campaigns.with_raw_response.resend_brand_verification_message(
+            "acct_01j9a43avnfqzbjfch6pygv1td",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        campaign = await response.parse()
+        assert_matches_type(CampaignResendBrandVerificationMessageResponse, campaign, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_resend_brand_verification_message(self, async_client: AsyncSurge) -> None:
+        async with async_client.campaigns.with_streaming_response.resend_brand_verification_message(
+            "acct_01j9a43avnfqzbjfch6pygv1td",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            campaign = await response.parse()
+            assert_matches_type(CampaignResendBrandVerificationMessageResponse, campaign, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_resend_brand_verification_message(self, async_client: AsyncSurge) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
+            await async_client.campaigns.with_raw_response.resend_brand_verification_message(
+                "",
             )
