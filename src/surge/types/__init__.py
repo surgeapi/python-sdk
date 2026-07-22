@@ -69,3 +69,6 @@ from .phone_number_list_available_numbers_response import (
 from .phone_number_attached_to_campaign_webhook_event import (
     PhoneNumberAttachedToCampaignWebhookEvent as PhoneNumberAttachedToCampaignWebhookEvent,
 )
+from .campaign_resend_brand_verification_message_response import (
+    CampaignResendBrandVerificationMessageResponse as CampaignResendBrandVerificationMessageResponse,
+)

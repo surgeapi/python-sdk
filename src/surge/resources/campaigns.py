@@ -21,6 +21,7 @@ from .._response import (
 from ..pagination import SyncCursor, AsyncCursor
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.campaign import Campaign
+from ..types.campaign_resend_brand_verification_message_response import CampaignResendBrandVerificationMessageResponse
 
 __all__ = ["CampaignsResource", "AsyncCampaignsResource"]
 
@@ -607,6 +608,41 @@ class CampaignsResource(SyncAPIResource):
             model=Campaign,
         )
 
+    def resend_brand_verification_message(
+        self,
+        account_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CampaignResendBrandVerificationMessageResponse:
+        """
+        Enqueues an SMS OTP for a sole proprietor brand awaiting identity verification.
+
+        Args:
+          account_id: The account whose brand verification OTP should be sent.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return self._post(
+            path_template("/accounts/{account_id}/brand_verification_messages", account_id=account_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CampaignResendBrandVerificationMessageResponse,
+        )
+
 
 class AsyncCampaignsResource(AsyncAPIResource):
     @cached_property
@@ -1190,6 +1226,41 @@ class AsyncCampaignsResource(AsyncAPIResource):
             model=Campaign,
         )
 
+    async def resend_brand_verification_message(
+        self,
+        account_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CampaignResendBrandVerificationMessageResponse:
+        """
+        Enqueues an SMS OTP for a sole proprietor brand awaiting identity verification.
+
+        Args:
+          account_id: The account whose brand verification OTP should be sent.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not account_id:
+            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
+        return await self._post(
+            path_template("/accounts/{account_id}/brand_verification_messages", account_id=account_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CampaignResendBrandVerificationMessageResponse,
+        )
+
 
 class CampaignsResourceWithRawResponse:
     def __init__(self, campaigns: CampaignsResource) -> None:
@@ -1206,6 +1277,9 @@ class CampaignsResourceWithRawResponse:
         )
         self.list = to_raw_response_wrapper(
             campaigns.list,
+        )
+        self.resend_brand_verification_message = to_raw_response_wrapper(
+            campaigns.resend_brand_verification_message,
         )
 
 
@@ -1225,6 +1299,9 @@ class AsyncCampaignsResourceWithRawResponse:
         self.list = async_to_raw_response_wrapper(
             campaigns.list,
         )
+        self.resend_brand_verification_message = async_to_raw_response_wrapper(
+            campaigns.resend_brand_verification_message,
+        )
 
 
 class CampaignsResourceWithStreamingResponse:
@@ -1243,6 +1320,9 @@ class CampaignsResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             campaigns.list,
         )
+        self.resend_brand_verification_message = to_streamed_response_wrapper(
+            campaigns.resend_brand_verification_message,
+        )
 
 
 class AsyncCampaignsResourceWithStreamingResponse:
@@ -1260,4 +1340,7 @@ class AsyncCampaignsResourceWithStreamingResponse:
         )
         self.list = async_to_streamed_response_wrapper(
             campaigns.list,
+        )
+        self.resend_brand_verification_message = async_to_streamed_response_wrapper(
+            campaigns.resend_brand_verification_message,
         )
