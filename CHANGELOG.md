@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.24.0 (2026-07-22)
+
+Full Changelog: [v0.23.0...v0.24.0](https://github.com/surgeapi/python-sdk/compare/v0.23.0...v0.24.0)
+
+### Features
+
+* **api:** add resend brand verification message endpoint ([2765406](https://github.com/surgeapi/python-sdk/commit/2765406757ad80e3daa69be9d6f4b98a75481055))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([a694784](https://github.com/surgeapi/python-sdk/commit/a69478444855dcf37c77ba7816111b6119d78f22))
+
 ## 0.23.0 (2026-07-14)
 
 Full Changelog: [v0.22.0...v0.23.0](https://github.com/surgeapi/python-sdk/compare/v0.22.0...v0.23.0)
