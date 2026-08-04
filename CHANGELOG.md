@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.25.0 (2026-08-04)
+
+Full Changelog: [v0.24.0...v0.25.0](https://github.com/surgeapi/python-sdk/compare/v0.24.0...v0.25.0)
+
+### Features
+
+* **api:** add get account endpoint ([de3cc15](https://github.com/surgeapi/python-sdk/commit/de3cc158c5bdd08cbb582d025ade336341a3acf0))
+* **api:** remove campaign rejected status ([444e9f3](https://github.com/surgeapi/python-sdk/commit/444e9f3ba472f57627ee60ce8d843a93845a737b))
+
 ## 0.24.0 (2026-07-22)
 
 Full Changelog: [v0.23.0...v0.24.0](https://github.com/surgeapi/python-sdk/compare/v0.23.0...v0.24.0)
