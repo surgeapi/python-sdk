@@ -15,6 +15,7 @@ from surge.types import Account, AccountStatus, Organization
 Methods:
 
 - <code title="post /accounts">client.accounts.<a href="./src/surge/resources/accounts.py">create</a>(\*\*<a href="src/surge/types/account_create_params.py">params</a>) -> <a href="./src/surge/types/account.py">Account</a></code>
+- <code title="get /accounts/{id}">client.accounts.<a href="./src/surge/resources/accounts.py">retrieve</a>(id) -> <a href="./src/surge/types/account.py">Account</a></code>
 - <code title="patch /accounts/{id}">client.accounts.<a href="./src/surge/resources/accounts.py">update</a>(id, \*\*<a href="src/surge/types/account_update_params.py">params</a>) -> <a href="./src/surge/types/account.py">Account</a></code>
 - <code title="get /accounts">client.accounts.<a href="./src/surge/resources/accounts.py">list</a>(\*\*<a href="src/surge/types/account_list_params.py">params</a>) -> <a href="./src/surge/types/account.py">SyncCursor[Account]</a></code>
 - <code title="delete /accounts/{id}">client.accounts.<a href="./src/surge/resources/accounts.py">archive</a>(id) -> <a href="./src/surge/types/account.py">Account</a></code>
