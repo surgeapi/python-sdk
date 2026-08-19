@@ -106,13 +106,14 @@ class Organization(BaseModel):
     field.
 
     For EIN, can be formatted with or without the hyphen. For CBN, must be exactly 9
-    digits.
+    digits. For VAT, provide only the numeric portion, between 2 and 20 digits.
     """
 
-    identifier_type: Optional[Literal["ein", "cbn"]] = None
+    identifier_type: Optional[Literal["ein", "cbn", "vat"]] = None
     """The type of identifier being provided for the organization.
 
-    Use "ein" for US businesses or "cbn" for Canadian businesses.
+    Use "ein" for US organizations, "cbn" for Canadian organizations, or "vat" for
+    supported international organizations.
     """
 
     industry: Optional[
