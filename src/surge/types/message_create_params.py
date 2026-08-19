@@ -64,6 +64,9 @@ class MessageParamsWithConversationConversationContact(TypedDict, total=False):
     metadata: Dict[str, str]
     """Set of key-value pairs that will be stored with the object."""
 
+    outbound_disabled: bool
+    """Whether outbound messaging should be manually disabled for the contact."""
+
 
 class MessageParamsWithConversationConversation(TypedDict, total=False):
     """Params for selecting or creating a new conversation.
