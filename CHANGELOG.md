@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.26.0 (2026-08-19)
+
+Full Changelog: [v0.25.0...v0.26.0](https://github.com/surgeapi/python-sdk/compare/v0.25.0...v0.26.0)
+
+### Features
+
+* **api:** allow non us/canadian organizations ([df9d03b](https://github.com/surgeapi/python-sdk/commit/df9d03b556f863ac49f258012b7b0f4a84b5828c))
+* **api:** disable outbound for contacts ([8033609](https://github.com/surgeapi/python-sdk/commit/80336097fb6565eaf60246c4b730953777b9414e))
+
 ## 0.25.0 (2026-08-04)
 
 Full Changelog: [v0.24.0...v0.25.0](https://github.com/surgeapi/python-sdk/compare/v0.24.0...v0.25.0)
