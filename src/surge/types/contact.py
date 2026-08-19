@@ -27,3 +27,6 @@ class Contact(BaseModel):
 
     metadata: Optional[Dict[str, str]] = None
     """Set of key-value pairs that will be stored with the object."""
+
+    outbound_disabled: Optional[bool] = None
+    """Whether outbound messaging has been manually disabled for the contact."""

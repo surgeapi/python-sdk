@@ -53,6 +53,7 @@ class ContactsResource(SyncAPIResource):
         first_name: str | Omit = omit,
         last_name: str | Omit = omit,
         metadata: Dict[str, str] | Omit = omit,
+        outbound_disabled: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -76,6 +77,8 @@ class ContactsResource(SyncAPIResource):
 
           metadata: Set of key-value pairs that will be stored with the object.
 
+          outbound_disabled: Whether outbound messaging should be manually disabled for the contact.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -95,6 +98,7 @@ class ContactsResource(SyncAPIResource):
                     "first_name": first_name,
                     "last_name": last_name,
                     "metadata": metadata,
+                    "outbound_disabled": outbound_disabled,
                 },
                 contact_create_params.ContactCreateParams,
             ),
@@ -148,6 +152,7 @@ class ContactsResource(SyncAPIResource):
         first_name: str | Omit = omit,
         last_name: str | Omit = omit,
         metadata: Dict[str, str] | Omit = omit,
+        outbound_disabled: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -172,6 +177,8 @@ class ContactsResource(SyncAPIResource):
 
           metadata: Set of key-value pairs that will be stored with the object.
 
+          outbound_disabled: Whether outbound messaging should be manually disabled for the contact.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -191,6 +198,7 @@ class ContactsResource(SyncAPIResource):
                     "first_name": first_name,
                     "last_name": last_name,
                     "metadata": metadata,
+                    "outbound_disabled": outbound_disabled,
                 },
                 contact_update_params.ContactUpdateParams,
             ),
@@ -283,6 +291,7 @@ class AsyncContactsResource(AsyncAPIResource):
         first_name: str | Omit = omit,
         last_name: str | Omit = omit,
         metadata: Dict[str, str] | Omit = omit,
+        outbound_disabled: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -306,6 +315,8 @@ class AsyncContactsResource(AsyncAPIResource):
 
           metadata: Set of key-value pairs that will be stored with the object.
 
+          outbound_disabled: Whether outbound messaging should be manually disabled for the contact.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -325,6 +336,7 @@ class AsyncContactsResource(AsyncAPIResource):
                     "first_name": first_name,
                     "last_name": last_name,
                     "metadata": metadata,
+                    "outbound_disabled": outbound_disabled,
                 },
                 contact_create_params.ContactCreateParams,
             ),
@@ -378,6 +390,7 @@ class AsyncContactsResource(AsyncAPIResource):
         first_name: str | Omit = omit,
         last_name: str | Omit = omit,
         metadata: Dict[str, str] | Omit = omit,
+        outbound_disabled: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -402,6 +415,8 @@ class AsyncContactsResource(AsyncAPIResource):
 
           metadata: Set of key-value pairs that will be stored with the object.
 
+          outbound_disabled: Whether outbound messaging should be manually disabled for the contact.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -421,6 +436,7 @@ class AsyncContactsResource(AsyncAPIResource):
                     "first_name": first_name,
                     "last_name": last_name,
                     "metadata": metadata,
+                    "outbound_disabled": outbound_disabled,
                 },
                 contact_update_params.ContactUpdateParams,
             ),

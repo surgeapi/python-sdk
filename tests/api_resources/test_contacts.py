@@ -37,6 +37,7 @@ class TestContacts:
             first_name="Dominic",
             last_name="Toretto",
             metadata={"car": "1970 Dodge Charger R/T"},
+            outbound_disabled=False,
         )
         assert_matches_type(Contact, contact, path=["response"])
 
@@ -138,6 +139,7 @@ class TestContacts:
             first_name="Dominic",
             last_name="Toretto",
             metadata={"car": "1970 Dodge Charger R/T"},
+            outbound_disabled=False,
         )
         assert_matches_type(Contact, contact, path=["response"])
 
@@ -255,6 +257,7 @@ class TestAsyncContacts:
             first_name="Dominic",
             last_name="Toretto",
             metadata={"car": "1970 Dodge Charger R/T"},
+            outbound_disabled=False,
         )
         assert_matches_type(Contact, contact, path=["response"])
 
@@ -356,6 +359,7 @@ class TestAsyncContacts:
             first_name="Dominic",
             last_name="Toretto",
             metadata={"car": "1970 Dodge Charger R/T"},
+            outbound_disabled=False,
         )
         assert_matches_type(Contact, contact, path=["response"])
 
