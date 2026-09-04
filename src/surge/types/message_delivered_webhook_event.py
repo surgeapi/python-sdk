@@ -53,6 +53,9 @@ class Data(BaseModel):
     metadata: Dict[str, str]
     """Set of key-value pairs that will be stored with the object."""
 
+    status: Literal["delivered"]
+    """The message status represented by this event"""
+
     attachments: Optional[List[DataAttachment]] = None
     """Attachments included with the message"""
 
