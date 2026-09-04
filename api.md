@@ -188,6 +188,7 @@ from surge.types import (
     MessageReceivedWebhookEvent,
     MessageSentWebhookEvent,
     PhoneNumberAttachedToCampaignWebhookEvent,
+    PhoneNumberImportedWebhookEvent,
     RecordingCompletedWebhookEvent,
     VoicemailReceivedWebhookEvent,
     UnwrapWebhookEvent,
