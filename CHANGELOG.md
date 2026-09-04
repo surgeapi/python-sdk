@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.27.0 (2026-09-04)
+
+Full Changelog: [v0.26.0...v0.27.0](https://github.com/surgeapi/python-sdk/compare/v0.26.0...v0.27.0)
+
+### Features
+
+* **api:** add status to messages ([8659b97](https://github.com/surgeapi/python-sdk/commit/8659b97758ebf0d1d912d209ad418302f14c7360))
+* **api:** add toll free messaging capability to accounts ([0a80fa5](https://github.com/surgeapi/python-sdk/commit/0a80fa5557c9071a0462c02c6050af3cde05c6b5))
+* **api:** phone number imported webhook event ([d950456](https://github.com/surgeapi/python-sdk/commit/d95045674c38c98b86c525a5784f8e0bd8c206d7))
+
+
+### Documentation
+
+* **api:** add note about links in messages for campaigns ([bbaabd5](https://github.com/surgeapi/python-sdk/commit/bbaabd54fcf26f6be4b80a287e0cf19724f03b4a))
+* **api:** add note about links in messages for campaigns (continued) ([54504f8](https://github.com/surgeapi/python-sdk/commit/54504f83fedb8e3b9fe033bb628eb4ca5bbc7e84))
+
 ## 0.26.0 (2026-08-19)
 
 Full Changelog: [v0.25.0...v0.26.0](https://github.com/surgeapi/python-sdk/compare/v0.25.0...v0.26.0)
