@@ -73,3 +73,6 @@ class Message(BaseModel):
 
     metadata: Optional[Dict[str, str]] = None
     """Set of key-value pairs that will be stored with the object."""
+
+    status: Optional[Literal["pending", "received", "sent", "delivered", "failed"]] = None
+    """The current status of the message."""

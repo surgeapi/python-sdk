@@ -53,6 +53,9 @@ class Data(BaseModel):
     sent_at: datetime
     """When the message was sent"""
 
+    status: Literal["sent"]
+    """The message status represented by this event"""
+
     attachments: Optional[List[DataAttachment]] = None
     """Attachments included with the message"""
 
