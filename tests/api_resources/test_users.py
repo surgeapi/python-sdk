@@ -293,6 +293,7 @@ class TestUsers:
         user = client.users.create_token(
             user_id="usr_01jymgdfrpec2asc5m0z3a6fr9",
             duration_seconds=900,
+            read_only=True,
         )
         assert_matches_type(UserTokenResponse, user, path=["response"])
 
@@ -608,6 +609,7 @@ class TestAsyncUsers:
         user = await async_client.users.create_token(
             user_id="usr_01jymgdfrpec2asc5m0z3a6fr9",
             duration_seconds=900,
+            read_only=True,
         )
         assert_matches_type(UserTokenResponse, user, path=["response"])
 

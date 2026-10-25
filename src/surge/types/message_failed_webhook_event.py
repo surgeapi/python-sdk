@@ -50,8 +50,11 @@ class Data(BaseModel):
     failed_at: datetime
     """When the message failed"""
 
-    failure_reason: str
-    """The reason the message failed to be delivered"""
+    failure_reason: Optional[str] = None
+    """
+    The reason the message failed to be delivered, or null if no failure reason is
+    set
+    """
 
     metadata: Dict[str, str]
     """Set of key-value pairs that will be stored with the object."""

@@ -47,6 +47,7 @@ if TYPE_CHECKING:
         attachments,
         phone_numbers,
         verifications,
+        toll_free_campaigns,
     )
     from .resources.users import UsersResource, AsyncUsersResource
     from .resources.blasts import BlastsResource, AsyncBlastsResource
@@ -60,6 +61,7 @@ if TYPE_CHECKING:
     from .resources.attachments import AttachmentsResource, AsyncAttachmentsResource
     from .resources.phone_numbers import PhoneNumbersResource, AsyncPhoneNumbersResource
     from .resources.verifications import VerificationsResource, AsyncVerificationsResource
+    from .resources.toll_free_campaigns import TollFreeCampaignsResource, AsyncTollFreeCampaignsResource
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Surge", "AsyncSurge", "Client", "AsyncClient"]
 
@@ -189,6 +191,12 @@ class Surge(SyncAPIClient):
         from .resources.recordings import RecordingsResource
 
         return RecordingsResource(self)
+
+    @cached_property
+    def toll_free_campaigns(self) -> TollFreeCampaignsResource:
+        from .resources.toll_free_campaigns import TollFreeCampaignsResource
+
+        return TollFreeCampaignsResource(self)
 
     @cached_property
     def users(self) -> UsersResource:
@@ -450,6 +458,12 @@ class AsyncSurge(AsyncAPIClient):
         return AsyncRecordingsResource(self)
 
     @cached_property
+    def toll_free_campaigns(self) -> AsyncTollFreeCampaignsResource:
+        from .resources.toll_free_campaigns import AsyncTollFreeCampaignsResource
+
+        return AsyncTollFreeCampaignsResource(self)
+
+    @cached_property
     def users(self) -> AsyncUsersResource:
         from .resources.users import AsyncUsersResource
 
@@ -643,6 +657,12 @@ class SurgeWithRawResponse:
         return RecordingsResourceWithRawResponse(self._client.recordings)
 
     @cached_property
+    def toll_free_campaigns(self) -> toll_free_campaigns.TollFreeCampaignsResourceWithRawResponse:
+        from .resources.toll_free_campaigns import TollFreeCampaignsResourceWithRawResponse
+
+        return TollFreeCampaignsResourceWithRawResponse(self._client.toll_free_campaigns)
+
+    @cached_property
     def users(self) -> users.UsersResourceWithRawResponse:
         from .resources.users import UsersResourceWithRawResponse
 
@@ -714,6 +734,12 @@ class AsyncSurgeWithRawResponse:
         from .resources.recordings import AsyncRecordingsResourceWithRawResponse
 
         return AsyncRecordingsResourceWithRawResponse(self._client.recordings)
+
+    @cached_property
+    def toll_free_campaigns(self) -> toll_free_campaigns.AsyncTollFreeCampaignsResourceWithRawResponse:
+        from .resources.toll_free_campaigns import AsyncTollFreeCampaignsResourceWithRawResponse
+
+        return AsyncTollFreeCampaignsResourceWithRawResponse(self._client.toll_free_campaigns)
 
     @cached_property
     def users(self) -> users.AsyncUsersResourceWithRawResponse:
@@ -789,6 +815,12 @@ class SurgeWithStreamedResponse:
         return RecordingsResourceWithStreamingResponse(self._client.recordings)
 
     @cached_property
+    def toll_free_campaigns(self) -> toll_free_campaigns.TollFreeCampaignsResourceWithStreamingResponse:
+        from .resources.toll_free_campaigns import TollFreeCampaignsResourceWithStreamingResponse
+
+        return TollFreeCampaignsResourceWithStreamingResponse(self._client.toll_free_campaigns)
+
+    @cached_property
     def users(self) -> users.UsersResourceWithStreamingResponse:
         from .resources.users import UsersResourceWithStreamingResponse
 
@@ -860,6 +892,12 @@ class AsyncSurgeWithStreamedResponse:
         from .resources.recordings import AsyncRecordingsResourceWithStreamingResponse
 
         return AsyncRecordingsResourceWithStreamingResponse(self._client.recordings)
+
+    @cached_property
+    def toll_free_campaigns(self) -> toll_free_campaigns.AsyncTollFreeCampaignsResourceWithStreamingResponse:
+        from .resources.toll_free_campaigns import AsyncTollFreeCampaignsResourceWithStreamingResponse
+
+        return AsyncTollFreeCampaignsResourceWithStreamingResponse(self._client.toll_free_campaigns)
 
     @cached_property
     def users(self) -> users.AsyncUsersResourceWithStreamingResponse:

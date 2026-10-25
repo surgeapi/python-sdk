@@ -47,6 +47,9 @@ class Data(BaseModel):
     conversation: DataConversation
     """The conversation this message belongs to"""
 
+    failure_reason: Optional[str] = None
+    """The reason the message failed, or null if no failure reason is set"""
+
     metadata: Dict[str, str]
     """Set of key-value pairs that will be stored with the object."""
 

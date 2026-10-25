@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import Dict, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -33,6 +33,9 @@ class Data(BaseModel):
 
     The unique identifier of the campaign this phone number is attached to
     """
+
+    metadata: Dict[str, str]
+    """Set of key-value pairs that will be stored with the object."""
 
     name: Optional[str] = None
     """A human-readable name for the phone number"""

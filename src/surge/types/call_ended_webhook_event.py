@@ -30,7 +30,11 @@ class Data(BaseModel):
     status: Literal[
         "busy", "canceled", "completed", "failed", "in_progress", "missed", "no_answer", "queued", "ringing"
     ]
-    """The status of the call"""
+    """The status of the call.
+
+    For inbound embedded-phone calls, `no_answer` means no embedded user answered,
+    even if the caller reached voicemail.
+    """
 
     from_: Optional[str] = FieldInfo(alias="from", default=None)
     """The E.164 phone number of the caller"""

@@ -289,6 +289,7 @@ class UsersResource(SyncAPIResource):
         user_id: str,
         *,
         duration_seconds: int | Omit = omit,
+        read_only: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -305,6 +306,11 @@ class UsersResource(SyncAPIResource):
 
           duration_seconds: For how many seconds the token should be accepted. Defaults to 15 minutes.
 
+          read_only: Restrict the token to viewing embedded conversations and unread counts. Sending
+              messages, changing read state, editing contacts, and calling are disabled.
+              Defaults to false. Preserve this value when refreshing the token; changing
+              access mode requires reloading the embed.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -318,7 +324,11 @@ class UsersResource(SyncAPIResource):
         return self._post(
             path_template("/users/{user_id}/tokens", user_id=user_id),
             body=maybe_transform(
-                {"duration_seconds": duration_seconds}, user_create_token_params.UserCreateTokenParams
+                {
+                    "duration_seconds": duration_seconds,
+                    "read_only": read_only,
+                },
+                user_create_token_params.UserCreateTokenParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -591,6 +601,7 @@ class AsyncUsersResource(AsyncAPIResource):
         user_id: str,
         *,
         duration_seconds: int | Omit = omit,
+        read_only: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -607,6 +618,11 @@ class AsyncUsersResource(AsyncAPIResource):
 
           duration_seconds: For how many seconds the token should be accepted. Defaults to 15 minutes.
 
+          read_only: Restrict the token to viewing embedded conversations and unread counts. Sending
+              messages, changing read state, editing contacts, and calling are disabled.
+              Defaults to false. Preserve this value when refreshing the token; changing
+              access mode requires reloading the embed.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -620,7 +636,11 @@ class AsyncUsersResource(AsyncAPIResource):
         return await self._post(
             path_template("/users/{user_id}/tokens", user_id=user_id),
             body=await async_maybe_transform(
-                {"duration_seconds": duration_seconds}, user_create_token_params.UserCreateTokenParams
+                {
+                    "duration_seconds": duration_seconds,
+                    "read_only": read_only,
+                },
+                user_create_token_params.UserCreateTokenParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

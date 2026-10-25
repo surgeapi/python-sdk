@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Optional
 from typing_extensions import Literal, overload
 
 import httpx
@@ -142,11 +142,11 @@ class CampaignsResource(SyncAPIResource):
               This will be one of the following:
 
               - `low` - The campaign will be allowed to send up to 2000 SMS segments to
-                T-Mobile customers each day. In this case your platform will be charged for
-                the setup fee for a low volume number upon receipt of the API request.
+                T-Mobile customers each day. In this case your project will be charged for the
+                setup fee for a low volume number upon receipt of the API request.
               - `high` - The campaign will be allowed to send up to 200k SMS segments to
                 T-Mobile customers each day, depending on the trust score assigned by The
-                Campaign Registry. Your platform will be charged for the setup fee for a high
+                Campaign Registry. Your project will be charged for the setup fee for a high
                 volume number upon receipt of the API request, and phone numbers will be
                 charged as high volume numbers going forward.
 
@@ -313,16 +313,17 @@ class CampaignsResource(SyncAPIResource):
             cast_to=Campaign,
         )
 
-    @overload
     def update(
         self,
         id: str,
         *,
-        consent_flow: str,
-        description: str,
-        message_samples: SequenceNotStr[str],
-        privacy_policy_url: str,
-        terms_and_conditions_url: str,
+        consent_flow: str | Omit = omit,
+        description: str | Omit = omit,
+        includes: List[Literal["links", "phone_numbers", "age_gated", "direct_lending"]] | Omit = omit,
+        link_sample: Optional[str] | Omit = omit,
+        message_samples: SequenceNotStr[str] | Omit = omit,
+        privacy_policy_url: str | Omit = omit,
+        terms_and_conditions_url: str | Omit = omit,
         use_cases: List[
             Literal[
                 "account_notification",
@@ -336,10 +337,9 @@ class CampaignsResource(SyncAPIResource):
                 "security_alert",
                 "two_factor_authentication",
             ]
-        ],
-        volume: Literal["high", "low"],
-        includes: List[Literal["links", "phone_numbers", "age_gated", "direct_lending"]] | Omit = omit,
-        link_sample: str | Omit = omit,
+        ]
+        | Omit = omit,
+        volume: Literal["high", "low"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -347,12 +347,14 @@ class CampaignsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Campaign:
-        """Updates a campaign that has not yet been approved.
+        """Updates supplied fields on a campaign and submits it for review.
 
-        This can be used to fix
-        issues flagged during review and resubmit the campaign. Returns an error if the
-        campaign is currently in review, has already been approved, or has been
-        deactivated.
+        Omitted fields
+        retain their stored values. An empty object or empty request body resubmits the
+        existing campaign without changing its registration details. Supplied arrays
+        replace their stored values; an empty includes array clears all inclusion flags.
+        Returns an error if the resulting campaign is incomplete or invalid, or the
+        campaign is not editable.
 
         Args:
           id: The ID of the campaign to update.
@@ -364,6 +366,21 @@ class CampaignsResource(SyncAPIResource):
 
           description: An explanation of the organization's purpose and how it will be using text
               messaging to accomplish that purpose.
+
+          includes: A list of properties that this campaign should include. These properties can be
+              any of the following values:
+
+              - `links` - whether the campaign might send links in messages
+              - `phone_numbers` - whether the campaign might send phone numbers in messages
+              - `age_gated` - whether the campaign contains age gated content (controlled
+                substances or adult content)
+              - `direct_lending` - whether the campaign contains content related to direct
+                lending or other loan arrangements
+
+          link_sample: A sample link that might be sent by this campaign. This is required when
+              `includes` contains `links`. Provide the same URL or domain that the campaign
+              will use in production. If links from other domains are sent through this
+              campaign, they are much more likely to be filtered by the carriers.
 
           message_samples: An array of 2-5 strings with examples of the messages that will be sent from
               this campaign. Typically the first sample should be a compliance message like
@@ -413,29 +430,14 @@ class CampaignsResource(SyncAPIResource):
               This will be one of the following:
 
               - `low` - The campaign will be allowed to send up to 2000 SMS segments to
-                T-Mobile customers each day. In this case your platform will be charged for
-                the setup fee for a low volume number upon receipt of the API request.
+                T-Mobile customers each day. In this case your project will be charged for the
+                setup fee for a low volume number upon receipt of the API request.
               - `high` - The campaign will be allowed to send up to 200k SMS segments to
                 T-Mobile customers each day, depending on the trust score assigned by The
-                Campaign Registry. Your platform will be charged for the setup fee for a high
+                Campaign Registry. Your project will be charged for the setup fee for a high
                 volume number upon receipt of the API request, and phone numbers will be
                 charged as high volume numbers going forward.
 
-          includes: A list of properties that this campaign should include. These properties can be
-              any of the following values:
-
-              - `links` - whether the campaign might send links in messages
-              - `phone_numbers` - whether the campaign might send phone numbers in messages
-              - `age_gated` - whether the campaign contains age gated content (controlled
-                substances or adult content)
-              - `direct_lending` - whether the campaign contains content related to direct
-                lending or other loan arrangements
-
-          link_sample: A sample link that might be sent by this campaign. This is required when
-              `includes` contains `links`. Provide the same URL or domain that the campaign
-              will use in production. If links from other domains are sent through this
-              campaign, they are much more likely to be filtered by the carriers.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -444,90 +446,6 @@ class CampaignsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @overload
-    def update(
-        self,
-        id: str,
-        *,
-        tcr_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Campaign:
-        """Updates a campaign that has not yet been approved.
-
-        This can be used to fix
-        issues flagged during review and resubmit the campaign. Returns an error if the
-        campaign is currently in review, has already been approved, or has been
-        deactivated.
-
-        Args:
-          id: The ID of the campaign to update.
-
-          tcr_id: The Campaign Registry (TCR) ID for the externally registered campaign
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(
-        [
-            "consent_flow",
-            "description",
-            "message_samples",
-            "privacy_policy_url",
-            "terms_and_conditions_url",
-            "use_cases",
-            "volume",
-        ],
-        ["tcr_id"],
-    )
-    def update(
-        self,
-        id: str,
-        *,
-        consent_flow: str | Omit = omit,
-        description: str | Omit = omit,
-        message_samples: SequenceNotStr[str] | Omit = omit,
-        privacy_policy_url: str | Omit = omit,
-        terms_and_conditions_url: str | Omit = omit,
-        use_cases: List[
-            Literal[
-                "account_notification",
-                "customer_care",
-                "delivery_notification",
-                "fraud_alert",
-                "higher_education",
-                "marketing",
-                "polling_voting",
-                "public_service_announcement",
-                "security_alert",
-                "two_factor_authentication",
-            ]
-        ]
-        | Omit = omit,
-        volume: Literal["high", "low"] | Omit = omit,
-        includes: List[Literal["links", "phone_numbers", "age_gated", "direct_lending"]] | Omit = omit,
-        link_sample: str | Omit = omit,
-        tcr_id: str | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Campaign:
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._patch(
@@ -536,14 +454,13 @@ class CampaignsResource(SyncAPIResource):
                 {
                     "consent_flow": consent_flow,
                     "description": description,
+                    "includes": includes,
+                    "link_sample": link_sample,
                     "message_samples": message_samples,
                     "privacy_policy_url": privacy_policy_url,
                     "terms_and_conditions_url": terms_and_conditions_url,
                     "use_cases": use_cases,
                     "volume": volume,
-                    "includes": includes,
-                    "link_sample": link_sample,
-                    "tcr_id": tcr_id,
                 },
                 campaign_update_params.CampaignUpdateParams,
             ),
@@ -758,11 +675,11 @@ class AsyncCampaignsResource(AsyncAPIResource):
               This will be one of the following:
 
               - `low` - The campaign will be allowed to send up to 2000 SMS segments to
-                T-Mobile customers each day. In this case your platform will be charged for
-                the setup fee for a low volume number upon receipt of the API request.
+                T-Mobile customers each day. In this case your project will be charged for the
+                setup fee for a low volume number upon receipt of the API request.
               - `high` - The campaign will be allowed to send up to 200k SMS segments to
                 T-Mobile customers each day, depending on the trust score assigned by The
-                Campaign Registry. Your platform will be charged for the setup fee for a high
+                Campaign Registry. Your project will be charged for the setup fee for a high
                 volume number upon receipt of the API request, and phone numbers will be
                 charged as high volume numbers going forward.
 
@@ -929,16 +846,17 @@ class AsyncCampaignsResource(AsyncAPIResource):
             cast_to=Campaign,
         )
 
-    @overload
     async def update(
         self,
         id: str,
         *,
-        consent_flow: str,
-        description: str,
-        message_samples: SequenceNotStr[str],
-        privacy_policy_url: str,
-        terms_and_conditions_url: str,
+        consent_flow: str | Omit = omit,
+        description: str | Omit = omit,
+        includes: List[Literal["links", "phone_numbers", "age_gated", "direct_lending"]] | Omit = omit,
+        link_sample: Optional[str] | Omit = omit,
+        message_samples: SequenceNotStr[str] | Omit = omit,
+        privacy_policy_url: str | Omit = omit,
+        terms_and_conditions_url: str | Omit = omit,
         use_cases: List[
             Literal[
                 "account_notification",
@@ -952,10 +870,9 @@ class AsyncCampaignsResource(AsyncAPIResource):
                 "security_alert",
                 "two_factor_authentication",
             ]
-        ],
-        volume: Literal["high", "low"],
-        includes: List[Literal["links", "phone_numbers", "age_gated", "direct_lending"]] | Omit = omit,
-        link_sample: str | Omit = omit,
+        ]
+        | Omit = omit,
+        volume: Literal["high", "low"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -963,12 +880,14 @@ class AsyncCampaignsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Campaign:
-        """Updates a campaign that has not yet been approved.
+        """Updates supplied fields on a campaign and submits it for review.
 
-        This can be used to fix
-        issues flagged during review and resubmit the campaign. Returns an error if the
-        campaign is currently in review, has already been approved, or has been
-        deactivated.
+        Omitted fields
+        retain their stored values. An empty object or empty request body resubmits the
+        existing campaign without changing its registration details. Supplied arrays
+        replace their stored values; an empty includes array clears all inclusion flags.
+        Returns an error if the resulting campaign is incomplete or invalid, or the
+        campaign is not editable.
 
         Args:
           id: The ID of the campaign to update.
@@ -980,6 +899,21 @@ class AsyncCampaignsResource(AsyncAPIResource):
 
           description: An explanation of the organization's purpose and how it will be using text
               messaging to accomplish that purpose.
+
+          includes: A list of properties that this campaign should include. These properties can be
+              any of the following values:
+
+              - `links` - whether the campaign might send links in messages
+              - `phone_numbers` - whether the campaign might send phone numbers in messages
+              - `age_gated` - whether the campaign contains age gated content (controlled
+                substances or adult content)
+              - `direct_lending` - whether the campaign contains content related to direct
+                lending or other loan arrangements
+
+          link_sample: A sample link that might be sent by this campaign. This is required when
+              `includes` contains `links`. Provide the same URL or domain that the campaign
+              will use in production. If links from other domains are sent through this
+              campaign, they are much more likely to be filtered by the carriers.
 
           message_samples: An array of 2-5 strings with examples of the messages that will be sent from
               this campaign. Typically the first sample should be a compliance message like
@@ -1029,29 +963,14 @@ class AsyncCampaignsResource(AsyncAPIResource):
               This will be one of the following:
 
               - `low` - The campaign will be allowed to send up to 2000 SMS segments to
-                T-Mobile customers each day. In this case your platform will be charged for
-                the setup fee for a low volume number upon receipt of the API request.
+                T-Mobile customers each day. In this case your project will be charged for the
+                setup fee for a low volume number upon receipt of the API request.
               - `high` - The campaign will be allowed to send up to 200k SMS segments to
                 T-Mobile customers each day, depending on the trust score assigned by The
-                Campaign Registry. Your platform will be charged for the setup fee for a high
+                Campaign Registry. Your project will be charged for the setup fee for a high
                 volume number upon receipt of the API request, and phone numbers will be
                 charged as high volume numbers going forward.
 
-          includes: A list of properties that this campaign should include. These properties can be
-              any of the following values:
-
-              - `links` - whether the campaign might send links in messages
-              - `phone_numbers` - whether the campaign might send phone numbers in messages
-              - `age_gated` - whether the campaign contains age gated content (controlled
-                substances or adult content)
-              - `direct_lending` - whether the campaign contains content related to direct
-                lending or other loan arrangements
-
-          link_sample: A sample link that might be sent by this campaign. This is required when
-              `includes` contains `links`. Provide the same URL or domain that the campaign
-              will use in production. If links from other domains are sent through this
-              campaign, they are much more likely to be filtered by the carriers.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1060,90 +979,6 @@ class AsyncCampaignsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @overload
-    async def update(
-        self,
-        id: str,
-        *,
-        tcr_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Campaign:
-        """Updates a campaign that has not yet been approved.
-
-        This can be used to fix
-        issues flagged during review and resubmit the campaign. Returns an error if the
-        campaign is currently in review, has already been approved, or has been
-        deactivated.
-
-        Args:
-          id: The ID of the campaign to update.
-
-          tcr_id: The Campaign Registry (TCR) ID for the externally registered campaign
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(
-        [
-            "consent_flow",
-            "description",
-            "message_samples",
-            "privacy_policy_url",
-            "terms_and_conditions_url",
-            "use_cases",
-            "volume",
-        ],
-        ["tcr_id"],
-    )
-    async def update(
-        self,
-        id: str,
-        *,
-        consent_flow: str | Omit = omit,
-        description: str | Omit = omit,
-        message_samples: SequenceNotStr[str] | Omit = omit,
-        privacy_policy_url: str | Omit = omit,
-        terms_and_conditions_url: str | Omit = omit,
-        use_cases: List[
-            Literal[
-                "account_notification",
-                "customer_care",
-                "delivery_notification",
-                "fraud_alert",
-                "higher_education",
-                "marketing",
-                "polling_voting",
-                "public_service_announcement",
-                "security_alert",
-                "two_factor_authentication",
-            ]
-        ]
-        | Omit = omit,
-        volume: Literal["high", "low"] | Omit = omit,
-        includes: List[Literal["links", "phone_numbers", "age_gated", "direct_lending"]] | Omit = omit,
-        link_sample: str | Omit = omit,
-        tcr_id: str | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Campaign:
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._patch(
@@ -1152,14 +987,13 @@ class AsyncCampaignsResource(AsyncAPIResource):
                 {
                     "consent_flow": consent_flow,
                     "description": description,
+                    "includes": includes,
+                    "link_sample": link_sample,
                     "message_samples": message_samples,
                     "privacy_policy_url": privacy_policy_url,
                     "terms_and_conditions_url": terms_and_conditions_url,
                     "use_cases": use_cases,
                     "volume": volume,
-                    "includes": includes,
-                    "link_sample": link_sample,
-                    "tcr_id": tcr_id,
                 },
                 campaign_update_params.CampaignUpdateParams,
             ),
