@@ -8,11 +8,14 @@ from .call_ended_webhook_event import CallEndedWebhookEvent
 from .message_sent_webhook_event import MessageSentWebhookEvent
 from .link_followed_webhook_event import LinkFollowedWebhookEvent
 from .message_failed_webhook_event import MessageFailedWebhookEvent
+from .campaign_warning_webhook_event import CampaignWarningWebhookEvent
 from .contact_opted_in_webhook_event import ContactOptedInWebhookEvent
 from .message_received_webhook_event import MessageReceivedWebhookEvent
 from .campaign_approved_webhook_event import CampaignApprovedWebhookEvent
+from .campaign_rejected_webhook_event import CampaignRejectedWebhookEvent
 from .contact_opted_out_webhook_event import ContactOptedOutWebhookEvent
 from .message_delivered_webhook_event import MessageDeliveredWebhookEvent
+from .campaign_submitted_webhook_event import CampaignSubmittedWebhookEvent
 from .voicemail_received_webhook_event import VoicemailReceivedWebhookEvent
 from .recording_completed_webhook_event import RecordingCompletedWebhookEvent
 from .conversation_created_webhook_event import ConversationCreatedWebhookEvent
@@ -25,6 +28,9 @@ UnwrapWebhookEvent: TypeAlias = Annotated[
     Union[
         CallEndedWebhookEvent,
         CampaignApprovedWebhookEvent,
+        CampaignRejectedWebhookEvent,
+        CampaignSubmittedWebhookEvent,
+        CampaignWarningWebhookEvent,
         ContactOptedInWebhookEvent,
         ContactOptedOutWebhookEvent,
         ConversationCreatedWebhookEvent,

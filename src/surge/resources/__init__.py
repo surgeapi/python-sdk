@@ -89,6 +89,14 @@ from .verifications import (
     VerificationsResourceWithStreamingResponse,
     AsyncVerificationsResourceWithStreamingResponse,
 )
+from .toll_free_campaigns import (
+    TollFreeCampaignsResource,
+    AsyncTollFreeCampaignsResource,
+    TollFreeCampaignsResourceWithRawResponse,
+    AsyncTollFreeCampaignsResourceWithRawResponse,
+    TollFreeCampaignsResourceWithStreamingResponse,
+    AsyncTollFreeCampaignsResourceWithStreamingResponse,
+)
 
 __all__ = [
     "AccountsResource",
@@ -145,6 +153,12 @@ __all__ = [
     "AsyncRecordingsResourceWithRawResponse",
     "RecordingsResourceWithStreamingResponse",
     "AsyncRecordingsResourceWithStreamingResponse",
+    "TollFreeCampaignsResource",
+    "AsyncTollFreeCampaignsResource",
+    "TollFreeCampaignsResourceWithRawResponse",
+    "AsyncTollFreeCampaignsResourceWithRawResponse",
+    "TollFreeCampaignsResourceWithStreamingResponse",
+    "AsyncTollFreeCampaignsResourceWithStreamingResponse",
     "UsersResource",
     "AsyncUsersResource",
     "UsersResourceWithRawResponse",

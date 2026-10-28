@@ -77,6 +77,7 @@ class TestPhoneNumbers:
         phone_number = client.phone_numbers.update(
             id="pn_01jsjwe4d9fx3tpymgtg958d9w",
             campaign_id="cpn_01jjnn7s0zfx5tdcsxjfy93et2",
+            metadata={"location": "Downtown store"},
             name="Letty's Main Line",
         )
         assert_matches_type(PhoneNumber, phone_number, path=["response"])
@@ -242,6 +243,7 @@ class TestPhoneNumbers:
             area_code="801",
             latitude=40.7128,
             longitude=-74.006,
+            metadata={"foo": "string"},
             name="Support Line",
             phone_number="+18015551234",
             type="local",
@@ -386,6 +388,7 @@ class TestAsyncPhoneNumbers:
         phone_number = await async_client.phone_numbers.update(
             id="pn_01jsjwe4d9fx3tpymgtg958d9w",
             campaign_id="cpn_01jjnn7s0zfx5tdcsxjfy93et2",
+            metadata={"location": "Downtown store"},
             name="Letty's Main Line",
         )
         assert_matches_type(PhoneNumber, phone_number, path=["response"])
@@ -551,6 +554,7 @@ class TestAsyncPhoneNumbers:
             area_code="801",
             latitude=40.7128,
             longitude=-74.006,
+            metadata={"foo": "string"},
             name="Support Line",
             phone_number="+18015551234",
             type="local",

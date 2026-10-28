@@ -28,6 +28,9 @@ class ConversationPhoneNumber(BaseModel):
     id: str
     """Unique identifier for the phone number"""
 
+    metadata: Dict[str, str]
+    """Set of key-value pairs that will be stored with the object."""
+
     name: Optional[str] = None
     """A human-readable name for the phone number"""
 
@@ -70,6 +73,9 @@ class Message(BaseModel):
 
     conversation: Optional[Conversation] = None
     """A conversation with a Contact"""
+
+    failure_reason: Optional[str] = None
+    """The reason the message failed, or null if no failure reason is set."""
 
     metadata: Optional[Dict[str, str]] = None
     """Set of key-value pairs that will be stored with the object."""

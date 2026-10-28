@@ -61,7 +61,7 @@ class AccountsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Account:
         """
-        Creates a new Account within the calling Platform.
+        Creates a new Account.
 
         Args:
           name: The name of the account that will be visible for your internal organizational
@@ -214,7 +214,7 @@ class AccountsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncCursor[Account]:
         """
-        List all accounts for the calling platform with cursor-based pagination.
+        List all accounts with cursor-based pagination.
 
         Args:
           after: Cursor for forward pagination. Use the next_cursor from a previous response.
@@ -373,7 +373,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Account:
         """
-        Creates a new Account within the calling Platform.
+        Creates a new Account.
 
         Args:
           name: The name of the account that will be visible for your internal organizational
@@ -526,7 +526,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Account, AsyncCursor[Account]]:
         """
-        List all accounts for the calling platform with cursor-based pagination.
+        List all accounts with cursor-based pagination.
 
         Args:
           after: Cursor for forward pagination. Use the next_cursor from a previous response.

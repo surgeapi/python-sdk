@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Dict
 from typing_extensions import Literal
 
 import httpx
@@ -90,6 +91,7 @@ class PhoneNumbersResource(SyncAPIResource):
         id: str,
         *,
         campaign_id: str | Omit = omit,
+        metadata: Dict[str, str] | Omit = omit,
         name: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -105,6 +107,8 @@ class PhoneNumbersResource(SyncAPIResource):
           id: The ID of the phone number to update.
 
           campaign_id: Campaign ID to attach this number to (`cpn_...`).
+
+          metadata: Set of key-value pairs that will be stored with the object.
 
           name: A human-readable name for the phone number.
 
@@ -123,6 +127,7 @@ class PhoneNumbersResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "campaign_id": campaign_id,
+                    "metadata": metadata,
                     "name": name,
                 },
                 phone_number_update_params.PhoneNumberUpdateParams,
@@ -260,6 +265,7 @@ class PhoneNumbersResource(SyncAPIResource):
         area_code: str | Omit = omit,
         latitude: float | Omit = omit,
         longitude: float | Omit = omit,
+        metadata: Dict[str, str] | Omit = omit,
         name: str | Omit = omit,
         phone_number: str | Omit = omit,
         type: Literal["local", "toll_free"] | Omit = omit,
@@ -289,6 +295,8 @@ class PhoneNumbersResource(SyncAPIResource):
           longitude: Longitude to search for nearby phone numbers. Must be used with latitude. If
               provided without type, type will be inferred as 'local'.
 
+          metadata: Set of key-value pairs that will be stored with the object.
+
           name: A human-readable name for the phone number. If not provided, defaults to the
               formatted phone number.
 
@@ -315,6 +323,7 @@ class PhoneNumbersResource(SyncAPIResource):
                     "area_code": area_code,
                     "latitude": latitude,
                     "longitude": longitude,
+                    "metadata": metadata,
                     "name": name,
                     "phone_number": phone_number,
                     "type": type,
@@ -423,6 +432,7 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
         id: str,
         *,
         campaign_id: str | Omit = omit,
+        metadata: Dict[str, str] | Omit = omit,
         name: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -438,6 +448,8 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
           id: The ID of the phone number to update.
 
           campaign_id: Campaign ID to attach this number to (`cpn_...`).
+
+          metadata: Set of key-value pairs that will be stored with the object.
 
           name: A human-readable name for the phone number.
 
@@ -456,6 +468,7 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "campaign_id": campaign_id,
+                    "metadata": metadata,
                     "name": name,
                 },
                 phone_number_update_params.PhoneNumberUpdateParams,
@@ -593,6 +606,7 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
         area_code: str | Omit = omit,
         latitude: float | Omit = omit,
         longitude: float | Omit = omit,
+        metadata: Dict[str, str] | Omit = omit,
         name: str | Omit = omit,
         phone_number: str | Omit = omit,
         type: Literal["local", "toll_free"] | Omit = omit,
@@ -622,6 +636,8 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
           longitude: Longitude to search for nearby phone numbers. Must be used with latitude. If
               provided without type, type will be inferred as 'local'.
 
+          metadata: Set of key-value pairs that will be stored with the object.
+
           name: A human-readable name for the phone number. If not provided, defaults to the
               formatted phone number.
 
@@ -648,6 +664,7 @@ class AsyncPhoneNumbersResource(AsyncAPIResource):
                     "area_code": area_code,
                     "latitude": latitude,
                     "longitude": longitude,
+                    "metadata": metadata,
                     "name": name,
                     "phone_number": phone_number,
                     "type": type,

@@ -14,6 +14,9 @@ class Data(BaseModel):
     id: str
     """The unique identifier for the campaign"""
 
+    account_id: str
+    """The ID of the account that owns this campaign"""
+
     status: Literal["active"]
     """The status of the campaign. Will always be `active` for this event."""
 

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Dict
 from typing_extensions import Literal, TypedDict
 
 __all__ = ["PhoneNumberPurchaseParams"]
@@ -27,6 +28,9 @@ class PhoneNumberPurchaseParams(TypedDict, total=False):
     Must be used with latitude. If provided without type, type will be inferred as
     'local'.
     """
+
+    metadata: Dict[str, str]
+    """Set of key-value pairs that will be stored with the object."""
 
     name: str
     """A human-readable name for the phone number.

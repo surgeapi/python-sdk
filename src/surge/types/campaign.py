@@ -16,6 +16,9 @@ class Campaign(BaseModel):
     id: str
     """The campaign ID"""
 
+    account_id: str
+    """The ID of the account that owns this campaign"""
+
     consent_flow: str
     """
     A string explaining the method through which end users will opt in to receive
@@ -110,11 +113,11 @@ class Campaign(BaseModel):
     """This will be one of the following:
 
     - `low` - The campaign will be allowed to send up to 2000 SMS segments to
-      T-Mobile customers each day. In this case your platform will be charged for
-      the setup fee for a low volume number upon receipt of the API request.
+      T-Mobile customers each day. In this case your project will be charged for the
+      setup fee for a low volume number upon receipt of the API request.
     - `high` - The campaign will be allowed to send up to 200k SMS segments to
       T-Mobile customers each day, depending on the trust score assigned by The
-      Campaign Registry. Your platform will be charged for the setup fee for a high
+      Campaign Registry. Your project will be charged for the setup fee for a high
       volume number upon receipt of the API request, and phone numbers will be
       charged as high volume numbers going forward.
     """

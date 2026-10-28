@@ -141,6 +141,21 @@ Methods:
 - <code title="delete /recordings/{id}">client.recordings.<a href="./src/surge/resources/recordings.py">delete</a>(id) -> <a href="./src/surge/types/recording_delete_response.py">RecordingDeleteResponse</a></code>
 - <code title="get /recordings/{recording_id}/file">client.recordings.<a href="./src/surge/resources/recordings.py">get_file</a>(recording_id) -> <a href="./src/surge/types/recording_get_file_response.py">RecordingGetFileResponse</a></code>
 
+# TollFreeCampaigns
+
+Types:
+
+```python
+from surge.types import TollFreeCampaign, TollFreeCampaignConsentFlow
+```
+
+Methods:
+
+- <code title="post /accounts/{account_id}/toll_free_campaigns">client.toll_free_campaigns.<a href="./src/surge/resources/toll_free_campaigns.py">create</a>(account_id, \*\*<a href="src/surge/types/toll_free_campaign_create_params.py">params</a>) -> <a href="./src/surge/types/toll_free_campaign.py">TollFreeCampaign</a></code>
+- <code title="get /toll_free_campaigns/{campaign_id}">client.toll_free_campaigns.<a href="./src/surge/resources/toll_free_campaigns.py">retrieve</a>(campaign_id) -> <a href="./src/surge/types/toll_free_campaign.py">TollFreeCampaign</a></code>
+- <code title="patch /toll_free_campaigns/{campaign_id}">client.toll_free_campaigns.<a href="./src/surge/resources/toll_free_campaigns.py">update</a>(campaign_id, \*\*<a href="src/surge/types/toll_free_campaign_update_params.py">params</a>) -> <a href="./src/surge/types/toll_free_campaign.py">TollFreeCampaign</a></code>
+- <code title="get /accounts/{account_id}/toll_free_campaigns">client.toll_free_campaigns.<a href="./src/surge/resources/toll_free_campaigns.py">list</a>(account_id, \*\*<a href="src/surge/types/toll_free_campaign_list_params.py">params</a>) -> <a href="./src/surge/types/toll_free_campaign.py">SyncCursor[TollFreeCampaign]</a></code>
+
 # Users
 
 Types:
@@ -179,6 +194,9 @@ Types:
 from surge.types import (
     CallEndedWebhookEvent,
     CampaignApprovedWebhookEvent,
+    CampaignRejectedWebhookEvent,
+    CampaignSubmittedWebhookEvent,
+    CampaignWarningWebhookEvent,
     ContactOptedInWebhookEvent,
     ContactOptedOutWebhookEvent,
     ConversationCreatedWebhookEvent,
