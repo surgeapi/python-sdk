@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.28.0](https://github.com/surgeapi/python-sdk/compare/v0.27.0...v0.28.0) (2026-10-28)
+
+
+### Features
+
+* update python SDK ([5aee69d](https://github.com/surgeapi/python-sdk/commit/5aee69dc7a32effac6af55409ac8d829a6190aa2))
+
 ## 0.27.0 (2026-09-04)
 
 Full Changelog: [v0.26.0...v0.27.0](https://github.com/surgeapi/python-sdk/compare/v0.26.0...v0.27.0)
