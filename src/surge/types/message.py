@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Dict, List, Optional
+from datetime import datetime
 from typing_extensions import Literal
 
 from .contact import Contact
@@ -56,6 +57,13 @@ class Conversation(BaseModel):
 
 class Message(BaseModel):
     """A Message is a communication sent to a Contact."""
+
+    created_at: Optional[datetime] = None
+    """When the message was added to the conversation, in ISO8601 UTC format.
+
+    Null for scheduled messages until they are created. For imported messages, this
+    is the original creation time.
+    """
 
     id: Optional[str] = None
     """Unique identifier for the object."""
