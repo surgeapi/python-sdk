@@ -47,6 +47,14 @@ class Data(BaseModel):
     conversation: DataConversation
     """The conversation this message belongs to"""
 
+    created_at: datetime
+    """When the message was added to the conversation, in ISO8601 UTC format.
+
+    For scheduled messages, this is the actual creation time, which may be later
+    than the requested send_at. For imported messages, this is the original creation
+    time.
+    """
+
     failed_at: datetime
     """When the message failed"""
 
