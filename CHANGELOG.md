@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.29.0](https://github.com/surgeapi/python-sdk/compare/v0.28.0...v0.29.0) (2026-11-03)
+
+
+### Features
+
+* **api:** add created_at to messages ([#49](https://github.com/surgeapi/python-sdk/issues/49)) ([912e2dd](https://github.com/surgeapi/python-sdk/commit/912e2dd214a43e864492c5d073e6f4afb1dfe74b))
+
 ## [0.28.0](https://github.com/surgeapi/python-sdk/compare/v0.27.0...v0.28.0) (2026-10-28)
 
 
