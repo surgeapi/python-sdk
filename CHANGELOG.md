@@ -5,15 +5,11 @@
 
 ### ⚠ BREAKING CHANGES
 
-* **deps:** require Python 3.11 and update vulnerable packages ([#51](https://github.com/surgeapi/python-sdk/issues/51))
-* **deps:** require Python 3.11 and update vulnerable packages ([#4](https://github.com/surgeapi/python-sdk/issues/4))
-* **deps:** require Python 3.11 and update vulnerable packages
+* **deps:** require Python 3.11 or later. ([#51](https://github.com/surgeapi/python-sdk/pull/51))
 
 ### Bug Fixes
 
-* **deps:** require Python 3.11 and update vulnerable packages ([5d8a82e](https://github.com/surgeapi/python-sdk/commit/5d8a82eccb7cbf28040429db84fc547a7f8689d7))
-* **deps:** require Python 3.11 and update vulnerable packages ([#4](https://github.com/surgeapi/python-sdk/issues/4)) ([74c31a7](https://github.com/surgeapi/python-sdk/commit/74c31a72da5614bb3a27a2e566ed1fd9d486e6de))
-* **deps:** require Python 3.11 and update vulnerable packages ([#51](https://github.com/surgeapi/python-sdk/issues/51)) ([199d7f6](https://github.com/surgeapi/python-sdk/commit/199d7f68fcab4128ce2061a290aedcba8c5a5e8d))
+* **deps:** require patched runtime dependencies and update development dependencies. ([#51](https://github.com/surgeapi/python-sdk/pull/51))
 
 ## [0.29.0](https://github.com/surgeapi/python-sdk/compare/v0.28.0...v0.29.0) (2026-11-03)
 
