@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.30.0](https://github.com/surgeapi/python-sdk/compare/v0.29.0...v0.30.0) (2026-11-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** require Python 3.11 or later. ([#51](https://github.com/surgeapi/python-sdk/pull/51))
+
+### Bug Fixes
+
+* **deps:** require patched runtime dependencies and update development dependencies. ([#51](https://github.com/surgeapi/python-sdk/pull/51))
+
 ## [0.29.0](https://github.com/surgeapi/python-sdk/compare/v0.28.0...v0.29.0) (2026-11-03)
 
 
